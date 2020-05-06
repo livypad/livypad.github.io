@@ -1,12 +1,27 @@
 ---
 layout: default
 ---
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-<article class="color3 module">
-  <a href="{{ page.url }}"><h1>{{ page.title }}</h1></a>
-  <hr>
-  <time>{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</time>
-  {{ content }}
+  <header class="artilce_header">
+    <h1 class="artilce_title" itemprop="name headline">{{ page.title }}</h1>
+    <p class="artilce_meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+  </header>
+
+  <div class="article-content" itemprop="articleBody">
+    {{ page.content }}
+  </div>
+
+  <footer class="article-footer">
+
+  {% include share.html %}
+
+  <hr/>
+
+  {% include author.html %}
+
+  </footer>
+
+  {% include dq.html %}
+
 </article>
-
-{% include disqus.html %}
