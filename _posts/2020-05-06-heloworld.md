@@ -1,6 +1,6 @@
 ---
-layout: post
-title: 你好，世界
+layout: default
+title:  "Welcome to Jekyll!"
 ---
 
 ## hello world
