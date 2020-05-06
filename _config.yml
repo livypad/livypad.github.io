@@ -1,5 +1,5 @@
 # Site settings
-title:        "block-Log"
+title:        "zhh's blog"
 description:  "student"
 baseurl:      "" # the subpath of your site, e.g. /blog/
 url:          "http://livypad.github.io" # the base hostname & protocol for your site
