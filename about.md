@@ -11,4 +11,4 @@ You can find the source code for this theme at: <data data-icon="ei-sc-github"><
 You can find the source code for Jekyll at <data data-icon="ei-sc-github"></data>  [jekyll](https://github.com/jekyll/jekyll)
 
 Theme author: David Lin, Currently a Ph.D. student in Singapore University of Technology and Design in the area of Human-Computer Interaction(HCI).
-[his photo]{/assets/img/Taffy.jpg}
+[his photo](assets/img/Taffy.jpg)
