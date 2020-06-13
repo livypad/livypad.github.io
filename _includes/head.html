@@ -18,12 +18,26 @@
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}"
     href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
-  <script type="text/x-mathjax-config">
+    <style>
+      table{
+        border-left:1px solid #000000;border-top:1px solid #000000;
+        width: 100%;
+        word-wrap:break-word; word-break:break-all;
+      }
+      table th{
+      text-align:center;
+      }
+      table th,td{
+        border-right:1px solid #000000;border-bottom:1px solid #000000;
+      }
+  </style>
+  
+    <script type="text/x-mathjax-config">
     MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); 
   </script>
   <script type="text/x-mathjax-config">
    MathJax.Hub.Config({tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+          inlineMath: [ ['$','$'], ["\\(","\\)"],["$$","$$"]],
           processEscapes: true
         }
       });
@@ -31,17 +45,5 @@
 
   <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
   </script>
-  <style>
-	  table{
-	    border-left:1px solid #000000;border-top:1px solid #000000;
-	    width: 100%;
-	    word-wrap:break-word; word-break:break-all;
-	  }
-	  table th{
-	  text-align:center;
-	  }
-	  table th,td{
-	    border-right:1px solid #000000;border-bottom:1px solid #000000;
-	  }
-</style>
+ 
 </head>
