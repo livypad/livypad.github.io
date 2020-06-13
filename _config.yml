@@ -21,7 +21,7 @@ github_username:  livypad
 markdown: kramdown
 kramdown:
   input: GFM
-math_engine: null
+
 # Third-party services
 # just leave someone empty to disable it
 # google_analytics: 

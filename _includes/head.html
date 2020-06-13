@@ -13,23 +13,6 @@
   <script src="{{"/assets/evil-icons.min.js" | prepend:site.baseurl }}"></script>
 
   <!-- todo: include this into main.css -->
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        TeX: {
-            equationNumbers: {
-                autoNumber: "AMS"
-            }
-        },
-        tex2jax: {
-            inlineMath: [ ['$','$'] ],
-            displayMath: [ ['$$','$$'] ],
-            processEscapes: true,
-        }
-    });
-    </script>
-<script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-    </script>
 
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
@@ -55,6 +38,8 @@
       border-bottom: 1px solid #000000;
     }
   </style>
-  
+  {% unless page.no_latex %}
+  {% include latex.html %}
+  {% endunless %}
 
 </head>
