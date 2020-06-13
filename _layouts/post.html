@@ -5,7 +5,13 @@ layout: default
 
   <header class="artilce_header">
     <h1 class="artilce_title" itemprop="name headline">{{ page.title }}</h1>
-    <p class="artilce_meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+    <p class="artilce_meta"><time datetime="{{ page.date | date_to_xmlschema }}"
+        itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span
+        itemprop="author" itemscope itemtype="http://schema.org/Person"><span
+          itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+    <script type="text/javascript" async
+      src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+      </script>
   </header>
 
   <div class="article-content" itemprop="articleBody">
@@ -14,11 +20,11 @@ layout: default
 
   <footer class="article-footer">
 
-  {% include share.html %}
+    {% include share.html %}
 
-  <hr/>
+    <hr />
 
-  {% include author.html %}
+    {% include author.html %}
 
   </footer>
 
