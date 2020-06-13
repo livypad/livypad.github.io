@@ -4,8 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description"
-    content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
   <!-- evil icon -->
 
@@ -16,40 +15,8 @@
 
   <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}"
-    href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
-  <style>
-    table {
-      border-left: 1px solid #000000;
-      border-top: 1px solid #000000;
-      width: 100%;
-      word-wrap: break-word;
-      word-break: break-all;
-    }
-
-    table th {
-      text-align: center;
-    }
-
-    table th,
-    td {
-      text-align: center;
-      border-right: 1px solid #000000;
-      border-bottom: 1px solid #000000;
-    }
-  </style>
-  <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: displayMath } } }); 
-</script>
-  <script type="text/x-mathjax-config">
- MathJax.Hub.Config({tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-        displayMath:["$$","$$"],
-        processEscapes: true
-      }
-    });
-</script>
-
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
-  </script>
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+  {% unless page.no_latex %}
+  {% include tex.html %}
+{% endunless %}
 </head>
