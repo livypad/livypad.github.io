@@ -28,6 +28,7 @@
       text-align:center;
       }
       table th,td{
+        text-align:center;
         border-right:1px solid #000000;border-bottom:1px solid #000000;
       }
   </style>
@@ -39,6 +40,8 @@
    MathJax.Hub.Config({tex2jax: {
           inlineMath: [ ['$','$'], ["\\(","\\)"]],
           displayMath:["$$","$$"],
+          availableFonts: ["STIX", "TeX"], 
+        });
           processEscapes: true
         }
       });
