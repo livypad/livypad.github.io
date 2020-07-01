@@ -1,6 +1,10 @@
-[![](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/wild-flame)
+# README
+
+zhh的个人博客，额外的个人笔记在note部分，下面是这个主题原来的介绍。
 
 # jekyll-simple
+
+[![thanks](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/wild-flame)
 
 ## simple
 
