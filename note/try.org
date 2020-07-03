@@ -1,8 +1,9 @@
 * 标题
-文本
-** TODO todolist [100%]
-   DERED:  
-- [X] learn org mode
-- [X] d
-- [X] todo
-- [X] corrct
+
+
+
+** TODO emacs learn [0%]  
+- [ ] tutorial
+- [ ] evil
+- [ ] watch video emacs rock
+- [ ] org mode learn
