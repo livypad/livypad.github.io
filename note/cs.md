@@ -362,7 +362,3 @@ unsigned int ELFHash(char *str)
 	return (hash & 0x7FFFFFFF);
 	}
 ```
-	
-
-
-
