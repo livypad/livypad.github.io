@@ -237,6 +237,7 @@ unsigned int BKDRHash(char *str)
 ```
 
 关于 BKDRHash 算法的较为详细的解析可以参考 BKDRHash 详解
+                            
 2）APHash 算法
 
 ```cpp
