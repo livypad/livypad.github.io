@@ -421,7 +421,6 @@ const int MAXS = 60*1024*1024;
                          numbers[i] = numbers[i] * 10 +*p - '0';
  }
 
-
  const int MAXN = 10000000;
  const int MAXS = 60*1024*1024;
  
