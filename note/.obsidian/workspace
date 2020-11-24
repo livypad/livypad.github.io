@@ -1,0 +1,101 @@
+{
+  "main": {
+    "id": "c6d92094cda60fa3",
+    "type": "split",
+    "children": [
+      {
+        "id": "c1e97c58bc0ee833",
+        "type": "leaf",
+        "active": true,
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "cs.md",
+            "mode": "source"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "098747a9bcedcc16",
+    "type": "split",
+    "children": [
+      {
+        "id": "b6c5c0dc5e48f5b7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1e858ae4b50a69f4",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "b68da214a24871a3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "5381949ea3eb3514",
+    "type": "split",
+    "children": [
+      {
+        "id": "0ec642ceb72c002f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3df6b49625e0d93c",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "cs.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "a3affe9505877a7c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "lastOpenFiles": [
+    "cs.md",
+    "electric.md",
+    "2020-06-30-ao31.md"
+  ]
+}
