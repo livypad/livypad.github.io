@@ -10,8 +10,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "cs.md",
-            "mode": "source"
+            "file": "latex.md",
+            "mode": "preview"
           }
         }
       }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "cs.md",
+                "file": "latex.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -94,8 +94,15 @@
     "collapsed": true
   },
   "lastOpenFiles": [
+    "latex.md",
     "cs.md",
     "electric.md",
-    "2020-06-30-ao31.md"
+    "OpenGL.md",
+    "dsa.md",
+    "主界面.md",
+    "202012182104.md",
+    "Untitled.md",
+    "2020-06-30-ao31.md",
+    "2020-12-02.md"
   ]
 }
