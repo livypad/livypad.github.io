@@ -10,8 +10,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "latex.md",
-            "mode": "preview"
+            "file": "cs.md",
+            "mode": "source"
           }
         }
       }
@@ -69,12 +69,12 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "latex.md",
+                "file": "cs.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": false
               }
             }
           },
@@ -83,26 +83,27 @@
             "type": "leaf",
             "state": {
               "type": "tag",
-              "state": {}
+              "state": {
+                "sortOrder": "frequency"
+              }
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "lastOpenFiles": [
-    "latex.md",
     "cs.md",
-    "electric.md",
-    "OpenGL.md",
     "dsa.md",
+    "OpenGL.md",
+    "latex.md",
+    "electric.md",
+    "2020-06-30-ao31.md",
     "主界面.md",
     "202012182104.md",
     "Untitled.md",
-    "2020-06-30-ao31.md",
     "2020-12-02.md"
   ]
 }

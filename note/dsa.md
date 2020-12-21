@@ -22,7 +22,7 @@
 
 所有的字符串哈希算法都是基于对字符编码的迭代运算，只是运算规则不同而已。
 
-1）BKDRHash 算法
+### 1）BKDRHash 算法
 
 ```cpp
 // BKDR Hash Function
@@ -42,7 +42,7 @@ unsigned int BKDRHash(char *str)
 
 关于 BKDRHash 算法的较为详细的解析可以参考 BKDRHash 详解
                             
-2）APHash 算法
+### 2）APHash 算法
 
 ```cpp
 // AP Hash Function
@@ -67,7 +67,7 @@ unsigned int APHash(char *str)
 	}
 ```
 
-3）DJBHash 算法
+### 3）DJBHash 算法
 
 ```cpp
 // DJB Hash Function
@@ -83,7 +83,7 @@ unsigned int DJBHash(char *str)
 }
 ```
 
-4）JSHash 算法
+### 4）JSHash 算法
 
 ```cpp
 // JS Hash Function
@@ -99,7 +99,7 @@ return (hash & 0x7FFFFFFF);
 }
 ```
 
-5）RSHash 算法
+### 5）RSHash 算法
 
 ```cpp
 unsigned int RSHash(char *str)
@@ -118,9 +118,8 @@ unsigned int RSHash(char *str)
 }
 ```
 
-// RS Hash Function
 
-6）SDBMHash 算法
+### 6）SDBMHash 算法
 
 ```cpp
 unsigned int SDBMHash(char *str)
@@ -137,7 +136,7 @@ unsigned int SDBMHash(char *str)
 }
 ```
 
-7）PJWHash 算法
+### 7）PJWHash 算法
 
 ```cpp
 // P. J. Weinberger Hash Function
@@ -163,7 +162,7 @@ unsigned int PJWHash(char *str)
 	}
 ```
 
-8）ELFHash 算法
+### 8）ELFHash 算法
 
 ```cpp
 // ELF Hash Function
