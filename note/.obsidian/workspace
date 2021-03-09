@@ -10,8 +10,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "latex.md",
-            "mode": "preview"
+            "file": "2021-03-03.md",
+            "mode": "source"
           }
         }
       }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "latex.md",
+                "file": "2021-03-03.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -84,7 +84,8 @@
             "state": {
               "type": "tag",
               "state": {
-                "sortOrder": "frequency"
+                "sortOrder": "frequency",
+                "useHierarchy": true
               }
             }
           }
@@ -95,15 +96,15 @@
     "width": 300
   },
   "lastOpenFiles": [
-    "latex.md",
-    "OpenGL.md",
-    "dsa.md",
+    "2021-03-04.md",
+    "MEMS/membrane.md",
     "cs.md",
-    "electric.md",
-    "2020-06-30-ao31.md",
-    "主界面.md",
-    "202012182104.md",
     "Untitled.md",
-    "2020-12-02.md"
+    "electric.md",
+    "2021-02-04.md",
+    "dsa.md",
+    "2020-06-30-ao31.md",
+    "OpenGL.md",
+    "latex.md"
   ]
 }
