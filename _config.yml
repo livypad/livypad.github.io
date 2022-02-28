@@ -18,9 +18,9 @@ url: "https://livypad.github.io" # the base hostname & protocol for your site
 github_username:  livypad
 
 # Build settings
-markdown: kramdown
-kramdown:
-  input: GFM
+# markdown: kramdown
+# kramdown:
+#   input: GFM
 
 # Third-party services
 # just leave someone empty to disable it
