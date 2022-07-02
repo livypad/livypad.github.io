@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>outdated on zhh's blog</title><link>https://livypad.github.io/tags/outdated/</link><description>zhh's blog (outdated)</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 17 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://livypad.github.io/tags/outdated/index.xml" rel="self" type="application/rss+xml"/><item><title>关于这个博客的搭建</title><link>https://livypad.github.io/post/2020-06-17-blog/</link><pubDate>Wed, 17 Jun 2020 00:00:00 +0000</pubDate><guid>https://livypad.github.io/post/2020-06-17-blog/</guid><description>&lt;h1 id="关于这个博客的搭建" >关于这个博客的搭建
+&lt;span>
+&lt;a href="#%e5%85%b3%e4%ba%8e%e8%bf%99%e4%b8%aa%e5%8d%9a%e5%ae%a2%e7%9a%84%e6%90%ad%e5%bb%ba">
+&lt;svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg">&lt;path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;/svg>
+&lt;/a>
+&lt;/span>
+&lt;/h1>&lt;h2 id="缘由" >缘由
+&lt;span>
+&lt;a href="#%e7%bc%98%e7%94%b1">
+&lt;svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg">&lt;path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;/svg>
+&lt;/a>
+&lt;/span>
+&lt;/h2>&lt;ol>
+&lt;li>自己搭建博客很有意思。（人就是要折腾&lt;/li>
+&lt;li>很好的展示自己的平台&lt;/li>
+&lt;li>界面相对自由&lt;/li>
+&lt;/ol>
+&lt;h2 id="如何搭建" >如何搭建
+&lt;span>
+&lt;a href="#%e5%a6%82%e4%bd%95%e6%90%ad%e5%bb%ba">
+&lt;svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg">&lt;path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;/svg>
+&lt;/a>
+&lt;/span>
+&lt;/h2>&lt;p>Jekll是个简单的博客服务。而GitHub Pages 基于Jekyll构建，可以很简单地（就像在这篇文章接下来介绍的）在 GitHub 上免费发布网站和个人博客。&lt;/p>
+&lt;p>&lt;strong>警告，下列操作涉及的网站很多只有英文界面&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>这只是一个非常初级的教程，而且笔者水平有限，必有谬误，敬请指正&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>网络不是法外之地，希望大家不要滥用博客功能&lt;/strong>&lt;/p>
+&lt;h3 id="github-初始化" >Github 初始化
+&lt;span>
+&lt;a href="#github-%e5%88%9d%e5%a7%8b%e5%8c%96">
+&lt;svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg">&lt;path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;/svg>
+&lt;/a>
+&lt;/span>
+&lt;/h3>&lt;p>注册一个&lt;a href="https://github.com/">Github&lt;/a>账户。创建一个Respority（代码存储库）。用户名按照username.GitHub.io这样的格式。在Settings(设置)下面找到Github Pages，选择一个主题。Github就会自动创建好一个用于个人博客的库。这个时候，博客就可以通过在浏览器输入username.GitHub.io访问。&lt;/p>
+&lt;p>为了方便博客的编写，笔者自己采用的方法是下载&lt;a href="https://desktop.github.com/">Github的桌面客户端&lt;/a>，并搭配&lt;a href="https://code.visualstudio.com/">VS Code&lt;/a>作为对应编辑器使用（现在微软由于收购了Github，这两者的结合还是很方便的）。&lt;/p>
+&lt;h3 id="博客设置" >博客设置
+&lt;span>
+&lt;a href="#%e5%8d%9a%e5%ae%a2%e8%ae%be%e7%bd%ae">
+&lt;svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg">&lt;path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;/svg>
+&lt;/a>
+&lt;/span>
+&lt;/h3>&lt;p>Github默认创建的博客虽然已经可以访问，但是一般来说还不是很全面。而笔者的建议是，&lt;/p>
+&lt;ol>
+&lt;li>用Github的桌面端软件把原来的Respority Clone（复制）到本地&lt;/li>
+&lt;li>在Jekll官网上下载一个好看的主题（或者如果喜欢的话，也可以选择笔者的）&lt;/li>
+&lt;li>直接将解压后的主题文件夹（除了.git文件）直接在本地复制粘贴到原来的Respority对应的文件夹下面&lt;/li>
+&lt;li>同步&lt;/li>
+&lt;/ol>
+&lt;p>这样就能快速换成自己想要的，而且是别人已经帮配置好的主题。&lt;/p>
+&lt;h3 id="写博客" >写博客
+&lt;span>
+&lt;a href="#%e5%86%99%e5%8d%9a%e5%ae%a2">
+&lt;svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg">&lt;path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;/svg>
+&lt;/a>
+&lt;/span>
+&lt;/h3>&lt;p>&lt;strong>警告，不同的主题之间可能有一定的差异&lt;/strong>&lt;/p>
+&lt;p>用我们之前下好的VS Code打开本地的Respority文件夹，就可以开始写博客了。&lt;/p>
+&lt;p>Jekll的博客一般通过markdown语法进行编写。博文新建在_posts文件夹下，命名格式为时间加题目&lt;code>20XX-XX-XX-title.md&lt;/code>。
+在md文件题头还要加上描述符。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>layout: default
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>title: &amp;#34;XX&amp;#34;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其他部分和一般的markdown语法相近。如&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>#&lt;/code> 用来表示标题，1-6个，越少标题越大&lt;/li>
+&lt;li>&lt;code>**&lt;/code>斜体&lt;/li>
+&lt;li>&lt;code>****&lt;/code>加粗&lt;/li>
+&lt;li>``````中间包含代码块&lt;/li>
+&lt;/ul>
+&lt;p>如果需要插入图片，将图片放/assets/img文件夹下，通过&lt;code>![描述名](/assets/img/图片名)&lt;/code>来引用。&lt;/p>
+&lt;p>如果需要支持Latex公式，可以自行上网搜索，如何加入mathJx脚本，支持latex公式。本博客目前已经支持。&lt;/p>
+&lt;p>发布博客时，只需要提交更改，并同步即可。网页会自动帮助转换md文档为网页博客。&lt;/p></description></item><item><title>Welcome to Jekyll!</title><link>https://livypad.github.io/post/2020-05-06-heloworld/</link><pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate><guid>https://livypad.github.io/post/2020-05-06-heloworld/</guid><description>&lt;h1 id="hello-world" >hello world
+&lt;span>
+&lt;a href="#hello-world">
+&lt;svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg">&lt;path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;/svg>
+&lt;/a>
+&lt;/span>
+&lt;/h1>&lt;p>先试一下怎么用&lt;/p></description></item></channel></rss>
