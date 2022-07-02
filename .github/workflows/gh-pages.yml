@@ -17,7 +17,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: '0.101.0'
+          hugo-version: "0.101.0"
           extended: true
 
       - name: Build
@@ -28,7 +28,4 @@ jobs:
         if: github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: master
           publish_dir: ./public
-          user_name: livypad
-          user_email: ishonghua.zhu@outlook.com
