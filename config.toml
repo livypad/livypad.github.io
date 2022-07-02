@@ -1,0 +1,57 @@
+baseURL="https://livypad.github.io"
+# disablePathToLower=True
+languageCode = 'zh-cn'
+title = "zhh's blog"
+theme = "anubis"
+paginate = 5
+
+# [[menu.main]]
+# identifier = "archive"
+# name = "Archive"
+# title = "Archive"
+# url = "/posts/"
+# weight = 0
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "/about/"
+weight = 1
+
+[[menu.main]]
+identifier = "tags"
+name = "Tags"
+url = "/tags/"
+weight = 2
+
+[[menu.main]]
+name = "Archive"
+identifier = "archive"
+url = "/post/"
+weight = 3
+
+[taxonomies]
+category = "categories"
+tag = "tags"
+
+[author]
+name = "livypad"
+
+[params]
+author = "livypad"
+email = "ishonghua.zhu@outlook.com"
+description = ""
+dateFormat = "2006-01-02"
+paginationSinglePost = true
+style = "auto"
+# readMore = true
+readNextPosts = 5
+disableSummary= true
+hidden = true
+disableComments = true
+    [[params.social]]
+    id = "github"
+    name = "livypad"
+    [[params.social]]
+    id = "email"
+    name="ishonghua.zhu@outlook.com"
+
