@@ -55,3 +55,8 @@ disableComments = true
     id = "email"
     name="ishonghua.zhu@outlook.com"
 
+[markup]
+    [markup.highlight]
+        style = "manni"
+
+
