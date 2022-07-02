@@ -32,14 +32,14 @@
 &lt;svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg">&lt;path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>&lt;/svg>
 &lt;/a>
 &lt;/span>
-&lt;/h2>&lt;p>In fact, &amp;ldquo;as you wish“ can be accomplished in two different strategies, a genie can either fulfill ones&amp;rsquo; dream or wish after its proposal, or it can predict that particular wish and prepare for it in advance. The latter strategy has a much looser time constraint on genie, therefore requiring less magic power. As long as branch predictor&amp;rsquo;s accuracy is high enough, the advantage of prediction might outweigh the extra cost of maintaining the predictor and penalty of misprediction (former preparation becomes useless and the wish need to be fulfilled instantly). To draw a conclusion, a genie who promise to follow any order may not be extremely resourceful, instead, maybe you are too easy to understand and to be predicted.&lt;/p></description></item><item><title>IO效率与人</title><link>https://livypad.github.io/post/2022-02-20-ioeff/</link><pubDate>Sun, 20 Feb 2022 00:00:00 +0000</pubDate><guid>https://livypad.github.io/post/2022-02-20-ioeff/</guid><description>&lt;ol>
+&lt;/h2>&lt;p>In fact, &amp;ldquo;as you wish“ can be accomplished in two different strategies, a genie can either fulfill ones&amp;rsquo; dream or wish after its proposal, or it can predict that particular wish and prepare for it in advance. The latter strategy has a much looser time constraint on genie, therefore requiring less magic power. As long as branch predictor&amp;rsquo;s accuracy is high enough, the advantage of prediction might outweigh the extra cost of maintaining the predictor and penalty of misprediction (former preparation becomes useless and the wish need to be fulfilled instantly). To draw a conclusion, a genie who promise to follow any order may not be extremely resourceful, instead, maybe you are too easy to understand and to be predicted.&lt;/p></description></item><item><title>IO效率与人</title><link>https://livypad.github.io/post/2022-02-20-ioeff/</link><pubDate>Sun, 20 Feb 2022 00:00:00 +0000</pubDate><guid>https://livypad.github.io/post/2022-02-20-ioeff/</guid><description>&lt;ul>
 &lt;li>&lt;a href="#io-%E6%95%88%E7%8E%87%E4%B8%8E%E4%BA%BA">IO 效率与人&lt;/a>
-&lt;ol>
+&lt;ul>
 &lt;li>&lt;a href="#%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF">状态信息&lt;/a>&lt;/li>
 &lt;li>&lt;a href="#%E4%BC%A0%E7%BB%9F%E4%B9%A6%E4%BF%A1%E7%9A%84%E4%BD%8E%E5%B8%A6%E5%AE%BD">传统书信的低带宽（？&lt;/a>&lt;/li>
-&lt;/ol>
+&lt;/ul>
 &lt;/li>
-&lt;/ol>
+&lt;/ul>
 &lt;h1 id="io-效率与人" >IO 效率与人
 &lt;span>
 &lt;a href="#io-%e6%95%88%e7%8e%87%e4%b8%8e%e4%ba%ba">
@@ -53,7 +53,7 @@
 &lt;/a>
 &lt;/span>
 &lt;/h2>&lt;blockquote>
-&lt;p>Scales D J, Nelson M, Venkitachalam G. The design of a practical system for fault-tolerant virtual machines[J]. ACM SIGOPS Operating Systems Review, 2010, 44(4): 30–39.&lt;/p>
+&lt;p>Scales D J, Nelson M, Venkitachalam G. The design of a practical system for fault-tolerant virtual machines 【J】. ACM SIGOPS Operating Systems Review, 2010, 44(4): 30–39.&lt;/p>
 &lt;/blockquote>
 &lt;p>VMware 公司有一篇 &lt;strong>VM-FT&lt;/strong>的论文，介绍了如何借助虚拟机技术，构建一个主/从备份的容错系统。大部分计算机的指令是确定性的（deterministic），给定当前状态和指令，执行之后的状态是确定的。外界对内部的输入、产生随机数等少部分情况下，计算机执行是非确定性的（non-deterministic）。&lt;strong>VM-FT&lt;/strong>论文的核心思想是通过虚拟机拦截下主机所有 non-deterministic 的指令，产生一个 log，通过网络发给从机，这样可以在完全不了解上层应用情况下，实现双机器运行任何软件的同步备份。这样依赖状态机的假设的方法存在一个问题，无法应对多核情况。多核执行时候的细微先后顺序是不能确定的，从而从相同状态和指令序列出发不能保证最后相同状态结果。&lt;/p>
 &lt;p>为了清晰传递自己的一个想法，自然希望能直接传递自己思想活动状态；别人直接“共情”我的思想活动，这是最容易理解的方式（？）；通过传递大量思考当中的细节（类比于指令），别人直接复现这些细节，相当于传递思想活动状态。但问题是人的大脑的神经元连接天然并行，比多核的执行顺序和并行度高的多的多；思考当中的各种补充细节，也相应的比指令序列多的多；表述这些细节，还需要自己加工成语言文字（即使这种直接表达思考细节，而不是构建成文章已经省略了很多文章结构的思考，语言文字的输出带宽还是比不上思想产生的速度）。VMware 最后似乎对于多核，还是放弃了状态机方法，回到传统的传 checkpoint 整体传状态。&lt;/p>
