@@ -1,32 +1,31 @@
 name: github pages
-
 on:
-    push:
-        branches:
-            - master # 每次推送到 main 分支都会触发部署任务
+  push:
+    branches:
+      - master # Set a branch to deploy
+  pull_request:
 
 jobs:
-    deploy:
-        runs-on: ubuntu-18.04
-        steps:
-            - uses: actions/checkout@v2
-              with:
-                  submodules: true # Fetch Hugo themes (true OR recursive)
-                  fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0 # Fetch all history for .GitInfo and .Lastmod
 
-            - name: Setup Hugo
-              uses: peaceiris/actions-hugo@v2
-              with:
-                  hugo-version: "0.79.1"
-                  extended: true
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "latest"
+          extended: true
 
-            - name: Build
-              run: hugo --minify
+      - name: Build
+        run: hugo --minify
 
-            - name: Deploy
-              uses: peaceiris/actions-gh-pages@v3
-              with:
-                  deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-                  external_repository: <USERNAME>/<USERNAME>.github.io # 替换成上文所创建的个人主页仓库
-                  publish_branch: main
-                  publish_dir: ./public
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
