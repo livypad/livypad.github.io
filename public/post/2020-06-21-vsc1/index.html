@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-cn" data-theme="">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>VS Code，All in One（1）——v0.2.0 - zhh&#39;s blog</title>
+
+<meta name="description" content="VS Code以及其他的安利向（1) -编辑器 关于这个系列 什么是VS Code 什么是代码编辑器 代码文档 vs .docx 代码编辑器 vs 记事本 代码编辑器 vs 集成开发环境 为何选择VS Code 安装 界面介绍 字体和美化 杂项 中文支持 文件编码 设置同步 ctrl&#43;shift&#43;p Draw.io Integration Binary Gitlens VSC Netease Music 用户代码片段 VS Code以及其他的安利向（1) -编辑器 关于这个系列 大学以来，笔者接触了很多新东西，很想安利出去。但是如果是一对一安利，虽然能有及时反馈，但是一是略显尴尬，打字很不方便，二是笔者懒（抱歉），不想一个个人说。所以就萌生了写这个系列小文章的想法。
+正好VS Code就是笔者一直以来的各个工作的共同平台，All in One 正是取其“全能”的含义。是有这个系列文章。
+这是一个安利&#43;教程向的文章。限于笔者水平（和懒惰），肯定会有一些谬误或者是不全面的地方。而且笔者也只有win10平台经验。按照笔者的经验，遇到的绝大多数问题，是可以当即依靠搜索引擎解决的。（当然，如果您希望笔者加上去，也欢迎私下联系我更新文章。
+学习这些应用性技能的宗旨
+搜索引擎是最好的老师
+什么是VS Code VS Code 是微软开源出来的一款代码编辑器。在此基础上再加上一些微软自己的服务，就是现在的VS Code 软件。VS Code可以很容易的从官网上下载，Insiders版本（预览版本，更新更快，新功能上线早，可能不稳定）。
+什么是代码编辑器 代码编辑器，顾名思义，就是编辑代码文件的。但是问题来了，这些文件究竟是什么，为什么笔者在这里推荐代码编辑器，不是别的软件？
+代码文档 vs .docx 读者应该都接触过txt格式的文件。上过大学，学过一些计算机方面的基础课的同学，可能还会接触.c,.cpp,.py,.md,.tex等等格式的文件。这些文件看起来拓展名千差万别，但是读者可以做一个实验。文件里面写上“123456789”，文件的大小都是9B。而若是在一个docx文档里面，文档大小是11.8 KB。这个简单的对比就反映出，本质上，之前说的各个格式，都是某种意义上的纯文本文档，拓展名只是标识这个文件是什么类型的，需要什么样的编译器/解释器。而docx，如果用压缩软件打开，其实是一系列的xml文件，word软件对这一系列的文件，掩盖了在文本文档层面的工作，而展现出一个整体的效果。
+从这点出发，我们就可以用同一个代码编辑器，处理不同的代码文档，毕竟ta们本质都是文本文档。
+代码编辑器 vs 记事本 既然说到文本文档，大家第一反应一般都是记事本。记事本当然是可以写代码文件的，毕竟记事本是可以处理txt这样的文本文档的。如果不信，可以看下面的对比图。左边为VS Code，右边是记事本，文件是笔者之前光线追迹里面提到的.py文件。
+但这么一对比，直观上看，记事本毕竟没有专门的设计。相比较正牌的代码编辑器，ta缺少比如自动补全，代码语法高亮等等好用的功能。最多说能用，但是很不趁手。">
+
+
+
+
+
+<link rel="icon" type="image/x-icon" href="https://livypad.github.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://livypad.github.io/favicon.png">
+
+
+<style>
+  body {
+    visibility: hidden;
+    opacity: 0;
+  }
+</style>
+
+<noscript>
+  <style>
+    body {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</noscript>
+
+
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <link rel="stylesheet" href="https://livypad.github.io/css/style.min.c6a5c56d82abc1aa3a1925bf0b67884906e878e4e5bfb5af069b0a3e35e32569.css" integrity="sha256-xqXFbYKrwao6GSW/C2eISQboeOTlv7WvBpsKPjXjJWk=">
+    
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <script src="https://livypad.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js" type="text/javascript" charset="utf-8" integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script>
+    
+
+
+
+
+
+
+
+<meta property="og:title" content="VS Code，All in One（1）——v0.2.0" />
+<meta property="og:description" content="VS Code以及其他的安利向（1) -编辑器 关于这个系列 什么是VS Code 什么是代码编辑器 代码文档 vs .docx 代码编辑器 vs 记事本 代码编辑器 vs 集成开发环境 为何选择VS Code 安装 界面介绍 字体和美化 杂项 中文支持 文件编码 设置同步 ctrl&#43;shift&#43;p Draw.io Integration Binary Gitlens VSC Netease Music 用户代码片段 VS Code以及其他的安利向（1) -编辑器 关于这个系列 大学以来，笔者接触了很多新东西，很想安利出去。但是如果是一对一安利，虽然能有及时反馈，但是一是略显尴尬，打字很不方便，二是笔者懒（抱歉），不想一个个人说。所以就萌生了写这个系列小文章的想法。
+正好VS Code就是笔者一直以来的各个工作的共同平台，All in One 正是取其“全能”的含义。是有这个系列文章。
+这是一个安利&#43;教程向的文章。限于笔者水平（和懒惰），肯定会有一些谬误或者是不全面的地方。而且笔者也只有win10平台经验。按照笔者的经验，遇到的绝大多数问题，是可以当即依靠搜索引擎解决的。（当然，如果您希望笔者加上去，也欢迎私下联系我更新文章。
+学习这些应用性技能的宗旨
+搜索引擎是最好的老师
+什么是VS Code VS Code 是微软开源出来的一款代码编辑器。在此基础上再加上一些微软自己的服务，就是现在的VS Code 软件。VS Code可以很容易的从官网上下载，Insiders版本（预览版本，更新更快，新功能上线早，可能不稳定）。
+什么是代码编辑器 代码编辑器，顾名思义，就是编辑代码文件的。但是问题来了，这些文件究竟是什么，为什么笔者在这里推荐代码编辑器，不是别的软件？
+代码文档 vs .docx 读者应该都接触过txt格式的文件。上过大学，学过一些计算机方面的基础课的同学，可能还会接触.c,.cpp,.py,.md,.tex等等格式的文件。这些文件看起来拓展名千差万别，但是读者可以做一个实验。文件里面写上“123456789”，文件的大小都是9B。而若是在一个docx文档里面，文档大小是11.8 KB。这个简单的对比就反映出，本质上，之前说的各个格式，都是某种意义上的纯文本文档，拓展名只是标识这个文件是什么类型的，需要什么样的编译器/解释器。而docx，如果用压缩软件打开，其实是一系列的xml文件，word软件对这一系列的文件，掩盖了在文本文档层面的工作，而展现出一个整体的效果。
+从这点出发，我们就可以用同一个代码编辑器，处理不同的代码文档，毕竟ta们本质都是文本文档。
+代码编辑器 vs 记事本 既然说到文本文档，大家第一反应一般都是记事本。记事本当然是可以写代码文件的，毕竟记事本是可以处理txt这样的文本文档的。如果不信，可以看下面的对比图。左边为VS Code，右边是记事本，文件是笔者之前光线追迹里面提到的.py文件。
+但这么一对比，直观上看，记事本毕竟没有专门的设计。相比较正牌的代码编辑器，ta缺少比如自动补全，代码语法高亮等等好用的功能。最多说能用，但是很不趁手。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://livypad.github.io/post/2020-06-21-vsc1/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2020-06-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-21T00:00:00+00:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="VS Code，All in One（1）——v0.2.0"/>
+<meta name="twitter:description" content="VS Code以及其他的安利向（1) -编辑器 关于这个系列 什么是VS Code 什么是代码编辑器 代码文档 vs .docx 代码编辑器 vs 记事本 代码编辑器 vs 集成开发环境 为何选择VS Code 安装 界面介绍 字体和美化 杂项 中文支持 文件编码 设置同步 ctrl&#43;shift&#43;p Draw.io Integration Binary Gitlens VSC Netease Music 用户代码片段 VS Code以及其他的安利向（1) -编辑器 关于这个系列 大学以来，笔者接触了很多新东西，很想安利出去。但是如果是一对一安利，虽然能有及时反馈，但是一是略显尴尬，打字很不方便，二是笔者懒（抱歉），不想一个个人说。所以就萌生了写这个系列小文章的想法。
+正好VS Code就是笔者一直以来的各个工作的共同平台，All in One 正是取其“全能”的含义。是有这个系列文章。
+这是一个安利&#43;教程向的文章。限于笔者水平（和懒惰），肯定会有一些谬误或者是不全面的地方。而且笔者也只有win10平台经验。按照笔者的经验，遇到的绝大多数问题，是可以当即依靠搜索引擎解决的。（当然，如果您希望笔者加上去，也欢迎私下联系我更新文章。
+学习这些应用性技能的宗旨
+搜索引擎是最好的老师
+什么是VS Code VS Code 是微软开源出来的一款代码编辑器。在此基础上再加上一些微软自己的服务，就是现在的VS Code 软件。VS Code可以很容易的从官网上下载，Insiders版本（预览版本，更新更快，新功能上线早，可能不稳定）。
+什么是代码编辑器 代码编辑器，顾名思义，就是编辑代码文件的。但是问题来了，这些文件究竟是什么，为什么笔者在这里推荐代码编辑器，不是别的软件？
+代码文档 vs .docx 读者应该都接触过txt格式的文件。上过大学，学过一些计算机方面的基础课的同学，可能还会接触.c,.cpp,.py,.md,.tex等等格式的文件。这些文件看起来拓展名千差万别，但是读者可以做一个实验。文件里面写上“123456789”，文件的大小都是9B。而若是在一个docx文档里面，文档大小是11.8 KB。这个简单的对比就反映出，本质上，之前说的各个格式，都是某种意义上的纯文本文档，拓展名只是标识这个文件是什么类型的，需要什么样的编译器/解释器。而docx，如果用压缩软件打开，其实是一系列的xml文件，word软件对这一系列的文件，掩盖了在文本文档层面的工作，而展现出一个整体的效果。
+从这点出发，我们就可以用同一个代码编辑器，处理不同的代码文档，毕竟ta们本质都是文本文档。
+代码编辑器 vs 记事本 既然说到文本文档，大家第一反应一般都是记事本。记事本当然是可以写代码文件的，毕竟记事本是可以处理txt这样的文本文档的。如果不信，可以看下面的对比图。左边为VS Code，右边是记事本，文件是笔者之前光线追迹里面提到的.py文件。
+但这么一对比，直观上看，记事本毕竟没有专门的设计。相比较正牌的代码编辑器，ta缺少比如自动补全，代码语法高亮等等好用的功能。最多说能用，但是很不趁手。"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header"> 
+            
+                <div class="header-top">
+    <h1 class="site-title">
+    <a href="/">zhh&#39;s blog</a>
+</h1>
+    <ul class="social-icons">
+
+
+    
+        
+        
+        <li>
+            <a href="https://github.com/livypad" title="Github" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+    
+        
+        
+        <li>
+            <a href="mailto:ishonghua.zhu@outlook.com" title="Email" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+
+
+
+</ul>
+</div>
+
+    <nav>
+        
+        
+        <a class="" href="https://livypad.github.io/about/" title="">About</a>
+        
+        <a class="" href="https://livypad.github.io/tags/" title="">Tags</a>
+        
+        <a class="" href="https://livypad.github.io/post/" title="">Archive</a>
+        
+    </nav>
+
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title">VS Code，All in One（1）——v0.2.0</h1>
+
+                
+            </header>
+        </div>
+        <div class="content e-content">
+            <ol>
+<li><a href="#vs-code%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E7%9A%84%E5%AE%89%E5%88%A9%E5%90%911--%E7%BC%96%E8%BE%91%E5%99%A8">VS Code以及其他的安利向（1) -编辑器</a>
+<ol>
+<li><a href="#%E5%85%B3%E4%BA%8E%E8%BF%99%E4%B8%AA%E7%B3%BB%E5%88%97">关于这个系列</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFvs-code">什么是VS Code</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BB%A3%E7%A0%81%E7%BC%96%E8%BE%91%E5%99%A8">什么是代码编辑器</a>
+<ol>
+<li><a href="#%E4%BB%A3%E7%A0%81%E6%96%87%E6%A1%A3-vs-docx">代码文档 vs .docx</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%BC%96%E8%BE%91%E5%99%A8-vs-%E8%AE%B0%E4%BA%8B%E6%9C%AC">代码编辑器 vs 记事本</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E7%BC%96%E8%BE%91%E5%99%A8-vs-%E9%9B%86%E6%88%90%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83">代码编辑器 vs 集成开发环境</a></li>
+<li><a href="#%E4%B8%BA%E4%BD%95%E9%80%89%E6%8B%A9vs-code">为何选择VS Code</a></li>
+</ol>
+</li>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D">界面介绍</a></li>
+<li><a href="#%E5%AD%97%E4%BD%93%E5%92%8C%E7%BE%8E%E5%8C%96">字体和美化</a></li>
+<li><a href="#%E6%9D%82%E9%A1%B9">杂项</a>
+<ol>
+<li><a href="#%E4%B8%AD%E6%96%87%E6%94%AF%E6%8C%81">中文支持</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E7%BC%96%E7%A0%81">文件编码</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E5%90%8C%E6%AD%A5">设置同步</a></li>
+<li><a href="#ctrlshiftp">ctrl+shift+p</a></li>
+<li><a href="#drawio-integration">Draw.io Integration</a></li>
+<li><a href="#binary">Binary</a></li>
+<li><a href="#gitlens">Gitlens</a></li>
+<li><a href="#vsc-netease-music">VSC Netease Music</a></li>
+<li><a href="#%E7%94%A8%E6%88%B7%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5">用户代码片段</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="vs-code以及其他的安利向1--编辑器" >VS Code以及其他的安利向（1) -编辑器
+<span>
+    <a href="#vs-code%e4%bb%a5%e5%8f%8a%e5%85%b6%e4%bb%96%e7%9a%84%e5%ae%89%e5%88%a9%e5%90%911--%e7%bc%96%e8%be%91%e5%99%a8">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h1><h2 id="关于这个系列" >关于这个系列
+<span>
+    <a href="#%e5%85%b3%e4%ba%8e%e8%bf%99%e4%b8%aa%e7%b3%bb%e5%88%97">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h2><p>大学以来，笔者接触了很多新东西，很想安利出去。但是如果是一对一安利，虽然能有及时反馈，但是一是略显尴尬，打字很不方便，二是笔者懒（抱歉），不想一个个人说。所以就萌生了写这个系列小文章的想法。</p>
+<p>正好VS Code就是笔者一直以来的各个工作的共同平台，All in One 正是取其“全能”的含义。是有这个系列文章。</p>
+<p>这是一个安利+教程向的文章。限于笔者水平（和懒惰），肯定会有一些谬误或者是不全面的地方。而且笔者也只有win10平台经验。按照笔者的经验，遇到的绝大多数问题，是可以当即依靠<strong>搜索引擎</strong>解决的。（当然，如果您希望笔者加上去，也欢迎私下联系我更新文章。</p>
+<p>学习这些应用性技能的宗旨</p>
+<p><strong>搜索引擎是最好的老师</strong></p>
+<h2 id="什么是vs-code" >什么是VS Code
+<span>
+    <a href="#%e4%bb%80%e4%b9%88%e6%98%afvs-code">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h2><p>VS Code 是微软开源出来的一款代码编辑器。在此基础上再加上一些微软自己的服务，就是现在的VS Code 软件。VS Code可以很容易的从<a href="https://code.visualstudio.com/Download">官网上下载</a>，<a href="https://code.visualstudio.com/insiders/">Insiders版本</a>（预览版本，更新更快，新功能上线早，可能不稳定）。</p>
+<h2 id="什么是代码编辑器" >什么是代码编辑器
+<span>
+    <a href="#%e4%bb%80%e4%b9%88%e6%98%af%e4%bb%a3%e7%a0%81%e7%bc%96%e8%be%91%e5%99%a8">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h2><p>代码编辑器，顾名思义，就是编辑代码文件的。但是问题来了，这些文件究竟是什么，为什么笔者在这里推荐代码编辑器，不是别的软件？</p>
+<h3 id="代码文档-vs-docx" >代码文档 vs .docx
+<span>
+    <a href="#%e4%bb%a3%e7%a0%81%e6%96%87%e6%a1%a3-vs-docx">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>读者应该都接触过txt格式的文件。上过大学，学过一些计算机方面的基础课的同学，可能还会接触.c,.cpp,.py,.md,.tex等等格式的文件。这些文件看起来拓展名千差万别，但是读者可以做一个实验。文件里面写上“123456789”，文件的大小都是9B。而若是在一个docx文档里面，文档大小是11.8 KB。这个简单的对比就反映出，本质上，之前说的各个格式，都是某种意义上的纯文本文档，拓展名只是标识这个文件是什么类型的，需要什么样的编译器/解释器。而docx，如果用压缩软件打开，其实是一系列的xml文件，word软件对这一系列的文件，掩盖了在文本文档层面的工作，而展现出一个整体的效果。</p>
+<p><img src="/assets/img/vscset2.jpg" alt="docx"></p>
+<p>从这点出发，我们就可以用同一个代码编辑器，处理不同的代码文档，毕竟ta们本质都是文本文档。</p>
+<h3 id="代码编辑器-vs-记事本" >代码编辑器 vs 记事本
+<span>
+    <a href="#%e4%bb%a3%e7%a0%81%e7%bc%96%e8%be%91%e5%99%a8-vs-%e8%ae%b0%e4%ba%8b%e6%9c%ac">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>既然说到文本文档，大家第一反应一般都是记事本。记事本当然是可以写代码文件的，毕竟记事本是可以处理txt这样的文本文档的。如果不信，可以看下面的对比图。左边为VS Code，右边是记事本，文件是笔者之前光线追迹里面提到的.py文件。</p>
+<p><img src="/assets/img/vscset3.jpg" alt="txt"></p>
+<p>但这么一对比，直观上看，记事本毕竟没有专门的设计。相比较正牌的代码编辑器，ta缺少比如自动补全，代码语法高亮等等好用的功能。最多说能用，但是很不趁手。</p>
+<h3 id="代码编辑器-vs-集成开发环境" >代码编辑器 vs 集成开发环境
+<span>
+    <a href="#%e4%bb%a3%e7%a0%81%e7%bc%96%e8%be%91%e5%99%a8-vs-%e9%9b%86%e6%88%90%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>集成开发环境（IDE，下文也会这样简称）顾名思义，就是集成了大量的辅助功能，针对性的开发软件。例如学c/cpp读者可能接触过的Visual Studio，Dev-C++，学python读者接触过的PyCharm，都是所谓的IDE。</p>
+<p>与代码编辑器孰优孰劣其实是个延续已久的话题。一般来说，毕竟IDE集成了大量的辅助功能，在实际生产环境中，比起代码编辑器，还是更胜一筹（比如笔者虽然选择在VS Code里面写cpp，但复杂调试的工作还是在VS 2019里面进行）。而正由于这样的强大的功能，IDE一般来说，体积巨大，加载也比代码编辑器慢。而且，一般来说，IDE针对少数几种语言设计，如果自己需要的不止一种，可能还有切换的麻烦。</p>
+<p>相比而言，通过插件的帮助，代码编辑器可以适配绝大多数语言。而更小的体积，更精简的功能让代码编辑器加载更快，更轻量。而对一些要求不高的项目/任务，代码编辑器也能胜任，这样就不需要安装/加载体积巨大的IDE。</p>
+<h3 id="为何选择vs-code" >为何选择VS Code
+<span>
+    <a href="#%e4%b8%ba%e4%bd%95%e9%80%89%e6%8b%a9vs-code">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><ol>
+<li>作为代码编辑器，安装插件后，就能适应很多编程语言和琐碎应用场景。</li>
+<li>微软大厂更新勤快，新功能上线多，官方就有很多插件支持。而且现在已经支持用微软账户或GitHub
+账户同步设置。</li>
+<li>目前VS Code市场份额大，而且还在上升趋势。插件开发多，教程多。</li>
+<li>开源免费软件，不怕封锁。这个系列之后介绍的也主要是开源方案，适合于跨平台和对抗科技封锁。</li>
+</ol>
+<p><strong>本质上来说，笔者希望这个系列的教程，提供基于VS Code的，大量工作流程/场景的“一站式解决方案”。</strong></p>
+<h2 id="安装" >安装
+<span>
+    <a href="#%e5%ae%89%e8%a3%85">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h2><p>按照上述地址，或者使用搜索引擎就能很快完成VS Code 的安装。唯一需要注意的可能就是勾选注册VS Code为Path，和添加到右键菜单。现在只建议在常用设置里面，把自动保存Auto Save 改成afterDelay（就是允许自动保存）。这样不需要频繁按保存键。</p>
+<h2 id="界面介绍" >界面介绍
+<span>
+    <a href="#%e7%95%8c%e9%9d%a2%e4%bb%8b%e7%bb%8d">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h2><p>左边是侧边栏。文件是基本编辑区，方块是拓展市场，左下角头像是配置同步设置，齿轮就是设置。</p>
+<h2 id="字体和美化" >字体和美化
+<span>
+    <a href="#%e5%ad%97%e4%bd%93%e5%92%8c%e7%be%8e%e5%8c%96">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h2><p><strong>这些主题，字体等设置纯属个人审美倾向</strong></p>
+<p>笔者非常喜欢<a href="https://github.com/tonsky/FiraCode/releases">Fira Code</a>这个字体。这个等宽字体能很好的区分1l0o这样的字母，还支持连字符的特性。例如输入！=就会自动转换为$\neq$，非常美观。中文可以选择微软雅黑或者是<a href="https://github.com/adobe-fonts/source-han-sans/tree/release">思源黑体</a>。同样在设置里面更改字体<img src="/assets/img/vscset1.jpg" alt="字体设置"></p>
+<p>同样的，单击齿轮图标，可以修改配色和文件图标。更多的文件图标和配色主题，在之前介绍的拓展里面搜索下载。文件图标推荐选择Material Icon Theme。亮色主题使用自带的Light+就很好，需要更换也可以选择Github Theme里面的亮色主题。自带的Dark+背景有点太黑了，所以笔者推荐One Dark Pro，这个暗色主题适合写Python，md，写c++有点太多红色了。如果写Latex，笔者喜欢Linux Themes for VS Code当中的Adapta Nokto，公式比较鲜艳，而且照明环境下，不显得太黑。</p>
+<h2 id="杂项" >杂项
+<span>
+    <a href="#%e6%9d%82%e9%a1%b9">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h2><h3 id="中文支持" >中文支持
+<span>
+    <a href="#%e4%b8%ad%e6%96%87%e6%94%af%e6%8c%81">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>在拓展市场中搜索Chinese (Simplified) Language Pack for Visual Studio Code就能找到官方的汉化插件。按照指示安装就能配置好中文支持。</p>
+<p><strong>注意：该中文是不一定保证完全覆盖的。很多时候还是会接触到英文界面</strong></p>
+<h3 id="文件编码" >文件编码
+<span>
+    <a href="#%e6%96%87%e4%bb%b6%e7%bc%96%e7%a0%81">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>在状态栏上，右下角例如UTF-8就是当前文件的编码。如果一直使用VS Code这不构出问题。但是现在还是有很多软件，其文件的默认编码为GBK等，包括Matlab，Code Composer Studio，微软自家的VS2019等。而VS Code的默认编码方式为UTF-8。编码不一样打开文件就会乱码。要解决文件乱码问题</p>
+<ol>
+<li>单击编码标签，选择“通过编码重新打开”，选择原文件的编码.这样就能解决显示问题</li>
+<li>再单击编码标签，选择“通过编码保存”，选择UTF-8。下次再用VS Code打开就不会出现乱码。</li>
+</ol>
+<h3 id="设置同步" >设置同步
+<span>
+    <a href="#%e8%ae%be%e7%bd%ae%e5%90%8c%e6%ad%a5">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>左下角的头像就是设置同步账号，按提示操作就能同步自己的VS Code 配置。可以选择使用微软账户（一般安装win10系统，上云端的就是微软账户）或者是Github账户同步。</p>
+<h3 id="ctrlshiftp" >ctrl+shift+p
+<span>
+    <a href="#ctrlshiftp">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>VS Code的通用顶部功能搜索框。可以依靠这一功能，快速搜索需要的操作而不用背诵快捷键</p>
+<h3 id="drawio-integration" >Draw.io Integration
+<span>
+    <a href="#drawio-integration">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>一个本地画流程图的实用插件。新建一个后缀为.dio的文件，打开就是绘制流程图的界面。简单易上手。</p>
+<h3 id="binary" >Binary
+<span>
+    <a href="#binary">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>可以查看文件的二进制预览形式。</p>
+<h3 id="gitlens" >Gitlens
+<span>
+    <a href="#gitlens">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>git功能的拓展，查看历史更方便。但是笔者自己对git的理解也不多，暂时不深入说明。</p>
+<h3 id="vsc-netease-music" >VSC Netease Music
+<span>
+    <a href="#vsc-netease-music">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>在VS Code里面听网易云音乐。现在由于VS Code自身的问题，还需要修复。所以这里就暂不推荐该拓展。有余力的可以按照官方指引修复。</p>
+<h3 id="用户代码片段" >用户代码片段
+<span>
+    <a href="#%e7%94%a8%e6%88%b7%e4%bb%a3%e7%a0%81%e7%89%87%e6%ae%b5">
+        <svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
+    </a>
+</span>
+</h3><p>用户代码片段，乍一眼看上去可能会感觉到不知所云，其实这个功能是用来提供自定义代码补全的。点击设置按钮即可为全局或者是特定语言进行设置。而设置的语法参考教程就行。下面是对latex语言的设置举例（latex教程见本系列后续文章）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Place your snippets for latex here. Each snippet is defined under a snippet name and has a prefix, body and 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// same ids are connected.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// Example:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// &#34;Print to console&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// 	&#34;prefix&#34;: &#34;log&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// 	&#34;body&#34;: [
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// 		&#34;console.log(&#39;$1&#39;);&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// 		&#34;$2&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// 	],
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// 	&#34;description&#34;: &#34;Log output to console&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#f92672">&#34;Input a figure&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;prefix&#34;</span>: <span style="color:#e6db74">&#34;fig&#34;</span>,<span style="color:#75715e">//代码自动补全的名字
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">&#34;body&#34;</span>: [
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;\\begin{figure}[H]&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;\t\\centering&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;\t\\includegraphics[width=\\linewidth]{$1}&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;\t\\caption{$2}&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;\\end{figure}&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;$0&#34;</span><span style="color:#75715e">//正式的代码段
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        ],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Input a figure&#34;</span>
+</span></span><span style="display:flex;"><span>	},
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">&#34;aligned&#34;</span>:{
+</span></span><span style="display:flex;"><span>		<span style="color:#f92672">&#34;prefix&#34;</span>: <span style="color:#e6db74">&#34;aligned&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;body&#34;</span>: [
+</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;\\begin{aligned}&#34;</span>,
+</span></span><span style="display:flex;"><span>			<span style="color:#e6db74">&#34;\t$1&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;\\end{aligned}$0&#34;</span>,
+</span></span><span style="display:flex;"><span>        ],
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;Input an aligned env&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+        </div>
+        
+
+    
+
+
+<div class="post-info">
+    
+        <div class="post-date dt-published">2020-06-21</div>
+    
+
+    <a class="post-hidden-url u-url" href="https://livypad.github.io/post/2020-06-21-vsc1/">https://livypad.github.io/post/2020-06-21-vsc1/</a>
+    <a href="https://livypad.github.io" class="p-name p-author post-hidden-author h-card" rel="me">livypad</a>
+
+
+    <div class="post-taxonomies">
+        
+            
+                <ul class="post-tags">
+                    
+                        
+                        <li><a href="https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/">#教程</a></li>
+                    
+                </ul>
+        
+    </div>
+</div>
+
+    </article>
+
+    
+        
+        
+            <h3 class="read-next-title">Read next</h3>
+            <ul class="read-next-posts">
+                
+                <li><a href="/post/2020-06-18-sigpro/">简单信号处理</a></li>
+                
+                <li><a href="/post/2020-06-17-blog/">关于这个博客的搭建</a></li>
+                
+                <li><a href="/post/2020-05-06-light/">光线追迹</a></li>
+                
+            </ul>
+        
+    
+
+    
+        
+    <div class="pagination post-pagination">
+        <div class="left pagination-item ">
+            
+                <a href="/post/2020-06-22-vsc2/">VS Code，All in One（2）——v0.2.0</a>
+            
+        </div>
+        <div class="right pagination-item ">
+            
+                <a href="/post/2020-06-18-sigpro/">简单信号处理</a>
+            
+        </div>
+    </div>
+
+
+
+
+    
+
+    
+        
+
+
+
+
+
+
+
+    
+
+        </main>
+        
+            <footer class="common-footer">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+        <div class="copyright">
+            <p>© livypad, 2022<br>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a>.<br>
+            
+<script
+    type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+            extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    }
+    });
+</script>
+
+            </p>  
+        </div> 
+
+        
+
+    
+
+
+
+    <button class="theme-switcher">
+        Dark theme
+    </button>
+
+
+<script>
+const STORAGE_KEY = 'user-color-scheme'
+const defaultTheme = "auto"
+
+let currentTheme
+let switchButton
+let autoDefinedScheme = window.matchMedia('(prefers-color-scheme: dark)')
+
+const autoChangeScheme = e => {
+    currentTheme = e.matches ? 'dark' : 'light'
+    document.documentElement.setAttribute('data-theme', currentTheme)
+    changeButtonText()
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    switchButton = document.querySelector('.theme-switcher')
+    currentTheme = detectCurrentScheme()
+    if (currentTheme == 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+    }
+    if (currentTheme == 'auto') {
+        autoChangeScheme(autoDefinedScheme);
+        autoDefinedScheme.addListener(autoChangeScheme);
+    }
+
+    if (switchButton) {
+        changeButtonText()
+        switchButton.addEventListener('click', switchTheme, false)
+    }
+  
+    showContent()
+})
+
+function detectCurrentScheme() {
+    if (localStorage.getItem(STORAGE_KEY)) {
+        return localStorage.getItem(STORAGE_KEY)
+    } 
+    if (defaultTheme) {
+        return defaultTheme
+    } 
+    if (!window.matchMedia) {
+        return 'light'
+    } 
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+    }
+    return 'light'
+}
+
+function changeButtonText()
+{   
+    if (switchButton) {
+        switchButton.textContent = currentTheme == 'dark' ?  "Light theme" : "Dark theme"
+    }
+}
+
+function switchTheme(e) {
+    if (currentTheme == 'dark') {
+        localStorage.setItem(STORAGE_KEY, 'light')
+        document.documentElement.setAttribute('data-theme', 'light')
+        currentTheme = 'light'
+    } else {
+        localStorage.setItem(STORAGE_KEY, 'dark')
+        document.documentElement.setAttribute('data-theme', 'dark')
+        currentTheme = 'dark'
+    }
+    changeButtonText()
+}
+
+function showContent() {
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = 1;
+}
+</script>   
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=https://livypad.github.io class="p-name u-url url fn" rel="me">livypad</a> 
+
+     
+        /
+        <a class="p-email u-email email" rel="me" href="mailto:ishonghua.zhu@outlook.com">ishonghua.zhu@outlook.com</a>
+    
+
+    
+</p> 
+</footer>
+
+        
+    </div>
+</body>
+</html>
