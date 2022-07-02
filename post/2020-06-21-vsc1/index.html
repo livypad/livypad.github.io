@@ -8,7 +8,7 @@
 代码文档 vs .docx 读者应该都接触过txt格式的文件。上过大学，学过一些计算机方面的基础课的同学，可能还会接触.c,.cpp,.py,.md,.tex等等格式的文件。这些文件看起来拓展名千差万别，但是读者可以做一个实验。文件里面写上“123456789”，文件的大小都是9B。而若是在一个docx文档里面，文档大小是11.8 KB。这个简单的对比就反映出，本质上，之前说的各个格式，都是某种意义上的纯文本文档，拓展名只是标识这个文件是什么类型的，需要什么样的编译器/解释器。而docx，如果用压缩软件打开，其实是一系列的xml文件，word软件对这一系列的文件，掩盖了在文本文档层面的工作，而展现出一个整体的效果。
 从这点出发，我们就可以用同一个代码编辑器，处理不同的代码文档，毕竟ta们本质都是文本文档。
 代码编辑器 vs 记事本 既然说到文本文档，大家第一反应一般都是记事本。记事本当然是可以写代码文件的，毕竟记事本是可以处理txt这样的文本文档的。如果不信，可以看下面的对比图。左边为VS Code，右边是记事本，文件是笔者之前光线追迹里面提到的.py文件。
-但这么一对比，直观上看，记事本毕竟没有专门的设计。相比较正牌的代码编辑器，ta缺少比如自动补全，代码语法高亮等等好用的功能。最多说能用，但是很不趁手。"><link rel=icon type=image/x-icon href=https://livypad.github.io/favicon.ico><link rel=apple-touch-icon-precomposed href=https://livypad.github.io/favicon.png><style>body{visibility:hidden;opacity:0}</style><noscript><style>body{visibility:visible;opacity:1}</style></noscript><link rel=stylesheet href=https://livypad.github.io/css/style.min.c6a5c56d82abc1aa3a1925bf0b67884906e878e4e5bfb5af069b0a3e35e32569.css integrity="sha256-xqXFbYKrwao6GSW/C2eISQboeOTlv7WvBpsKPjXjJWk="><script src=https://livypad.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js type=text/javascript integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script><meta property="og:title" content="VS Code，All in One（1）——v0.2.0"><meta property="og:description" content="VS Code以及其他的安利向（1) -编辑器 关于这个系列 什么是VS Code 什么是代码编辑器 代码文档 vs .docx 代码编辑器 vs 记事本 代码编辑器 vs 集成开发环境 为何选择VS Code 安装 界面介绍 字体和美化 杂项 中文支持 文件编码 设置同步 ctrl+shift+p Draw.io Integration Binary Gitlens VSC Netease Music 用户代码片段 VS Code以及其他的安利向（1) -编辑器 关于这个系列 大学以来，笔者接触了很多新东西，很想安利出去。但是如果是一对一安利，虽然能有及时反馈，但是一是略显尴尬，打字很不方便，二是笔者懒（抱歉），不想一个个人说。所以就萌生了写这个系列小文章的想法。
+但这么一对比，直观上看，记事本毕竟没有专门的设计。相比较正牌的代码编辑器，ta缺少比如自动补全，代码语法高亮等等好用的功能。最多说能用，但是很不趁手。"><link rel=icon type=image/x-icon href=https://livypad.github.io/favicon.ico><link rel=apple-touch-icon-precomposed href=https://livypad.github.io/favicon.png><style>body{visibility:hidden;opacity:0}</style><noscript><style>body{visibility:visible;opacity:1}</style></noscript><link rel=stylesheet href=https://livypad.github.io/css/style.min.b1ff3b33966ee59e60805c22025d3250e47f3c7738cb6d6907c4c27f9da268e4.css integrity="sha256-sf87M5Zu5Z5ggFwiAl0yUOR/PHc4y21pB8TCf52iaOQ="><script src=https://livypad.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js type=text/javascript integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script><meta property="og:title" content="VS Code，All in One（1）——v0.2.0"><meta property="og:description" content="VS Code以及其他的安利向（1) -编辑器 关于这个系列 什么是VS Code 什么是代码编辑器 代码文档 vs .docx 代码编辑器 vs 记事本 代码编辑器 vs 集成开发环境 为何选择VS Code 安装 界面介绍 字体和美化 杂项 中文支持 文件编码 设置同步 ctrl+shift+p Draw.io Integration Binary Gitlens VSC Netease Music 用户代码片段 VS Code以及其他的安利向（1) -编辑器 关于这个系列 大学以来，笔者接触了很多新东西，很想安利出去。但是如果是一对一安利，虽然能有及时反馈，但是一是略显尴尬，打字很不方便，二是笔者懒（抱歉），不想一个个人说。所以就萌生了写这个系列小文章的想法。
 正好VS Code就是笔者一直以来的各个工作的共同平台，All in One 正是取其“全能”的含义。是有这个系列文章。
 这是一个安利+教程向的文章。限于笔者水平（和懒惰），肯定会有一些谬误或者是不全面的地方。而且笔者也只有win10平台经验。按照笔者的经验，遇到的绝大多数问题，是可以当即依靠搜索引擎解决的。（当然，如果您希望笔者加上去，也欢迎私下联系我更新文章。
 学习这些应用性技能的宗旨
@@ -52,40 +52,40 @@
 <span><a href=#binary><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h3><p>可以查看文件的二进制预览形式。</p><h3 id=gitlens>Gitlens
 <span><a href=#gitlens><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h3><p>git功能的拓展，查看历史更方便。但是笔者自己对git的理解也不多，暂时不深入说明。</p><h3 id=vsc-netease-music>VSC Netease Music
 <span><a href=#vsc-netease-music><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h3><p>在VS Code里面听网易云音乐。现在由于VS Code自身的问题，还需要修复。所以这里就暂不推荐该拓展。有余力的可以按照官方指引修复。</p><h3 id=用户代码片段>用户代码片段
-<span><a href=#%e7%94%a8%e6%88%b7%e4%bb%a3%e7%a0%81%e7%89%87%e6%ae%b5><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h3><p>用户代码片段，乍一眼看上去可能会感觉到不知所云，其实这个功能是用来提供自定义代码补全的。点击设置按钮即可为全局或者是特定语言进行设置。而设置的语法参考教程就行。下面是对latex语言的设置举例（latex教程见本系列后续文章）。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>  {
-</span></span><span style=display:flex><span>	<span style=color:#75715e>// Place your snippets for latex here. Each snippet is defined under a snippet name and has a prefix, body and 
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// same ids are connected.
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// Example:
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// &#34;Print to console&#34;: {
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// 	&#34;prefix&#34;: &#34;log&#34;,
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// 	&#34;body&#34;: [
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// 		&#34;console.log(&#39;$1&#39;);&#34;,
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// 		&#34;$2&#34;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// 	],
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// 	&#34;description&#34;: &#34;Log output to console&#34;
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#75715e>// }
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#f92672>&#34;Input a figure&#34;</span>: {
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;prefix&#34;</span>: <span style=color:#e6db74>&#34;fig&#34;</span>,<span style=color:#75715e>//代码自动补全的名字
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#f92672>&#34;body&#34;</span>: [
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;\\begin{figure}[H]&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;\t\\centering&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;\t\\includegraphics[width=\\linewidth]{$1}&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;\t\\caption{$2}&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;\\end{figure}&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;$0&#34;</span><span style=color:#75715e>//正式的代码段
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        ],
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;Input a figure&#34;</span>
+<span><a href=#%e7%94%a8%e6%88%b7%e4%bb%a3%e7%a0%81%e7%89%87%e6%ae%b5><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h3><p>用户代码片段，乍一眼看上去可能会感觉到不知所云，其实这个功能是用来提供自定义代码补全的。点击设置按钮即可为全局或者是特定语言进行设置。而设置的语法参考教程就行。下面是对latex语言的设置举例（latex教程见本系列后续文章）。</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>	<span style=color:#09f;font-style:italic>// Place your snippets for latex here. Each snippet is defined under a snippet name and has a prefix, body and 
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// same ids are connected.
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// Example:
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// &#34;Print to console&#34;: {
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// 	&#34;prefix&#34;: &#34;log&#34;,
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// 	&#34;body&#34;: [
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// 		&#34;console.log(&#39;$1&#39;);&#34;,
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// 		&#34;$2&#34;
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// 	],
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// 	&#34;description&#34;: &#34;Log output to console&#34;
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#09f;font-style:italic>// }
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>	<span style=color:#309;font-weight:700>&#34;Input a figure&#34;</span>: {
+</span></span><span style=display:flex><span>        <span style=color:#309;font-weight:700>&#34;prefix&#34;</span>: <span style=color:#c30>&#34;fig&#34;</span>,<span style=color:#09f;font-style:italic>//代码自动补全的名字
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>        <span style=color:#309;font-weight:700>&#34;body&#34;</span>: [
+</span></span><span style=display:flex><span>            <span style=color:#c30>&#34;\\begin{figure}[H]&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#c30>&#34;\t\\centering&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#c30>&#34;\t\\includegraphics[width=\\linewidth]{$1}&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#c30>&#34;\t\\caption{$2}&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#c30>&#34;\\end{figure}&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#c30>&#34;$0&#34;</span><span style=color:#09f;font-style:italic>//正式的代码段
+</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>        ],
+</span></span><span style=display:flex><span>        <span style=color:#309;font-weight:700>&#34;description&#34;</span>: <span style=color:#c30>&#34;Input a figure&#34;</span>
 </span></span><span style=display:flex><span>	},
-</span></span><span style=display:flex><span>	<span style=color:#f92672>&#34;aligned&#34;</span>:{
-</span></span><span style=display:flex><span>		<span style=color:#f92672>&#34;prefix&#34;</span>: <span style=color:#e6db74>&#34;aligned&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;body&#34;</span>: [
-</span></span><span style=display:flex><span>			<span style=color:#e6db74>&#34;\\begin{aligned}&#34;</span>,
-</span></span><span style=display:flex><span>			<span style=color:#e6db74>&#34;\t$1&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;\\end{aligned}$0&#34;</span>,
+</span></span><span style=display:flex><span>	<span style=color:#309;font-weight:700>&#34;aligned&#34;</span>:{
+</span></span><span style=display:flex><span>		<span style=color:#309;font-weight:700>&#34;prefix&#34;</span>: <span style=color:#c30>&#34;aligned&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#309;font-weight:700>&#34;body&#34;</span>: [
+</span></span><span style=display:flex><span>			<span style=color:#c30>&#34;\\begin{aligned}&#34;</span>,
+</span></span><span style=display:flex><span>			<span style=color:#c30>&#34;\t$1&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#c30>&#34;\\end{aligned}$0&#34;</span>,
 </span></span><span style=display:flex><span>        ],
-</span></span><span style=display:flex><span>        <span style=color:#f92672>&#34;description&#34;</span>: <span style=color:#e6db74>&#34;Input an aligned env&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#309;font-weight:700>&#34;description&#34;</span>: <span style=color:#c30>&#34;Input an aligned env&#34;</span>
 </span></span><span style=display:flex><span>	}
 </span></span><span style=display:flex><span>}
 </span></span></code></pre></div></div><div class=post-info><div class="post-date dt-published">2020-06-21</div><a class="post-hidden-url u-url" href=https://livypad.github.io/post/2020-06-21-vsc1/>https://livypad.github.io/post/2020-06-21-vsc1/</a>

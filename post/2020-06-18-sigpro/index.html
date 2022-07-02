@@ -16,7 +16,7 @@ $$ \begin{aligned} proc2(t)&=proc1(t)-proc1(t).average()\\ &=\frac{AD}{2}\cos(\o
 滤波器采用 8 阶 Butterworth 低通滤波器。
 结果 图一为频谱，红色为相乘信号，蓝色为输出信号。图二为时域。蓝色信号为输出，红色信号是初始发出的雷达信号，作为对比。
 源代码 完整源代码如下。
-import numpy as np from scipy import signal import matplotlib.pyplot as plt w = [100, 105] #频率 a = [10, 5, 3] #幅值 ph = [0, 1."><link rel=icon type=image/x-icon href=https://livypad.github.io/favicon.ico><link rel=apple-touch-icon-precomposed href=https://livypad.github.io/favicon.png><style>body{visibility:hidden;opacity:0}</style><noscript><style>body{visibility:visible;opacity:1}</style></noscript><link rel=stylesheet href=https://livypad.github.io/css/style.min.c6a5c56d82abc1aa3a1925bf0b67884906e878e4e5bfb5af069b0a3e35e32569.css integrity="sha256-xqXFbYKrwao6GSW/C2eISQboeOTlv7WvBpsKPjXjJWk="><script src=https://livypad.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js type=text/javascript integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script><meta property="og:title" content="简单信号处理"><meta property="og:description" content="简单信号处理 题目 物理知识告诉我们，对运动物体发射波，反射的波会受到多普勒效应的影响，造成反射波的频率的改变。而这一改变和物与发射源运动速度相关。这就是多普勒测速的基本原理。本题只需要处理出频率变化量。
+import numpy as np from scipy import signal import matplotlib.pyplot as plt w = [100, 105] #频率 a = [10, 5, 3] #幅值 ph = [0, 1."><link rel=icon type=image/x-icon href=https://livypad.github.io/favicon.ico><link rel=apple-touch-icon-precomposed href=https://livypad.github.io/favicon.png><style>body{visibility:hidden;opacity:0}</style><noscript><style>body{visibility:visible;opacity:1}</style></noscript><link rel=stylesheet href=https://livypad.github.io/css/style.min.b1ff3b33966ee59e60805c22025d3250e47f3c7738cb6d6907c4c27f9da268e4.css integrity="sha256-sf87M5Zu5Z5ggFwiAl0yUOR/PHc4y21pB8TCf52iaOQ="><script src=https://livypad.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js type=text/javascript integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script><meta property="og:title" content="简单信号处理"><meta property="og:description" content="简单信号处理 题目 物理知识告诉我们，对运动物体发射波，反射的波会受到多普勒效应的影响，造成反射波的频率的改变。而这一改变和物与发射源运动速度相关。这就是多普勒测速的基本原理。本题只需要处理出频率变化量。
 简化实际情况，假设发射信号为$x(t)=A\cos(\omega_0 t+\phi)$，而接受信号接收到反射静止物体和运动物体的信号，为$y(t)=B\cos(\omega_0(t-t_0)+\phi)+D\cos(\omega_0(t-t_0)+\phi)$。而且为了方便，假定机器保留了原始的输出信号。
 流程图 基本设计思路如下
 这个设计的基本思路是借鉴了双边带抑制载波调制的思路。借鉴自乘和滤波，获得低频的多普勒偏移频率。
@@ -74,59 +74,59 @@ proc2(t)&=proc1(t)-proc1(t).average()\\
 $$</p><h2 id=实现细节>实现细节
 <span><a href=#%e5%ae%9e%e7%8e%b0%e7%bb%86%e8%8a%82><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>由于这是数字信号处理，所以不需要再加上专门的“去直流”。对离散值直接求平均减去即可。</p><p>滤波器采用 8 阶 Butterworth 低通滤波器。</p><h2 id=结果>结果
 <span><a href=#%e7%bb%93%e6%9e%9c><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p><img src=/assets/img/sig2.png alt=结果></p><p>图一为频谱，红色为相乘信号，蓝色为输出信号。图二为时域。蓝色信号为输出，红色信号是初始发出的雷达信号，作为对比。</p><h2 id=源代码>源代码
-<span><a href=#%e6%ba%90%e4%bb%a3%e7%a0%81><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>完整源代码如下。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#f92672>import</span> numpy <span style=color:#66d9ef>as</span> np
-</span></span><span style=display:flex><span><span style=color:#f92672>from</span> scipy <span style=color:#f92672>import</span> signal
-</span></span><span style=display:flex><span><span style=color:#f92672>import</span> matplotlib.pyplot <span style=color:#66d9ef>as</span> plt
-</span></span><span style=display:flex><span>w <span style=color:#f92672>=</span> [<span style=color:#ae81ff>100</span>, <span style=color:#ae81ff>105</span>]  <span style=color:#75715e>#频率</span>
-</span></span><span style=display:flex><span>a <span style=color:#f92672>=</span> [<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>3</span>]  <span style=color:#75715e>#幅值</span>
-</span></span><span style=display:flex><span>ph <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1.4</span>, <span style=color:#ae81ff>0.73</span>]  <span style=color:#75715e>#相位</span>
-</span></span><span style=display:flex><span>N <span style=color:#f92672>=</span> <span style=color:#ae81ff>1000</span>
+<span><a href=#%e6%ba%90%e4%bb%a3%e7%a0%81><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>完整源代码如下。</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#069;font-weight:700>import</span> <span style=color:#0cf;font-weight:700>numpy</span> <span style=color:#069;font-weight:700>as</span> <span style=color:#0cf;font-weight:700>np</span>
+</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>from</span> <span style=color:#0cf;font-weight:700>scipy</span> <span style=color:#069;font-weight:700>import</span> signal
+</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>import</span> <span style=color:#0cf;font-weight:700>matplotlib.pyplot</span> <span style=color:#069;font-weight:700>as</span> <span style=color:#0cf;font-weight:700>plt</span>
+</span></span><span style=display:flex><span>w <span style=color:#555>=</span> [<span style=color:#f60>100</span>, <span style=color:#f60>105</span>]  <span style=color:#09f;font-style:italic>#频率</span>
+</span></span><span style=display:flex><span>a <span style=color:#555>=</span> [<span style=color:#f60>10</span>, <span style=color:#f60>5</span>, <span style=color:#f60>3</span>]  <span style=color:#09f;font-style:italic>#幅值</span>
+</span></span><span style=display:flex><span>ph <span style=color:#555>=</span> [<span style=color:#f60>0</span>, <span style=color:#f60>1.4</span>, <span style=color:#f60>0.73</span>]  <span style=color:#09f;font-style:italic>#相位</span>
+</span></span><span style=display:flex><span>N <span style=color:#555>=</span> <span style=color:#f60>1000</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#初始信号</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>xtsig</span>(t):
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> a[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> np<span style=color:#f92672>.</span>sin(<span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> np<span style=color:#f92672>.</span>pi <span style=color:#f92672>*</span> w[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> t <span style=color:#f92672>+</span> ph[<span style=color:#ae81ff>0</span>])
+</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>#初始信号</span>
+</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>def</span> <span style=color:#c0f>xtsig</span>(t):
+</span></span><span style=display:flex><span>    <span style=color:#069;font-weight:700>return</span> a[<span style=color:#f60>0</span>] <span style=color:#555>*</span> np<span style=color:#555>.</span>sin(<span style=color:#f60>2</span> <span style=color:#555>*</span> np<span style=color:#555>.</span>pi <span style=color:#555>*</span> w[<span style=color:#f60>0</span>] <span style=color:#555>*</span> t <span style=color:#555>+</span> ph[<span style=color:#f60>0</span>])
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>#回波</span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>ytsig</span>(t):
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> (a[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>*</span> np<span style=color:#f92672>.</span>cos(<span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> np<span style=color:#f92672>.</span>pi <span style=color:#f92672>*</span> w[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> t <span style=color:#f92672>+</span> ph[<span style=color:#ae81ff>1</span>]) <span style=color:#f92672>+</span>
-</span></span><span style=display:flex><span>            a[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>*</span> np<span style=color:#f92672>.</span>cos(<span style=color:#ae81ff>2</span> <span style=color:#f92672>*</span> np<span style=color:#f92672>.</span>pi <span style=color:#f92672>*</span> w[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>*</span> t <span style=color:#f92672>+</span> ph[<span style=color:#ae81ff>2</span>]))
+</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>#回波</span>
+</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>def</span> <span style=color:#c0f>ytsig</span>(t):
+</span></span><span style=display:flex><span>    <span style=color:#069;font-weight:700>return</span> (a[<span style=color:#f60>1</span>] <span style=color:#555>*</span> np<span style=color:#555>.</span>cos(<span style=color:#f60>2</span> <span style=color:#555>*</span> np<span style=color:#555>.</span>pi <span style=color:#555>*</span> w[<span style=color:#f60>0</span>] <span style=color:#555>*</span> t <span style=color:#555>+</span> ph[<span style=color:#f60>1</span>]) <span style=color:#555>+</span>
+</span></span><span style=display:flex><span>            a[<span style=color:#f60>2</span>] <span style=color:#555>*</span> np<span style=color:#555>.</span>cos(<span style=color:#f60>2</span> <span style=color:#555>*</span> np<span style=color:#555>.</span>pi <span style=color:#555>*</span> w[<span style=color:#f60>1</span>] <span style=color:#555>*</span> t <span style=color:#555>+</span> ph[<span style=color:#f60>2</span>]))
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>mul</span>(t):
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> ytsig(t) <span style=color:#f92672>*</span> xtsig(t)
+</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>def</span> <span style=color:#c0f>mul</span>(t):
+</span></span><span style=display:flex><span>    <span style=color:#069;font-weight:700>return</span> ytsig(t) <span style=color:#555>*</span> xtsig(t)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>time <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>linspace(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, N)
+</span></span><span style=display:flex><span>time <span style=color:#555>=</span> np<span style=color:#555>.</span>linspace(<span style=color:#f60>0</span>, <span style=color:#f60>1</span>, N)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>mulxy <span style=color:#f92672>=</span> mul(time)
-</span></span><span style=display:flex><span>x <span style=color:#f92672>=</span> xtsig(time)
-</span></span><span style=display:flex><span><span style=color:#75715e>#滤波</span>
-</span></span><span style=display:flex><span>b, a <span style=color:#f92672>=</span> signal<span style=color:#f92672>.</span>butter(<span style=color:#ae81ff>8</span>, <span style=color:#ae81ff>0.02</span>, <span style=color:#e6db74>&#39;lowpass&#39;</span>)
-</span></span><span style=display:flex><span>low <span style=color:#f92672>=</span> signal<span style=color:#f92672>.</span>filtfilt(b, a, mulxy)
-</span></span><span style=display:flex><span><span style=color:#75715e>#去除直流分量</span>
-</span></span><span style=display:flex><span>ave <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>average(low)
-</span></span><span style=display:flex><span>low <span style=color:#f92672>=</span> low <span style=color:#f92672>-</span> ave
+</span></span><span style=display:flex><span>mulxy <span style=color:#555>=</span> mul(time)
+</span></span><span style=display:flex><span>x <span style=color:#555>=</span> xtsig(time)
+</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>#滤波</span>
+</span></span><span style=display:flex><span>b, a <span style=color:#555>=</span> signal<span style=color:#555>.</span>butter(<span style=color:#f60>8</span>, <span style=color:#f60>0.02</span>, <span style=color:#c30>&#39;lowpass&#39;</span>)
+</span></span><span style=display:flex><span>low <span style=color:#555>=</span> signal<span style=color:#555>.</span>filtfilt(b, a, mulxy)
+</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>#去除直流分量</span>
+</span></span><span style=display:flex><span>ave <span style=color:#555>=</span> np<span style=color:#555>.</span>average(low)
+</span></span><span style=display:flex><span>low <span style=color:#555>=</span> low <span style=color:#555>-</span> ave
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>f1 <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>fft<span style=color:#f92672>.</span>fft(mulxy)
-</span></span><span style=display:flex><span>absf1 <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>abs(f1) <span style=color:#f92672>/</span> N
+</span></span><span style=display:flex><span>f1 <span style=color:#555>=</span> np<span style=color:#555>.</span>fft<span style=color:#555>.</span>fft(mulxy)
+</span></span><span style=display:flex><span>absf1 <span style=color:#555>=</span> np<span style=color:#555>.</span>abs(f1) <span style=color:#555>/</span> N
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>f2 <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>fft<span style=color:#f92672>.</span>fft(x)
-</span></span><span style=display:flex><span>absf2 <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>abs(f2) <span style=color:#f92672>/</span> N
+</span></span><span style=display:flex><span>f2 <span style=color:#555>=</span> np<span style=color:#555>.</span>fft<span style=color:#555>.</span>fft(x)
+</span></span><span style=display:flex><span>absf2 <span style=color:#555>=</span> np<span style=color:#555>.</span>abs(f2) <span style=color:#555>/</span> N
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>f3 <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>fft<span style=color:#f92672>.</span>fft(low)
-</span></span><span style=display:flex><span>absf3 <span style=color:#f92672>=</span> np<span style=color:#f92672>.</span>abs(f3) <span style=color:#f92672>/</span> N
+</span></span><span style=display:flex><span>f3 <span style=color:#555>=</span> np<span style=color:#555>.</span>fft<span style=color:#555>.</span>fft(low)
+</span></span><span style=display:flex><span>absf3 <span style=color:#555>=</span> np<span style=color:#555>.</span>abs(f3) <span style=color:#555>/</span> N
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>211</span>)
-</span></span><span style=display:flex><span>p1, <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>plot(np<span style=color:#f92672>.</span>arange(N), absf1, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;r&#39;</span>)
-</span></span><span style=display:flex><span>p2, <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>plot(np<span style=color:#f92672>.</span>arange(N), absf2, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;g&#39;</span>)
-</span></span><span style=display:flex><span>p3, <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>plot(np<span style=color:#f92672>.</span>arange(N), absf3, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;b&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#555>.</span>subplot(<span style=color:#f60>211</span>)
+</span></span><span style=display:flex><span>p1, <span style=color:#555>=</span> plt<span style=color:#555>.</span>plot(np<span style=color:#555>.</span>arange(N), absf1, color<span style=color:#555>=</span><span style=color:#c30>&#39;r&#39;</span>)
+</span></span><span style=display:flex><span>p2, <span style=color:#555>=</span> plt<span style=color:#555>.</span>plot(np<span style=color:#555>.</span>arange(N), absf2, color<span style=color:#555>=</span><span style=color:#c30>&#39;g&#39;</span>)
+</span></span><span style=display:flex><span>p3, <span style=color:#555>=</span> plt<span style=color:#555>.</span>plot(np<span style=color:#555>.</span>arange(N), absf3, color<span style=color:#555>=</span><span style=color:#c30>&#39;b&#39;</span>)
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>subplot(<span style=color:#ae81ff>212</span>)
-</span></span><span style=display:flex><span>p4, <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>plot(time, low)
-</span></span><span style=display:flex><span>p5, <span style=color:#f92672>=</span> plt<span style=color:#f92672>.</span>plot(time, x, color<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;r&#39;</span>)
-</span></span><span style=display:flex><span>plt<span style=color:#f92672>.</span>show()
+</span></span><span style=display:flex><span>plt<span style=color:#555>.</span>subplot(<span style=color:#f60>212</span>)
+</span></span><span style=display:flex><span>p4, <span style=color:#555>=</span> plt<span style=color:#555>.</span>plot(time, low)
+</span></span><span style=display:flex><span>p5, <span style=color:#555>=</span> plt<span style=color:#555>.</span>plot(time, x, color<span style=color:#555>=</span><span style=color:#c30>&#39;r&#39;</span>)
+</span></span><span style=display:flex><span>plt<span style=color:#555>.</span>show()
 </span></span></code></pre></div></div><div class=post-info><div class="post-date dt-published">2020-06-18</div><a class="post-hidden-url u-url" href=https://livypad.github.io/post/2020-06-18-sigpro/>https://livypad.github.io/post/2020-06-18-sigpro/</a>
 <a href=https://livypad.github.io class="p-name p-author post-hidden-author h-card" rel=me>livypad</a><div class=post-taxonomies><ul class=post-tags><li><a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>#教程</a></li></ul></div></div></article><div class="pagination post-pagination"><div class="left pagination-item"><a href=/post/2020-06-21-vsc1/>VS Code，All in One（1）——v0.2.0</a></div><div class="right pagination-item"><a href=/post/2020-06-17-blog/>关于这个博客的搭建</a></div></div></main><footer class=common-footer><div class=common-footer-bottom><div class=copyright><p>© livypad, 2022<br>Powered by <a target=_blank rel="noopener noreferrer" href=https://gohugo.io/>Hugo</a>, theme <a target=_blank rel="noopener noreferrer" href=https://github.com/mitrichius/hugo-theme-anubis>Anubis</a>.<br><script type=text/javascript src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type=text/x-mathjax-config>

@@ -57,7 +57,7 @@
 &lt;p>用我们之前下好的VS Code打开本地的Respority文件夹，就可以开始写博客了。&lt;/p>
 &lt;p>Jekll的博客一般通过markdown语法进行编写。博文新建在_posts文件夹下，命名格式为时间加题目&lt;code>20XX-XX-XX-title.md&lt;/code>。
 在md文件题头还要加上描述符。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>---
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-md" data-lang="md">&lt;span style="display:flex;">&lt;span>---
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>layout: default
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>title: &amp;#34;XX&amp;#34;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---

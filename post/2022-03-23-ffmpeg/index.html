@@ -1,182 +1,182 @@
 <!doctype html><html lang=zh-cn data-theme><head><meta charset=utf-8><meta name=HandheldFriendly content="True"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer-when-downgrade"><title>FFmpeg转换音乐文件格式 - zhh's blog</title><meta name=description content="FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。
 find . -name &#34;*.flac&#34; -maxdepth 1 -exec ffmpeg -i {} -ab 320k -map_metadata 0 -id3v2_version 3 {}.mp3 \; Rust 的 cli toy 程序 由此，可以顺手搞一个 rust 的 cli 程序，实现任何音乐格式的互转。主要是使用walkdir这个库，不用自己实现遍历。
-[package] name = &#34;music_converter&#34; version = &#34;0.1.0&#34; edition = &#34;2018&#34; # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html [dependencies] walkdir = &#34;2&#34; use std::borrow::Borrow; use std::env; use std::io; use std::path::Path; use std::process::{Command, Stdio}; use walkdir::WalkDir; fn cin(print_info: &str) -> String { println!"><link rel=icon type=image/x-icon href=https://livypad.github.io/favicon.ico><link rel=apple-touch-icon-precomposed href=https://livypad.github.io/favicon.png><style>body{visibility:hidden;opacity:0}</style><noscript><style>body{visibility:visible;opacity:1}</style></noscript><link rel=stylesheet href=https://livypad.github.io/css/style.min.c6a5c56d82abc1aa3a1925bf0b67884906e878e4e5bfb5af069b0a3e35e32569.css integrity="sha256-xqXFbYKrwao6GSW/C2eISQboeOTlv7WvBpsKPjXjJWk="><script src=https://livypad.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js type=text/javascript integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script><meta property="og:title" content="FFmpeg转换音乐文件格式"><meta property="og:description" content="FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。
+[package] name = &#34;music_converter&#34; version = &#34;0.1.0&#34; edition = &#34;2018&#34; # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html [dependencies] walkdir = &#34;2&#34; use std::borrow::Borrow; use std::env; use std::io; use std::path::Path; use std::process::{Command, Stdio}; use walkdir::WalkDir; fn cin(print_info: &str) -> String { println!"><link rel=icon type=image/x-icon href=https://livypad.github.io/favicon.ico><link rel=apple-touch-icon-precomposed href=https://livypad.github.io/favicon.png><style>body{visibility:hidden;opacity:0}</style><noscript><style>body{visibility:visible;opacity:1}</style></noscript><link rel=stylesheet href=https://livypad.github.io/css/style.min.b1ff3b33966ee59e60805c22025d3250e47f3c7738cb6d6907c4c27f9da268e4.css integrity="sha256-sf87M5Zu5Z5ggFwiAl0yUOR/PHc4y21pB8TCf52iaOQ="><script src=https://livypad.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js type=text/javascript integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script><meta property="og:title" content="FFmpeg转换音乐文件格式"><meta property="og:description" content="FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。
 find . -name &#34;*.flac&#34; -maxdepth 1 -exec ffmpeg -i {} -ab 320k -map_metadata 0 -id3v2_version 3 {}.mp3 \; Rust 的 cli toy 程序 由此，可以顺手搞一个 rust 的 cli 程序，实现任何音乐格式的互转。主要是使用walkdir这个库，不用自己实现遍历。
 [package] name = &#34;music_converter&#34; version = &#34;0.1.0&#34; edition = &#34;2018&#34; # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html [dependencies] walkdir = &#34;2&#34; use std::borrow::Borrow; use std::env; use std::io; use std::path::Path; use std::process::{Command, Stdio}; use walkdir::WalkDir; fn cin(print_info: &str) -> String { println!"><meta property="og:type" content="article"><meta property="og:url" content="https://livypad.github.io/post/2022-03-23-ffmpeg/"><meta property="article:section" content="post"><meta property="article:published_time" content="2022-03-23T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-23T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="FFmpeg转换音乐文件格式"><meta name=twitter:description content="FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。
 find . -name &#34;*.flac&#34; -maxdepth 1 -exec ffmpeg -i {} -ab 320k -map_metadata 0 -id3v2_version 3 {}.mp3 \; Rust 的 cli toy 程序 由此，可以顺手搞一个 rust 的 cli 程序，实现任何音乐格式的互转。主要是使用walkdir这个库，不用自己实现遍历。
 [package] name = &#34;music_converter&#34; version = &#34;0.1.0&#34; edition = &#34;2018&#34; # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html [dependencies] walkdir = &#34;2&#34; use std::borrow::Borrow; use std::env; use std::io; use std::path::Path; use std::process::{Command, Stdio}; use walkdir::WalkDir; fn cin(print_info: &str) -> String { println!"></head><body><a class=skip-main href=#main>Skip to main content</a><div class=container><header class=common-header><div class=header-top><h1 class=site-title><a href=/>zhh's blog</a></h1><ul class=social-icons><li><a href=https://github.com/livypad title=Github rel=me><span class=inline-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentcolor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6.0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6.0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3.0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1.0-6.2-.3-40.4-.3-61.4.0.0-70 15-84.7-29.8.0.0-11.4-29.1-27.8-36.6.0.0-22.9-15.7 1.6-15.4.0.0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5.0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9.0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4.0 33.7-.3 75.4-.3 83.6.0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6.0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9.0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span></a></li><li><a href=mailto:ishonghua.zhu@outlook.com title=Email rel=me><span class=inline-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentcolor" d="M464 64H48C21.49 64 0 85.49.0 112v288c0 26.51 21.49 48 48 48h416c26.51.0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 4e2V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V4e2H48z"/></svg></span></a></li></ul></div><nav><a href=https://livypad.github.io/about/ title>About</a>
 <a href=https://livypad.github.io/tags/ title>Tags</a>
-<a href=https://livypad.github.io/post/ title>Archive</a></nav></header><main id=main tabindex=-1><article class="post h-entry"><div class=post-header><header><h1 class="p-name post-title">FFmpeg转换音乐文件格式</h1></header></div><div class="content e-content"><p><a href=https://ffmpeg.org/>FFmpeg</a>是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用<code>find</code>命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>find . -name <span style=color:#e6db74>&#34;*.flac&#34;</span> -maxdepth <span style=color:#ae81ff>1</span> -exec ffmpeg -i <span style=color:#f92672>{}</span> -ab 320k -map_metadata <span style=color:#ae81ff>0</span> -id3v2_version <span style=color:#ae81ff>3</span> <span style=color:#f92672>{}</span>.mp3 <span style=color:#ae81ff>\;</span>
+<a href=https://livypad.github.io/post/ title>Archive</a></nav></header><main id=main tabindex=-1><article class="post h-entry"><div class=post-header><header><h1 class="p-name post-title">FFmpeg转换音乐文件格式</h1></header></div><div class="content e-content"><p><a href=https://ffmpeg.org/>FFmpeg</a>是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用<code>find</code>命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>find . -name <span style=color:#c30>&#34;*.flac&#34;</span> -maxdepth <span style=color:#f60>1</span> -exec ffmpeg -i <span style=color:#555>{}</span> -ab 320k -map_metadata <span style=color:#f60>0</span> -id3v2_version <span style=color:#f60>3</span> <span style=color:#555>{}</span>.mp3 <span style=color:#c30;font-weight:700>\;</span>
 </span></span></code></pre></div><h1 id=rust-的-cli-toy-程序>Rust 的 cli toy 程序
-<span><a href=#rust-%e7%9a%84-cli-toy-%e7%a8%8b%e5%ba%8f><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h1><p>由此，可以顺手搞一个 rust 的 cli 程序，实现任何音乐格式的互转。主要是使用<code>walkdir</code>这个库，不用自己实现遍历。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=display:flex><span>[<span style=color:#a6e22e>package</span>]
-</span></span><span style=display:flex><span><span style=color:#a6e22e>name</span> = <span style=color:#e6db74>&#34;music_converter&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>version</span> = <span style=color:#e6db74>&#34;0.1.0&#34;</span>
-</span></span><span style=display:flex><span><span style=color:#a6e22e>edition</span> = <span style=color:#e6db74>&#34;2018&#34;</span>
+<span><a href=#rust-%e7%9a%84-cli-toy-%e7%a8%8b%e5%ba%8f><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h1><p>由此，可以顺手搞一个 rust 的 cli 程序，实现任何音乐格式的互转。主要是使用<code>walkdir</code>这个库，不用自己实现遍历。</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=display:flex><span>[package]
+</span></span><span style=display:flex><span>name = <span style=color:#c30>&#34;music_converter&#34;</span>
+</span></span><span style=display:flex><span>version = <span style=color:#c30>&#34;0.1.0&#34;</span>
+</span></span><span style=display:flex><span>edition = <span style=color:#c30>&#34;2018&#34;</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e># See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html</span>
+</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>[<span style=color:#a6e22e>dependencies</span>]
-</span></span><span style=display:flex><span><span style=color:#a6e22e>walkdir</span> = <span style=color:#e6db74>&#34;2&#34;</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#66d9ef>use</span> std::borrow::Borrow;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> std::env;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> std::io;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> std::path::Path;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> std::process::{Command, Stdio};
-</span></span><span style=display:flex><span><span style=color:#66d9ef>use</span> walkdir::WalkDir;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>cin</span>(print_info: <span style=color:#66d9ef>&amp;</span><span style=color:#66d9ef>str</span>) -&gt; String {
-</span></span><span style=display:flex><span>    println!(<span style=color:#e6db74>&#34;{}&#34;</span>, print_info);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> input <span style=color:#f92672>=</span> String::new();
-</span></span><span style=display:flex><span>    io::stdin()
-</span></span><span style=display:flex><span>        .read_line(<span style=color:#f92672>&amp;</span><span style=color:#66d9ef>mut</span> input)
-</span></span><span style=display:flex><span>        .expect(<span style=color:#e6db74>&#34;Failed to read line&#34;</span>);
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> input;
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>path_match</span><span style=color:#f92672>&lt;&#39;</span><span style=color:#a6e22e>a</span><span style=color:#f92672>&gt;</span>(path: <span style=color:#66d9ef>&amp;</span><span style=color:#f92672>&#39;</span><span style=color:#a6e22e>a</span> <span style=color:#a6e22e>Path</span>, ext: <span style=color:#66d9ef>&amp;</span><span style=color:#f92672>&#39;</span><span style=color:#a6e22e>a</span> <span style=color:#66d9ef>str</span>, not_full_name: <span style=color:#66d9ef>bool</span>) -&gt; Option<span style=color:#f92672>&lt;</span>(<span style=color:#f92672>&amp;&#39;</span><span style=color:#a6e22e>a</span> <span style=color:#66d9ef>str</span>, String)<span style=color:#f92672>&gt;</span> {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> not_full_name {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Some(file_ext) <span style=color:#f92672>=</span> path.extension() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> file_ext.to_str().unwrap() <span style=color:#f92672>==</span> ext.trim() {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>let</span> path_name <span style=color:#f92672>=</span> path.to_str().unwrap();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> file_name <span style=color:#f92672>=</span> path
-</span></span><span style=display:flex><span>                    .clone()
-</span></span><span style=display:flex><span>                    .file_stem()
-</span></span><span style=display:flex><span>                    .unwrap()
-</span></span><span style=display:flex><span>                    .to_str()
-</span></span><span style=display:flex><span>                    .unwrap()
-</span></span><span style=display:flex><span>                    .to_string();
-</span></span><span style=display:flex><span>                file_name.push_str(<span style=color:#e6db74>&#34;.mp3&#34;</span>);
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> Some((path_name.borrow(), file_name));
-</span></span><span style=display:flex><span>            } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> None;
-</span></span><span style=display:flex><span>            }
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> None;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> ext <span style=color:#f92672>==</span> path.clone().file_name().unwrap().to_str().unwrap() {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>let</span> path_name <span style=color:#f92672>=</span> path.to_str().unwrap();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> file_name_no_ext <span style=color:#f92672>=</span> path
-</span></span><span style=display:flex><span>                .clone()
-</span></span><span style=display:flex><span>                .file_stem()
-</span></span><span style=display:flex><span>                .unwrap()
-</span></span><span style=display:flex><span>                .to_str()
-</span></span><span style=display:flex><span>                .unwrap()
-</span></span><span style=display:flex><span>                .to_string();
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            file_name_no_ext.push_str(<span style=color:#e6db74>&#34;.mp3&#34;</span>);
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> Some((path_name.borrow(), file_name_no_ext));
-</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> None;
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>call_ffmpeg</span>(src_name: <span style=color:#66d9ef>&amp;</span><span style=color:#66d9ef>str</span>, tgt_name: <span style=color:#66d9ef>&amp;</span><span style=color:#66d9ef>str</span>) {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> <span style=color:#66d9ef>mut</span> child <span style=color:#f92672>=</span> Command::new(<span style=color:#e6db74>&#34;ffmpeg&#34;</span>)
-</span></span><span style=display:flex><span>        .args([
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;-i&#34;</span>,
-</span></span><span style=display:flex><span>            src_name,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;-ab&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;320k&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;-map_metadata&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;0&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;-id3v2_version&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;3&#34;</span>,
-</span></span><span style=display:flex><span>            tgt_name,
-</span></span><span style=display:flex><span>        ])
-</span></span><span style=display:flex><span>        .stdout(Stdio::null())
-</span></span><span style=display:flex><span>        .spawn()
-</span></span><span style=display:flex><span>        .expect(<span style=color:#e6db74>&#34;Failed to execute command&#34;</span>);
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>let</span> ecode <span style=color:#f92672>=</span> child.wait().expect(<span style=color:#e6db74>&#34;failed to wait on child&#34;</span>);
-</span></span><span style=display:flex><span>    println!(<span style=color:#e6db74>&#34;{}&#34;</span>, ecode);
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span>;
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>fn</span> <span style=color:#a6e22e>main</span>() {
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Ok(current_dir) <span style=color:#f92672>=</span> env::current_dir() {
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> current_dir <span style=color:#f92672>=</span> current_dir.as_path();
-</span></span><span style=display:flex><span>        println!(<span style=color:#e6db74>&#34;音乐转换器，请保证音乐文件在该脚本所在目录&#34;</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>loop</span> {
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>let</span> mode <span style=color:#f92672>=</span> cin(<span style=color:#e6db74>&#34;输入模式，q退出，ls列出当前目录下某一拓展名的文件，r递归转换，nr非递归转换，o单文件转换&#34;</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>match</span> mode.to_lowercase().trim() {
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;ls&#34;</span> <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>let</span> ext <span style=color:#f92672>=</span> cin(<span style=color:#e6db74>&#34;输入要查看的拓展名&#34;</span>);
-</span></span><span style=display:flex><span>                    WalkDir::new(current_dir).into_iter().for_each(<span style=color:#f92672>|</span>e<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>                        <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Ok(e) <span style=color:#f92672>=</span> e {
-</span></span><span style=display:flex><span>                            <span style=color:#66d9ef>let</span> path <span style=color:#f92672>=</span> e.path();
-</span></span><span style=display:flex><span>                            <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Some((src_path, _tgt_name)) <span style=color:#f92672>=</span> path_match(path, ext.trim(), <span style=color:#66d9ef>true</span>)
-</span></span><span style=display:flex><span>                            {
-</span></span><span style=display:flex><span>                                println!(<span style=color:#e6db74>&#34;{}&#34;</span>, src_path);
-</span></span><span style=display:flex><span>                            }
-</span></span><span style=display:flex><span>                        }
-</span></span><span style=display:flex><span>                    });
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;r&#34;</span> <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>let</span> ext <span style=color:#f92672>=</span> cin(<span style=color:#e6db74>&#34;输入待转换的拓展名&#34;</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                    WalkDir::new(current_dir).into_iter().for_each(<span style=color:#f92672>|</span>e<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>                        <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Ok(e) <span style=color:#f92672>=</span> e {
-</span></span><span style=display:flex><span>                            <span style=color:#66d9ef>let</span> path <span style=color:#f92672>=</span> e.path();
-</span></span><span style=display:flex><span>                            <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Some((src_path, tgt_name)) <span style=color:#f92672>=</span> path_match(path, ext.trim(), <span style=color:#66d9ef>true</span>) {
-</span></span><span style=display:flex><span>                                call_ffmpeg(src_path, tgt_name.as_str());
-</span></span><span style=display:flex><span>                            }
-</span></span><span style=display:flex><span>                        }
-</span></span><span style=display:flex><span>                    });
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;nr&#34;</span> <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>let</span> ext <span style=color:#f92672>=</span> cin(<span style=color:#e6db74>&#34;输入待转换的拓展名&#34;</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                    WalkDir::new(current_dir)
-</span></span><span style=display:flex><span>                        .max_depth(<span style=color:#ae81ff>1</span>)
-</span></span><span style=display:flex><span>                        .into_iter()
-</span></span><span style=display:flex><span>                        .for_each(<span style=color:#f92672>|</span>e<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>                            <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Ok(e) <span style=color:#f92672>=</span> e {
-</span></span><span style=display:flex><span>                                <span style=color:#66d9ef>let</span> path <span style=color:#f92672>=</span> e.path();
-</span></span><span style=display:flex><span>                                <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Some((src_path, tgt_name)) <span style=color:#f92672>=</span>
-</span></span><span style=display:flex><span>                                    path_match(path, ext.trim(), <span style=color:#66d9ef>true</span>)
-</span></span><span style=display:flex><span>                                {
-</span></span><span style=display:flex><span>                                    call_ffmpeg(src_path, tgt_name.as_str());
-</span></span><span style=display:flex><span>                                }
-</span></span><span style=display:flex><span>                            }
-</span></span><span style=display:flex><span>                        });
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;o&#34;</span> <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>let</span> filename <span style=color:#f92672>=</span> cin(<span style=color:#e6db74>&#34;输入待转换的文件名&#34;</span>);
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>                    WalkDir::new(current_dir)
-</span></span><span style=display:flex><span>                        .max_depth(<span style=color:#ae81ff>1</span>)
-</span></span><span style=display:flex><span>                        .into_iter()
-</span></span><span style=display:flex><span>                        .for_each(<span style=color:#f92672>|</span>e<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>                            <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Ok(e) <span style=color:#f92672>=</span> e {
-</span></span><span style=display:flex><span>                                <span style=color:#66d9ef>let</span> path <span style=color:#f92672>=</span> e.path();
-</span></span><span style=display:flex><span>                                <span style=color:#66d9ef>if</span> <span style=color:#66d9ef>let</span> Some((src_path, tgt_name)) <span style=color:#f92672>=</span>
-</span></span><span style=display:flex><span>                                    path_match(path, filename.trim(), <span style=color:#66d9ef>false</span>)
-</span></span><span style=display:flex><span>                                {
-</span></span><span style=display:flex><span>                                    call_ffmpeg(src_path, tgt_name.as_str());
-</span></span><span style=display:flex><span>                                }
-</span></span><span style=display:flex><span>                            }
-</span></span><span style=display:flex><span>                        });
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;q&#34;</span> <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>break</span>;
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>                _ <span style=color:#f92672>=&gt;</span> {
-</span></span><span style=display:flex><span>                    println!(<span style=color:#e6db74>&#34;input not support&#34;</span>);
-</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> mode.trim() <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;123&#34;</span> {
-</span></span><span style=display:flex><span>                        println!(<span style=color:#e6db74>&#34;hi&#34;</span>);
-</span></span><span style=display:flex><span>                    }
-</span></span><span style=display:flex><span>                }
-</span></span><span style=display:flex><span>            };
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    }
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div></div><div class=post-info><div class="post-date dt-published">2022-03-23</div><a class="post-hidden-url u-url" href=https://livypad.github.io/post/2022-03-23-ffmpeg/>https://livypad.github.io/post/2022-03-23-ffmpeg/</a>
+</span></span><span style=display:flex><span>[dependencies]
+</span></span><span style=display:flex><span>walkdir = <span style=color:#c30>&#34;2&#34;</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>std::borrow::Borrow;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>std::env;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>std::io;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>std::path::Path;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>std::process::{Command,<span style=color:#bbb> </span>Stdio};<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>walkdir::WalkDir;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>fn</span> <span style=color:#c0f>cin</span>(print_info: <span style=color:#069>&amp;</span><span style=color:#078;font-weight:700>str</span>)<span style=color:#bbb> </span>-&gt; <span style=color:#366>String</span> {<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>println!(<span style=color:#c30>&#34;{}&#34;</span>,<span style=color:#bbb> </span>print_info);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>mut</span><span style=color:#bbb> </span>input<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span><span style=color:#366>String</span>::new();<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>io::stdin()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.read_line(<span style=color:#555>&amp;</span><span style=color:#069;font-weight:700>mut</span><span style=color:#bbb> </span>input)<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.expect(<span style=color:#c30>&#34;Failed to read line&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span>input;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>fn</span> <span style=color:#c0f>path_match</span><span style=color:#555>&lt;&#39;</span><span style=color:#309>a</span><span style=color:#555>&gt;</span>(path: <span style=color:#069>&amp;</span><span style=color:#555>&#39;</span><span style=color:#309>a</span> <span style=color:#0a8;font-weight:700>Path</span>,<span style=color:#bbb> </span>ext: <span style=color:#069>&amp;</span><span style=color:#555>&#39;</span><span style=color:#309>a</span> <span style=color:#078;font-weight:700>str</span>,<span style=color:#bbb> </span>not_full_name: <span style=color:#078;font-weight:700>bool</span>)<span style=color:#bbb> </span>-&gt; <span style=color:#366>Option</span><span style=color:#555>&lt;</span>(<span style=color:#555>&amp;&#39;</span><span style=color:#309>a</span><span style=color:#bbb> </span><span style=color:#078;font-weight:700>str</span>,<span style=color:#bbb> </span><span style=color:#366>String</span>)<span style=color:#555>&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span>not_full_name<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Some</span>(file_ext)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path.extension()<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span>file_ext.to_str().unwrap()<span style=color:#bbb> </span><span style=color:#555>==</span><span style=color:#bbb> </span>ext.trim()<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path_name<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path.to_str().unwrap();<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>mut</span><span style=color:#bbb> </span>file_name<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.clone()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.file_stem()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.unwrap()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.to_str()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.unwrap()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.to_string();<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>file_name.push_str(<span style=color:#c30>&#34;.mp3&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((path_name.borrow(),<span style=color:#bbb> </span>file_name));<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>}<span style=color:#bbb> </span><span style=color:#069;font-weight:700>else</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span><span style=color:#366>None</span>;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>}<span style=color:#bbb> </span><span style=color:#069;font-weight:700>else</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span><span style=color:#366>None</span>;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>}<span style=color:#bbb> </span><span style=color:#069;font-weight:700>else</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span>ext<span style=color:#bbb> </span><span style=color:#555>==</span><span style=color:#bbb> </span>path.clone().file_name().unwrap().to_str().unwrap()<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path_name<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path.to_str().unwrap();<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>mut</span><span style=color:#bbb> </span>file_name_no_ext<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.clone()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.file_stem()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.unwrap()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.to_str()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.unwrap()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.to_string();<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>file_name_no_ext.push_str(<span style=color:#c30>&#34;.mp3&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((path_name.borrow(),<span style=color:#bbb> </span>file_name_no_ext));<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>}<span style=color:#bbb> </span><span style=color:#069;font-weight:700>else</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span><span style=color:#366>None</span>;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>fn</span> <span style=color:#c0f>call_ffmpeg</span>(src_name: <span style=color:#069>&amp;</span><span style=color:#078;font-weight:700>str</span>,<span style=color:#bbb> </span>tgt_name: <span style=color:#069>&amp;</span><span style=color:#078;font-weight:700>str</span>)<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>mut</span><span style=color:#bbb> </span>child<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>Command::new(<span style=color:#c30>&#34;ffmpeg&#34;</span>)<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.args([<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;-i&#34;</span>,<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>src_name,<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;-ab&#34;</span>,<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;320k&#34;</span>,<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;-map_metadata&#34;</span>,<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;0&#34;</span>,<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;-id3v2_version&#34;</span>,<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;3&#34;</span>,<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>tgt_name,<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>])<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.stdout(Stdio::null())<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.spawn()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.expect(<span style=color:#c30>&#34;Failed to execute command&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>ecode<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>child.wait().expect(<span style=color:#c30>&#34;failed to wait on child&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>println!(<span style=color:#c30>&#34;{}&#34;</span>,<span style=color:#bbb> </span>ecode);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>return</span>;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>fn</span> <span style=color:#c0f>main</span>()<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Ok</span>(current_dir)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>env::current_dir()<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>current_dir<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>current_dir.as_path();<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>println!(<span style=color:#c30>&#34;音乐转换器，请保证音乐文件在该脚本所在目录&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#069;font-weight:700>loop</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>mode<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>cin(<span style=color:#c30>&#34;输入模式，q退出，ls列出当前目录下某一拓展名的文件，r递归转换，nr非递归转换，o单文件转换&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>match</span><span style=color:#bbb> </span>mode.to_lowercase().trim()<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#c30>&#34;ls&#34;</span><span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>ext<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>cin(<span style=color:#c30>&#34;输入要查看的拓展名&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>WalkDir::new(current_dir).into_iter().for_each(<span style=color:#555>|</span>e<span style=color:#555>|</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Ok</span>(e)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e.path();<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((src_path,<span style=color:#bbb> </span>_tgt_name))<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path_match(path,<span style=color:#bbb> </span>ext.trim(),<span style=color:#bbb> </span><span style=color:#069;font-weight:700>true</span>)<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>println!(<span style=color:#c30>&#34;{}&#34;</span>,<span style=color:#bbb> </span>src_path);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>});<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#c30>&#34;r&#34;</span><span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>ext<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>cin(<span style=color:#c30>&#34;输入待转换的拓展名&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>WalkDir::new(current_dir).into_iter().for_each(<span style=color:#555>|</span>e<span style=color:#555>|</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Ok</span>(e)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e.path();<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((src_path,<span style=color:#bbb> </span>tgt_name))<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path_match(path,<span style=color:#bbb> </span>ext.trim(),<span style=color:#bbb> </span><span style=color:#069;font-weight:700>true</span>)<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>call_ffmpeg(src_path,<span style=color:#bbb> </span>tgt_name.as_str());<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>});<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#c30>&#34;nr&#34;</span><span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>ext<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>cin(<span style=color:#c30>&#34;输入待转换的拓展名&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>WalkDir::new(current_dir)<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.max_depth(<span style=color:#f60>1</span>)<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.into_iter()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.for_each(<span style=color:#555>|</span>e<span style=color:#555>|</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Ok</span>(e)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e.path();<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((src_path,<span style=color:#bbb> </span>tgt_name))<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                    </span>path_match(path,<span style=color:#bbb> </span>ext.trim(),<span style=color:#bbb> </span><span style=color:#069;font-weight:700>true</span>)<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                    </span>call_ffmpeg(src_path,<span style=color:#bbb> </span>tgt_name.as_str());<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>});<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#c30>&#34;o&#34;</span><span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>filename<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>cin(<span style=color:#c30>&#34;输入待转换的文件名&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>WalkDir::new(current_dir)<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.max_depth(<span style=color:#f60>1</span>)<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.into_iter()<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.for_each(<span style=color:#555>|</span>e<span style=color:#555>|</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Ok</span>(e)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e<span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e.path();<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((src_path,<span style=color:#bbb> </span>tgt_name))<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                    </span>path_match(path,<span style=color:#bbb> </span>filename.trim(),<span style=color:#bbb> </span><span style=color:#069;font-weight:700>false</span>)<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                    </span>call_ffmpeg(src_path,<span style=color:#bbb> </span>tgt_name.as_str());<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>});<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#c30>&#34;q&#34;</span><span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>break</span>;<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>_<span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>println!(<span style=color:#c30>&#34;input not support&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span>mode.trim()<span style=color:#bbb> </span><span style=color:#555>==</span><span style=color:#bbb> </span><span style=color:#c30>&#34;123&#34;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>println!(<span style=color:#c30>&#34;hi&#34;</span>);<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>};<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>}<span style=color:#bbb>
+</span></span></span><span style=display:flex><span><span style=color:#bbb></span>}<span style=color:#bbb>
+</span></span></span></code></pre></div></div><div class=post-info><div class="post-date dt-published">2022-03-23</div><a class="post-hidden-url u-url" href=https://livypad.github.io/post/2022-03-23-ffmpeg/>https://livypad.github.io/post/2022-03-23-ffmpeg/</a>
 <a href=https://livypad.github.io class="p-name p-author post-hidden-author h-card" rel=me>livypad</a><div class=post-taxonomies><ul class=post-tags><li><a href=https://livypad.github.io/tags/%E6%9D%82%E8%B0%88/>#杂谈</a></li><li><a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>#教程</a></li></ul></div></div></article><div class="pagination post-pagination"><div class="left pagination-item"><a href=/post/2022-06-21-fairytalerabbit/>遥远的时间有关的童话/寓言（？</a></div><div class="right pagination-item"><a href=/post/2022-03-15-asyouwish/>“如意”的两种实现</a></div></div></main><footer class=common-footer><div class=common-footer-bottom><div class=copyright><p>© livypad, 2022<br>Powered by <a target=_blank rel="noopener noreferrer" href=https://gohugo.io/>Hugo</a>, theme <a target=_blank rel="noopener noreferrer" href=https://github.com/mitrichius/hugo-theme-anubis>Anubis</a>.<br><script type=text/javascript src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type=text/x-mathjax-config>
     MathJax.Hub.Config({
