@@ -1,337 +1,545 @@
-<!doctype html><html lang=zh-cn data-theme><head><meta charset=utf-8><meta name=HandheldFriendly content="True"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer-when-downgrade"><title>VS Code，All in One（3）——v0.1.2 - zhh's blog</title><meta name=description content="VS Code以及其他的安利向（3）-LaTex 何为LaTex 安装LaTex发行版 配置VS Code LaTex数学公式相关a语法 基本符号 数学公式环境 公式对齐 数学公式范例 LaTex文章模板 表格 内部引用 bibTex VS Code以及其他的安利向（3）-LaTex LaTex本身有一定的复杂性和学习门槛。在本文中，笔者尝试走一条特殊的思路写这个教程。这也是笔者自己学会LaTex的道路。但这条道路是不能覆盖LaTex的方方面面（笔者自己也没学会）。所以实在遇到问题，除了联系笔者增补教程，还可以求助搜索引擎。再次复习一下这个系列文章的宗旨：
-搜索引擎是最好的老师，不会的需求，直接去查询，学好
-本文的大概思路安装环境->学会数学语法->从模板学习LaTex
-笔者会提供一个现成的可用的Latex源代码。在这个基础上就能编译出自己的文档了。需要的更多功能可以在之后通过搜索引擎学习。
-何为LaTex 相比如markdown这样的简单标记语言，latex是一套更完整，复杂的标记语言+排版系统。优点有：
-LaTex有极其发达的数学公式支持。支持自动编号，全文引用（可以有链接跳转）等等特性。LaTex的数学公式语法被markdown和word自带的插入公式借用，所以说至少学习LaTex后，使用word的公式功能也更方便。 相比word所见即所得，虽然word也有样式等功能，LaTex容易实现排版和内容分离。这一点还使得LaTex方便切换主题。内容不变可以输出排版不一样的文档。 bibTex可以实现极其方便的引用文献处理。 LaTex还有比如tikz宏包，可以直接实现简单的画图功能。 安装LaTex发行版 发行版就是基于LaTex语言的编译器等等打包好的可以用的软件。根据很多大佬们的说法，CTex套装已经非常老旧，其中配套的WinEdt其实是一个收费软件。我们这个教程不准备使用这个套装，而是选择Tex Live。
-Tex Live可以在Tuna（清华大学开源镜像站）上下载镜像，这样速度比从国外下载会快很多。在右侧，“获取下载链接”->“应用软件”->“Tex排版系统”->“Tex Live2020”。单击即可下载一个iso压缩包。
-警告，Tex Live压缩包大概有4GB，注意网速和流量
-解压该文件，以管理员身份（在右键文件后在菜单里选择），打开install-tl-windows.bat文件。这个是个自动安装脚本，如果没有特别的比如空间要求，建议可以直接“下一步”到底。全部安装，注意勾选添加到环境变量
-警告，Tex Live安装好大概会有8GB大小，安装需要一定时间，请耐心等待
-Tex Live会自带一个Texworks Editor，也可以用来写LaTex。但我们这个系列一切基于VS Code。
-配置VS Code 在插件市场搜索下载插件LaTex Workshop。这个插件基本就能帮助完成所有LaTex相关的任务。
-进入设置界面。点击右上角“打开设置（JSON）”，粘贴以下设置。虽然这是个快速上手向教程，但还是建议仔细阅读这些设置的注释，尽量理解这些设置的含义。
-写LaTex在VS Code中新建一个 英文标题（防止中文不支持）.tex 文件就能开始编写了。
-&#34;latex-workshop.latex.autoBuild.run&#34;: &#34;never&#34;, //可选默认是onFileChange，改写了文件会自动编译，可以改成never，手动编译 &#34;latex-workshop.message.error.show&#34;: false,//可选，不显示错误信息 &#34;latex-workshop.message.warning.show&#34;: false,//可选，不显示警告信息 &#34;latex-workshop.latex.tools&#34;: [//必须有 { &#34;name&#34;: &#34;xelatex&#34;, &#34;command&#34;: &#34;xelatex&#34;, &#34;args&#34;: [ &#34;-synctex=1&#34;, &#34;-interaction=nonstopmode&#34;, &#34;-file-line-error&#34;, &#34;-pdf&#34;, &#34;%DOCFILE%&#34; ] }, { &#34;name&#34;: &#34;pdflatex&#34;, &#34;command&#34;: &#34;pdflatex&#34;, &#34;args&#34;: [ &#34;-synctex=1&#34;, &#34;-interaction=nonstopmode&#34;, &#34;-file-line-error&#34;, &#34;%DOCFILE%&#34; ] }, { &#34;name&#34;: &#34;bibtex&#34;, &#34;command&#34;: &#34;bibtex&#34;, &#34;args&#34;: [ &#34;%DOCFILE%&#34; ] } ], &#34;latex-workshop."><link rel=icon type=image/x-icon href=https://livypad.github.io/favicon.ico><link rel=apple-touch-icon-precomposed href=https://livypad.github.io/favicon.png><style>body{visibility:hidden;opacity:0}</style><noscript><style>body{visibility:visible;opacity:1}</style></noscript><link rel=stylesheet href=https://livypad.github.io/css/style.min.b1ff3b33966ee59e60805c22025d3250e47f3c7738cb6d6907c4c27f9da268e4.css integrity="sha256-sf87M5Zu5Z5ggFwiAl0yUOR/PHc4y21pB8TCf52iaOQ="><script src=https://livypad.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js type=text/javascript integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script><meta property="og:title" content="VS Code，All in One（3）——v0.1.2"><meta property="og:description" content="VS Code以及其他的安利向（3）-LaTex 何为LaTex 安装LaTex发行版 配置VS Code LaTex数学公式相关a语法 基本符号 数学公式环境 公式对齐 数学公式范例 LaTex文章模板 表格 内部引用 bibTex VS Code以及其他的安利向（3）-LaTex LaTex本身有一定的复杂性和学习门槛。在本文中，笔者尝试走一条特殊的思路写这个教程。这也是笔者自己学会LaTex的道路。但这条道路是不能覆盖LaTex的方方面面（笔者自己也没学会）。所以实在遇到问题，除了联系笔者增补教程，还可以求助搜索引擎。再次复习一下这个系列文章的宗旨：
-搜索引擎是最好的老师，不会的需求，直接去查询，学好
-本文的大概思路安装环境->学会数学语法->从模板学习LaTex
-笔者会提供一个现成的可用的Latex源代码。在这个基础上就能编译出自己的文档了。需要的更多功能可以在之后通过搜索引擎学习。
-何为LaTex 相比如markdown这样的简单标记语言，latex是一套更完整，复杂的标记语言+排版系统。优点有：
-LaTex有极其发达的数学公式支持。支持自动编号，全文引用（可以有链接跳转）等等特性。LaTex的数学公式语法被markdown和word自带的插入公式借用，所以说至少学习LaTex后，使用word的公式功能也更方便。 相比word所见即所得，虽然word也有样式等功能，LaTex容易实现排版和内容分离。这一点还使得LaTex方便切换主题。内容不变可以输出排版不一样的文档。 bibTex可以实现极其方便的引用文献处理。 LaTex还有比如tikz宏包，可以直接实现简单的画图功能。 安装LaTex发行版 发行版就是基于LaTex语言的编译器等等打包好的可以用的软件。根据很多大佬们的说法，CTex套装已经非常老旧，其中配套的WinEdt其实是一个收费软件。我们这个教程不准备使用这个套装，而是选择Tex Live。
-Tex Live可以在Tuna（清华大学开源镜像站）上下载镜像，这样速度比从国外下载会快很多。在右侧，“获取下载链接”->“应用软件”->“Tex排版系统”->“Tex Live2020”。单击即可下载一个iso压缩包。
-警告，Tex Live压缩包大概有4GB，注意网速和流量
-解压该文件，以管理员身份（在右键文件后在菜单里选择），打开install-tl-windows.bat文件。这个是个自动安装脚本，如果没有特别的比如空间要求，建议可以直接“下一步”到底。全部安装，注意勾选添加到环境变量
-警告，Tex Live安装好大概会有8GB大小，安装需要一定时间，请耐心等待
-Tex Live会自带一个Texworks Editor，也可以用来写LaTex。但我们这个系列一切基于VS Code。
-配置VS Code 在插件市场搜索下载插件LaTex Workshop。这个插件基本就能帮助完成所有LaTex相关的任务。
-进入设置界面。点击右上角“打开设置（JSON）”，粘贴以下设置。虽然这是个快速上手向教程，但还是建议仔细阅读这些设置的注释，尽量理解这些设置的含义。
-写LaTex在VS Code中新建一个 英文标题（防止中文不支持）.tex 文件就能开始编写了。
-&#34;latex-workshop.latex.autoBuild.run&#34;: &#34;never&#34;, //可选默认是onFileChange，改写了文件会自动编译，可以改成never，手动编译 &#34;latex-workshop.message.error.show&#34;: false,//可选，不显示错误信息 &#34;latex-workshop.message.warning.show&#34;: false,//可选，不显示警告信息 &#34;latex-workshop.latex.tools&#34;: [//必须有 { &#34;name&#34;: &#34;xelatex&#34;, &#34;command&#34;: &#34;xelatex&#34;, &#34;args&#34;: [ &#34;-synctex=1&#34;, &#34;-interaction=nonstopmode&#34;, &#34;-file-line-error&#34;, &#34;-pdf&#34;, &#34;%DOCFILE%&#34; ] }, { &#34;name&#34;: &#34;pdflatex&#34;, &#34;command&#34;: &#34;pdflatex&#34;, &#34;args&#34;: [ &#34;-synctex=1&#34;, &#34;-interaction=nonstopmode&#34;, &#34;-file-line-error&#34;, &#34;%DOCFILE%&#34; ] }, { &#34;name&#34;: &#34;bibtex&#34;, &#34;command&#34;: &#34;bibtex&#34;, &#34;args&#34;: [ &#34;%DOCFILE%&#34; ] } ], &#34;latex-workshop."><meta property="og:type" content="article"><meta property="og:url" content="https://livypad.github.io/post/2020-06-23-vsc3/"><meta property="article:section" content="post"><meta property="article:published_time" content="2020-06-23T00:00:00+00:00"><meta property="article:modified_time" content="2020-06-23T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="VS Code，All in One（3）——v0.1.2"><meta name=twitter:description content="VS Code以及其他的安利向（3）-LaTex 何为LaTex 安装LaTex发行版 配置VS Code LaTex数学公式相关a语法 基本符号 数学公式环境 公式对齐 数学公式范例 LaTex文章模板 表格 内部引用 bibTex VS Code以及其他的安利向（3）-LaTex LaTex本身有一定的复杂性和学习门槛。在本文中，笔者尝试走一条特殊的思路写这个教程。这也是笔者自己学会LaTex的道路。但这条道路是不能覆盖LaTex的方方面面（笔者自己也没学会）。所以实在遇到问题，除了联系笔者增补教程，还可以求助搜索引擎。再次复习一下这个系列文章的宗旨：
-搜索引擎是最好的老师，不会的需求，直接去查询，学好
-本文的大概思路安装环境->学会数学语法->从模板学习LaTex
-笔者会提供一个现成的可用的Latex源代码。在这个基础上就能编译出自己的文档了。需要的更多功能可以在之后通过搜索引擎学习。
-何为LaTex 相比如markdown这样的简单标记语言，latex是一套更完整，复杂的标记语言+排版系统。优点有：
-LaTex有极其发达的数学公式支持。支持自动编号，全文引用（可以有链接跳转）等等特性。LaTex的数学公式语法被markdown和word自带的插入公式借用，所以说至少学习LaTex后，使用word的公式功能也更方便。 相比word所见即所得，虽然word也有样式等功能，LaTex容易实现排版和内容分离。这一点还使得LaTex方便切换主题。内容不变可以输出排版不一样的文档。 bibTex可以实现极其方便的引用文献处理。 LaTex还有比如tikz宏包，可以直接实现简单的画图功能。 安装LaTex发行版 发行版就是基于LaTex语言的编译器等等打包好的可以用的软件。根据很多大佬们的说法，CTex套装已经非常老旧，其中配套的WinEdt其实是一个收费软件。我们这个教程不准备使用这个套装，而是选择Tex Live。
-Tex Live可以在Tuna（清华大学开源镜像站）上下载镜像，这样速度比从国外下载会快很多。在右侧，“获取下载链接”->“应用软件”->“Tex排版系统”->“Tex Live2020”。单击即可下载一个iso压缩包。
-警告，Tex Live压缩包大概有4GB，注意网速和流量
-解压该文件，以管理员身份（在右键文件后在菜单里选择），打开install-tl-windows.bat文件。这个是个自动安装脚本，如果没有特别的比如空间要求，建议可以直接“下一步”到底。全部安装，注意勾选添加到环境变量
-警告，Tex Live安装好大概会有8GB大小，安装需要一定时间，请耐心等待
-Tex Live会自带一个Texworks Editor，也可以用来写LaTex。但我们这个系列一切基于VS Code。
-配置VS Code 在插件市场搜索下载插件LaTex Workshop。这个插件基本就能帮助完成所有LaTex相关的任务。
-进入设置界面。点击右上角“打开设置（JSON）”，粘贴以下设置。虽然这是个快速上手向教程，但还是建议仔细阅读这些设置的注释，尽量理解这些设置的含义。
-写LaTex在VS Code中新建一个 英文标题（防止中文不支持）.tex 文件就能开始编写了。
-&#34;latex-workshop.latex.autoBuild.run&#34;: &#34;never&#34;, //可选默认是onFileChange，改写了文件会自动编译，可以改成never，手动编译 &#34;latex-workshop.message.error.show&#34;: false,//可选，不显示错误信息 &#34;latex-workshop.message.warning.show&#34;: false,//可选，不显示警告信息 &#34;latex-workshop.latex.tools&#34;: [//必须有 { &#34;name&#34;: &#34;xelatex&#34;, &#34;command&#34;: &#34;xelatex&#34;, &#34;args&#34;: [ &#34;-synctex=1&#34;, &#34;-interaction=nonstopmode&#34;, &#34;-file-line-error&#34;, &#34;-pdf&#34;, &#34;%DOCFILE%&#34; ] }, { &#34;name&#34;: &#34;pdflatex&#34;, &#34;command&#34;: &#34;pdflatex&#34;, &#34;args&#34;: [ &#34;-synctex=1&#34;, &#34;-interaction=nonstopmode&#34;, &#34;-file-line-error&#34;, &#34;%DOCFILE%&#34; ] }, { &#34;name&#34;: &#34;bibtex&#34;, &#34;command&#34;: &#34;bibtex&#34;, &#34;args&#34;: [ &#34;%DOCFILE%&#34; ] } ], &#34;latex-workshop."></head><body><a class=skip-main href=#main>Skip to main content</a><div class=container><header class=common-header><div class=header-top><h1 class=site-title><a href=/>zhh's blog</a></h1><ul class=social-icons><li><a href=https://github.com/livypad title=Github rel=me><span class=inline-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentcolor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6.0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6.0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3.0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1.0-6.2-.3-40.4-.3-61.4.0.0-70 15-84.7-29.8.0.0-11.4-29.1-27.8-36.6.0.0-22.9-15.7 1.6-15.4.0.0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5.0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9.0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4.0 33.7-.3 75.4-.3 83.6.0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6.0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9.0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span></a></li><li><a href=mailto:ishonghua.zhu@outlook.com title=Email rel=me><span class=inline-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentcolor" d="M464 64H48C21.49 64 0 85.49.0 112v288c0 26.51 21.49 48 48 48h416c26.51.0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 4e2V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V4e2H48z"/></svg></span></a></li></ul></div><nav><a href=https://livypad.github.io/about/ title>About</a>
-<a href=https://livypad.github.io/tags/ title>Tags</a>
-<a href=https://livypad.github.io/post/ title>Archive</a></nav></header><main id=main tabindex=-1><article class="post h-entry"><div class=post-header><header><h1 class="p-name post-title">VS Code，All in One（3）——v0.1.2</h1></header></div><div class="content e-content"><ol><li><a href=#vs-code%E4%BB%A5%E5%8F%8A%E5%85%B6%E4%BB%96%E7%9A%84%E5%AE%89%E5%88%A9%E5%90%913-latex>VS Code以及其他的安利向（3）-LaTex</a><ol><li><a href=#%E4%BD%95%E4%B8%BAlatex>何为LaTex</a></li><li><a href=#%E5%AE%89%E8%A3%85latex%E5%8F%91%E8%A1%8C%E7%89%88>安装LaTex发行版</a></li><li><a href=#%E9%85%8D%E7%BD%AEvs-code>配置VS Code</a></li><li><a href=#latex%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E7%9B%B8%E5%85%B3a%E8%AF%AD%E6%B3%95>LaTex数学公式相关a语法</a><ol><li><a href=#%E5%9F%BA%E6%9C%AC%E7%AC%A6%E5%8F%B7>基本符号</a></li><li><a href=#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E7%8E%AF%E5%A2%83>数学公式环境</a></li><li><a href=#%E5%85%AC%E5%BC%8F%E5%AF%B9%E9%BD%90>公式对齐</a></li><li><a href=#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F%E8%8C%83%E4%BE%8B>数学公式范例</a></li></ol></li><li><a href=#latex%E6%96%87%E7%AB%A0%E6%A8%A1%E6%9D%BF>LaTex文章模板</a></li><li><a href=#%E8%A1%A8%E6%A0%BC>表格</a></li><li><a href=#%E5%86%85%E9%83%A8%E5%BC%95%E7%94%A8>内部引用</a></li><li><a href=#bibtex>bibTex</a></li></ol></li></ol><h1 id=vs-code以及其他的安利向3-latex>VS Code以及其他的安利向（3）-LaTex
-<span><a href=#vs-code%e4%bb%a5%e5%8f%8a%e5%85%b6%e4%bb%96%e7%9a%84%e5%ae%89%e5%88%a9%e5%90%913-latex><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h1><p>LaTex本身有一定的复杂性和学习门槛。在本文中，笔者尝试走一条特殊的思路写这个教程。这也是笔者自己学会LaTex的道路。但这条道路是不能覆盖LaTex的方方面面（笔者自己也没学会）。所以实在遇到问题，除了联系笔者增补教程，还可以求助搜索引擎。再次复习一下这个系列文章的宗旨：</p><p><strong>搜索引擎是最好的老师，不会的需求，直接去查询，学好</strong></p><p>本文的大概思路<strong>安装环境->学会数学语法->从模板学习LaTex</strong></p><p>笔者会提供一个现成的可用的Latex源代码。在这个基础上就能编译出自己的文档了。需要的更多功能可以在之后通过搜索引擎学习。</p><h2 id=何为latex>何为LaTex
-<span><a href=#%e4%bd%95%e4%b8%balatex><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>相比如markdown这样的简单标记语言，latex是一套更完整，复杂的标记语言+排版系统。优点有：</p><ol><li>LaTex有极其发达的数学公式支持。支持自动编号，全文引用（可以有链接跳转）等等特性。LaTex的数学公式语法被markdown和word自带的插入公式借用，所以说至少学习LaTex后，使用word的公式功能也更方便。</li><li>相比word所见即所得，虽然word也有样式等功能，LaTex容易实现排版和内容分离。这一点还使得LaTex方便切换主题。内容不变可以输出排版不一样的文档。</li><li>bibTex可以实现极其方便的引用文献处理。</li><li>LaTex还有比如tikz宏包，可以直接实现简单的画图功能。</li></ol><h2 id=安装latex发行版>安装LaTex发行版
-<span><a href=#%e5%ae%89%e8%a3%85latex%e5%8f%91%e8%a1%8c%e7%89%88><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>发行版就是基于LaTex语言的编译器等等打包好的可以用的软件。根据很多大佬们的说法，CTex套装已经非常老旧，其中配套的WinEdt其实是一个收费软件。我们这个教程不准备使用这个套装，而是选择Tex Live。</p><p>Tex Live可以在<a href=https://mirrors.tuna.tsinghua.edu.cn/#>Tuna（清华大学开源镜像站）</a>上下载镜像，这样速度比从国外下载会快很多。在右侧，“获取下载链接”->“应用软件”->“Tex排版系统”->“Tex Live2020”。单击即可下载一个iso压缩包。</p><p><strong>警告，Tex Live压缩包大概有4GB，注意网速和流量</strong></p><p>解压该文件，以管理员身份（在右键文件后在菜单里选择），打开install-tl-windows.bat文件。这个是个自动安装脚本，如果没有特别的比如空间要求，建议可以直接“下一步”到底。全部安装，注意勾选添加到环境变量</p><p><strong>警告，Tex Live安装好大概会有8GB大小，安装需要一定时间，请耐心等待</strong></p><p>Tex Live会自带一个Texworks Editor，也可以用来写LaTex。但我们这个系列一切基于VS Code。</p><h2 id=配置vs-code>配置VS Code
-<span><a href=#%e9%85%8d%e7%bd%aevs-code><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>在插件市场搜索下载插件LaTex Workshop。这个插件基本就能帮助完成所有LaTex相关的任务。</p><p>进入设置界面。点击右上角“打开设置（JSON）”，粘贴以下设置。虽然这是个快速上手向教程，但还是建议仔细阅读这些设置的注释，尽量理解这些设置的含义。</p><p>写LaTex在VS Code中新建一个 <strong>英文标题（防止中文不支持）.tex</strong> 文件就能开始编写了。</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=display:flex><span><span style=color:#c30>&#34;latex-workshop.latex.autoBuild.run&#34;</span><span style=color:#a00;background-color:#faa>:</span> <span style=color:#c30>&#34;never&#34;</span><span style=color:#a00;background-color:#faa>,</span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>//可选默认是onFileChange，改写了文件会自动编译，可以改成never，手动编译
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#c30>&#34;latex-workshop.message.error.show&#34;</span><span style=color:#a00;background-color:#faa>:</span> <span style=color:#069;font-weight:700>false</span><span style=color:#a00;background-color:#faa>,</span><span style=color:#09f;font-style:italic>//可选，不显示错误信息
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#c30>&#34;latex-workshop.message.warning.show&#34;</span><span style=color:#a00;background-color:#faa>:</span> <span style=color:#069;font-weight:700>false</span><span style=color:#a00;background-color:#faa>,</span><span style=color:#09f;font-style:italic>//可选，不显示警告信息
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#c30>&#34;latex-workshop.latex.tools&#34;</span><span style=color:#a00;background-color:#faa>:</span> [<span style=color:#09f;font-style:italic>//必须有
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>        {
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;name&#34;</span>: <span style=color:#c30>&#34;xelatex&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;command&#34;</span>: <span style=color:#c30>&#34;xelatex&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;args&#34;</span>: [
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;-synctex=1&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;-interaction=nonstopmode&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;-file-line-error&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;-pdf&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;%DOCFILE%&#34;</span>
-</span></span><span style=display:flex><span>            ]
-</span></span><span style=display:flex><span>        },
-</span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;name&#34;</span>: <span style=color:#c30>&#34;pdflatex&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;command&#34;</span>: <span style=color:#c30>&#34;pdflatex&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;args&#34;</span>: [
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;-synctex=1&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;-interaction=nonstopmode&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;-file-line-error&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;%DOCFILE%&#34;</span>
-</span></span><span style=display:flex><span>            ]
-</span></span><span style=display:flex><span>        },
-</span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;name&#34;</span>: <span style=color:#c30>&#34;bibtex&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;command&#34;</span>: <span style=color:#c30>&#34;bibtex&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;args&#34;</span>: [
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;%DOCFILE%&#34;</span>
-</span></span><span style=display:flex><span>            ]
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    ]<span style=color:#a00;background-color:#faa>,</span>
-</span></span><span style=display:flex><span>    <span style=color:#c30>&#34;latex-workshop.latex.recipes&#34;</span><span style=color:#a00;background-color:#faa>:</span> [
-</span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;name&#34;</span>: <span style=color:#c30>&#34;xelatex&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#09f;font-style:italic>//xelatex编译一遍，一般的Latex文档这样编译
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>            <span style=color:#09f;font-style:italic>//xelatex不支持中文标题！！！！
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>            <span style=color:#309;font-weight:700>&#34;tools&#34;</span>: [
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;xelatex&#34;</span>
-</span></span><span style=display:flex><span>            ]
-</span></span><span style=display:flex><span>        },
-</span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;name&#34;</span>: <span style=color:#c30>&#34;xe-&gt;bib-&gt;xe-&gt;xe&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#09f;font-style:italic>//需要bibTex的文档，用于有bib文件引用的LAtex文档
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>            <span style=color:#309;font-weight:700>&#34;tools&#34;</span>: [
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;xelatex&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;bibtex&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;xelatex&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;xelatex&#34;</span>
-</span></span><span style=display:flex><span>            ]
-</span></span><span style=display:flex><span>        },
-</span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;name&#34;</span>: <span style=color:#c30>&#34;xe-&gt;xe-&gt;xe&#34;</span>,<span style=color:#09f;font-style:italic>//Latex文档内部有交叉引用时候这样编译
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>            <span style=color:#309;font-weight:700>&#34;tools&#34;</span>: [
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;xelatex&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;xelatex&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;xelatex&#34;</span>
-</span></span><span style=display:flex><span>            ]
-</span></span><span style=display:flex><span>        },
-</span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;name&#34;</span>: <span style=color:#c30>&#34;pdflatex&#34;</span>,
-</span></span><span style=display:flex><span>            <span style=color:#09f;font-style:italic>//换一个编译器，一般来说xelatex对中文等支持更好，这个选项以备万一
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>            <span style=color:#09f;font-style:italic>//pdflatex可以支持中文标题
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>            <span style=color:#309;font-weight:700>&#34;tools&#34;</span>: [
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;pdflatex&#34;</span>
-</span></span><span style=display:flex><span>            ]
-</span></span><span style=display:flex><span>        },
-</span></span><span style=display:flex><span>        {
-</span></span><span style=display:flex><span>            <span style=color:#309;font-weight:700>&#34;name&#34;</span>: <span style=color:#c30>&#34;pdf-&gt;bib-&gt;pdf-&gt;pdf&#34;</span>,<span style=color:#09f;font-style:italic>//同上
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>            <span style=color:#309;font-weight:700>&#34;tools&#34;</span>: [
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;pdflatex&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;bibtex&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;pdflatex&#34;</span>,
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;pdflatex&#34;</span>,
-</span></span><span style=display:flex><span>            ]
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>    ]<span style=color:#a00;background-color:#faa>,</span>
-</span></span><span style=display:flex><span>  
-</span></span><span style=display:flex><span>    <span style=color:#c30>&#34;latex-workshop.latex.clean.fileTypes&#34;</span><span style=color:#a00;background-color:#faa>:</span> [
-</span></span><span style=display:flex><span>        <span style=color:#09f;font-style:italic>//tex文件编译会有一些辅助软件，可以靠这个设置清理
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>        <span style=color:#c30>&#34;*.aux&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.bbl&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.blg&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.idx&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.ind&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.lof&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.lot&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.out&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.toc&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.acn&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.acr&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.alg&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.glg&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.glo&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.gls&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.ist&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.fls&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.log&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.fdb_latexmk&#34;</span>,
-</span></span><span style=display:flex><span>        <span style=color:#c30>&#34;*.gz&#34;</span>
-</span></span><span style=display:flex><span>    ]<span style=color:#a00;background-color:#faa>,</span>
-</span></span></code></pre></div><h2 id=latex数学公式相关a语法>LaTex数学公式相关a语法
-<span><a href=#latex%e6%95%b0%e5%ad%a6%e5%85%ac%e5%bc%8f%e7%9b%b8%e5%85%b3a%e8%af%ad%e6%b3%95><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>这个是LaTex最精华的一部分，建议至少学会这个部分。这一部分的知识也可以用于markdown文档编写。</p><p>首先，LaTex语法一般来说，如果是英文字母描述的命令，使用\开头。\也可以用作一些特殊符号的转义，比如%是LaTex的注释符号，如果需要打出%本身，可以打%，作为一个整体表示百分号。</p><p>Latex里面使用<code>\begin{}\end{}</code>来给出环境。</p><h3 id=基本符号>基本符号
-<span><a href=#%e5%9f%ba%e6%9c%ac%e7%ac%a6%e5%8f%b7><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h3><ol><li>指数^，下标_，如果不止一个字母/数字的上下标，用{}括起来</li><li>\frac{}{} 分数</li><li>\sqrt{} 平方根</li><li>\partial 偏导数</li><li>\ +希腊字母的名字输出希腊字母，例如\alpha输出$\alpha$</li><li>\int积分，\sum求和，\lim极限，\prod连乘，^_用来表示上下限，和上下标含义一样。</li><li>\approx约等于，\neq不等号，\geq大于等于，\leq小于等于</li><li>\mathrm{}在数学公式里面输入正体，用于输入单位等。\mathbb{}花体字$\mathbb{N}$</li><li>\left( \right)左右大括号，这些符号必须成对使用。同理可以比如{[等，\right.表示空白。</li></ol><h3 id=数学公式环境>数学公式环境
-<span><a href=#%e6%95%b0%e5%ad%a6%e5%85%ac%e5%bc%8f%e7%8e%af%e5%a2%83><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h3><ol><li>单独的$括起来，是无编号行内公式。</li><li>连着两个$，之间括起来，编号好的行间公式</li><li><code>\begin{equation} \end{equation}</code> 之间括起来的是编号的行间公式</li></ol><h3 id=公式对齐>公式对齐
-<span><a href=#%e5%85%ac%e5%bc%8f%e5%af%b9%e9%bd%90><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h3><p>上述的环境只能支持一行的公式。如果比如需要写出连等式子，可以在数学环境（上面的2，3条）里面使用<code>\begin{aligned} \end{aligned}</code>。在中间的数学公式就可以实现对齐。</p><p>&是对齐符号，每行的&会自动对齐，连等式子一般写成&=。两个\是换行符，表示不同行公式之间的换行。</p><p>使用<code>\left{\right.</code>在数学环境和<code>\begin{aligned} \end{aligned}</code>，可以实现多条公式前面有个大括号括起来。</p><h3 id=数学公式范例>数学公式范例
-<span><a href=#%e6%95%b0%e5%ad%a6%e5%85%ac%e5%bc%8f%e8%8c%83%e4%be%8b><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h3><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-latex data-lang=latex><span style=display:flex><span><span style=color:#09f;font-style:italic>%注意这里面用到了公式环境，对齐，上下标，分号，根号，大括号
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span> <span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>equation<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%公式环境
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#069;font-weight:700>\left\{</span>
-</span></span><span style=display:flex><span>    <span style=color:#09f;font-style:italic>%大括号~
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>aligned<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%对齐
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>         <span style=color:#366>&amp;</span> <span style=color:#069;font-weight:700>\mu</span><span style=color:#366>_</span>L=<span style=color:#069;font-weight:700>\frac</span><span style=color:#366>{</span>e<span style=color:#366>}{</span>2m<span style=color:#366>}</span>P<span style=color:#366>_</span>L=<span style=color:#069;font-weight:700>\frac</span><span style=color:#366>{</span>e<span style=color:#366>}{</span>2m<span style=color:#366>}</span><span style=color:#069;font-weight:700>\sqrt</span><span style=color:#366>{</span>L(L+1)<span style=color:#366>}</span><span style=color:#069;font-weight:700>\frac</span><span style=color:#366>{</span>h<span style=color:#366>}{</span>2<span style=color:#069;font-weight:700>\pi</span><span style=color:#366>}</span> <span style=color:#069;font-weight:700>\\</span>
-</span></span><span style=display:flex><span>         <span style=color:#366>&amp;</span> <span style=color:#069;font-weight:700>\mu</span><span style=color:#366>_</span>s=<span style=color:#069;font-weight:700>\frac</span><span style=color:#366>{</span>e<span style=color:#366>}{</span>m<span style=color:#366>}</span>P<span style=color:#366>_</span>s=<span style=color:#069;font-weight:700>\frac</span><span style=color:#366>{</span>e<span style=color:#366>}{</span>m<span style=color:#366>}</span><span style=color:#069;font-weight:700>\sqrt</span><span style=color:#366>{</span>S(S+1)<span style=color:#366>}</span><span style=color:#069;font-weight:700>\frac</span><span style=color:#366>{</span>h<span style=color:#366>}{</span>2<span style=color:#069;font-weight:700>\pi</span><span style=color:#366>}</span>   <span style=color:#069;font-weight:700>\\</span>
-</span></span><span style=display:flex><span>    <span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>aligned<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#069;font-weight:700>\right</span>.<span style=color:#09f;font-style:italic>%与left成对
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>equation<span style=color:#366>}</span>
-</span></span></code></pre></div><p>显示效果</p><p><img src=/assets/img/vsctex2.jpg alt=显示效果></p><h2 id=latex文章模板>LaTex文章模板
-<span><a href=#latex%e6%96%87%e7%ab%a0%e6%a8%a1%e6%9d%bf><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>这个版本是已经可以使用的。建议仔细阅读文档里面的注释，尽量理解含义。（这样您的LaTex就已经能走上正路了。</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-latex data-lang=latex><span style=display:flex><span><span style=color:#069;font-weight:700>\documentclass</span><span style=color:#309>[UTF8]</span><span style=color:#366>{</span>ctexart<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%文档宏观定义
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>lmodern<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%导入宏包，LaTex导入宏包多次不会报错，所以可以随便复制粘贴宏包，即使不需要
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>amssymb<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>amsmath<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>graphicx<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>float<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>adjustbox<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>geometry<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>fullpage<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>longtable<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>booktabs<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>tikz<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>listings<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>xcolor<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\usepackage</span><span style=color:#366>{</span>subfigure<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\lstset</span><span style=color:#366>{</span>
-</span></span><span style=display:flex><span>      <span style=color:#09f;font-style:italic>%背景框
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>      framexleftmargin=10mm,
-</span></span><span style=display:flex><span>      frame=none,
-</span></span><span style=display:flex><span>     <span style=color:#09f;font-style:italic>%背景色
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>     <span style=color:#09f;font-style:italic>%backgroundcolor=\color[rgb]{1,1,0.76},
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>     backgroundcolor=<span style=color:#069;font-weight:700>\color</span><span style=color:#309>[RGB]</span><span style=color:#366>{</span>245,245,244<span style=color:#366>}</span>,
-</span></span><span style=display:flex><span>    <span style=color:#09f;font-style:italic>%样式
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    keywordstyle=<span style=color:#069;font-weight:700>\bf\color</span><span style=color:#366>{</span>blue<span style=color:#366>}</span>,
-</span></span><span style=display:flex><span>     identifierstyle=<span style=color:#069;font-weight:700>\bf</span>,
-</span></span><span style=display:flex><span>     numberstyle=<span style=color:#069;font-weight:700>\color</span><span style=color:#309>[RGB]</span><span style=color:#366>{</span>0,192,192<span style=color:#366>}</span>,
-</span></span><span style=display:flex><span>     commentstyle=<span style=color:#069;font-weight:700>\it\color</span><span style=color:#309>[RGB]</span><span style=color:#366>{</span>0,96,96<span style=color:#366>}</span>,
-</span></span><span style=display:flex><span>     stringstyle=<span style=color:#069;font-weight:700>\rmfamily\slshape\color</span><span style=color:#309>[RGB]</span><span style=color:#366>{</span>128,0,0<span style=color:#366>}</span>,  <span style=color:#09f;font-style:italic>%显示空格
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>     showstringspaces=false
-</span></span><span style=display:flex><span> <span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\newcommand*</span><span style=color:#366>{</span><span style=color:#069;font-weight:700>\de</span><span style=color:#366>}{^</span><span style=color:#069;font-weight:700>\circ\hspace</span><span style=color:#366>{</span>-0.09em<span style=color:#366>}}</span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>%温度
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\newcommand*</span><span style=color:#366>{</span><span style=color:#069;font-weight:700>\dif</span><span style=color:#366>}{</span><span style=color:#069;font-weight:700>\mathop</span><span style=color:#366>{}</span><span style=color:#069;font-weight:700>\!\mathrm</span><span style=color:#366>{</span>d<span style=color:#366>}}</span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>%导数的d
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\newcommand*</span><span style=color:#366>{</span><span style=color:#069;font-weight:700>\e</span><span style=color:#366>}</span>[1]<span style=color:#366>{</span><span style=color:#069;font-weight:700>\times</span> 10<span style=color:#366>^{</span>#1<span style=color:#366>}}</span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>%\e{}用来表示科学计数法
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\newcommand*</span><span style=color:#366>{</span><span style=color:#069;font-weight:700>\celsius</span><span style=color:#366>}{</span><span style=color:#069;font-weight:700>\ensuremath</span><span style=color:#366>{^</span><span style=color:#069;font-weight:700>\circ\hspace</span><span style=color:#366>{</span>-0.09em<span style=color:#366>}</span><span style=color:#069;font-weight:700>\mathrm</span><span style=color:#366>{</span>C<span style=color:#366>}}}</span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>%摄氏度
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\ctexset</span><span style=color:#366>{</span>
-</span></span><span style=display:flex><span>section = <span style=color:#366>{</span>
-</span></span><span style=display:flex><span>format = <span style=color:#069;font-weight:700>\raggedright\large\bfseries</span>,
-</span></span><span style=display:flex><span><span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#366>}</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\title</span><span style=color:#366>{}</span><span style=color:#09f;font-style:italic>%标题
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\author</span><span style=color:#366>{}</span><span style=color:#09f;font-style:italic>%作者名
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\date</span><span style=color:#366>{</span><span style=color:#069;font-weight:700>\today</span><span style=color:#366>}</span><span style=color:#09f;font-style:italic>%自动生成今天日期
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\geometry</span><span style=color:#366>{</span>hcentering<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\textwidth</span> 16cm<span style=color:#09f;font-style:italic>%文章页面宽度
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\linespread</span><span style=color:#366>{</span>1<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\setCJKmainfont</span><span style=color:#366>{</span>Microsoft YaHei<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>%设置字体
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>document<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%文章开头
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\maketitle</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>enumerate<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%有序列表
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#069;font-weight:700>\item</span> <span style=color:#09f;font-style:italic>%每一项以此引起
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>enumerate<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>itemize<span style=color:#366>}</span>无序列表
-</span></span><span style=display:flex><span>    <span style=color:#069;font-weight:700>\item</span><span style=color:#09f;font-style:italic>%每一项以此引起
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>itemize<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\section</span><span style=color:#366>{}</span><span style=color:#09f;font-style:italic>%一级标题，编号
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\section*</span><span style=color:#366>{}</span><span style=color:#09f;font-style:italic>%一级标题，不编号
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\subsection</span><span style=color:#366>{}</span><span style=color:#09f;font-style:italic>%二级标题，编号
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\subsection*</span><span style=color:#366>{}</span><span style=color:#09f;font-style:italic>%二级标题，不编号
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\subsubsection</span><span style=color:#366>{}</span><span style=color:#09f;font-style:italic>%三级标题，编号
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\subsubsection*</span><span style=color:#366>{}</span><span style=color:#09f;font-style:italic>%三级标题，不编号
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>figure<span style=color:#366>}</span>[H]<span style=color:#09f;font-style:italic>%插入图片
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#069;font-weight:700>\centering</span><span style=color:#09f;font-style:italic>%居中
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#069;font-weight:700>\includegraphics</span><span style=color:#309>[height=12cm,width=0.6\linewidth]</span><span style=color:#366>{</span>5pic1.jpg<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#09f;font-style:italic>%插入图片，方括号是调整大小，大括号是图片相对路径名，如果tex文件和图片在同一个文件夹下，可以直接写名字
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#069;font-weight:700>\caption</span><span style=color:#366>{}</span><span style=color:#09f;font-style:italic>%描述名字
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span><span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>figure<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>figure<span style=color:#366>}</span>[H]<span style=color:#09f;font-style:italic>%多图片
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#069;font-weight:700>\centering</span>
-</span></span><span style=display:flex><span>    <span style=color:#069;font-weight:700>\subfigure</span><span style=color:#309>[title]</span><span style=color:#09f;font-style:italic>%多图片的图片名
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#366>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>minipage<span style=color:#366>}</span>[t]<span style=color:#366>{</span>0.5<span style=color:#069;font-weight:700>\linewidth</span><span style=color:#366>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#069;font-weight:700>\centering</span>
-</span></span><span style=display:flex><span>            <span style=color:#069;font-weight:700>\includegraphics</span><span style=color:#309>[width=\linewidth]</span><span style=color:#366>{</span>5pic3.jpg<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>minipage<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#366>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#069;font-weight:700>\subfigure</span><span style=color:#309>[]</span><span style=color:#09f;font-style:italic>%多图片的图片名
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#366>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>minipage<span style=color:#366>}</span>[t]<span style=color:#366>{</span>0.5<span style=color:#069;font-weight:700>\linewidth</span><span style=color:#366>}</span>
-</span></span><span style=display:flex><span>            <span style=color:#069;font-weight:700>\centering</span>
-</span></span><span style=display:flex><span>           <span style=color:#069;font-weight:700>\includegraphics</span><span style=color:#309>[width=\linewidth]</span><span style=color:#366>{</span>5pic4.jpg<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>        <span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>minipage<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#366>}</span>
-</span></span><span style=display:flex><span>    <span style=color:#069;font-weight:700>\centering</span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>figure<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>lstlisting<span style=color:#366>}</span>[language=c]
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic>%代码框，language选择语言
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    xx[j] = xx[j - 1] + d * vv[j - 1];
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>lstlisting<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>document<span style=color:#366>}</span>
-</span></span></code></pre></div><p>在这个基础上删改就能编译出一篇好看的pdf文档了。</p><h2 id=表格>表格
-<span><a href=#%e8%a1%a8%e6%a0%bc><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>或许读者已经注意到，我给出的模板没有涉及表格。表格很重要，但是表格的语法比较复杂。这里笔者给出一个简单的解决方案<a href=https://www.ctan.org/tex-archive/support/excel2latex/>Excel2LaTex</a>。这是一个excel的宏文件。使用时启动加载，框选现成的excel表格部分，点击“加载项”里面的Convert table to latex，就能自动生成LaTex的表格代码。</p><p><img src=/assets/img/vsctex1.jpg alt=excel2latex></p><p>这样会自动生成这样的LaTex代码</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-latex data-lang=latex><span style=display:flex><span> <span style=color:#09f;font-style:italic>% Table generated by Excel2LaTeX from sheet &#39;Sheet1&#39;
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span> <span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>table<span style=color:#366>}</span>[htbp]
-</span></span><span style=display:flex><span>   <span style=color:#069;font-weight:700>\centering</span>
-</span></span><span style=display:flex><span>   <span style=color:#069;font-weight:700>\caption</span><span style=color:#366>{</span>Add caption<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>     <span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>tabular<span style=color:#366>}{</span>ccc<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>     C光 <span style=color:#366>&amp;</span> d光 <span style=color:#366>&amp;</span> F光 <span style=color:#069;font-weight:700>\\</span>
-</span></span><span style=display:flex><span>     1.4 <span style=color:#366>&amp;</span> 1.5 <span style=color:#366>&amp;</span> 1.55 <span style=color:#069;font-weight:700>\\</span>
-</span></span><span style=display:flex><span>     1.9 <span style=color:#366>&amp;</span> 2 <span style=color:#366>&amp;</span> 2.1 <span style=color:#069;font-weight:700>\\</span>
-</span></span><span style=display:flex><span>     <span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>tabular<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>   <span style=color:#069;font-weight:700>\label</span><span style=color:#366>{</span>tab:addlabel<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span> <span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>table<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%
-</span></span></span></code></pre></div><p>这样的表格一般来说不尽如人意，笔者喜欢修改一些设置。注意对比不同点和阅读注释</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-latex data-lang=latex><span style=display:flex><span> <span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>table<span style=color:#366>}</span>[H]<span style=color:#09f;font-style:italic>%大写H可以让表格一路排版下来，位置不浮动
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>   <span style=color:#069;font-weight:700>\centering</span><span style=color:#09f;font-style:italic>%居中
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>     <span style=color:#069;font-weight:700>\begin</span><span style=color:#366>{</span>tabular<span style=color:#366>}{</span>ccc<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>     <span style=color:#069;font-weight:700>\toprule</span><span style=color:#09f;font-style:italic>%插入分割线
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>     C光 <span style=color:#366>&amp;</span> d光 <span style=color:#366>&amp;</span> F光 <span style=color:#069;font-weight:700>\\</span>
-</span></span><span style=display:flex><span>     <span style=color:#069;font-weight:700>\midrule</span><span style=color:#09f;font-style:italic>%插入分割线
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>     1.4 <span style=color:#366>&amp;</span> 1.5 <span style=color:#366>&amp;</span> 1.55 <span style=color:#069;font-weight:700>\\</span>
-</span></span><span style=display:flex><span>     1.9 <span style=color:#366>&amp;</span> 2 <span style=color:#366>&amp;</span> 2.1 <span style=color:#069;font-weight:700>\\</span>
-</span></span><span style=display:flex><span>     <span style=color:#069;font-weight:700>\bottomrule</span><span style=color:#09f;font-style:italic>%插入分割线
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>     <span style=color:#09f;font-style:italic>%这三个rule可以生成三线表格，比较学术化，美观
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>     <span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>tabular<span style=color:#366>}</span>
-</span></span><span style=display:flex><span>   <span style=color:#069;font-weight:700>\label</span><span style=color:#366>{</span>tab:addlabel<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%标签
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>   <span style=color:#069;font-weight:700>\caption</span><span style=color:#366>{</span>Add caption<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%表格标题放在表格底下
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span> <span style=color:#069;font-weight:700>\end</span><span style=color:#366>{</span>table<span style=color:#366>}</span>
-</span></span></code></pre></div><h2 id=内部引用>内部引用
-<span><a href=#%e5%86%85%e9%83%a8%e5%bc%95%e7%94%a8><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>如果是文章内部自己要引用图片/表格/公式，在对应环境里面加上一句</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-latex data-lang=latex><span style=display:flex><span>   <span style=color:#069;font-weight:700>\label</span><span style=color:#366>{</span>yinyong<span style=color:#366>}</span>
-</span></span></code></pre></div><p>引用的时候</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-latex data-lang=latex><span style=display:flex><span>   <span style=color:#069;font-weight:700>\ref</span><span style=color:#366>{</span>yinyong<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%注意标签名字要对应
-</span></span></span></code></pre></div><p>就会自动生成好对应的<strong>编号，不是 图片/表格/公式+编号</strong>。这样的tex文档要选择"xe->xe->xe"三次编译，才能建立起文档内部的引用关系。</p><h2 id=bibtex>bibTex
-<span><a href=#bibtex><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h2><p>在同一个目录里面新建一个.bib格式文件。bibTex的格式可以通过比如EndNotes等很多引用管理软件自动导出。注意第一行的“rn1”是文件的引用描述名</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-latex data-lang=latex><span style=display:flex><span>   @book<span style=color:#366>{</span>rn1,
-</span></span><span style=display:flex><span>   author = <span style=color:#366>{</span>李约瑟<span style=color:#366>}</span>,
-</span></span><span style=display:flex><span>   title = <span style=color:#366>{</span>中国科学技术史<span style=color:#366>}</span>,
-</span></span><span style=display:flex><span>   publisher = <span style=color:#366>{</span>香港 : 中华书局香港分局<span style=color:#366>}</span>,
-</span></span><span style=display:flex><span>   address = <span style=color:#366>{</span>香港<span style=color:#366>}</span>,
-</span></span><span style=display:flex><span>   year = <span style=color:#366>{</span>1975<span style=color:#366>}</span>,
-</span></span><span style=display:flex><span>   type = <span style=color:#366>{</span>Book<span style=color:#366>}</span>
-</span></span><span style=display:flex><span><span style=color:#366>}</span>
-</span></span></code></pre></div><p>在写.tex文件的时候，在需要引用的地方，写</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-latex data-lang=latex><span style=display:flex><span>   <span style=color:#069;font-weight:700>\cite</span><span style=color:#366>{</span>rn1<span style=color:#366>}</span>
-</span></span></code></pre></div><p>在文章结尾处</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-latex data-lang=latex><span style=display:flex><span>    <span style=color:#069;font-weight:700>\bibliographystyle</span><span style=color:#366>{</span>gbt7714-2005<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%选择引用文献格式
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic></span>    <span style=color:#069;font-weight:700>\bibliography</span><span style=color:#366>{</span>.bib<span style=color:#366>}</span><span style=color:#09f;font-style:italic>%对应的.bib文件名字
-</span></span></span></code></pre></div><p>选择"xe->bib->xe->xe"四次编译。LaTex会根据文献最早在tex文档里面出现的顺序，在文章结尾自动排版文献的顺序。而且，出现在bib文件中，但最后tex文件中没有引用的文章，不会出现在最后的pdf文档当中。</p><p>bibTex的优势就在于此，自由选择引用的格式，无需操心编号问题。</p></div><div class=post-info><div class="post-date dt-published">2020-06-23</div><a class="post-hidden-url u-url" href=https://livypad.github.io/post/2020-06-23-vsc3/>https://livypad.github.io/post/2020-06-23-vsc3/</a>
-<a href=https://livypad.github.io class="p-name p-author post-hidden-author h-card" rel=me>livypad</a><div class=post-taxonomies><ul class=post-tags><li><a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>#教程</a></li></ul></div></div></article><div class="pagination post-pagination"><div class="left pagination-item"><a href=/post/2020-08-08-touko/>杂谈/胡说 浅析七海灯子对喜欢的观念</a></div><div class="right pagination-item"><a href=/post/2020-06-22-vsc2/>VS Code，All in One（2）——v0.2.0</a></div></div></main><footer class=common-footer><div class=common-footer-bottom><div class=copyright><p>© livypad, 2022<br>Powered by <a target=_blank rel="noopener noreferrer" href=https://gohugo.io/>Hugo</a>, theme <a target=_blank rel="noopener noreferrer" href=https://github.com/mitrichius/hugo-theme-anubis>Anubis</a>.<br><script type=text/javascript src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>VS Code，All in One（3）——v0.1.2 | zhh's blog</title><meta name=keywords content="教程"><meta name=description content="VS Code 以及其他的安利向（3）-LaTex LaTex 本身有一定的复杂性和学习门槛。在本文中，笔者尝试走一条特殊的思路写这个教程。这也是笔者自己学会 LaTex 的道"><meta name=author content="livypad"><link rel=canonical href=https://livypad.github.io/post/2020-06-23-vsc3/><link crossorigin=anonymous href=/assets/css/stylesheet.min.7ca4c3dd9394a71fbe69a066b9fbc3dcfe7fb50ce978b051497ffe24c8e1c49a.css integrity="sha256-fKTD3ZOUpx++aaBmufvD3P5/tQzpeLBRSX/+JMjhxJo=" rel="preload stylesheet" as=style><link rel=icon href=https://livypad.github.io/favicon.ico><link rel=apple-touch-icon href=https://livypad.github.io/apple-touch-icon.png><meta name=twitter:title content="VS Code，All in One（3）——v0.1.2 | zhh's blog"><meta name=twitter:description content="VS Code 以及其他的安利向（3）-LaTex LaTex 本身有一定的复杂性和学习门槛。在本文中，笔者尝试走一条特殊的思路写这个教程。这也是笔者自己学会 LaTex 的道"><meta name=twitter:site content="@novoreorx"><meta name=twitter:creator content="@novoreorx"><meta property="og:title" content><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary-bg:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript></head><body id=top><script data-no-instant>function switchTheme(e){switch(e){case"light":document.body.classList.remove("dark");break;case"dark":document.body.classList.add("dark");break;default:window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")}}function isDarkTheme(){return document.body.className.includes("dark")}function getPrefTheme(){return localStorage.getItem("pref-theme")}function setPrefTheme(e){switchTheme(e),localStorage.setItem("pref-theme",e)}const toggleThemeCallbacks={};toggleThemeCallbacks.main=e=>{setPrefTheme(e?"light":"dark")},window.addEventListener("toggle-theme",function(){const e=isDarkTheme();for(const t in toggleThemeCallbacks)toggleThemeCallbacks[t](e)});function toggleThemeListener(){window.dispatchEvent(new CustomEvent("toggle-theme"))}</script><script>(function(){const t="auto",e=getPrefTheme(),n=e||t;switchTheme(n)})()</script><header class=header><nav class=nav><div class=logo><a href=https://livypad.github.io accesskey=h title="zhh's blog (Alt + H)">zhh's blog</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=https://livypad.github.io/about/ title=About>About</a></li><li><a href=https://livypad.github.io/tags/ title=Tags>Tags</a></li><li><a href=https://livypad.github.io/post/ title=Archive>Archive</a></li></ul></nav></header><main class="main post"><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://livypad.github.io>Home</a>&nbsp;»&nbsp;<a href=https://livypad.github.io/post/>Posts</a></div><h1 class=post-title>VS Code，All in One（3）——v0.1.2</h1><div class=post-meta><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select:text"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select:text"/><line x1="16" y1="2" x2="16" y2="6" style="user-select:text"/><line x1="8" y1="2" x2="8" y2="6" style="user-select:text"/><line x1="3" y1="10" x2="21" y2="10" style="user-select:text"/></svg><span>2020-06-23</span></span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select:text"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" style="user-select:text"/><line x1="7" y1="7" x2="7" y2="7" style="user-select:text"/></svg>
+<a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>教程</a>
+</span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select:text"><path d="M14 2H6A2 2 0 004 4v16a2 2 0 002 2h12a2 2 0 002-2V8z" style="user-select:text"/><polyline points="14 2 14 8 20 8" style="user-select:text"/><line x1="16" y1="13" x2="8" y2="13" style="user-select:text"/><line x1="16" y1="17" x2="8" y2="17" style="user-select:text"/><polyline points="10 9 9 9 8 9" style="user-select:text"/></svg><span>4271 words</span></span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>9 min</span></span></div></header><div class="toc side left"><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#vs-code-%e4%bb%a5%e5%8f%8a%e5%85%b6%e4%bb%96%e7%9a%84%e5%ae%89%e5%88%a9%e5%90%913-latex aria-label="VS Code 以及其他的安利向（3）-LaTex">VS Code 以及其他的安利向（3）-LaTex</a><ul><li><a href=#%e4%bd%95%e4%b8%ba-latex aria-label="何为 LaTex">何为 LaTex</a></li><li><a href=#%e5%ae%89%e8%a3%85-latex-%e5%8f%91%e8%a1%8c%e7%89%88 aria-label="安装 LaTex 发行版">安装 LaTex 发行版</a></li><li><a href=#%e9%85%8d%e7%bd%ae-vs-code aria-label="配置 VS Code">配置 VS Code</a></li><li><a href=#latex-%e6%95%b0%e5%ad%a6%e5%85%ac%e5%bc%8f%e7%9b%b8%e5%85%b3-a-%e8%af%ad%e6%b3%95 aria-label="LaTex 数学公式相关 a 语法">LaTex 数学公式相关 a 语法</a><ul><li><a href=#%e5%9f%ba%e6%9c%ac%e7%ac%a6%e5%8f%b7 aria-label=基本符号>基本符号</a></li><li><a href=#%e6%95%b0%e5%ad%a6%e5%85%ac%e5%bc%8f%e7%8e%af%e5%a2%83 aria-label=数学公式环境>数学公式环境</a></li><li><a href=#%e5%85%ac%e5%bc%8f%e5%af%b9%e9%bd%90 aria-label=公式对齐>公式对齐</a></li><li><a href=#%e6%95%b0%e5%ad%a6%e5%85%ac%e5%bc%8f%e8%8c%83%e4%be%8b aria-label=数学公式范例>数学公式范例</a></li></ul></li><li><a href=#latex-%e6%96%87%e7%ab%a0%e6%a8%a1%e6%9d%bf aria-label="LaTex 文章模板">LaTex 文章模板</a></li><li><a href=#%e8%a1%a8%e6%a0%bc aria-label=表格>表格</a></li><li><a href=#%e5%86%85%e9%83%a8%e5%bc%95%e7%94%a8 aria-label=内部引用>内部引用</a></li><li><a href=#bibtex aria-label=bibTex>bibTex</a></li></ul></li></ul></div></details></div><div class=post-content><h1 id=vs-code-以及其他的安利向3-latex>VS Code 以及其他的安利向（3）-LaTex<a hidden class=anchor aria-hidden=true href=#vs-code-以及其他的安利向3-latex>¶</a></h1><p>LaTex 本身有一定的复杂性和学习门槛。在本文中，笔者尝试走一条特殊的思路写这个教程。这也是笔者自己学会 LaTex 的道路。但这条道路是不能覆盖 LaTex 的方方面面（笔者自己也没学会）。所以实在遇到问题，除了联系笔者增补教程，还可以求助搜索引擎。再次复习一下这个系列文章的宗旨：</p><p><strong>搜索引擎是最好的老师，不会的需求，直接去查询，学好</strong></p><p>本文的大概思路<strong>安装环境->学会数学语法->从模板学习 LaTex</strong></p><p>笔者会提供一个现成的可用的 Latex 源代码。在这个基础上就能编译出自己的文档了。需要的更多功能可以在之后通过搜索引擎学习。</p><h2 id=何为-latex>何为 LaTex<a hidden class=anchor aria-hidden=true href=#何为-latex>¶</a></h2><p>相比如 markdown 这样的简单标记语言，latex 是一套更完整，复杂的标记语言+排版系统。优点有：</p><ol><li>LaTex 有极其发达的数学公式支持。支持自动编号，全文引用（可以有链接跳转）等等特性。LaTex 的数学公式语法被 markdown 和 word 自带的插入公式借用，所以说至少学习 LaTex 后，使用 word 的公式功能也更方便。</li><li>相比 word 所见即所得，虽然 word 也有样式等功能，LaTex 容易实现排版和内容分离。这一点还使得 LaTex 方便切换主题。内容不变可以输出排版不一样的文档。</li><li>bibTex 可以实现极其方便的引用文献处理。</li><li>LaTex 还有比如 tikz 宏包，可以直接实现简单的画图功能。</li></ol><h2 id=安装-latex-发行版>安装 LaTex 发行版<a hidden class=anchor aria-hidden=true href=#安装-latex-发行版>¶</a></h2><p>发行版就是基于 LaTex 语言的编译器等等打包好的可以用的软件。根据很多大佬们的说法，CTex 套装已经非常老旧，其中配套的 WinEdt 其实是一个收费软件。我们这个教程不准备使用这个套装，而是选择 Tex Live。</p><p>Tex Live 可以在<a href=https://mirrors.tuna.tsinghua.edu.cn/#>Tuna（清华大学开源镜像站）</a>上下载镜像，这样速度比从国外下载会快很多。在右侧，“获取下载链接”->“应用软件”->“Tex 排版系统”->“Tex Live2020”。单击即可下载一个 iso 压缩包。</p><p><strong>警告，Tex Live 压缩包大概有 4GB，注意网速和流量</strong></p><p>解压该文件，以管理员身份（在右键文件后在菜单里选择），打开 install-tl-windows.bat 文件。这个是个自动安装脚本，如果没有特别的比如空间要求，建议可以直接“下一步”到底。全部安装，注意勾选添加到环境变量</p><p><strong>警告，Tex Live 安装好大概会有 8GB 大小，安装需要一定时间，请耐心等待</strong></p><p>Tex Live 会自带一个 Texworks Editor，也可以用来写 LaTex。但我们这个系列一切基于 VS Code。</p><h2 id=配置-vs-code>配置 VS Code<a hidden class=anchor aria-hidden=true href=#配置-vs-code>¶</a></h2><p>在插件市场搜索下载插件 LaTex Workshop。这个插件基本就能帮助完成所有 LaTex 相关的任务。</p><p>进入设置界面。点击右上角“打开设置（JSON）”，粘贴以下设置。虽然这是个快速上手向教程，但还是建议仔细阅读这些设置的注释，尽量理解这些设置的含义。</p><p>写 LaTex 在 VS Code 中新建一个 <strong>英文标题（防止中文不支持）.tex</strong> 文件就能开始编写了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=s2>&#34;latex-workshop.latex.autoBuild.run&#34;</span><span class=err>:</span> <span class=s2>&#34;never&#34;</span><span class=err>,</span>
+</span></span><span class=line><span class=cl><span class=c1>//可选默认是onFileChange，改写了文件会自动编译，可以改成never，手动编译
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=s2>&#34;latex-workshop.message.error.show&#34;</span><span class=err>:</span> <span class=kc>false</span><span class=err>,</span><span class=c1>//可选，不显示错误信息
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=s2>&#34;latex-workshop.message.warning.show&#34;</span><span class=err>:</span> <span class=kc>false</span><span class=err>,</span><span class=c1>//可选，不显示警告信息
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=s2>&#34;latex-workshop.latex.tools&#34;</span><span class=err>:</span> <span class=p>[</span><span class=c1>//必须有
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;xelatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;command&#34;</span><span class=p>:</span> <span class=s2>&#34;xelatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;args&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;-synctex=1&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;-interaction=nonstopmode&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;-file-line-error&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;-pdf&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;%DOCFILE%&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;pdflatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;command&#34;</span><span class=p>:</span> <span class=s2>&#34;pdflatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;args&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;-synctex=1&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;-interaction=nonstopmode&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;-file-line-error&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;%DOCFILE%&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;bibtex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;command&#34;</span><span class=p>:</span> <span class=s2>&#34;bibtex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;args&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;%DOCFILE%&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span><span class=err>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;latex-workshop.latex.recipes&#34;</span><span class=err>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;xelatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=c1>//xelatex编译一遍，一般的Latex文档这样编译
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=c1>//xelatex不支持中文标题！！！！
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nt>&#34;tools&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;xelatex&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;xe-&gt;bib-&gt;xe-&gt;xe&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=c1>//需要bibTex的文档，用于有bib文件引用的LAtex文档
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nt>&#34;tools&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;xelatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;bibtex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;xelatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;xelatex&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;xe-&gt;xe-&gt;xe&#34;</span><span class=p>,</span><span class=c1>//Latex文档内部有交叉引用时候这样编译
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nt>&#34;tools&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;xelatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;xelatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;xelatex&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;pdflatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=c1>//换一个编译器，一般来说xelatex对中文等支持更好，这个选项以备万一
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=c1>//pdflatex可以支持中文标题
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nt>&#34;tools&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;pdflatex&#34;</span>
+</span></span><span class=line><span class=cl>            <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;pdf-&gt;bib-&gt;pdf-&gt;pdf&#34;</span><span class=p>,</span><span class=c1>//同上
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=nt>&#34;tools&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;pdflatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;bibtex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;pdflatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;pdflatex&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>            <span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span><span class=err>,</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;latex-workshop.latex.clean.fileTypes&#34;</span><span class=err>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=c1>//tex文件编译会有一些辅助软件，可以靠这个设置清理
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=s2>&#34;*.aux&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.bbl&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.blg&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.idx&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.ind&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.lof&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.lot&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.out&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.toc&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.acn&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.acr&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.alg&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.glg&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.glo&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.gls&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.ist&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.fls&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.log&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.fdb_latexmk&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;*.gz&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=p>]</span><span class=err>,</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=latex-数学公式相关-a-语法>LaTex 数学公式相关 a 语法<a hidden class=anchor aria-hidden=true href=#latex-数学公式相关-a-语法>¶</a></h2><p>这个是 LaTex 最精华的一部分，建议至少学会这个部分。这一部分的知识也可以用于 markdown 文档编写。</p><p>首先，LaTex 语法一般来说，如果是英文字母描述的命令，使用\开头。\也可以用作一些特殊符号的转义，比如%是 LaTex 的注释符号，如果需要打出%本身，可以打%，作为一个整体表示百分号。</p><p>Latex 里面使用<code>\begin{}\end{}</code>来给出环境。</p><h3 id=基本符号>基本符号<a hidden class=anchor aria-hidden=true href=#基本符号>¶</a></h3><ol><li>指数^，下标_，如果不止一个字母/数字的上下标，用{}括起来</li><li>\frac{}{} 分数</li><li>\sqrt{} 平方根</li><li>\partial 偏导数</li><li>\ +希腊字母的名字输出希腊字母，例如\alpha 输出$\alpha$</li><li>\int 积分，\sum 求和，\lim 极限，\prod 连乘，^_用来表示上下限，和上下标含义一样。</li><li>\approx 约等于，\neq 不等号，\geq 大于等于，\leq 小于等于</li><li>\mathrm{}在数学公式里面输入正体，用于输入单位等。\mathbb{}花体字$\mathbb{N}$</li><li>\left( \right)左右大括号，这些符号必须成对使用。同理可以比如{[等，\right.表示空白。</li></ol><h3 id=数学公式环境>数学公式环境<a hidden class=anchor aria-hidden=true href=#数学公式环境>¶</a></h3><ol><li>单独的$括起来，是无编号行内公式。</li><li>连着两个$，之间括起来，编号好的行间公式</li><li><code>\begin{equation} \end{equation}</code> 之间括起来的是编号的行间公式</li></ol><h3 id=公式对齐>公式对齐<a hidden class=anchor aria-hidden=true href=#公式对齐>¶</a></h3><p>上述的环境只能支持一行的公式。如果比如需要写出连等式子，可以在数学环境（上面的 2，3 条）里面使用<code>\begin{aligned} \end{aligned}</code>。在中间的数学公式就可以实现对齐。</p><p>&是对齐符号，每行的&会自动对齐，连等式子一般写成&=。两个\是换行符，表示不同行公式之间的换行。</p><p>使用<code>\left{\right.</code>在数学环境和<code>\begin{aligned} \end{aligned}</code>，可以实现多条公式前面有个大括号括起来。</p><h3 id=数学公式范例>数学公式范例<a hidden class=anchor aria-hidden=true href=#数学公式范例>¶</a></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=c>%注意这里面用到了公式环境，对齐，上下标，分号，根号，大括号
+</span></span></span><span class=line><span class=cl><span class=c></span> <span class=k>\begin</span><span class=nb>{</span>equation<span class=nb>}</span><span class=c>%公式环境
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=k>\left\{</span>
+</span></span><span class=line><span class=cl>    <span class=c>%大括号~
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=k>\begin</span><span class=nb>{</span>aligned<span class=nb>}</span><span class=c>%对齐
+</span></span></span><span class=line><span class=cl><span class=c></span>         <span class=nb>&amp;</span> <span class=k>\mu</span><span class=nb>_</span>L=<span class=k>\frac</span><span class=nb>{</span>e<span class=nb>}{</span>2m<span class=nb>}</span>P<span class=nb>_</span>L=<span class=k>\frac</span><span class=nb>{</span>e<span class=nb>}{</span>2m<span class=nb>}</span><span class=k>\sqrt</span><span class=nb>{</span>L(L+1)<span class=nb>}</span><span class=k>\frac</span><span class=nb>{</span>h<span class=nb>}{</span>2<span class=k>\pi</span><span class=nb>}</span> <span class=k>\\</span>
+</span></span><span class=line><span class=cl>         <span class=nb>&amp;</span> <span class=k>\mu</span><span class=nb>_</span>s=<span class=k>\frac</span><span class=nb>{</span>e<span class=nb>}{</span>m<span class=nb>}</span>P<span class=nb>_</span>s=<span class=k>\frac</span><span class=nb>{</span>e<span class=nb>}{</span>m<span class=nb>}</span><span class=k>\sqrt</span><span class=nb>{</span>S(S+1)<span class=nb>}</span><span class=k>\frac</span><span class=nb>{</span>h<span class=nb>}{</span>2<span class=k>\pi</span><span class=nb>}</span>   <span class=k>\\</span>
+</span></span><span class=line><span class=cl>    <span class=k>\end</span><span class=nb>{</span>aligned<span class=nb>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>\right</span>.<span class=c>%与left成对
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\end</span><span class=nb>{</span>equation<span class=nb>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>显示效果</p><p><img loading=lazy src=/assets/img/vsctex2.jpg alt=显示效果></p><h2 id=latex-文章模板>LaTex 文章模板<a hidden class=anchor aria-hidden=true href=#latex-文章模板>¶</a></h2><p>这个版本是已经可以使用的。建议仔细阅读文档里面的注释，尽量理解含义。（这样您的 LaTex 就已经能走上正路了。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl><span class=k>\documentclass</span><span class=na>[UTF8]</span><span class=nb>{</span>ctexart<span class=nb>}</span><span class=c>%文档宏观定义
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\usepackage</span><span class=nb>{</span>lmodern<span class=nb>}</span><span class=c>%导入宏包，LaTex导入宏包多次不会报错，所以可以随便复制粘贴宏包，即使不需要
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\usepackage</span><span class=nb>{</span>amssymb<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>amsmath<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>graphicx<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>float<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>adjustbox<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>geometry<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>fullpage<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>longtable<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>booktabs<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>tikz<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>listings<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>xcolor<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\usepackage</span><span class=nb>{</span>subfigure<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\lstset</span><span class=nb>{</span>
+</span></span><span class=line><span class=cl>      <span class=c>%背景框
+</span></span></span><span class=line><span class=cl><span class=c></span>      framexleftmargin=10mm,
+</span></span><span class=line><span class=cl>      frame=none,
+</span></span><span class=line><span class=cl>     <span class=c>%背景色
+</span></span></span><span class=line><span class=cl><span class=c></span>     <span class=c>%backgroundcolor=\color[rgb]{1,1,0.76},
+</span></span></span><span class=line><span class=cl><span class=c></span>     backgroundcolor=<span class=k>\color</span><span class=na>[RGB]</span><span class=nb>{</span>245,245,244<span class=nb>}</span>,
+</span></span><span class=line><span class=cl>    <span class=c>%样式
+</span></span></span><span class=line><span class=cl><span class=c></span>    keywordstyle=<span class=k>\bf\color</span><span class=nb>{</span>blue<span class=nb>}</span>,
+</span></span><span class=line><span class=cl>     identifierstyle=<span class=k>\bf</span>,
+</span></span><span class=line><span class=cl>     numberstyle=<span class=k>\color</span><span class=na>[RGB]</span><span class=nb>{</span>0,192,192<span class=nb>}</span>,
+</span></span><span class=line><span class=cl>     commentstyle=<span class=k>\it\color</span><span class=na>[RGB]</span><span class=nb>{</span>0,96,96<span class=nb>}</span>,
+</span></span><span class=line><span class=cl>     stringstyle=<span class=k>\rmfamily\slshape\color</span><span class=na>[RGB]</span><span class=nb>{</span>128,0,0<span class=nb>}</span>,  <span class=c>%显示空格
+</span></span></span><span class=line><span class=cl><span class=c></span>     showstringspaces=false
+</span></span><span class=line><span class=cl> <span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\newcommand*</span><span class=nb>{</span><span class=k>\de</span><span class=nb>}{^</span><span class=k>\circ\hspace</span><span class=nb>{</span>-0.09em<span class=nb>}}</span>
+</span></span><span class=line><span class=cl><span class=c>%温度
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\newcommand*</span><span class=nb>{</span><span class=k>\dif</span><span class=nb>}{</span><span class=k>\mathop</span><span class=nb>{}</span><span class=k>\!\mathrm</span><span class=nb>{</span>d<span class=nb>}}</span>
+</span></span><span class=line><span class=cl><span class=c>%导数的d
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\newcommand*</span><span class=nb>{</span><span class=k>\e</span><span class=nb>}</span>[1]<span class=nb>{</span><span class=k>\times</span> 10<span class=nb>^{</span>#1<span class=nb>}}</span>
+</span></span><span class=line><span class=cl><span class=c>%\e{}用来表示科学计数法
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\newcommand*</span><span class=nb>{</span><span class=k>\celsius</span><span class=nb>}{</span><span class=k>\ensuremath</span><span class=nb>{^</span><span class=k>\circ\hspace</span><span class=nb>{</span>-0.09em<span class=nb>}</span><span class=k>\mathrm</span><span class=nb>{</span>C<span class=nb>}}}</span>
+</span></span><span class=line><span class=cl><span class=c>%摄氏度
+</span></span></span><span class=line><span class=cl><span class=c></span>
+</span></span><span class=line><span class=cl><span class=k>\ctexset</span><span class=nb>{</span>
+</span></span><span class=line><span class=cl>section = <span class=nb>{</span>
+</span></span><span class=line><span class=cl>format = <span class=k>\raggedright\large\bfseries</span>,
+</span></span><span class=line><span class=cl><span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=nb>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>\title</span><span class=nb>{}</span><span class=c>%标题
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\author</span><span class=nb>{}</span><span class=c>%作者名
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\date</span><span class=nb>{</span><span class=k>\today</span><span class=nb>}</span><span class=c>%自动生成今天日期
+</span></span></span><span class=line><span class=cl><span class=c></span>
+</span></span><span class=line><span class=cl><span class=k>\geometry</span><span class=nb>{</span>hcentering<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\textwidth</span> 16cm<span class=c>%文章页面宽度
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\linespread</span><span class=nb>{</span>1<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=k>\setCJKmainfont</span><span class=nb>{</span>Microsoft YaHei<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=c>%设置字体
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\begin</span><span class=nb>{</span>document<span class=nb>}</span><span class=c>%文章开头
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\maketitle</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>\begin</span><span class=nb>{</span>enumerate<span class=nb>}</span><span class=c>%有序列表
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=k>\item</span> <span class=c>%每一项以此引起
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\end</span><span class=nb>{</span>enumerate<span class=nb>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>\begin</span><span class=nb>{</span>itemize<span class=nb>}</span>无序列表
+</span></span><span class=line><span class=cl>    <span class=k>\item</span><span class=c>%每一项以此引起
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\end</span><span class=nb>{</span>itemize<span class=nb>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>\section</span><span class=nb>{}</span><span class=c>%一级标题，编号
+</span></span></span><span class=line><span class=cl><span class=c></span>
+</span></span><span class=line><span class=cl><span class=k>\section*</span><span class=nb>{}</span><span class=c>%一级标题，不编号
+</span></span></span><span class=line><span class=cl><span class=c></span>
+</span></span><span class=line><span class=cl><span class=k>\subsection</span><span class=nb>{}</span><span class=c>%二级标题，编号
+</span></span></span><span class=line><span class=cl><span class=c></span>
+</span></span><span class=line><span class=cl><span class=k>\subsection*</span><span class=nb>{}</span><span class=c>%二级标题，不编号
+</span></span></span><span class=line><span class=cl><span class=c></span>
+</span></span><span class=line><span class=cl><span class=k>\subsubsection</span><span class=nb>{}</span><span class=c>%三级标题，编号
+</span></span></span><span class=line><span class=cl><span class=c></span>
+</span></span><span class=line><span class=cl><span class=k>\subsubsection*</span><span class=nb>{}</span><span class=c>%三级标题，不编号
+</span></span></span><span class=line><span class=cl><span class=c></span>
+</span></span><span class=line><span class=cl><span class=k>\begin</span><span class=nb>{</span>figure<span class=nb>}</span>[H]<span class=c>%插入图片
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=k>\centering</span><span class=c>%居中
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=k>\includegraphics</span><span class=na>[height=12cm,width=0.6\linewidth]</span><span class=nb>{</span>5pic1.jpg<span class=nb>}</span>
+</span></span><span class=line><span class=cl>    <span class=c>%插入图片，方括号是调整大小，大括号是图片相对路径名，如果tex文件和图片在同一个文件夹下，可以直接写名字
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=k>\caption</span><span class=nb>{}</span><span class=c>%描述名字
+</span></span></span><span class=line><span class=cl><span class=c></span><span class=k>\end</span><span class=nb>{</span>figure<span class=nb>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>\begin</span><span class=nb>{</span>figure<span class=nb>}</span>[H]<span class=c>%多图片
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=k>\centering</span>
+</span></span><span class=line><span class=cl>    <span class=k>\subfigure</span><span class=na>[title]</span><span class=c>%多图片的图片名
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=nb>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>\begin</span><span class=nb>{</span>minipage<span class=nb>}</span>[t]<span class=nb>{</span>0.5<span class=k>\linewidth</span><span class=nb>}</span>
+</span></span><span class=line><span class=cl>            <span class=k>\centering</span>
+</span></span><span class=line><span class=cl>            <span class=k>\includegraphics</span><span class=na>[width=\linewidth]</span><span class=nb>{</span>5pic3.jpg<span class=nb>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>\end</span><span class=nb>{</span>minipage<span class=nb>}</span><span class=c>%
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=nb>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>\subfigure</span><span class=na>[]</span><span class=c>%多图片的图片名
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=nb>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>\begin</span><span class=nb>{</span>minipage<span class=nb>}</span>[t]<span class=nb>{</span>0.5<span class=k>\linewidth</span><span class=nb>}</span>
+</span></span><span class=line><span class=cl>            <span class=k>\centering</span>
+</span></span><span class=line><span class=cl>           <span class=k>\includegraphics</span><span class=na>[width=\linewidth]</span><span class=nb>{</span>5pic4.jpg<span class=nb>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>\end</span><span class=nb>{</span>minipage<span class=nb>}</span><span class=c>%
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=nb>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>\centering</span>
+</span></span><span class=line><span class=cl><span class=k>\end</span><span class=nb>{</span>figure<span class=nb>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>\begin</span><span class=nb>{</span>lstlisting<span class=nb>}</span>[language=c]
+</span></span><span class=line><span class=cl><span class=c>%代码框，language选择语言
+</span></span></span><span class=line><span class=cl><span class=c></span>    xx[j] = xx[j - 1] + d * vv[j - 1];
+</span></span><span class=line><span class=cl><span class=k>\end</span><span class=nb>{</span>lstlisting<span class=nb>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>\end</span><span class=nb>{</span>document<span class=nb>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在这个基础上删改就能编译出一篇好看的 pdf 文档了。</p><h2 id=表格>表格<a hidden class=anchor aria-hidden=true href=#表格>¶</a></h2><p>或许读者已经注意到，我给出的模板没有涉及表格。表格很重要，但是表格的语法比较复杂。这里笔者给出一个简单的解决方案<a href=https://www.ctan.org/tex-archive/support/excel2latex/>Excel2LaTex</a>。这是一个 excel 的宏文件。使用时启动加载，框选现成的 excel 表格部分，点击“加载项”里面的 Convert table to latex，就能自动生成 LaTex 的表格代码。</p><p><img loading=lazy src=/assets/img/vsctex1.jpg alt=excel2latex></p><p>这样会自动生成这样的 LaTex 代码</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl> <span class=c>% Table generated by Excel2LaTeX from sheet &#39;Sheet1&#39;
+</span></span></span><span class=line><span class=cl><span class=c></span> <span class=k>\begin</span><span class=nb>{</span>table<span class=nb>}</span>[htbp]
+</span></span><span class=line><span class=cl>   <span class=k>\centering</span>
+</span></span><span class=line><span class=cl>   <span class=k>\caption</span><span class=nb>{</span>Add caption<span class=nb>}</span>
+</span></span><span class=line><span class=cl>     <span class=k>\begin</span><span class=nb>{</span>tabular<span class=nb>}{</span>ccc<span class=nb>}</span>
+</span></span><span class=line><span class=cl>     C光 <span class=nb>&amp;</span> d光 <span class=nb>&amp;</span> F光 <span class=k>\\</span>
+</span></span><span class=line><span class=cl>     1.4 <span class=nb>&amp;</span> 1.5 <span class=nb>&amp;</span> 1.55 <span class=k>\\</span>
+</span></span><span class=line><span class=cl>     1.9 <span class=nb>&amp;</span> 2 <span class=nb>&amp;</span> 2.1 <span class=k>\\</span>
+</span></span><span class=line><span class=cl>     <span class=k>\end</span><span class=nb>{</span>tabular<span class=nb>}</span><span class=c>%
+</span></span></span><span class=line><span class=cl><span class=c></span>   <span class=k>\label</span><span class=nb>{</span>tab:addlabel<span class=nb>}</span><span class=c>%
+</span></span></span><span class=line><span class=cl><span class=c></span> <span class=k>\end</span><span class=nb>{</span>table<span class=nb>}</span><span class=c>%
+</span></span></span></code></pre></td></tr></table></div></div><p>这样的表格一般来说不尽如人意，笔者喜欢修改一些设置。注意对比不同点和阅读注释</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl> <span class=k>\begin</span><span class=nb>{</span>table<span class=nb>}</span>[H]<span class=c>%大写H可以让表格一路排版下来，位置不浮动
+</span></span></span><span class=line><span class=cl><span class=c></span>   <span class=k>\centering</span><span class=c>%居中
+</span></span></span><span class=line><span class=cl><span class=c></span>     <span class=k>\begin</span><span class=nb>{</span>tabular<span class=nb>}{</span>ccc<span class=nb>}</span>
+</span></span><span class=line><span class=cl>     <span class=k>\toprule</span><span class=c>%插入分割线
+</span></span></span><span class=line><span class=cl><span class=c></span>     C光 <span class=nb>&amp;</span> d光 <span class=nb>&amp;</span> F光 <span class=k>\\</span>
+</span></span><span class=line><span class=cl>     <span class=k>\midrule</span><span class=c>%插入分割线
+</span></span></span><span class=line><span class=cl><span class=c></span>     1.4 <span class=nb>&amp;</span> 1.5 <span class=nb>&amp;</span> 1.55 <span class=k>\\</span>
+</span></span><span class=line><span class=cl>     1.9 <span class=nb>&amp;</span> 2 <span class=nb>&amp;</span> 2.1 <span class=k>\\</span>
+</span></span><span class=line><span class=cl>     <span class=k>\bottomrule</span><span class=c>%插入分割线
+</span></span></span><span class=line><span class=cl><span class=c></span>     <span class=c>%这三个rule可以生成三线表格，比较学术化，美观
+</span></span></span><span class=line><span class=cl><span class=c></span>     <span class=k>\end</span><span class=nb>{</span>tabular<span class=nb>}</span>
+</span></span><span class=line><span class=cl>   <span class=k>\label</span><span class=nb>{</span>tab:addlabel<span class=nb>}</span><span class=c>%标签
+</span></span></span><span class=line><span class=cl><span class=c></span>   <span class=k>\caption</span><span class=nb>{</span>Add caption<span class=nb>}</span><span class=c>%表格标题放在表格底下
+</span></span></span><span class=line><span class=cl><span class=c></span> <span class=k>\end</span><span class=nb>{</span>table<span class=nb>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=内部引用>内部引用<a hidden class=anchor aria-hidden=true href=#内部引用>¶</a></h2><p>如果是文章内部自己要引用图片/表格/公式，在对应环境里面加上一句</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl>   <span class=k>\label</span><span class=nb>{</span>yinyong<span class=nb>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>引用的时候</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl>   <span class=k>\ref</span><span class=nb>{</span>yinyong<span class=nb>}</span><span class=c>%注意标签名字要对应
+</span></span></span></code></pre></td></tr></table></div></div><p>就会自动生成好对应的<strong>编号，不是 图片/表格/公式+编号</strong>。这样的 tex 文档要选择"xe->xe->xe"三次编译，才能建立起文档内部的引用关系。</p><h2 id=bibtex>bibTex<a hidden class=anchor aria-hidden=true href=#bibtex>¶</a></h2><p>在同一个目录里面新建一个.bib 格式文件。bibTex 的格式可以通过比如 EndNotes 等很多引用管理软件自动导出。注意第一行的“rn1”是文件的引用描述名</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl>   @book<span class=nb>{</span>rn1,
+</span></span><span class=line><span class=cl>   author = <span class=nb>{</span>李约瑟<span class=nb>}</span>,
+</span></span><span class=line><span class=cl>   title = <span class=nb>{</span>中国科学技术史<span class=nb>}</span>,
+</span></span><span class=line><span class=cl>   publisher = <span class=nb>{</span>香港 : 中华书局香港分局<span class=nb>}</span>,
+</span></span><span class=line><span class=cl>   address = <span class=nb>{</span>香港<span class=nb>}</span>,
+</span></span><span class=line><span class=cl>   year = <span class=nb>{</span>1975<span class=nb>}</span>,
+</span></span><span class=line><span class=cl>   type = <span class=nb>{</span>Book<span class=nb>}</span>
+</span></span><span class=line><span class=cl><span class=nb>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在写.tex 文件的时候，在需要引用的地方，写</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl>   <span class=k>\cite</span><span class=nb>{</span>rn1<span class=nb>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在文章结尾处</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-latex data-lang=latex><span class=line><span class=cl>    <span class=k>\bibliographystyle</span><span class=nb>{</span>gbt7714-2005<span class=nb>}</span><span class=c>%选择引用文献格式
+</span></span></span><span class=line><span class=cl><span class=c></span>    <span class=k>\bibliography</span><span class=nb>{</span>.bib<span class=nb>}</span><span class=c>%对应的.bib文件名字
+</span></span></span></code></pre></td></tr></table></div></div><p>选择"xe->bib->xe->xe"四次编译。LaTex 会根据文献最早在 tex 文档里面出现的顺序，在文章结尾自动排版文献的顺序。而且，出现在 bib 文件中，但最后 tex 文件中没有引用的文章，不会出现在最后的 pdf 文档当中。</p><p>bibTex 的优势就在于此，自由选择引用的格式，无需操心编号问题。</p></div><footer class=post-footer><ul class=post-tags><li><a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>教程</a></li></ul><nav class=paginav><a class=prev href=https://livypad.github.io/post/2020-08-08-touko/><span class=title>« Prev Page</span><br><span>[杂谈/胡说] 浅析七海灯子对喜欢的观念</span></a>
+<a class=next href=https://livypad.github.io/post/2020-06-22-vsc2/><span class=title>Next Page »</span><br><span>VS Code，All in One（2）——v0.2.0</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2022 <a href=https://livypad.github.io>zhh's blog</a></span><span style=display:inline-block;margin-left:1em>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+    <a href=https://github.com/reorx/hugo-PaperModX/ rel=noopener target=_blank>PaperModX</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script type=text/javascript src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type=text/x-mathjax-config>
-    MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [['$$','$$'], ['\[','\]']],
-        processEscapes: true,
-        processEnvironments: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-        TeX: { equationNumbers: { autoNumber: "AMS" },
-            extensions: ["AMSmath.js", "AMSsymbols.js"] }
-    }
-    });
-</script></p></div><button class=theme-switcher>
-Dark theme</button>
-<script>const STORAGE_KEY="user-color-scheme",defaultTheme="auto";let currentTheme,switchButton,autoDefinedScheme=window.matchMedia("(prefers-color-scheme: dark)");const autoChangeScheme=e=>{currentTheme=e.matches?"dark":"light",document.documentElement.setAttribute("data-theme",currentTheme),changeButtonText()};document.addEventListener("DOMContentLoaded",function(){switchButton=document.querySelector(".theme-switcher"),currentTheme=detectCurrentScheme(),currentTheme=="dark"&&document.documentElement.setAttribute("data-theme","dark"),currentTheme=="auto"&&(autoChangeScheme(autoDefinedScheme),autoDefinedScheme.addListener(autoChangeScheme)),switchButton&&(changeButtonText(),switchButton.addEventListener("click",switchTheme,!1)),showContent()});function detectCurrentScheme(){return localStorage.getItem(STORAGE_KEY)?localStorage.getItem(STORAGE_KEY):defaultTheme?defaultTheme:window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":"light"}function changeButtonText(){switchButton&&(switchButton.textContent=currentTheme=="dark"?"Light theme":"Dark theme")}function switchTheme(){currentTheme=="dark"?(localStorage.setItem(STORAGE_KEY,"light"),document.documentElement.setAttribute("data-theme","light"),currentTheme="light"):(localStorage.setItem(STORAGE_KEY,"dark"),document.documentElement.setAttribute("data-theme","dark"),currentTheme="dark"),changeButtonText()}function showContent(){document.body.style.visibility="visible",document.body.style.opacity=1}</script></div><p class="h-card vcard"><a href=https://livypad.github.io class="p-name u-url url fn" rel=me>livypad</a>
-/
-<a class="p-email u-email email" rel=me href=mailto:ishonghua.zhu@outlook.com>ishonghua.zhu@outlook.com</a></p></footer></div></body></html>
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$']],
+            displayMath: [['$$','$$']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+    </script><script>(function(){const t=""=="1";if(t)return;let e=document.getElementById("theme-toggle");e.removeEventListener("click",toggleThemeListener),e.addEventListener("click",toggleThemeListener)})()</script><script>(function(){let e=document.getElementById("menu");e&&(e.scrollLeft=localStorage.getItem("menu-scroll-position"),e.onscroll=function(){localStorage.setItem("menu-scroll-position",e.scrollLeft)});const t=""=="1",n=""=="1";if(window.matchMedia("(prefers-reduced-motion: reduce)").matches||t||n)return;document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})})()</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>if(window.scrollListeners)for(const e of scrollListeners)window.removeEventListener("scroll",e);window.scrollListeners=[]</script><script src=/js/medium-zoom.min.js data-no-instant></script>
+<script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerText="copy";function s(){t.innerText="copied!",setTimeout(()=>{t.innerText="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script><script>(function(){const r="1"=="1";if(!r)return;if(!document.querySelector(".toc")){console.log("no toc found, ignore toc scroll");return}const c=window.scrollListeners,n=document.querySelectorAll("h1[id],h2[id],h3[id],h4[id],h5[id]"),s="active";let e=n[0];o(e).classList.add(s);const a=()=>{const t=[];for(const e of n)if(l(e)<5)t.push(e);else break;t.length>0?newActiveHeading=t[t.length-1]:newActiveHeading=n[0],e!=newActiveHeading&&(o(e).classList.remove(s),e=newActiveHeading,o(e).classList.add(s))};let t=null;const i=()=>{t!==null&&clearTimeout(t),t=setTimeout(a,50)};window.addEventListener("scroll",i,!1),c.push(i);function o(e){const t=encodeURI(e.getAttribute("id")).toLowerCase();return document.querySelector(`.toc ul li a[href="#${t}"]`)}function l(e){if(!e.getClientRects().length)return 0;let t=e.getBoundingClientRect();return t.top}})()</script></body></html>

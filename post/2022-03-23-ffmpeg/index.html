@@ -1,197 +1,361 @@
-<!doctype html><html lang=zh-cn data-theme><head><meta charset=utf-8><meta name=HandheldFriendly content="True"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=referrer content="no-referrer-when-downgrade"><title>FFmpeg转换音乐文件格式 - zhh's blog</title><meta name=description content="FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。
-find . -name &#34;*.flac&#34; -maxdepth 1 -exec ffmpeg -i {} -ab 320k -map_metadata 0 -id3v2_version 3 {}.mp3 \; Rust 的 cli toy 程序 由此，可以顺手搞一个 rust 的 cli 程序，实现任何音乐格式的互转。主要是使用walkdir这个库，不用自己实现遍历。
-[package] name = &#34;music_converter&#34; version = &#34;0.1.0&#34; edition = &#34;2018&#34; # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html [dependencies] walkdir = &#34;2&#34; use std::borrow::Borrow; use std::env; use std::io; use std::path::Path; use std::process::{Command, Stdio}; use walkdir::WalkDir; fn cin(print_info: &str) -> String { println!"><link rel=icon type=image/x-icon href=https://livypad.github.io/favicon.ico><link rel=apple-touch-icon-precomposed href=https://livypad.github.io/favicon.png><style>body{visibility:hidden;opacity:0}</style><noscript><style>body{visibility:visible;opacity:1}</style></noscript><link rel=stylesheet href=https://livypad.github.io/css/style.min.b1ff3b33966ee59e60805c22025d3250e47f3c7738cb6d6907c4c27f9da268e4.css integrity="sha256-sf87M5Zu5Z5ggFwiAl0yUOR/PHc4y21pB8TCf52iaOQ="><script src=https://livypad.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js type=text/javascript integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script><meta property="og:title" content="FFmpeg转换音乐文件格式"><meta property="og:description" content="FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。
-find . -name &#34;*.flac&#34; -maxdepth 1 -exec ffmpeg -i {} -ab 320k -map_metadata 0 -id3v2_version 3 {}.mp3 \; Rust 的 cli toy 程序 由此，可以顺手搞一个 rust 的 cli 程序，实现任何音乐格式的互转。主要是使用walkdir这个库，不用自己实现遍历。
-[package] name = &#34;music_converter&#34; version = &#34;0.1.0&#34; edition = &#34;2018&#34; # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html [dependencies] walkdir = &#34;2&#34; use std::borrow::Borrow; use std::env; use std::io; use std::path::Path; use std::process::{Command, Stdio}; use walkdir::WalkDir; fn cin(print_info: &str) -> String { println!"><meta property="og:type" content="article"><meta property="og:url" content="https://livypad.github.io/post/2022-03-23-ffmpeg/"><meta property="article:section" content="post"><meta property="article:published_time" content="2022-03-23T00:00:00+00:00"><meta property="article:modified_time" content="2022-03-23T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="FFmpeg转换音乐文件格式"><meta name=twitter:description content="FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。
-find . -name &#34;*.flac&#34; -maxdepth 1 -exec ffmpeg -i {} -ab 320k -map_metadata 0 -id3v2_version 3 {}.mp3 \; Rust 的 cli toy 程序 由此，可以顺手搞一个 rust 的 cli 程序，实现任何音乐格式的互转。主要是使用walkdir这个库，不用自己实现遍历。
-[package] name = &#34;music_converter&#34; version = &#34;0.1.0&#34; edition = &#34;2018&#34; # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html [dependencies] walkdir = &#34;2&#34; use std::borrow::Borrow; use std::env; use std::io; use std::path::Path; use std::process::{Command, Stdio}; use walkdir::WalkDir; fn cin(print_info: &str) -> String { println!"></head><body><a class=skip-main href=#main>Skip to main content</a><div class=container><header class=common-header><div class=header-top><h1 class=site-title><a href=/>zhh's blog</a></h1><ul class=social-icons><li><a href=https://github.com/livypad title=Github rel=me><span class=inline-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentcolor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6.0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6.0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3.0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1.0-6.2-.3-40.4-.3-61.4.0.0-70 15-84.7-29.8.0.0-11.4-29.1-27.8-36.6.0.0-22.9-15.7 1.6-15.4.0.0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5.0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9.0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4.0 33.7-.3 75.4-.3 83.6.0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6.0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9.0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span></a></li><li><a href=mailto:ishonghua.zhu@outlook.com title=Email rel=me><span class=inline-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentcolor" d="M464 64H48C21.49 64 0 85.49.0 112v288c0 26.51 21.49 48 48 48h416c26.51.0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 4e2V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V4e2H48z"/></svg></span></a></li></ul></div><nav><a href=https://livypad.github.io/about/ title>About</a>
-<a href=https://livypad.github.io/tags/ title>Tags</a>
-<a href=https://livypad.github.io/post/ title>Archive</a></nav></header><main id=main tabindex=-1><article class="post h-entry"><div class=post-header><header><h1 class="p-name post-title">FFmpeg转换音乐文件格式</h1></header></div><div class="content e-content"><p><a href=https://ffmpeg.org/>FFmpeg</a>是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用<code>find</code>命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=display:flex><span>find . -name <span style=color:#c30>&#34;*.flac&#34;</span> -maxdepth <span style=color:#f60>1</span> -exec ffmpeg -i <span style=color:#555>{}</span> -ab 320k -map_metadata <span style=color:#f60>0</span> -id3v2_version <span style=color:#f60>3</span> <span style=color:#555>{}</span>.mp3 <span style=color:#c30;font-weight:700>\;</span>
-</span></span></code></pre></div><h1 id=rust-的-cli-toy-程序>Rust 的 cli toy 程序
-<span><a href=#rust-%e7%9a%84-cli-toy-%e7%a8%8b%e5%ba%8f><svg viewBox="0 0 28 23" height="100%" width="19" xmlns="http://www.w3.org/2000/svg"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" fill="none" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg></a></span></h1><p>由此，可以顺手搞一个 rust 的 cli 程序，实现任何音乐格式的互转。主要是使用<code>walkdir</code>这个库，不用自己实现遍历。</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-toml data-lang=toml><span style=display:flex><span>[package]
-</span></span><span style=display:flex><span>name = <span style=color:#c30>&#34;music_converter&#34;</span>
-</span></span><span style=display:flex><span>version = <span style=color:#c30>&#34;0.1.0&#34;</span>
-</span></span><span style=display:flex><span>edition = <span style=color:#c30>&#34;2018&#34;</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>[dependencies]
-</span></span><span style=display:flex><span>walkdir = <span style=color:#c30>&#34;2&#34;</span>
-</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>std::borrow::Borrow;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>std::env;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>std::io;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>std::path::Path;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>std::process::{Command,<span style=color:#bbb> </span>Stdio};<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>use</span><span style=color:#bbb> </span>walkdir::WalkDir;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>fn</span> <span style=color:#c0f>cin</span>(print_info: <span style=color:#069>&amp;</span><span style=color:#078;font-weight:700>str</span>)<span style=color:#bbb> </span>-&gt; <span style=color:#366>String</span> {<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>println!(<span style=color:#c30>&#34;{}&#34;</span>,<span style=color:#bbb> </span>print_info);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>mut</span><span style=color:#bbb> </span>input<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span><span style=color:#366>String</span>::new();<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>io::stdin()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.read_line(<span style=color:#555>&amp;</span><span style=color:#069;font-weight:700>mut</span><span style=color:#bbb> </span>input)<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.expect(<span style=color:#c30>&#34;Failed to read line&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span>input;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>fn</span> <span style=color:#c0f>path_match</span><span style=color:#555>&lt;&#39;</span><span style=color:#309>a</span><span style=color:#555>&gt;</span>(path: <span style=color:#069>&amp;</span><span style=color:#555>&#39;</span><span style=color:#309>a</span> <span style=color:#0a8;font-weight:700>Path</span>,<span style=color:#bbb> </span>ext: <span style=color:#069>&amp;</span><span style=color:#555>&#39;</span><span style=color:#309>a</span> <span style=color:#078;font-weight:700>str</span>,<span style=color:#bbb> </span>not_full_name: <span style=color:#078;font-weight:700>bool</span>)<span style=color:#bbb> </span>-&gt; <span style=color:#366>Option</span><span style=color:#555>&lt;</span>(<span style=color:#555>&amp;&#39;</span><span style=color:#309>a</span><span style=color:#bbb> </span><span style=color:#078;font-weight:700>str</span>,<span style=color:#bbb> </span><span style=color:#366>String</span>)<span style=color:#555>&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span>not_full_name<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Some</span>(file_ext)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path.extension()<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span>file_ext.to_str().unwrap()<span style=color:#bbb> </span><span style=color:#555>==</span><span style=color:#bbb> </span>ext.trim()<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path_name<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path.to_str().unwrap();<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>mut</span><span style=color:#bbb> </span>file_name<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.clone()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.file_stem()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.unwrap()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.to_str()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.unwrap()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>.to_string();<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>file_name.push_str(<span style=color:#c30>&#34;.mp3&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((path_name.borrow(),<span style=color:#bbb> </span>file_name));<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>}<span style=color:#bbb> </span><span style=color:#069;font-weight:700>else</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span><span style=color:#366>None</span>;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>}<span style=color:#bbb> </span><span style=color:#069;font-weight:700>else</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span><span style=color:#366>None</span>;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>}<span style=color:#bbb> </span><span style=color:#069;font-weight:700>else</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span>ext<span style=color:#bbb> </span><span style=color:#555>==</span><span style=color:#bbb> </span>path.clone().file_name().unwrap().to_str().unwrap()<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path_name<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path.to_str().unwrap();<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>mut</span><span style=color:#bbb> </span>file_name_no_ext<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.clone()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.file_stem()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.unwrap()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.to_str()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.unwrap()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>.to_string();<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>file_name_no_ext.push_str(<span style=color:#c30>&#34;.mp3&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((path_name.borrow(),<span style=color:#bbb> </span>file_name_no_ext));<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>}<span style=color:#bbb> </span><span style=color:#069;font-weight:700>else</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>return</span><span style=color:#bbb> </span><span style=color:#366>None</span>;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>fn</span> <span style=color:#c0f>call_ffmpeg</span>(src_name: <span style=color:#069>&amp;</span><span style=color:#078;font-weight:700>str</span>,<span style=color:#bbb> </span>tgt_name: <span style=color:#069>&amp;</span><span style=color:#078;font-weight:700>str</span>)<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>mut</span><span style=color:#bbb> </span>child<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>Command::new(<span style=color:#c30>&#34;ffmpeg&#34;</span>)<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.args([<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;-i&#34;</span>,<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>src_name,<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;-ab&#34;</span>,<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;320k&#34;</span>,<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;-map_metadata&#34;</span>,<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;0&#34;</span>,<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;-id3v2_version&#34;</span>,<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#c30>&#34;3&#34;</span>,<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>tgt_name,<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>])<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.stdout(Stdio::null())<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.spawn()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>.expect(<span style=color:#c30>&#34;Failed to execute command&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>ecode<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>child.wait().expect(<span style=color:#c30>&#34;failed to wait on child&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>println!(<span style=color:#c30>&#34;{}&#34;</span>,<span style=color:#bbb> </span>ecode);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>return</span>;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span><span style=color:#069;font-weight:700>fn</span> <span style=color:#c0f>main</span>()<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Ok</span>(current_dir)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>env::current_dir()<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>current_dir<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>current_dir.as_path();<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>println!(<span style=color:#c30>&#34;音乐转换器，请保证音乐文件在该脚本所在目录&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#069;font-weight:700>loop</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>mode<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>cin(<span style=color:#c30>&#34;输入模式，q退出，ls列出当前目录下某一拓展名的文件，r递归转换，nr非递归转换，o单文件转换&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span><span style=color:#069;font-weight:700>match</span><span style=color:#bbb> </span>mode.to_lowercase().trim()<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#c30>&#34;ls&#34;</span><span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>ext<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>cin(<span style=color:#c30>&#34;输入要查看的拓展名&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>WalkDir::new(current_dir).into_iter().for_each(<span style=color:#555>|</span>e<span style=color:#555>|</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Ok</span>(e)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e.path();<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((src_path,<span style=color:#bbb> </span>_tgt_name))<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path_match(path,<span style=color:#bbb> </span>ext.trim(),<span style=color:#bbb> </span><span style=color:#069;font-weight:700>true</span>)<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>println!(<span style=color:#c30>&#34;{}&#34;</span>,<span style=color:#bbb> </span>src_path);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>});<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#c30>&#34;r&#34;</span><span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>ext<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>cin(<span style=color:#c30>&#34;输入待转换的拓展名&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>WalkDir::new(current_dir).into_iter().for_each(<span style=color:#555>|</span>e<span style=color:#555>|</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Ok</span>(e)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e.path();<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((src_path,<span style=color:#bbb> </span>tgt_name))<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>path_match(path,<span style=color:#bbb> </span>ext.trim(),<span style=color:#bbb> </span><span style=color:#069;font-weight:700>true</span>)<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>call_ffmpeg(src_path,<span style=color:#bbb> </span>tgt_name.as_str());<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>});<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#c30>&#34;nr&#34;</span><span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>ext<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>cin(<span style=color:#c30>&#34;输入待转换的拓展名&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>WalkDir::new(current_dir)<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.max_depth(<span style=color:#f60>1</span>)<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.into_iter()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.for_each(<span style=color:#555>|</span>e<span style=color:#555>|</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Ok</span>(e)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e.path();<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((src_path,<span style=color:#bbb> </span>tgt_name))<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                    </span>path_match(path,<span style=color:#bbb> </span>ext.trim(),<span style=color:#bbb> </span><span style=color:#069;font-weight:700>true</span>)<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                    </span>call_ffmpeg(src_path,<span style=color:#bbb> </span>tgt_name.as_str());<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>});<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#c30>&#34;o&#34;</span><span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>filename<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>cin(<span style=color:#c30>&#34;输入待转换的文件名&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>WalkDir::new(current_dir)<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.max_depth(<span style=color:#f60>1</span>)<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.into_iter()<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>.for_each(<span style=color:#555>|</span>e<span style=color:#555>|</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Ok</span>(e)<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e<span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span>path<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb> </span>e.path();<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span><span style=color:#069;font-weight:700>let</span><span style=color:#bbb> </span><span style=color:#366>Some</span>((src_path,<span style=color:#bbb> </span>tgt_name))<span style=color:#bbb> </span><span style=color:#555>=</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                    </span>path_match(path,<span style=color:#bbb> </span>filename.trim(),<span style=color:#bbb> </span><span style=color:#069;font-weight:700>false</span>)<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                    </span>call_ffmpeg(src_path,<span style=color:#bbb> </span>tgt_name.as_str());<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                                </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                            </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>});<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span><span style=color:#c30>&#34;q&#34;</span><span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>break</span>;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>_<span style=color:#bbb> </span><span style=color:#555>=&gt;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>println!(<span style=color:#c30>&#34;input not support&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span><span style=color:#069;font-weight:700>if</span><span style=color:#bbb> </span>mode.trim()<span style=color:#bbb> </span><span style=color:#555>==</span><span style=color:#bbb> </span><span style=color:#c30>&#34;123&#34;</span><span style=color:#bbb> </span>{<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                        </span>println!(<span style=color:#c30>&#34;hi&#34;</span>);<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                    </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>                </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>            </span>};<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>}<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb></span>}<span style=color:#bbb>
-</span></span></span></code></pre></div></div><div class=post-info><div class="post-date dt-published">2022-03-23</div><a class="post-hidden-url u-url" href=https://livypad.github.io/post/2022-03-23-ffmpeg/>https://livypad.github.io/post/2022-03-23-ffmpeg/</a>
-<a href=https://livypad.github.io class="p-name p-author post-hidden-author h-card" rel=me>livypad</a><div class=post-taxonomies><ul class=post-tags><li><a href=https://livypad.github.io/tags/%E6%9D%82%E8%B0%88/>#杂谈</a></li><li><a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>#教程</a></li></ul></div></div></article><div class="pagination post-pagination"><div class="left pagination-item"><a href=/post/2022-06-21-fairytalerabbit/>遥远的时间有关的童话/寓言（？</a></div><div class="right pagination-item"><a href=/post/2022-03-15-asyouwish/>“如意”的两种实现</a></div></div></main><footer class=common-footer><div class=common-footer-bottom><div class=copyright><p>© livypad, 2022<br>Powered by <a target=_blank rel="noopener noreferrer" href=https://gohugo.io/>Hugo</a>, theme <a target=_blank rel="noopener noreferrer" href=https://github.com/mitrichius/hugo-theme-anubis>Anubis</a>.<br><script type=text/javascript src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>FFmpeg转换音乐文件格式 | zhh's blog</title><meta name=keywords content="杂谈,教程"><meta name=description content="FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命"><meta name=author content="livypad"><link rel=canonical href=https://livypad.github.io/post/2022-03-23-ffmpeg/><link crossorigin=anonymous href=/assets/css/stylesheet.min.7ca4c3dd9394a71fbe69a066b9fbc3dcfe7fb50ce978b051497ffe24c8e1c49a.css integrity="sha256-fKTD3ZOUpx++aaBmufvD3P5/tQzpeLBRSX/+JMjhxJo=" rel="preload stylesheet" as=style><link rel=icon href=https://livypad.github.io/favicon.ico><link rel=apple-touch-icon href=https://livypad.github.io/apple-touch-icon.png><meta name=twitter:title content="FFmpeg转换音乐文件格式 | zhh's blog"><meta name=twitter:description content="FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命"><meta name=twitter:site content="@novoreorx"><meta name=twitter:creator content="@novoreorx"><meta property="og:title" content><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary-bg:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript></head><body id=top><script data-no-instant>function switchTheme(e){switch(e){case"light":document.body.classList.remove("dark");break;case"dark":document.body.classList.add("dark");break;default:window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")}}function isDarkTheme(){return document.body.className.includes("dark")}function getPrefTheme(){return localStorage.getItem("pref-theme")}function setPrefTheme(e){switchTheme(e),localStorage.setItem("pref-theme",e)}const toggleThemeCallbacks={};toggleThemeCallbacks.main=e=>{setPrefTheme(e?"light":"dark")},window.addEventListener("toggle-theme",function(){const e=isDarkTheme();for(const t in toggleThemeCallbacks)toggleThemeCallbacks[t](e)});function toggleThemeListener(){window.dispatchEvent(new CustomEvent("toggle-theme"))}</script><script>(function(){const t="auto",e=getPrefTheme(),n=e||t;switchTheme(n)})()</script><header class=header><nav class=nav><div class=logo><a href=https://livypad.github.io accesskey=h title="zhh's blog (Alt + H)">zhh's blog</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=https://livypad.github.io/about/ title=About>About</a></li><li><a href=https://livypad.github.io/tags/ title=Tags>Tags</a></li><li><a href=https://livypad.github.io/post/ title=Archive>Archive</a></li></ul></nav></header><main class="main post"><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://livypad.github.io>Home</a>&nbsp;»&nbsp;<a href=https://livypad.github.io/post/>Posts</a></div><h1 class=post-title>FFmpeg转换音乐文件格式</h1><div class=post-meta><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select:text"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select:text"/><line x1="16" y1="2" x2="16" y2="6" style="user-select:text"/><line x1="8" y1="2" x2="8" y2="6" style="user-select:text"/><line x1="3" y1="10" x2="21" y2="10" style="user-select:text"/></svg><span>2022-03-23</span></span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select:text"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" style="user-select:text"/><line x1="7" y1="7" x2="7" y2="7" style="user-select:text"/></svg>
+<a href=https://livypad.github.io/tags/%E6%9D%82%E8%B0%88/>杂谈 </a><a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>教程</a>
+</span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select:text"><path d="M14 2H6A2 2 0 004 4v16a2 2 0 002 2h12a2 2 0 002-2V8z" style="user-select:text"/><polyline points="14 2 14 8 20 8" style="user-select:text"/><line x1="16" y1="13" x2="8" y2="13" style="user-select:text"/><line x1="16" y1="17" x2="8" y2="17" style="user-select:text"/><polyline points="10 9 9 9 8 9" style="user-select:text"/></svg><span>934 words</span></span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>2 min</span></span></div></header><div class="toc side left"><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#rust-%e7%9a%84-cli-toy-%e7%a8%8b%e5%ba%8f aria-label="Rust 的 cli toy 程序">Rust 的 cli toy 程序</a></li></ul></div></details></div><div class=post-content><p><a href=https://ffmpeg.org/>FFmpeg</a>是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用<code>find</code>命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>find . -name <span class=s2>&#34;*.flac&#34;</span> -maxdepth <span class=m>1</span> -exec ffmpeg -i <span class=o>{}</span> -ab 320k -map_metadata <span class=m>0</span> -id3v2_version <span class=m>3</span> <span class=o>{}</span>.mp3 <span class=se>\;</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=rust-的-cli-toy-程序>Rust 的 cli toy 程序<a hidden class=anchor aria-hidden=true href=#rust-的-cli-toy-程序>¶</a></h1><p>由此，可以顺手搞一个 rust 的 cli 程序，实现任何音乐格式的互转。主要是使用<code>walkdir</code>这个库，不用自己实现遍历。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-toml data-lang=toml><span class=line><span class=cl><span class=p>[</span><span class=nx>package</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>name</span> <span class=p>=</span> <span class=s2>&#34;music_converter&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>version</span> <span class=p>=</span> <span class=s2>&#34;0.1.0&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>edition</span> <span class=p>=</span> <span class=s2>&#34;2018&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>dependencies</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>walkdir</span> <span class=p>=</span> <span class=s2>&#34;2&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-rust data-lang=rust><span class=line><span class=cl><span class=k>use</span><span class=w> </span><span class=n>std</span>::<span class=n>borrow</span>::<span class=n>Borrow</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>std</span>::<span class=n>env</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>std</span>::<span class=n>io</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>std</span>::<span class=n>path</span>::<span class=n>Path</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>std</span>::<span class=n>process</span>::<span class=p>{</span><span class=n>Command</span><span class=p>,</span><span class=w> </span><span class=n>Stdio</span><span class=p>};</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>use</span><span class=w> </span><span class=n>walkdir</span>::<span class=n>WalkDir</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>fn</span> <span class=nf>cin</span><span class=p>(</span><span class=n>print_info</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>String</span> <span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=fm>println!</span><span class=p>(</span><span class=s>&#34;{}&#34;</span><span class=p>,</span><span class=w> </span><span class=n>print_info</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=k>mut</span><span class=w> </span><span class=n>input</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=nb>String</span>::<span class=n>new</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>io</span>::<span class=n>stdin</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=n>read_line</span><span class=p>(</span><span class=o>&amp;</span><span class=k>mut</span><span class=w> </span><span class=n>input</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=n>expect</span><span class=p>(</span><span class=s>&#34;Failed to read line&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>return</span><span class=w> </span><span class=n>input</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>fn</span> <span class=nf>path_match</span><span class=o>&lt;&#39;</span><span class=na>a</span><span class=o>&gt;</span><span class=p>(</span><span class=n>path</span>: <span class=kp>&amp;</span><span class=o>&#39;</span><span class=na>a</span> <span class=nc>Path</span><span class=p>,</span><span class=w> </span><span class=n>ext</span>: <span class=kp>&amp;</span><span class=o>&#39;</span><span class=na>a</span> <span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=n>not_full_name</span>: <span class=kt>bool</span><span class=p>)</span><span class=w> </span>-&gt; <span class=nb>Option</span><span class=o>&lt;</span><span class=p>(</span><span class=o>&amp;&#39;</span><span class=na>a</span><span class=w> </span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=nb>String</span><span class=p>)</span><span class=o>&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=n>not_full_name</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=kd>let</span><span class=w> </span><span class=nb>Some</span><span class=p>(</span><span class=n>file_ext</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>path</span><span class=p>.</span><span class=n>extension</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>if</span><span class=w> </span><span class=n>file_ext</span><span class=p>.</span><span class=n>to_str</span><span class=p>().</span><span class=n>unwrap</span><span class=p>()</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>ext</span><span class=p>.</span><span class=n>trim</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=kd>let</span><span class=w> </span><span class=n>path_name</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>path</span><span class=p>.</span><span class=n>to_str</span><span class=p>().</span><span class=n>unwrap</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=kd>let</span><span class=w> </span><span class=k>mut</span><span class=w> </span><span class=n>file_name</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>path</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>clone</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>file_stem</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>unwrap</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>to_str</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>unwrap</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>.</span><span class=n>to_string</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>file_name</span><span class=p>.</span><span class=n>push_str</span><span class=p>(</span><span class=s>&#34;.mp3&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=k>return</span><span class=w> </span><span class=nb>Some</span><span class=p>((</span><span class=n>path_name</span><span class=p>.</span><span class=n>borrow</span><span class=p>(),</span><span class=w> </span><span class=n>file_name</span><span class=p>));</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=p>}</span><span class=w> </span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=k>return</span><span class=w> </span><span class=nb>None</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w> </span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=nb>None</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w> </span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>if</span><span class=w> </span><span class=n>ext</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>path</span><span class=p>.</span><span class=n>clone</span><span class=p>().</span><span class=n>file_name</span><span class=p>().</span><span class=n>unwrap</span><span class=p>().</span><span class=n>to_str</span><span class=p>().</span><span class=n>unwrap</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=kd>let</span><span class=w> </span><span class=n>path_name</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>path</span><span class=p>.</span><span class=n>to_str</span><span class=p>().</span><span class=n>unwrap</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=kd>let</span><span class=w> </span><span class=k>mut</span><span class=w> </span><span class=n>file_name_no_ext</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>path</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=n>clone</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=n>file_stem</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=n>unwrap</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=n>to_str</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=n>unwrap</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=n>to_string</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>file_name_no_ext</span><span class=p>.</span><span class=n>push_str</span><span class=p>(</span><span class=s>&#34;.mp3&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=nb>Some</span><span class=p>((</span><span class=n>path_name</span><span class=p>.</span><span class=n>borrow</span><span class=p>(),</span><span class=w> </span><span class=n>file_name_no_ext</span><span class=p>));</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w> </span><span class=k>else</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>return</span><span class=w> </span><span class=nb>None</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>fn</span> <span class=nf>call_ffmpeg</span><span class=p>(</span><span class=n>src_name</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>,</span><span class=w> </span><span class=n>tgt_name</span>: <span class=kp>&amp;</span><span class=kt>str</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=k>mut</span><span class=w> </span><span class=n>child</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>Command</span>::<span class=n>new</span><span class=p>(</span><span class=s>&#34;ffmpeg&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=n>args</span><span class=p>([</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=s>&#34;-i&#34;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>src_name</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=s>&#34;-ab&#34;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=s>&#34;320k&#34;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=s>&#34;-map_metadata&#34;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=s>&#34;0&#34;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=s>&#34;-id3v2_version&#34;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=s>&#34;3&#34;</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=n>tgt_name</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>])</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=n>stdout</span><span class=p>(</span><span class=n>Stdio</span>::<span class=n>null</span><span class=p>())</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=n>spawn</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>.</span><span class=n>expect</span><span class=p>(</span><span class=s>&#34;Failed to execute command&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>let</span><span class=w> </span><span class=n>ecode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>child</span><span class=p>.</span><span class=n>wait</span><span class=p>().</span><span class=n>expect</span><span class=p>(</span><span class=s>&#34;failed to wait on child&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=fm>println!</span><span class=p>(</span><span class=s>&#34;{}&#34;</span><span class=p>,</span><span class=w> </span><span class=n>ecode</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>return</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=k>fn</span> <span class=nf>main</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=k>if</span><span class=w> </span><span class=kd>let</span><span class=w> </span><span class=nb>Ok</span><span class=p>(</span><span class=n>current_dir</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>env</span>::<span class=n>current_dir</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=kd>let</span><span class=w> </span><span class=n>current_dir</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>current_dir</span><span class=p>.</span><span class=n>as_path</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=fm>println!</span><span class=p>(</span><span class=s>&#34;音乐转换器，请保证音乐文件在该脚本所在目录&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>loop</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=kd>let</span><span class=w> </span><span class=n>mode</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cin</span><span class=p>(</span><span class=s>&#34;输入模式，q退出，ls列出当前目录下某一拓展名的文件，r递归转换，nr非递归转换，o单文件转换&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>match</span><span class=w> </span><span class=n>mode</span><span class=p>.</span><span class=n>to_lowercase</span><span class=p>().</span><span class=n>trim</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=s>&#34;ls&#34;</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=kd>let</span><span class=w> </span><span class=n>ext</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cin</span><span class=p>(</span><span class=s>&#34;输入要查看的拓展名&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=n>WalkDir</span>::<span class=n>new</span><span class=p>(</span><span class=n>current_dir</span><span class=p>).</span><span class=n>into_iter</span><span class=p>().</span><span class=n>for_each</span><span class=p>(</span><span class=o>|</span><span class=n>e</span><span class=o>|</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=k>if</span><span class=w> </span><span class=kd>let</span><span class=w> </span><span class=nb>Ok</span><span class=p>(</span><span class=n>e</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>e</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=kd>let</span><span class=w> </span><span class=n>path</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>e</span><span class=p>.</span><span class=n>path</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=k>if</span><span class=w> </span><span class=kd>let</span><span class=w> </span><span class=nb>Some</span><span class=p>((</span><span class=n>src_path</span><span class=p>,</span><span class=w> </span><span class=n>_tgt_name</span><span class=p>))</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>path_match</span><span class=p>(</span><span class=n>path</span><span class=p>,</span><span class=w> </span><span class=n>ext</span><span class=p>.</span><span class=n>trim</span><span class=p>(),</span><span class=w> </span><span class=kc>true</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                </span><span class=fm>println!</span><span class=p>(</span><span class=s>&#34;{}&#34;</span><span class=p>,</span><span class=w> </span><span class=n>src_path</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>});</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=s>&#34;r&#34;</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=kd>let</span><span class=w> </span><span class=n>ext</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cin</span><span class=p>(</span><span class=s>&#34;输入待转换的拓展名&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=n>WalkDir</span>::<span class=n>new</span><span class=p>(</span><span class=n>current_dir</span><span class=p>).</span><span class=n>into_iter</span><span class=p>().</span><span class=n>for_each</span><span class=p>(</span><span class=o>|</span><span class=n>e</span><span class=o>|</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=k>if</span><span class=w> </span><span class=kd>let</span><span class=w> </span><span class=nb>Ok</span><span class=p>(</span><span class=n>e</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>e</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=kd>let</span><span class=w> </span><span class=n>path</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>e</span><span class=p>.</span><span class=n>path</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=k>if</span><span class=w> </span><span class=kd>let</span><span class=w> </span><span class=nb>Some</span><span class=p>((</span><span class=n>src_path</span><span class=p>,</span><span class=w> </span><span class=n>tgt_name</span><span class=p>))</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>path_match</span><span class=p>(</span><span class=n>path</span><span class=p>,</span><span class=w> </span><span class=n>ext</span><span class=p>.</span><span class=n>trim</span><span class=p>(),</span><span class=w> </span><span class=kc>true</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                </span><span class=n>call_ffmpeg</span><span class=p>(</span><span class=n>src_path</span><span class=p>,</span><span class=w> </span><span class=n>tgt_name</span><span class=p>.</span><span class=n>as_str</span><span class=p>());</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>});</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=s>&#34;nr&#34;</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=kd>let</span><span class=w> </span><span class=n>ext</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cin</span><span class=p>(</span><span class=s>&#34;输入待转换的拓展名&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=n>WalkDir</span>::<span class=n>new</span><span class=p>(</span><span class=n>current_dir</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>.</span><span class=n>max_depth</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>.</span><span class=n>into_iter</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>.</span><span class=n>for_each</span><span class=p>(</span><span class=o>|</span><span class=n>e</span><span class=o>|</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=k>if</span><span class=w> </span><span class=kd>let</span><span class=w> </span><span class=nb>Ok</span><span class=p>(</span><span class=n>e</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>e</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                </span><span class=kd>let</span><span class=w> </span><span class=n>path</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>e</span><span class=p>.</span><span class=n>path</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                </span><span class=k>if</span><span class=w> </span><span class=kd>let</span><span class=w> </span><span class=nb>Some</span><span class=p>((</span><span class=n>src_path</span><span class=p>,</span><span class=w> </span><span class=n>tgt_name</span><span class=p>))</span><span class=w> </span><span class=o>=</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                    </span><span class=n>path_match</span><span class=p>(</span><span class=n>path</span><span class=p>,</span><span class=w> </span><span class=n>ext</span><span class=p>.</span><span class=n>trim</span><span class=p>(),</span><span class=w> </span><span class=kc>true</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                    </span><span class=n>call_ffmpeg</span><span class=p>(</span><span class=n>src_path</span><span class=p>,</span><span class=w> </span><span class=n>tgt_name</span><span class=p>.</span><span class=n>as_str</span><span class=p>());</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>});</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=s>&#34;o&#34;</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=kd>let</span><span class=w> </span><span class=n>filename</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>cin</span><span class=p>(</span><span class=s>&#34;输入待转换的文件名&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=n>WalkDir</span>::<span class=n>new</span><span class=p>(</span><span class=n>current_dir</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>.</span><span class=n>max_depth</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>.</span><span class=n>into_iter</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>.</span><span class=n>for_each</span><span class=p>(</span><span class=o>|</span><span class=n>e</span><span class=o>|</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=k>if</span><span class=w> </span><span class=kd>let</span><span class=w> </span><span class=nb>Ok</span><span class=p>(</span><span class=n>e</span><span class=p>)</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>e</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                </span><span class=kd>let</span><span class=w> </span><span class=n>path</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>e</span><span class=p>.</span><span class=n>path</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                </span><span class=k>if</span><span class=w> </span><span class=kd>let</span><span class=w> </span><span class=nb>Some</span><span class=p>((</span><span class=n>src_path</span><span class=p>,</span><span class=w> </span><span class=n>tgt_name</span><span class=p>))</span><span class=w> </span><span class=o>=</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                    </span><span class=n>path_match</span><span class=p>(</span><span class=n>path</span><span class=p>,</span><span class=w> </span><span class=n>filename</span><span class=p>.</span><span class=n>trim</span><span class=p>(),</span><span class=w> </span><span class=kc>false</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                    </span><span class=n>call_ffmpeg</span><span class=p>(</span><span class=n>src_path</span><span class=p>,</span><span class=w> </span><span class=n>tgt_name</span><span class=p>.</span><span class=n>as_str</span><span class=p>());</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>});</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=s>&#34;q&#34;</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=k>break</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>_</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=fm>println!</span><span class=p>(</span><span class=s>&#34;input not support&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=k>if</span><span class=w> </span><span class=n>mode</span><span class=p>.</span><span class=n>trim</span><span class=p>()</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=s>&#34;123&#34;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=fm>println!</span><span class=p>(</span><span class=s>&#34;hi&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=p>};</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=p>}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></div><footer class=post-footer><ul class=post-tags><li><a href=https://livypad.github.io/tags/%E6%9D%82%E8%B0%88/>杂谈</a></li><li><a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>教程</a></li></ul><nav class=paginav><a class=prev href=https://livypad.github.io/post/2022-06-21-fairytalerabbit/><span class=title>« Prev Page</span><br><span>遥远的时间有关的童话/寓言（？</span></a>
+<a class=next href=https://livypad.github.io/post/2022-03-15-asyouwish/><span class=title>Next Page »</span><br><span>“如意”的两种实现</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2022 <a href=https://livypad.github.io>zhh's blog</a></span><span style=display:inline-block;margin-left:1em>
+Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+    <a href=https://github.com/reorx/hugo-PaperModX/ rel=noopener target=_blank>PaperModX</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script type=text/javascript src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type=text/x-mathjax-config>
-    MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [['$','$'], ['\\(','\\)']],
-        displayMath: [['$$','$$'], ['\[','\]']],
-        processEscapes: true,
-        processEnvironments: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-        TeX: { equationNumbers: { autoNumber: "AMS" },
-            extensions: ["AMSmath.js", "AMSsymbols.js"] }
-    }
-    });
-</script></p></div><button class=theme-switcher>
-Dark theme</button>
-<script>const STORAGE_KEY="user-color-scheme",defaultTheme="auto";let currentTheme,switchButton,autoDefinedScheme=window.matchMedia("(prefers-color-scheme: dark)");const autoChangeScheme=e=>{currentTheme=e.matches?"dark":"light",document.documentElement.setAttribute("data-theme",currentTheme),changeButtonText()};document.addEventListener("DOMContentLoaded",function(){switchButton=document.querySelector(".theme-switcher"),currentTheme=detectCurrentScheme(),currentTheme=="dark"&&document.documentElement.setAttribute("data-theme","dark"),currentTheme=="auto"&&(autoChangeScheme(autoDefinedScheme),autoDefinedScheme.addListener(autoChangeScheme)),switchButton&&(changeButtonText(),switchButton.addEventListener("click",switchTheme,!1)),showContent()});function detectCurrentScheme(){return localStorage.getItem(STORAGE_KEY)?localStorage.getItem(STORAGE_KEY):defaultTheme?defaultTheme:window.matchMedia?window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light":"light"}function changeButtonText(){switchButton&&(switchButton.textContent=currentTheme=="dark"?"Light theme":"Dark theme")}function switchTheme(){currentTheme=="dark"?(localStorage.setItem(STORAGE_KEY,"light"),document.documentElement.setAttribute("data-theme","light"),currentTheme="light"):(localStorage.setItem(STORAGE_KEY,"dark"),document.documentElement.setAttribute("data-theme","dark"),currentTheme="dark"),changeButtonText()}function showContent(){document.body.style.visibility="visible",document.body.style.opacity=1}</script></div><p class="h-card vcard"><a href=https://livypad.github.io class="p-name u-url url fn" rel=me>livypad</a>
-/
-<a class="p-email u-email email" rel=me href=mailto:ishonghua.zhu@outlook.com>ishonghua.zhu@outlook.com</a></p></footer></div></body></html>
+        MathJax.Hub.Config({
+          tex2jax: {
+            inlineMath: [['$','$']],
+            displayMath: [['$$','$$']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: { equationNumbers: { autoNumber: "AMS" },
+                 extensions: ["AMSmath.js", "AMSsymbols.js"] }
+          }
+        });
+    </script><script>(function(){const t=""=="1";if(t)return;let e=document.getElementById("theme-toggle");e.removeEventListener("click",toggleThemeListener),e.addEventListener("click",toggleThemeListener)})()</script><script>(function(){let e=document.getElementById("menu");e&&(e.scrollLeft=localStorage.getItem("menu-scroll-position"),e.onscroll=function(){localStorage.setItem("menu-scroll-position",e.scrollLeft)});const t=""=="1",n=""=="1";if(window.matchMedia("(prefers-reduced-motion: reduce)").matches||t||n)return;document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})})()</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>if(window.scrollListeners)for(const e of scrollListeners)window.removeEventListener("scroll",e);window.scrollListeners=[]</script><script src=/js/medium-zoom.min.js data-no-instant></script>
+<script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerText="copy";function s(){t.innerText="copied!",setTimeout(()=>{t.innerText="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script><script>(function(){const r="1"=="1";if(!r)return;if(!document.querySelector(".toc")){console.log("no toc found, ignore toc scroll");return}const c=window.scrollListeners,n=document.querySelectorAll("h1[id],h2[id],h3[id],h4[id],h5[id]"),s="active";let e=n[0];o(e).classList.add(s);const a=()=>{const t=[];for(const e of n)if(l(e)<5)t.push(e);else break;t.length>0?newActiveHeading=t[t.length-1]:newActiveHeading=n[0],e!=newActiveHeading&&(o(e).classList.remove(s),e=newActiveHeading,o(e).classList.add(s))};let t=null;const i=()=>{t!==null&&clearTimeout(t),t=setTimeout(a,50)};window.addEventListener("scroll",i,!1),c.push(i);function o(e){const t=encodeURI(e.getAttribute("id")).toLowerCase();return document.querySelector(`.toc ul li a[href="#${t}"]`)}function l(e){if(!e.getClientRects().length)return 0;let t=e.getBoundingClientRect();return t.top}})()</script></body></html>
