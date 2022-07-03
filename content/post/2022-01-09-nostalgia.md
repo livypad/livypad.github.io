@@ -2,12 +2,9 @@
 date: "2022-01-09T00:00:00Z"
 title: 《长相思·山一程》 分析
 draft: false
-tags : [
-  "杂谈",
-  "胡说"
-]
+tags: ["杂谈", "胡说"]
+isCJKLanguage: true
 ---
-
 
 # 《长相思·山一程》 分析
 

@@ -2,11 +2,9 @@
 date: "2022-03-15T00:00:00Z"
 title: “如意”的两种实现
 draft: false
-tags : ["杂谈"]
+tags: ["杂谈"]
+isCJKLanguage: true
 ---
-1. [“如意”](#如意)
-   1. [中文](#中文)
-   2. [English](#english)
 
 # “如意”
 

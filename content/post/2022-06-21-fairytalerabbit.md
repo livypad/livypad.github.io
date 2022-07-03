@@ -2,7 +2,8 @@
 title: "遥远的时间有关的童话/寓言（？"
 date: "2022-06-21T00:00:00Z"
 draft: false
-tags : ["杂谈"]
+tags: ["杂谈"]
+isCJKLanguage: true
 ---
 
 # 遥远的时间有关的童话/寓言（？

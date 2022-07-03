@@ -1,0 +1,11 @@
+@import "../lib/chroma-light";
+
+// for github theme, add a background color
+// .chroma {
+//   color: #101010;
+//   background-color: #f6f8fa;
+// }
+
+.dark {
+  @import "../lib/chroma-dark";
+}
