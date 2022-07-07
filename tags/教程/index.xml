@@ -1084,9 +1084,9 @@
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">_斜体_
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">*斜体*
 </span></span><span class="line"><span class="cl"><span class="gs">**加粗**</span>
-</span></span><span class="line"><span class="cl"><span class="gs">**_倾斜加粗_**</span>
+</span></span><span class="line"><span class="cl"><span class="ge">**</span>*倾斜加粗***
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="图片链接数学公式代码块">图片，链接，数学公式，代码块</h3>
