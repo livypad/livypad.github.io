@@ -1,4 +1,684 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on zhh's blog</title><link>https://livypad.github.io/post/</link><description>Recent content in Posts on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Tue, 21 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://livypad.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>遥远的时间有关的童话/寓言（？</title><link>https://livypad.github.io/post/2022-06-21-fairytalerabbit/</link><pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate><guid>https://livypad.github.io/post/2022-06-21-fairytalerabbit/</guid><description>遥远的时间有关的童话/寓言（？ 小时候看儿童向杂志看到一个略显黑暗（？）的童话/寓言（？。有个小兔子不喜欢上学，喜欢星期天放假。一个老兔子给了</description><content:encoded><![CDATA[<h1 id="遥远的时间有关的童话寓言">遥远的时间有关的童话/寓言（？</h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on zhh's blog</title><link>https://livypad.github.io/post/</link><description>Recent content in Posts on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Sat, 09 Jul 2022 01:31:57 +0800</lastBuildDate><atom:link href="https://livypad.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Distributed Systems An Algorithmic Approach 2nd</title><link>https://livypad.github.io/post/2022-07-09-ghoshdsaaa/</link><pubDate>Sat, 09 Jul 2022 01:31:57 +0800</pubDate><guid>https://livypad.github.io/post/2022-07-09-ghoshdsaaa/</guid><description>Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach Ch 1 introduction Ch 2 interprocess communication naming rpc remote procedure call cloud computing MapReduce ch 3 Models for Communication shared variable 共享变量 linda mobile agent 模型强弱 resequencing protocol, 非 FIFO 模拟 FIFO 共享变量模拟信息传递 信息传递模拟共享变量 信</description><content:encoded><![CDATA[<ul>
+<li><a href="#ghosh-sukumar-2014---distributed-systems-an-algorithmic-approach">Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach</a>
+<ul>
+<li><a href="#ch-1-introduction">Ch 1 introduction</a></li>
+<li><a href="#ch-2-interprocess-communication">Ch 2 interprocess communication</a>
+<ul>
+<li><a href="#naming">naming</a></li>
+<li><a href="#rpc-remote-procedure-call">rpc remote procedure call</a></li>
+<li><a href="#cloud-computing">cloud computing</a>
+<ul>
+<li><a href="#mapreduce">MapReduce</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#ch-3-models-for-communication">ch 3 Models for Communication</a>
+<ul>
+<li><a href="#shared-variable-%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F">shared variable 共享变量</a>
+<ul>
+<li><a href="#linda">linda</a></li>
+<li><a href="#mobile-agent">mobile agent</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E5%BC%BA%E5%BC%B1">模型强弱</a>
+<ul>
+<li><a href="#resequencing-protocol-%E9%9D%9E-fifo-%E6%A8%A1%E6%8B%9F-fifo">resequencing protocol, 非 FIFO 模拟 FIFO</a></li>
+<li><a href="#%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E6%A8%A1%E6%8B%9F%E4%BF%A1%E6%81%AF%E4%BC%A0%E9%80%92">共享变量模拟信息传递</a></li>
+<li><a href="#%E4%BF%A1%E6%81%AF%E4%BC%A0%E9%80%92%E6%A8%A1%E6%8B%9F%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F">信息传递模拟共享变量</a></li>
+<li><a href="#%E4%BF%A1%E9%81%93%E5%88%A4%E7%A9%BA%E7%9A%84%E4%B8%8D%E5%8F%AF%E8%83%BD%E6%80%A7">信道判空的不可能性</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E5%88%86%E7%B1%BB">系统分类</a></li>
+<li><a href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E8%AE%A1%E6%95%B0">复杂度计数</a></li>
+</ul>
+</li>
+<li><a href="#ch-4-representing-distributed-algorithms">ch 4 Representing Distributed Algorithms</a>
+<ul>
+<li><a href="#%E5%85%AC%E6%AD%A3%E6%80%A7">公正性</a></li>
+<li><a href="#scheduler">scheduler</a></li>
+</ul>
+</li>
+<li><a href="#ch-5-program-correctness">ch 5 Program Correctness</a>
+<ul>
+<li><a href="#%E6%96%AD%E8%A8%80%E6%8E%A8%E7%90%86-assertional-reasoning">断言推理 assertional reasoning</a></li>
+<li><a href="#%E8%89%AF%E5%9F%BA%E9%9B%86-well-founeded-set">良基集 well-founeded set</a></li>
+<li><a href="#%E6%97%B6%E9%97%B4%E9%80%BB%E8%BE%91-temporal-logic">时间逻辑 temporal logic</a></li>
+</ul>
+</li>
+<li><a href="#ch-6-time-in-a-distributed-system">ch 6 Time in a Distributed System</a>
+<ul>
+<li><a href="#%E9%80%BB%E8%BE%91%E6%97%B6%E9%92%9F">逻辑时钟</a>
+<ul>
+<li><a href="#%E5%BC%B1%E6%97%B6%E9%92%9F%E6%9D%A1%E4%BB%B6-%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB-prec">弱时钟条件 偏序关系 $\prec$</a></li>
+<li><a href="#%E5%BC%B1%E6%97%B6%E9%92%9F%E5%AE%9E%E7%8E%B0%E7%9A%84%E9%80%BB%E8%BE%91%E6%97%B6%E9%92%9F-logic-clock">弱时钟实现的逻辑时钟 logic clock</a></li>
+<li><a href="#%E5%BC%BA%E6%97%B6%E9%92%9F%E5%85%B3%E7%B3%BB-%E5%85%A8%E5%BA%8F%E5%85%B3%E7%B3%BB-ll">强时钟关系 全序关系 $\ll$</a></li>
+</ul>
+</li>
+<li><a href="#%E5%90%91%E9%87%8F%E6%97%B6%E9%92%9F-vector-clock">向量时钟 vector clock</a></li>
+<li><a href="#%E7%89%A9%E7%90%86%E6%97%B6%E9%92%9F%E5%90%8C%E6%AD%A5">物理时钟同步</a>
+<ul>
+<li><a href="#berkeley-%E7%AE%97%E6%B3%95-%E5%86%85%E9%83%A8%E5%90%8C%E6%AD%A5">Berkeley 算法 内部同步</a></li>
+<li><a href="#lamport-and-melliarsmith-%E7%AE%97%E6%B3%95-%E5%86%85%E9%83%A8%E5%90%8C%E6%AD%A5">Lamport and Melliar–Smith 算法 内部同步</a></li>
+<li><a href="#cristian-%E7%AE%97%E6%B3%95-%E5%A4%96%E9%83%A8%E5%90%8C%E6%AD%A5">Cristian 算法 外部同步</a></li>
+<li><a href="#ntp-network-time-protocol-%E5%AE%9E%E7%8E%B0">NTP network time protocol 实现</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="ghosh-sukumar-2014---distributed-systems-an-algorithmic-approach">Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach</h1>
+<h2 id="ch-1-introduction">Ch 1 introduction</h2>
+<p>特征</p>
+<ol>
+<li>多进程</li>
+<li>进程间通讯</li>
+<li>分离地址空间</li>
+<li>单任务</li>
+</ol>
+<p>使用分布式的原因</p>
+<ul>
+<li>地理分离</li>
+<li>加速</li>
+<li>远端资源共享</li>
+<li>容错</li>
+</ul>
+<p>一般的问题</p>
+<ol>
+<li>leader 选举</li>
+<li>互斥</li>
+<li>时钟同步</li>
+<li>全局状态</li>
+<li>组播</li>
+<li>副本管理</li>
+</ol>
+<h2 id="ch-2-interprocess-communication">Ch 2 interprocess communication</h2>
+<h3 id="naming">naming</h3>
+<p>位置无关，方便定位实体。一般是文本形式，树状结构</p>
+<h3 id="rpc-remote-procedure-call">rpc remote procedure call</h3>
+<ul>
+<li>机器差异（大小端，指针和地址）</li>
+<li>阻塞/非阻塞</li>
+<li>丢包：at-least-once/at-most-once,exactly once</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Client Stub</th>
+<th>Server Stub</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pack parameters into a message，Send message to remote machine</td>
+<td>Do no message → skip od ，Unpack the call parameters</td>
+</tr>
+<tr>
+<td>Do no result → skip od*，Receive result and unpack it</td>
+<td>Call the server procedure Receive result and unpack it Pack result into a message</td>
+</tr>
+<tr>
+<td>Return to the client program</td>
+<td>Send it to the client</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cloud-computing">cloud computing</h3>
+<ul>
+<li>software-as-a-service, SaaS
+<ul>
+<li>Google doc，云盘等</li>
+</ul>
+</li>
+<li>platform-as-a-service, PaaS
+<ul>
+<li>小程序 API（？</li>
+</ul>
+</li>
+<li>infrastructure-as-a-service, IaaS
+<ul>
+<li>elastic computing cloud， EC2 云服务器</li>
+</ul>
+</li>
+</ul>
+<h4 id="mapreduce">MapReduce</h4>
+<p>Map: 〈<em>key, value</em>〉→ list of 〈<em>key, value</em>〉</p>
+<p>{This is the intermediate 〈key, value〉 pair}</p>
+<p>Reduce: 〈<em>key, list of values</em>〉 → list of 〈<em>key, value</em>〉</p>
+<h2 id="ch-3-models-for-communication">ch 3 Models for Communication</h2>
+<blockquote>
+<p>本书的可靠信道公理 channel</p>
+<ol>
+<li>所有发出消息都被接收方收到，所有收到消息都有发送者
+<ul>
+<li>对数据链路/传输层不适用，需要恢复</li>
+</ul>
+</li>
+<li>每条信息都有一条任意，有限长，非零延迟
+<ul>
+<li>为了放宽对不同延迟的支持</li>
+</ul>
+</li>
+<li>信道呈现 FIFO 特性
+<ul>
+<li>电报 datagram 网络乱序</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+<h3 id="shared-variable-共享变量">shared variable 共享变量</h3>
+<blockquote>
+<p>DSM</p>
+<p>distribted shared memory，方便使用共享变量有关的编程工具</p>
+</blockquote>
+<ol>
+<li>state reading/locally shared variable 读取自身和邻居状态，只能修改自己状态</li>
+<li>link register 链路自带单读者单写者寄存器</li>
+</ol>
+<h4 id="linda">linda</h4>
+<p>共享的 tuple space</p>
+<table>
+<thead>
+<tr>
+<th>原语</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IN，INP</td>
+<td>取出 tuple，分阻塞、非阻塞版本</td>
+</tr>
+<tr>
+<td>OUT</td>
+<td>放入 tuple</td>
+</tr>
+<tr>
+<td>RD，RDP</td>
+<td>读 tuple，类比 in 不删除。分阻塞、非阻塞版本</td>
+</tr>
+<tr>
+<td>EVAL</td>
+<td>创建新进程</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/** main program**/</span>
+</span></span><span class="line"><span class="cl"><span class="n">real_main</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span><span class="n">argv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">argc</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[];</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">nslave</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">hello</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">nslave</span> <span class="o">=</span> <span class="n">atoi</span> <span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nslave</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    	<span class="n">EVAL</span> <span class="p">(</span><span class="s">&#34;slave&#34;</span><span class="p">,</span> <span class="n">hello</span><span class="p">(</span><span class="n">j</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nslave</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    	<span class="n">IN</span><span class="p">(</span><span class="s">&#34;done&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Task completed.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/** subroutine hello **/</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">hello</span> <span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;Task from number %d.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">OUT</span><span class="p">(</span><span class="s">&#34;done&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="mobile-agent">mobile agent</h4>
+<p>移动执行的代码</p>
+<p>(I, P, B)</p>
+<ul>
+<li>I 标识符</li>
+<li>P 对应代码</li>
+<li>B 代码的变量</li>
+</ul>
+<h3 id="模型强弱">模型强弱</h3>
+<p>强模型限制多，操作多；强模型模拟弱模型容易，反之可能困难</p>
+<h4 id="resequencing-protocol-非-fifo-模拟-fifo">resequencing protocol, 非 FIFO 模拟 FIFO</h4>
+<p>缓存再发送。可以优化为环形缓存编号</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">{Sender process P}
+</span></span><span class="line"><span class="cl">var i : integer {initially 0}
+</span></span><span class="line"><span class="cl">repeat
+</span></span><span class="line"><span class="cl">    send m[i],i to Q;
+</span></span><span class="line"><span class="cl">    i := i+1;
+</span></span><span class="line"><span class="cl">forever
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{Receiver process Q}
+</span></span><span class="line"><span class="cl">var k : integer {initially 0}
+</span></span><span class="line"><span class="cl">buffer : buffer [0..∞] of message
+</span></span><span class="line"><span class="cl">{initially for all k:buffer[k] = null}
+</span></span><span class="line"><span class="cl">repeat{store}
+</span></span><span class="line"><span class="cl">	receive m[i],i from P;
+</span></span><span class="line"><span class="cl">    store m[i] into buffer[i];
+</span></span><span class="line"><span class="cl">    {deliver}
+</span></span><span class="line"><span class="cl">    while buffer[k] ≠ null do
+</span></span><span class="line"><span class="cl">    begin
+</span></span><span class="line"><span class="cl">        deliver the content of buffer [k];
+</span></span><span class="line"><span class="cl">        buffer [k] := null; k := k+1;
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">forever
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="共享变量模拟信息传递">共享变量模拟信息传递</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">shared var p, q: integer {initially p = q}
+</span></span><span class="line"><span class="cl">buffer: array [0..max-1] of message
+</span></span><span class="line"><span class="cl">{Sender process P}
+</span></span><span class="line"><span class="cl">var s: array of messages sent by P, i : integer {initially 0}
+</span></span><span class="line"><span class="cl">repeat
+</span></span><span class="line"><span class="cl">	if p ≠ q − 1 mod max then
+</span></span><span class="line"><span class="cl">    begin
+</span></span><span class="line"><span class="cl">    	buffer[p] := s[i]; i := i + 1; p := p + 1 mod max
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">forever
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{Receiver process Q}
+</span></span><span class="line"><span class="cl">var r: array of messages received by Q, j : integer {initially 0}
+</span></span><span class="line"><span class="cl">repeat
+</span></span><span class="line"><span class="cl">    if q ≠ p mod max then
+</span></span><span class="line"><span class="cl">    begin
+</span></span><span class="line"><span class="cl">    	r[j] := buffer[q]; j := j + 1; q := q + 1 mod max
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">forever
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="信息传递模拟共享变量">信息传递模拟共享变量</h4>
+<p>下列实现错误：</p>
+<ol>
+<li>组播不 atmoic，atmoic 组播有代价</li>
+<li>组播不一定遵循更新变量顺序</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">{Implementing shared memory by message passing: first attempt}
+</span></span><span class="line"><span class="cl">{read X by process i}
+</span></span><span class="line"><span class="cl">read x[i] x[i] := v
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">{write X := v by process i}
+</span></span><span class="line"><span class="cl">x[i] := v
+</span></span><span class="line"><span class="cl">Multicast v to every other process j (j ≠ i) in the system;
+</span></span><span class="line"><span class="cl">Process j (j ≠ i), after receiving the multicast, sets x[j] to v.
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="信道判空的不可能性">信道判空的不可能性</h4>
+<p>如果进程<code>i,j</code>之间信道需要判空</p>
+<ul>
+<li>已知<code>i,j</code>之间最大时延 T，等待 T</li>
+<li>未知最大时延，初始信道可以包含任意信息，无法判空（即使使用一个清零帧）</li>
+</ul>
+<h3 id="系统分类">系统分类</h3>
+<ul>
+<li>reactive：反应性，对请求响应</li>
+<li>transformational：转移性，存在初态和末态</li>
+<li>named：和处理器标识有关</li>
+<li>anonymous：和处理器标识无关，即使标识改变可以继续运行，需要如随机数等机制打破对称性</li>
+</ul>
+<h3 id="复杂度计数">复杂度计数</h3>
+<ul>
+<li>空间复杂度：按 node 数目的增长要求的空间</li>
+<li>时间复杂度
+<ul>
+<li>总步数</li>
+<li>总轮次 round：最远端的执行一次是一轮</li>
+</ul>
+</li>
+</ul>
+<h2 id="ch-4-representing-distributed-algorithms">ch 4 Representing Distributed Algorithms</h2>
+<blockquote>
+<p>guard</p>
+<p>断言，条件执行，如果多个断言判正确，由 scheduler 决定执行任意一个代码段，下面假定每个代码段原子执行</p>
+</blockquote>
+<p>程序终止条件</p>
+<ol>
+<li>每个进程终止，guard 全判<code>false</code></li>
+<li>无消息还在传递</li>
+</ol>
+<p>类似如下的伪代码和对应的 Rust 实现</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">program uncertain;
+</span></span><span class="line"><span class="cl">define x : integer;
+</span></span><span class="line"><span class="cl">initially x = 0
+</span></span><span class="line"><span class="cl">do
+</span></span><span class="line"><span class="cl">  x &lt; 4 → x := x + 1
+</span></span><span class="line"><span class="cl">  [] x = 3 → x := 0
+</span></span><span class="line"><span class="cl">od
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">rand</span>::<span class="n">Rng</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">sync</span>::<span class="n">atomic</span>::<span class="p">{</span><span class="n">AtomicUsize</span><span class="p">,</span><span class="w"> </span><span class="n">Ordering</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">static</span><span class="w"> </span><span class="n">CNT</span>: <span class="nc">AtomicUsize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AtomicUsize</span>::<span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">10</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">CNT</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">Ordering</span>::<span class="n">Relaxed</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">the</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">the</span><span class="p">(</span><span class="n">i</span>: <span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">CNT</span><span class="p">.</span><span class="n">fetch_add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">Ordering</span>::<span class="n">Relaxed</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">(</span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">().</span><span class="n">gen_range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">match</span><span class="w"> </span><span class="n">guess</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="mi">0</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">the</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">the</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">(</span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">the</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">(</span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;terminate in {:?}&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">CNT</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="公正性">公正性</h3>
+<p>由于 guarded action 的选择依赖 scheduler （调度器） 决定，scheduler 需要考虑公平性</p>
+<ul>
+<li>无条件公平：每个代码段最终会进入调度队列，无论 guard 值</li>
+<li>弱公平：只要代码段的 guard 变为并保持 <code>true</code>就最终会进入调度队列</li>
+<li>强公平：只要代码段的 guard 能无限次经常变为<code>true</code>就最终会进入调度队列，弱公平能跑出的顺序，强公平一定能跑出，反之不一定</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">program test
+</span></span><span class="line"><span class="cl">define
+</span></span><span class="line"><span class="cl">x: integer {initial value undefined}
+</span></span><span class="line"><span class="cl">do
+</span></span><span class="line"><span class="cl">  true → x := 0
+</span></span><span class="line"><span class="cl">  [] x = 0 → x := 1
+</span></span><span class="line"><span class="cl">  [] x = 1 → x := 2
+</span></span><span class="line"><span class="cl">od
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>不公平时可能只执行第 1 条</li>
+<li>弱公平时只保证执行第 1、2 条（一直执行第 1 条会保证 x=0 从而执行 2，但 x=1 时可以只执行第 1 条而使得第 3 条永不满足）</li>
+</ul>
+<h3 id="scheduler">scheduler</h3>
+<blockquote>
+<p>central scheduler</p>
+<p>又名 serial scheduler：原子的调度执行 guard 对应的代码段，简单，可以用 token 传递实现，拓展性差，并行度差，是分布式 scheduler 的退化情形</p>
+<p>有关的 Theorem：</p>
+<ol>
+<li>算法在 central scheduler 下正确</li>
+<li>已为<code>true</code> 的 guard 不会被其他代码段修改为<code>false</code></li>
+</ol>
+<p>=&gt;在 distributed scheduler 下正确</p>
+</blockquote>
+<h2 id="ch-5-program-correctness">ch 5 Program Correctness</h2>
+<blockquote>
+<p>安全 safety 条件</p>
+<p>&ldquo;bad things never happen.&rdquo;</p>
+</blockquote>
+<p>如：</p>
+<ul>
+<li>同步互斥：至多一个进程在临界区</li>
+<li>有限容量信道：$nC\le nP\le nC+B$</li>
+<li>读写锁：$(nW\le 1 \wedge nR=0) \vee (nW=0\wedge nR\ge 0)$</li>
+<li>无死锁：$Q\wedge GG$</li>
+<li>部分正确性：如果不死锁，必得正确结果 $\neg GG\implies Q$</li>
+</ul>
+<blockquote>
+<p>活跃 liveness 条件</p>
+<p>&ldquo;good things eventually happen.&rdquo;</p>
+</blockquote>
+<p>如：</p>
+<ul>
+<li>进行：对于同步互斥问题，不死锁，不活锁（声明了临界区，最终总能获得机会）</li>
+<li>公平性：有限时间后 schduler 总会调度</li>
+<li>可达性：是否可以从初始状态 $S_0$ 到达状态 $S_k$</li>
+<li>终止：部分正确+终止状态可达</li>
+</ul>
+<h3 id="断言推理-assertional-reasoning">断言推理 assertional reasoning</h3>
+<p>用于证明安全性。构造不变式 $I$ 代表安全性条件（类似数学归纳法）</p>
+<ol>
+<li>初态不变式 $I$满足</li>
+<li>假定前状态不变式 $I$满足，任何执行后不变式 $I$ 仍然满足</li>
+</ol>
+<h3 id="良基集-well-founeded-set">良基集 well-founeded set</h3>
+<p>用于证明活跃性。一个映射（测量函数/变化函数 measured/variant function）从系统全局状态到一个 well-founed set $f:S\to WF$</p>
+<blockquote>
+<p>well-founded set</p>
+<p>对于 $WF={w_1,w_2,&hellip;}$ ，上面有个全序关系$\gg$</p>
+<ol>
+<li>不存在无穷比较链 $w_1\gg w_2 \gg &hellip;$</li>
+<li>系统状态从 $s_1$ 到 $s_2$ ，有 $w_1=f(s_1),w_2=f(s_2) \implies w_1 \gg w_2$</li>
+</ol>
+</blockquote>
+<p>一般 well-founed set 会选择非负整数集，0 就是终止状态，全序关系就是大于；也有选择 set 是一组元素，全序关系是字典顺序。</p>
+<h3 id="时间逻辑-temporal-logic">时间逻辑 temporal logic</h3>
+<ul>
+<li>$\Box P$ 意思是 $P$ 永真</li>
+<li>$\lozenge P$ 意思是 $P$ 最终会变为真</li>
+</ul>
+<p>有</p>
+<ol>
+<li>$\lozenge P=\neg \Box (\neg P)$：P 假不是一直不真的=P 假最终会不真</li>
+<li>$\Box P\wedge \Box Q=\Box (P\wedge Q)$</li>
+<li>$\Box P\vee \Box Q=\Box (P\vee Q)$</li>
+<li>$\lozenge\Box P\implies \Box \lozenge P$：P 最终会一直真推出 P 会一直经常真（强公平蕴含弱公平）</li>
+<li>$\lozenge P\wedge \lozenge Q=\lozenge (P\wedge Q)$</li>
+<li>$\lozenge P\vee \lozenge Q=\lozenge (P\vee Q)$</li>
+<li>$\lozenge P\vee Q\neq \lozenge (P\vee Q)$: <strong>注意：</strong> 如果 $Q=\neg P$，右边永真，左边可以为假</li>
+</ol>
+<h2 id="ch-6-time-in-a-distributed-system">ch 6 Time in a Distributed System</h2>
+<h3 id="逻辑时钟">逻辑时钟</h3>
+<h4 id="弱时钟条件-偏序关系-prec">弱时钟条件 偏序关系 $\prec$</h4>
+<ol>
+<li>同一进程里，a 在 b 后发生，$a\prec b$</li>
+<li>两个进程通讯，i 进程的 a 发送，j 进程 b 接受，$a\prec b$</li>
+<li>$(a\prec b)\wedge(b\prec c)\implies (a\prec c)$</li>
+</ol>
+<h4 id="弱时钟实现的逻辑时钟-logic-clock">弱时钟实现的逻辑时钟 logic clock</h4>
+<ol>
+<li>每个本地事件发生，$LC$ 递增 1</li>
+<li>发送消息时附上当前 $LC$ 作为时间戳</li>
+<li>接受到消息时 $LC=1+\max(local; LC, message; LC)$</li>
+</ol>
+<p>此时可以保证，但是反之不成立。逻辑时钟不能完全和因果关系互推，需要<a href="#%E5%90%91%E9%87%8F%E6%97%B6%E9%92%9F-vector-clock">向量时钟</a>。</p>
+<p>$a\prec b\implies LC(a)&lt;LC(b)$</p>
+<h4 id="强时钟关系-全序关系-ll">强时钟关系 全序关系 $\ll$</h4>
+<p>$a\ll b$ 成立条件</p>
+<ul>
+<li>要么$LC(a)&lt;LC(b)$</li>
+<li>要么不同进程，事件 a、b 对应进程 i、j，有 $LC(a)=LC(b),i&lt;j$</li>
+</ul>
+<h3 id="向量时钟-vector-clock">向量时钟 vector clock</h3>
+<p>从事件集到进程数大小(假定为 n)的非负整数向量的函数 $VC:V\to A$。事件 a、b 的向量时钟之间大小关系$VC(a)&lt;VC(b)$的充要条件为</p>
+<ol>
+<li>$\forall i:i\in [0,n-1]:VC_i(a)\le VC_i(b)$</li>
+<li>$\exists j\in[0,n-1]:VC_j(a)&lt;VC_j(b)$</li>
+</ol>
+<p>如果两个事件之间向量时钟既不大于也不小于，认为事件同时，记作$a\parallel b$。向量时钟保证了因果检测，即 $a\prec b \iff VC(a)&lt;VC(b)$ 。实现要求：</p>
+<ol>
+<li>进程 i 本地事件发生时候 $VC_i[i]+=1$</li>
+<li>发送信息时附带整个向量时钟</li>
+<li>进程 j 收到消息附带时间戳 $T$ 时，先更新本地 $VC_j[j]+=1$ ，再更新全局 $\forall k \in [0,n-1]:VC_k[j]=\max(T_k,VC_k[j])$</li>
+</ol>
+<h3 id="物理时钟同步">物理时钟同步</h3>
+<ol>
+<li>外部时钟同步：和 UTC/原子钟/GPS 同步时间。可以借助 NTP（network time protocol）协议</li>
+<li>内部时钟同步：在即使内部少数错误时钟下仍然同步时间，只需要内部相互同步即可，注意一般通过调快/调慢实现以防止突变</li>
+<li>相同步</li>
+<li>有界时钟：只能通过加位数保证可预见未来不溢出</li>
+</ol>
+<ul>
+<li>偏移率 drift rate：内部时钟和理想时钟走时速度不完全相等：$(1-\rho)\le \frac{\rm{d}C}{\rm{d}t}\le(1+\rho)$</li>
+<li>时钟偏差 clock skew：时钟之间最大允许读数偏差 $\delta$</li>
+<li>重同步间隔 resynchronization interval ：$R$</li>
+</ul>
+<h4 id="berkeley-算法-内部同步">Berkeley 算法 内部同步</h4>
+<p>选择一个 leader 收集计算各个内部时钟的平均值，并按此调整</p>
+<h4 id="lamport-and-melliarsmith-算法-内部同步">Lamport and Melliar–Smith 算法 内部同步</h4>
+<p>可以应对 two-faced clock（2 个非错时钟向 two-faced 时钟读数结果不一致）问题。$c_k[i]$ 表示时钟 i 读取时钟 k 得到的值。</p>
+<ol>
+<li>读系统中每个时钟的值</li>
+<li>将离群值丢弃,用本地值代替： $|c_i[i]-c_j[i]|&gt;\delta \implies c_j[i]\gets c_i[i]$</li>
+<li>使用处理后的平均值覆盖本地时钟值</li>
+</ol>
+<p>对于 n 个时钟，只要 two-faced clock 数目 t 有 $n&gt;3t$ 就能保证同步。</p>
+<p>考虑 3 个时钟，i、j 好，k 为 two-faced clock。有如下配置</p>
+<ul>
+<li>$c_i[i]=c$</li>
+<li>$c_j[j]=c-\delta$</li>
+<li>$c_k[i]=c+\delta$</li>
+<li>$c_k[j]=c-2\delta$</li>
+</ul>
+<p>这时候 i、j 平均值差为 $\frac{3t\delta}{n}$。如果 $n&gt;3t$ 就有$\frac{3t\delta}{n}&lt;\delta$。同步间隔 $R\le(\delta -\frac{3t\delta}{n})/\rho$</p>
+<h4 id="cristian-算法-外部同步">Cristian 算法 外部同步</h4>
+<p>每个 client 向有精确时钟的 time server 定时通信来同步时钟： $R&lt;\frac{\delta}{2\rho}$。</p>
+<blockquote>
+<p>round-trip time</p>
+<p>每次同步通过发起 RPC，用来度量信号延迟：$RTT=T_2-T_1$</p>
+</blockquote>
+<p>每次时钟修正为 $T_s+\frac{RTT}{2}=T_s+\frac{T_2-T_1}{2}$。但实际网络波动，返回时间是一个区间，记最短用时 $min$，对应同步精度 $\pm(\frac{T_2-T_1}{2}-min)$</p>
+<h4 id="ntp-network-time-protocol-实现">NTP network time protocol 实现</h4>
+<p>按层级 stratum 组织各计算机，stratum 0 对应直连高精度时钟，stratum $i$ 作为 $i+1$ 的 time server，精度随着层级增加递减。</p>
+<ul>
+<li>组播：使用 UDP 协议定期发送</li>
+<li>RPC：使用 <a href="#cristian-%E7%AE%97%E6%B3%95-%E5%A4%96%E9%83%A8%E5%90%8C%E6%AD%A5">Cristian 算法</a></li>
+<li>P2P 通信：同层级的 time server 互相同步保持精度。设 Q 在 P 之前$\delta$，互相发报：$T_2=T_1+T_{PQ}+\delta,T_4=t_3+T_{QP}-\delta$，则有 $\delta=\frac{T_2-T_4-T_1+T_3}{2}-\frac{T_{PQ}-T_{QP}}{2},RTT=T_{PQ}+T_{QP}=T_2+T_4-T_1-T_3$， 这时候两个时钟误差$\delta$就可以控制在 $\frac{T_2-T_4-T_1+T_3}{2}\pm\frac{RTT}{2}$ 里面（注意到 $T_{PQ},T_{QP}&gt;0$，相减的值可以由 RTT 控制）</li>
+</ul>
+]]></content:encoded></item><item><title>遥远的时间有关的童话/寓言（？</title><link>https://livypad.github.io/post/2022-06-21-fairytalerabbit/</link><pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate><guid>https://livypad.github.io/post/2022-06-21-fairytalerabbit/</guid><description>遥远的时间有关的童话/寓言（？ 小时候看儿童向杂志看到一个略显黑暗（？）的童话/寓言（？。有个小兔子不喜欢上学，喜欢星期天放假。一个老兔子给了</description><content:encoded><![CDATA[<h1 id="遥远的时间有关的童话寓言">遥远的时间有关的童话/寓言（？</h1>
 <p>小时候看儿童向杂志看到一个略显黑暗（？）的童话/寓言（？。有个小兔子不喜欢上学，喜欢星期天放假。一个老兔子给了 ta 一筐胡萝卜，吃一根就能到星期天了。小兔子就天天吃那筐胡萝卜，天天过星期天。有一天胡萝卜吃完了，小兔子也老了。因为胡罗卜的机制是跳过星期一到六。</p>
 <p>记忆会自动分类记录不同的状态，日子过得就像那个小兔子。学习时会自动续接之前看到到的页码，做的题，而不会考虑之前的视频到哪一 p，知乎看到哪个问题。用记忆回顾关键点，真的会忽视中间其他领域用时。大学这种，以假期定界的生活。每年大休息状态：寒假和暑假；大工作状态：两个学期。4 年就只是 8 个学期。8 个萝卜就过去 4 年了。</p>
 ]]></content:encoded></item><item><title>FFmpeg转换音乐文件格式</title><link>https://livypad.github.io/post/2022-03-23-ffmpeg/</link><pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate><guid>https://livypad.github.io/post/2022-03-23-ffmpeg/</guid><description>FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命</description><content:encoded><![CDATA[<p><a href="https://ffmpeg.org/">FFmpeg</a>是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用<code>find</code>命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。</p>
