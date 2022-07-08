@@ -27,8 +27,14 @@ weight = 2
 [[menu.main]]
 name = "Archive"
 identifier = "archive"
-url = "/post/"
+url = "/archives/"
 weight = 3
+
+[[menu.main]]
+name = "Note"
+identifier = "note"
+url = "/tags/读书笔记/"
+weight = 4
 
 [taxonomies]
 category = "categories"
