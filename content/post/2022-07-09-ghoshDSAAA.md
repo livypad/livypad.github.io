@@ -1,5 +1,5 @@
 ---
-title: "笔记：Distributed Systems An Algorithmic Approach 2nd"
+title: "笔记：Distributed Systems An Algorithmic Approach 2nd（更新到第7章）"
 date: 2022-07-09T01:31:57+08:00
 draft: false
 tags: ["教程", "读书笔记"]
@@ -42,8 +42,25 @@ isCJKLanguage: true
             - [Lamport and Melliar–Smith 算法 内部同步](#lamport-and-melliarsmith-算法-内部同步)
             - [Cristian 算法 外部同步](#cristian-算法-外部同步)
             - [NTP network time protocol 实现](#ntp-network-time-protocol-实现)
+    - [ch 7 Mutual Exclusion](#ch-7-mutual-exclusion)
+        - [消息传递模型的方案](#消息传递模型的方案)
+            - [Lamport 方案](#lamport-方案)
+            - [Ricart–Agrawala 方案](#ricartagrawala-方案)
+            - [Maekawa 方案](#maekawa-方案)
+        - [token-passing 的方案](#token-passing-的方案)
+            - [Suzuki–Kasami 方案](#suzukikasami-方案)
+            - [Raymond 方案](#raymond-方案)
+        - [共享存储的方案](#共享存储的方案)
+            - [Peterson 方案 不使用原子指令](#peterson-方案-不使用原子指令)
+            - [test-and-set 原子指令](#test-and-set-原子指令)
+            - [load-linked 和 store-conditional 原子指令](#load-linked-和-store-conditional-原子指令)
+        - [组同步互斥](#组同步互斥)
+            - [中心化方案](#中心化方案)
+            - [去中心化方案](#去中心化方案)
 
 # Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach
+
+一本高屋建瓴讨论分布式里面重要问题的书。这篇笔记主要就是结合我的理解复述一下书里的我感觉比较重要内容的流水账。
 
 ## Ch 1 introduction
 
@@ -470,7 +487,11 @@ $a\ll b$ 成立条件
 
 #### Lamport and Melliar–Smith 算法 内部同步
 
-可以应对 two-faced clock（2 个非错时钟向 two-faced 时钟读数结果不一致）问题。$c_k[i]$ 表示时钟 i 读取时钟 k 得到的值。
+去中心化的算法。可以应对 two-faced clock 问题。$c_k[i]$ 表示时钟 i 读取时钟 k 得到的值。
+
+> two-faced clock
+>
+> 2 个非错时钟向 two-faced 时钟读数结果不一致
 
 1. 读系统中每个时钟的值
 2. 将离群值丢弃,用本地值代替： $|c_i[i]-c_j[i]|>\delta \implies c_j[i]\gets c_i[i]$
@@ -504,3 +525,265 @@ $a\ll b$ 成立条件
 - 组播：使用 UDP 协议定期发送
 - RPC：使用 [Cristian 算法](#cristian-算法-外部同步)
 - P2P 通信：同层级的 time server 互相同步保持精度。设 Q 在 P 之前$\delta$，互相发报：$T_2=T_1+T_{PQ}+\delta,T_4=t_3+T_{QP}-\delta$，则有 $\delta=\frac{T_2-T_4-T_1+T_3}{2}-\frac{T_{PQ}-T_{QP}}{2},RTT=T_{PQ}+T_{QP}=T_2+T_4-T_1-T_3$， 这时候两个时钟误差$\delta$就可以控制在 $\frac{T_2-T_4-T_1+T_3}{2}\pm\frac{RTT}{2}$ 里面（注意到 $T_{PQ},T_{QP}>0$，相减的值可以由 RTT 控制）
+
+## ch 7 Mutual Exclusion
+
+3 个基本要求
+
+1. 同步互斥 Mutual exclusion：至多一个进程在临界区，这是安全性性质
+2. 不死锁 Freedom from deadlock：至少一个进程可以运行和进入临界区，也是安全性性质
+3. 进展 Progress：每个尝试进入临界区的进程最终总能进入，这是活跃性性质
+
+> livelock/starvation
+>
+> 违反性质 3。进程一直被阻止进入临界区
+
+> FIFO fairness，FIFO 公平
+>
+> 进入临界区的顺序按照申请的顺序，类似 FIFO 队列。注意是申请的时间而不是申请到达 central coordinator（如果采用中心化的算法）的时间，所以一般世俗机构的办事先到先得不是 FIFO fairness
+
+### 消息传递模型的方案
+
+下面算法一般要求发送消息时间戳。注意到如果只考虑同步互斥问题，时间戳最大差 $(n-1)$，因此可以选择 $\mathrm{mod}(2n-1)$ 的时间戳，有效规避无界时钟问题（详见 [物理时钟章节](#物理时钟同步) ）。
+
+#### Lamport 方案
+
+- 全连接网络
+- 信道 FIFO，不丢信息
+- 每个进程维护一个队列 Q
+- 3 特性+FIFO 公平，一轮需要 $3(n-1)$ 次消息传递
+
+1. 期望进入临界区的进程广播带时间戳`request`
+2. 接受到`request`的进程
+   1. 不在临界区：回复 `ack`
+   2. 在临界区：直到退出临界区再回复`ack`
+3. 进入临界区条件：
+   1. 检查本地队列 Q 自己的请求最早
+   2. 其他进程都回复了`ack`
+4. 退出临界区时：
+   1. 删除本地队列 Q 中自己的请求
+   2. 广播带时间戳`release`
+5. 收到`release`后进程删除对应的请求
+
+#### Ricart–Agrawala 方案
+
+- 不需要维护本地队列
+- 只是更多的缓存请求.对时间戳晚于自己的请求，当时不在临界区时：
+  - Lamport 方案回复
+  - Ricart–Agrawala 方案缓存
+- 3 特性+FIFO 公平，一轮需要 $2(n-1)$ 次消息传递
+
+1. 期望进入临界区的进程广播带时间戳`request`
+2. 接受到`request`的进程回复 `ack` 条件，反之缓存请求
+   - 该进程不准备进入临界区
+   - 该进程期望进入的时间戳晚于对应的`request`
+3. 进入临界区条件其他进程都回复了`ack`
+4. 退出临界区执行其他操作前，对等待的请求回复`ack`
+
+#### Maekawa 方案
+
+每个进程 i 属于单独的通信组 $S_i$。组内互相监督满足临界区，只要组的覆盖足够好，就可以减少通信支出。大概为 $3\sqrt{n}=O(\sqrt{n})$
+
+1. $\forall i,j\in [0,n-1],S_i\cap S_j\neq \varnothing$：保证全局覆盖
+2. $i\in S_i$：自身也被监督
+3. 最好的，每个进程属于通信组的次数相同（有对称性）
+
+> global FIFO
+>
+> 每个进程严格按照发送时间戳接受消息：极难实现
+
+- global FIFO 成立时
+  1.  期望进入临界区的进程对 $S_i$ 广播带时间戳`request`
+  2.  对时间戳最早的请求回复`ack`，锁住，其他请求排在队列中；如果进程在临界区里，退出时再进行
+  3.  进入临界区条件：收到 $S_i$ 中每个进程的 `ack`
+  4.  退出临界区时对 $S_i$ 广播`release`
+  5.  接收到`release`后从队列剔除对应请求，解锁，重复`步骤2`
+- 没有 global FIFO，可能会因为循环等 `ack` 导致死锁，需要添加放弃机制
+  1. 期望进入临界区的进程对 $S_i$ 广播带时间戳`request`
+  2. 不在临界区时接受到请求：
+  3. 未锁：对时间戳最早的请求回复`ack`，锁定
+  4. 已锁，新请求的时间戳更晚：回复`failed`
+  5. 已锁，新请求的时间戳更早：排队请求，对之前锁定请求的发送方发`inquire`，可能会重排顺序
+  6. 进入临界区条件：收到 $S_i$ 中每个进程的 `ack`
+     - 如果收到 `inquire` 还接受到了`failed`，对 $S_i$ 广播 `relinquish` 放弃排期自己的请求
+     - 如果只收到 `inquire` 可以忽略
+  7. 退出临界区时对 $S_i$ 广播`release`
+  8. 接收到`release`后从队列剔除对应请求，解锁，重复`步骤2`
+  9. 已锁，接受到`relinquish`，重排队列，对时间戳最早的发`ack`
+
+### token-passing 的方案
+
+#### Suzuki–Kasami 方案
+
+全连接网络。初始有个进程拥有 token。期望进入临界区的进程 $i$ 广播带序列号的消息 $(i,num)$。拿到 token 即允许进入临界区。每个进程有本地队列 Q 和本地向量
+
+- $req[0,...,n-1]$ 记录对应进程最近请求序列号
+- $last[0,...,n-1]$ 记录对应进程进入临界区次数
+
+进程 $i$ 拿到 token 后
+
+1. $last[i]\gets num$
+2. 将满足 $1+last[k]=req[k]$ 的每个进程 k 加入本地队列 Q
+3. 执行临界区
+4. 取出 Q 第一项传递 token
+
+对应消息总数 $(n-1)+1$（发出 $n-1$，接收 1 条 token）
+
+#### Raymond 方案
+
+关系组织成树。每个进程有一个本地队列。一般的，树之间节点距离就是通信开销 $O(\log{n})$
+
+1. 节点拥有 token 时候为树的根，并可以进去临界区，反之将自己的请求加入自己本地队列
+2. 节点没有 token，本地队列非空时给父节点发送请求，除非已经发送并在等待
+3. 根节点结束临界区，收到请求时，给本地队列第一项的邻居传递 token，并改为指向该邻居，该邻居变成根节点
+4. 接受到 token 时候，向本地队列第一项的邻居继续传递，并删除对应的请求，改为指向该邻居，如果队列中还有请求，向新的父节点发送请求
+
+### 共享存储的方案
+
+一般依靠原子指令：
+
+- compare-and-swap (CAS)：比较预期值和内存变量，相等时候改为新传入的值，反之不修改，返回执行之后的内存变量值
+- fetch-and-add(FA)：原子加
+- semaphore 信号量：非负整数支持原子操作，可以对应资源个数
+  - $P(s)\triangleq\{waituntil\; s>0\implies s-=1\}$：申请资源，取得后可用资源-1
+  - $V(s)\triangleq\{s+=1\}$：释放资源，可用资源+1
+
+#### Peterson 方案 不使用原子指令
+
+2 个进程版本
+
+```
+program peterson;
+define flag[0], flag[1] shared Boolean;
+turn: shared integer
+initially flag[0] = false, flag[1] = false, turn = 0 or 1
+{program for process 0}
+do true→
+    flag[0] := true;
+    turn := 0;
+
+    do (flag[1] ∧ turn = 0) → skip od//不需要原子语句，turn要么0要么1，不会死锁；如果是flag引起进入临界区，process 1已经执行完临界区了；如果是turn引起，process 1 会等待：保证互斥
+
+    critical section;
+    flag[0] := false;
+    non-critical section codes
+od
+{program for process 1}
+do  true →
+    flag[1] := true;
+    turn := 1;
+
+    do (flag[0] ∧ turn = 1) → skip od;//不需要原子语句
+
+    critical section;
+    flag[1] := false;
+    non-critical section codes
+od
+```
+
+多进程拓展版本。跑 $n-1$ 轮，每轮留下一个（最后一个修改 $turn[j]$ 的），最后选出 1 个执行临界区。最高位执行完后，$flag$ 会置 0，剩下 flag 最高的会结束等待，然后按照 轮数递减执行临界区。
+
+```
+program Peterson n-process;
+define flag, turn: array [0.. n − 1] of shared integer;
+initially ∀k:flag[k] = 0, and turn = 0
+{program for process i}
+do true →
+    j:=1;
+    do j ≠ n − 1
+        flag[i] := j;
+        turn[j] := i;
+
+        do ((∃k ≠ i: flag[k] ≥ j) ∧ turn[j] = i) → skip od;// （1：选出的执行完后递减执行）∧（每轮修改turn的留下，flag不动）
+
+        j := j + 1;
+    od;
+
+    critical section;
+
+    flag[i] := 0;
+
+    non-critical section codes
+od
+```
+
+#### test-and-set 原子指令
+
+特殊的原子指令，取得某`bool`变量值，然后将其置 `True/1`
+
+```
+program Test-and-set (for any process);
+define
+    x: shared integer;
+    r: integer (private);
+initially
+    x = 0, r = 1;
+do true →
+
+    do r ≠ 0 → TS(r, x) od;
+
+    critical section;
+    x := 0
+od
+```
+
+#### load-linked 和 store-conditional 原子指令
+
+- load-linked $LL(r,x)$：类似普通 load 功能 $r\gets x$，还会对 x 插装
+- store-conditional $SC(r,x)$：类似 store $x\gets r$，如果 SC 是在其他进程的 LL 后执行后没修改，r 返回成功，反之 x 的值不改变，r 返回失败。LL 和 SC 配合类似 test-and-set
+
+```
+program mutex (for process i);
+define x: shared integer; r: integer (private);
+initially x = 0;
+do true →
+try:
+    do r ≠ 0 → LL(r, x) od; //critical section is busy
+    r = 1; SC(r, x);
+
+    if r = 0 → goto try fi;// SC did not succeed
+
+    critical section;
+    x := 0;
+    non-critical section codes;
+od
+```
+
+### 组同步互斥
+
+进程可以属于不同的独立的 forum，按 forum 为单位占有资源 in session。这是单独同步互斥、读写锁等经典问题的推广化。
+
+1. 同步互斥：同一时间最多 1 个 forum 在 in session
+2. 无死锁：任何时间最少一个进程可以有效行动
+3. 有界等待：有成员的 forum 在有界时间内能 in session
+4. 同步进入：只要 forum 在 in session，其他有意愿的进程都能加入
+
+#### 中心化方案
+
+- 每个进程拥有一个 $flag\in\{F_i,\perp\}$，中心协调器按顺序读取 flag 信息，安排进入 forum 和 in session
+- 为了防止一个 forum 一直有进入，指定一个 leader（一般是第一个进入的进程），当 leader 退出时 forum 结束 in session
+
+#### 去中心化方案
+
+每个进程拥有一个 $flag=(state,op),state\in \{request, in_cs, in_forum, passive\},op\in\{F,F',\perp\}$。类似于 [peterson 的 2 进程方案](#peterson-方案)。为了保证想要进入 forum 的都可以，而不是偶尔检查条件被 skip，可以选择第一个进入的为 leader，leader 保证申请的随后进入 forum
+
+```
+First attempt with two forums F and F′
+define  flag: array[1..n − 1] of (state, op), turn ∈ {F, F′}
+        state ∈ {request, in_cs, in_forum, passive}
+        op ∈ {F, F′, ⊥}
+{Program for process i trying to attend forum F}
+do ∃j ≠ i: flag[j] = (in_cs, F′) →
+
+    flag[i] := (request, F); //发送请求
+
+    do turn ≠ F ∧ ¬(∀j ≠ i: flag[j].op ≠ F′) → skip od; // (1 F'之前执行完)∧(2 没有要求进入F'的)
+
+    flag[i] := (in_cs, F);//准备进入 forum 的临界区
+od;
+
+attend forum F;
+
+turn := F′;
+flag[i] := (passive, ⊥)
+```
