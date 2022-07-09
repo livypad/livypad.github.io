@@ -408,7 +408,7 @@ od
 
 > well-founded set
 >
-> 对于 $WF=\{w_1,w_2,...\}$ ，上面有个全序关系$\gg$
+> 对于 $WF=\\{w_1,w_2,...\\}$ ，上面有个全序关系$\gg$
 >
 > 1. 不存在无穷比较链 $w_1\gg w_2 \gg ...$
 > 2. 系统状态从 $s_1$ 到 $s_2$ ，有 $w_1=f(s_1),w_2=f(s_2) \implies w_1 \gg w_2$
@@ -645,8 +645,8 @@ $a\ll b$ 成立条件
 - compare-and-swap (CAS)：比较预期值和内存变量，相等时候改为新传入的值，反之不修改，返回执行之后的内存变量值
 - fetch-and-add(FA)：原子加
 - semaphore 信号量：非负整数支持原子操作，可以对应资源个数
-  - $P(s)\triangleq\{waituntil\; s>0\implies s-=1\}$：申请资源，取得后可用资源-1
-  - $V(s)\triangleq\{s+=1\}$：释放资源，可用资源+1
+  - $P(s)\triangleq\\{waituntil\; s>0\implies s-=1\\}$：申请资源，取得后可用资源-1
+  - $V(s)\triangleq\\{s+=1\\}$：释放资源，可用资源+1
 
 #### Peterson 方案 不使用原子指令
 
@@ -760,12 +760,12 @@ od
 
 #### 中心化方案
 
-- 每个进程拥有一个 $flag\in\{F_i,\perp\}$，中心协调器按顺序读取 flag 信息，安排进入 forum 和 in session
+- 每个进程拥有一个 $flag\in\\{F_i,\perp\\}$，中心协调器按顺序读取 flag 信息，安排进入 forum 和 in session
 - 为了防止一个 forum 一直有进入，指定一个 leader（一般是第一个进入的进程），当 leader 退出时 forum 结束 in session
 
 #### 去中心化方案
 
-每个进程拥有一个 $flag=(state,op),state\in \{request, in_cs, in_forum, passive\},op\in\{F,F',\perp\}$。类似于 [peterson 的 2 进程方案](#peterson-方案)。为了保证想要进入 forum 的都可以，而不是偶尔检查条件被 skip，可以选择第一个进入的为 leader，leader 保证申请的随后进入 forum
+每个进程拥有一个 $flag=(state,op),state\in \\{request, in\\_cs, in\\_forum, passive\\},op\in\\{F,F',\perp\\}$。类似于 [peterson 的 2 进程方案](#peterson-方案)。为了保证想要进入 forum 的都可以，而不是偶尔检查条件被 skip，可以选择第一个进入的为 leader，leader 保证申请的随后进入 forum
 
 ```
 First attempt with two forums F and F′
