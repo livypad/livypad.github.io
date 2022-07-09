@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>zhh's blog</title><link>https://livypad.github.io/</link><description>Recent content on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Sat, 09 Jul 2022 01:31:57 +0800</lastBuildDate><atom:link href="https://livypad.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Distributed Systems An Algorithmic Approach 2nd</title><link>https://livypad.github.io/post/2022-07-09-ghoshdsaaa/</link><pubDate>Sat, 09 Jul 2022 01:31:57 +0800</pubDate><guid>https://livypad.github.io/post/2022-07-09-ghoshdsaaa/</guid><description>Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach Ch 1 introduction Ch 2 interprocess communication naming rpc remote procedure call cloud computing MapReduce ch 3 Models for Communication shared variable 共享变量 linda mobile agent 模型强弱 resequencing protocol, 非 FIFO 模拟 FIFO 共享变量模拟信息传递 信息传递模拟共享变量 信</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>zhh's blog</title><link>https://livypad.github.io/</link><description>Recent content on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Sat, 09 Jul 2022 01:31:57 +0800</lastBuildDate><atom:link href="https://livypad.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Distributed Systems An Algorithmic Approach 2nd（更新到第7章）</title><link>https://livypad.github.io/post/2022-07-09-ghoshdsaaa/</link><pubDate>Sat, 09 Jul 2022 01:31:57 +0800</pubDate><guid>https://livypad.github.io/post/2022-07-09-ghoshdsaaa/</guid><description>Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach Ch 1 introduction Ch 2 interprocess communication naming rpc remote procedure call cloud computing MapReduce ch 3 Models for Communication shared variable 共享变量 linda mobile agent 模型强弱 resequencing protocol, 非 FIFO 模拟 FIFO 共享变量模拟信息传递 信息传递模拟共享变量 信</description><content:encoded><![CDATA[<ul>
 <li><a href="#ghosh-sukumar-2014---distributed-systems-an-algorithmic-approach">Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach</a>
 <ul>
 <li><a href="#ch-1-introduction">Ch 1 introduction</a></li>
@@ -66,10 +66,41 @@
 </li>
 </ul>
 </li>
+<li><a href="#ch-7-mutual-exclusion">ch 7 Mutual Exclusion</a>
+<ul>
+<li><a href="#%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%96%B9%E6%A1%88">消息传递模型的方案</a>
+<ul>
+<li><a href="#lamport-%E6%96%B9%E6%A1%88">Lamport 方案</a></li>
+<li><a href="#ricartagrawala-%E6%96%B9%E6%A1%88">Ricart–Agrawala 方案</a></li>
+<li><a href="#maekawa-%E6%96%B9%E6%A1%88">Maekawa 方案</a></li>
+</ul>
+</li>
+<li><a href="#token-passing-%E7%9A%84%E6%96%B9%E6%A1%88">token-passing 的方案</a>
+<ul>
+<li><a href="#suzukikasami-%E6%96%B9%E6%A1%88">Suzuki–Kasami 方案</a></li>
+<li><a href="#raymond-%E6%96%B9%E6%A1%88">Raymond 方案</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%E7%9A%84%E6%96%B9%E6%A1%88">共享存储的方案</a>
+<ul>
+<li><a href="#peterson-%E6%96%B9%E6%A1%88-%E4%B8%8D%E4%BD%BF%E7%94%A8%E5%8E%9F%E5%AD%90%E6%8C%87%E4%BB%A4">Peterson 方案 不使用原子指令</a></li>
+<li><a href="#test-and-set-%E5%8E%9F%E5%AD%90%E6%8C%87%E4%BB%A4">test-and-set 原子指令</a></li>
+<li><a href="#load-linked-%E5%92%8C-store-conditional-%E5%8E%9F%E5%AD%90%E6%8C%87%E4%BB%A4">load-linked 和 store-conditional 原子指令</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%84%E5%90%8C%E6%AD%A5%E4%BA%92%E6%96%A5">组同步互斥</a>
+<ul>
+<li><a href="#%E4%B8%AD%E5%BF%83%E5%8C%96%E6%96%B9%E6%A1%88">中心化方案</a></li>
+<li><a href="#%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E6%96%B9%E6%A1%88">去中心化方案</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <h1 id="ghosh-sukumar-2014---distributed-systems-an-algorithmic-approach">Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach</h1>
+<p>一本高屋建瓴讨论分布式里面重要问题的书。这篇笔记主要就是结合我的理解复述一下书里的我感觉比较重要内容的流水账。</p>
 <h2 id="ch-1-introduction">Ch 1 introduction</h2>
 <p>特征</p>
 <ol>
@@ -649,7 +680,11 @@
 <h4 id="berkeley-算法-内部同步">Berkeley 算法 内部同步</h4>
 <p>选择一个 leader 收集计算各个内部时钟的平均值，并按此调整</p>
 <h4 id="lamport-and-melliarsmith-算法-内部同步">Lamport and Melliar–Smith 算法 内部同步</h4>
-<p>可以应对 two-faced clock（2 个非错时钟向 two-faced 时钟读数结果不一致）问题。$c_k[i]$ 表示时钟 i 读取时钟 k 得到的值。</p>
+<p>去中心化的算法。可以应对 two-faced clock 问题。$c_k[i]$ 表示时钟 i 读取时钟 k 得到的值。</p>
+<blockquote>
+<p>two-faced clock</p>
+<p>2 个非错时钟向 two-faced 时钟读数结果不一致</p>
+</blockquote>
 <ol>
 <li>读系统中每个时钟的值</li>
 <li>将离群值丢弃,用本地值代替： $|c_i[i]-c_j[i]|&gt;\delta \implies c_j[i]\gets c_i[i]$</li>
@@ -678,7 +713,267 @@
 <li>RPC：使用 <a href="#cristian-%E7%AE%97%E6%B3%95-%E5%A4%96%E9%83%A8%E5%90%8C%E6%AD%A5">Cristian 算法</a></li>
 <li>P2P 通信：同层级的 time server 互相同步保持精度。设 Q 在 P 之前$\delta$，互相发报：$T_2=T_1+T_{PQ}+\delta,T_4=t_3+T_{QP}-\delta$，则有 $\delta=\frac{T_2-T_4-T_1+T_3}{2}-\frac{T_{PQ}-T_{QP}}{2},RTT=T_{PQ}+T_{QP}=T_2+T_4-T_1-T_3$， 这时候两个时钟误差$\delta$就可以控制在 $\frac{T_2-T_4-T_1+T_3}{2}\pm\frac{RTT}{2}$ 里面（注意到 $T_{PQ},T_{QP}&gt;0$，相减的值可以由 RTT 控制）</li>
 </ul>
-]]></content:encoded></item><item><title>遥远的时间有关的童话/寓言（？</title><link>https://livypad.github.io/post/2022-06-21-fairytalerabbit/</link><pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate><guid>https://livypad.github.io/post/2022-06-21-fairytalerabbit/</guid><description>遥远的时间有关的童话/寓言（？ 小时候看儿童向杂志看到一个略显黑暗（？）的童话/寓言（？。有个小兔子不喜欢上学，喜欢星期天放假。一个老兔子给了</description><content:encoded><![CDATA[<h1 id="遥远的时间有关的童话寓言">遥远的时间有关的童话/寓言（？</h1>
+<h2 id="ch-7-mutual-exclusion">ch 7 Mutual Exclusion</h2>
+<p>3 个基本要求</p>
+<ol>
+<li>同步互斥 Mutual exclusion：至多一个进程在临界区，这是安全性性质</li>
+<li>不死锁 Freedom from deadlock：至少一个进程可以运行和进入临界区，也是安全性性质</li>
+<li>进展 Progress：每个尝试进入临界区的进程最终总能进入，这是活跃性性质</li>
+</ol>
+<blockquote>
+<p>livelock/starvation</p>
+<p>违反性质 3。进程一直被阻止进入临界区</p>
+</blockquote>
+<blockquote>
+<p>FIFO fairness，FIFO 公平</p>
+<p>进入临界区的顺序按照申请的顺序，类似 FIFO 队列。注意是申请的时间而不是申请到达 central coordinator（如果采用中心化的算法）的时间，所以一般世俗机构的办事先到先得不是 FIFO fairness</p>
+</blockquote>
+<h3 id="消息传递模型的方案">消息传递模型的方案</h3>
+<p>下面算法一般要求发送消息时间戳。注意到如果只考虑同步互斥问题，时间戳最大差 $(n-1)$，因此可以选择 $\mathrm{mod}(2n-1)$ 的时间戳，有效规避无界时钟问题（详见 <a href="#%E7%89%A9%E7%90%86%E6%97%B6%E9%92%9F%E5%90%8C%E6%AD%A5">物理时钟章节</a> ）。</p>
+<h4 id="lamport-方案">Lamport 方案</h4>
+<ul>
+<li>全连接网络</li>
+<li>信道 FIFO，不丢信息</li>
+<li>每个进程维护一个队列 Q</li>
+<li>3 特性+FIFO 公平，一轮需要 $3(n-1)$ 次消息传递</li>
+</ul>
+<ol>
+<li>期望进入临界区的进程广播带时间戳<code>request</code></li>
+<li>接受到<code>request</code>的进程
+<ol>
+<li>不在临界区：回复 <code>ack</code></li>
+<li>在临界区：直到退出临界区再回复<code>ack</code></li>
+</ol>
+</li>
+<li>进入临界区条件：
+<ol>
+<li>检查本地队列 Q 自己的请求最早</li>
+<li>其他进程都回复了<code>ack</code></li>
+</ol>
+</li>
+<li>退出临界区时：
+<ol>
+<li>删除本地队列 Q 中自己的请求</li>
+<li>广播带时间戳<code>release</code></li>
+</ol>
+</li>
+<li>收到<code>release</code>后进程删除对应的请求</li>
+</ol>
+<h4 id="ricartagrawala-方案">Ricart–Agrawala 方案</h4>
+<ul>
+<li>不需要维护本地队列</li>
+<li>只是更多的缓存请求.对时间戳晚于自己的请求，当时不在临界区时：
+<ul>
+<li>Lamport 方案回复</li>
+<li>Ricart–Agrawala 方案缓存</li>
+</ul>
+</li>
+<li>3 特性+FIFO 公平，一轮需要 $2(n-1)$ 次消息传递</li>
+</ul>
+<ol>
+<li>期望进入临界区的进程广播带时间戳<code>request</code></li>
+<li>接受到<code>request</code>的进程回复 <code>ack</code> 条件，反之缓存请求
+<ul>
+<li>该进程不准备进入临界区</li>
+<li>该进程期望进入的时间戳晚于对应的<code>request</code></li>
+</ul>
+</li>
+<li>进入临界区条件其他进程都回复了<code>ack</code></li>
+<li>退出临界区执行其他操作前，对等待的请求回复<code>ack</code></li>
+</ol>
+<h4 id="maekawa-方案">Maekawa 方案</h4>
+<p>每个进程 i 属于单独的通信组 $S_i$。组内互相监督满足临界区，只要组的覆盖足够好，就可以减少通信支出。大概为 $3\sqrt{n}=O(\sqrt{n})$</p>
+<ol>
+<li>$\forall i,j\in [0,n-1],S_i\cap S_j\neq \varnothing$：保证全局覆盖</li>
+<li>$i\in S_i$：自身也被监督</li>
+<li>最好的，每个进程属于通信组的次数相同（有对称性）</li>
+</ol>
+<blockquote>
+<p>global FIFO</p>
+<p>每个进程严格按照发送时间戳接受消息：极难实现</p>
+</blockquote>
+<ul>
+<li>global FIFO 成立时
+<ol>
+<li>期望进入临界区的进程对 $S_i$ 广播带时间戳<code>request</code></li>
+<li>对时间戳最早的请求回复<code>ack</code>，锁住，其他请求排在队列中；如果进程在临界区里，退出时再进行</li>
+<li>进入临界区条件：收到 $S_i$ 中每个进程的 <code>ack</code></li>
+<li>退出临界区时对 $S_i$ 广播<code>release</code></li>
+<li>接收到<code>release</code>后从队列剔除对应请求，解锁，重复<code>步骤2</code></li>
+</ol>
+</li>
+<li>没有 global FIFO，可能会因为循环等 <code>ack</code> 导致死锁，需要添加放弃机制
+<ol>
+<li>期望进入临界区的进程对 $S_i$ 广播带时间戳<code>request</code></li>
+<li>不在临界区时接受到请求：</li>
+<li>未锁：对时间戳最早的请求回复<code>ack</code>，锁定</li>
+<li>已锁，新请求的时间戳更晚：回复<code>failed</code></li>
+<li>已锁，新请求的时间戳更早：排队请求，对之前锁定请求的发送方发<code>inquire</code>，可能会重排顺序</li>
+<li>进入临界区条件：收到 $S_i$ 中每个进程的 <code>ack</code>
+<ul>
+<li>如果收到 <code>inquire</code> 还接受到了<code>failed</code>，对 $S_i$ 广播 <code>relinquish</code> 放弃排期自己的请求</li>
+<li>如果只收到 <code>inquire</code> 可以忽略</li>
+</ul>
+</li>
+<li>退出临界区时对 $S_i$ 广播<code>release</code></li>
+<li>接收到<code>release</code>后从队列剔除对应请求，解锁，重复<code>步骤2</code></li>
+<li>已锁，接受到<code>relinquish</code>，重排队列，对时间戳最早的发<code>ack</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="token-passing-的方案">token-passing 的方案</h3>
+<h4 id="suzukikasami-方案">Suzuki–Kasami 方案</h4>
+<p>全连接网络。初始有个进程拥有 token。期望进入临界区的进程 $i$ 广播带序列号的消息 $(i,num)$。拿到 token 即允许进入临界区。每个进程有本地队列 Q 和本地向量</p>
+<ul>
+<li>$req[0,&hellip;,n-1]$ 记录对应进程最近请求序列号</li>
+<li>$last[0,&hellip;,n-1]$ 记录对应进程进入临界区次数</li>
+</ul>
+<p>进程 $i$ 拿到 token 后</p>
+<ol>
+<li>$last[i]\gets num$</li>
+<li>将满足 $1+last[k]=req[k]$ 的每个进程 k 加入本地队列 Q</li>
+<li>执行临界区</li>
+<li>取出 Q 第一项传递 token</li>
+</ol>
+<p>对应消息总数 $(n-1)+1$（发出 $n-1$，接收 1 条 token）</p>
+<h4 id="raymond-方案">Raymond 方案</h4>
+<p>关系组织成树。每个进程有一个本地队列。一般的，树之间节点距离就是通信开销 $O(\log{n})$</p>
+<ol>
+<li>节点拥有 token 时候为树的根，并可以进去临界区，反之将自己的请求加入自己本地队列</li>
+<li>节点没有 token，本地队列非空时给父节点发送请求，除非已经发送并在等待</li>
+<li>根节点结束临界区，收到请求时，给本地队列第一项的邻居传递 token，并改为指向该邻居，该邻居变成根节点</li>
+<li>接受到 token 时候，向本地队列第一项的邻居继续传递，并删除对应的请求，改为指向该邻居，如果队列中还有请求，向新的父节点发送请求</li>
+</ol>
+<h3 id="共享存储的方案">共享存储的方案</h3>
+<p>一般依靠原子指令：</p>
+<ul>
+<li>compare-and-swap (CAS)：比较预期值和内存变量，相等时候改为新传入的值，反之不修改，返回执行之后的内存变量值</li>
+<li>fetch-and-add(FA)：原子加</li>
+<li>semaphore 信号量：非负整数支持原子操作，可以对应资源个数
+<ul>
+<li>$P(s)\triangleq{waituntil; s&gt;0\implies s-=1}$：申请资源，取得后可用资源-1</li>
+<li>$V(s)\triangleq{s+=1}$：释放资源，可用资源+1</li>
+</ul>
+</li>
+</ul>
+<h4 id="peterson-方案-不使用原子指令">Peterson 方案 不使用原子指令</h4>
+<p>2 个进程版本</p>
+<pre tabindex="0"><code>program peterson;
+define flag[0], flag[1] shared Boolean;
+turn: shared integer
+initially flag[0] = false, flag[1] = false, turn = 0 or 1
+{program for process 0}
+do true→
+    flag[0] := true;
+    turn := 0;
+
+    do (flag[1] ∧ turn = 0) → skip od//不需要原子语句，turn要么0要么1，不会死锁；如果是flag引起进入临界区，process 1已经执行完临界区了；如果是turn引起，process 1 会等待：保证互斥
+
+    critical section;
+    flag[0] := false;
+    non-critical section codes
+od
+{program for process 1}
+do  true →
+    flag[1] := true;
+    turn := 1;
+
+    do (flag[0] ∧ turn = 1) → skip od;//不需要原子语句
+
+    critical section;
+    flag[1] := false;
+    non-critical section codes
+od
+</code></pre><p>多进程拓展版本。跑 $n-1$ 轮，每轮留下一个（最后一个修改 $turn[j]$ 的），最后选出 1 个执行临界区。最高位执行完后，$flag$ 会置 0，剩下 flag 最高的会结束等待，然后按照 轮数递减执行临界区。</p>
+<pre tabindex="0"><code>program Peterson n-process;
+define flag, turn: array [0.. n − 1] of shared integer;
+initially ∀k:flag[k] = 0, and turn = 0
+{program for process i}
+do true →
+    j:=1;
+    do j ≠ n − 1
+        flag[i] := j;
+        turn[j] := i;
+
+        do ((∃k ≠ i: flag[k] ≥ j) ∧ turn[j] = i) → skip od;// （1：选出的执行完后递减执行）∧（每轮修改turn的留下，flag不动）
+
+        j := j + 1;
+    od;
+
+    critical section;
+
+    flag[i] := 0;
+
+    non-critical section codes
+od
+</code></pre><h4 id="test-and-set-原子指令">test-and-set 原子指令</h4>
+<p>特殊的原子指令，取得某<code>bool</code>变量值，然后将其置 <code>True/1</code></p>
+<pre tabindex="0"><code>program Test-and-set (for any process);
+define
+    x: shared integer;
+    r: integer (private);
+initially
+    x = 0, r = 1;
+do true →
+
+    do r ≠ 0 → TS(r, x) od;
+
+    critical section;
+    x := 0
+od
+</code></pre><h4 id="load-linked-和-store-conditional-原子指令">load-linked 和 store-conditional 原子指令</h4>
+<ul>
+<li>load-linked $LL(r,x)$：类似普通 load 功能 $r\gets x$，还会对 x 插装</li>
+<li>store-conditional $SC(r,x)$：类似 store $x\gets r$，如果 SC 是在其他进程的 LL 后执行后没修改，r 返回成功，反之 x 的值不改变，r 返回失败。LL 和 SC 配合类似 test-and-set</li>
+</ul>
+<pre tabindex="0"><code>program mutex (for process i);
+define x: shared integer; r: integer (private);
+initially x = 0;
+do true →
+try:
+    do r ≠ 0 → LL(r, x) od; //critical section is busy
+    r = 1; SC(r, x);
+
+    if r = 0 → goto try fi;// SC did not succeed
+
+    critical section;
+    x := 0;
+    non-critical section codes;
+od
+</code></pre><h3 id="组同步互斥">组同步互斥</h3>
+<p>进程可以属于不同的独立的 forum，按 forum 为单位占有资源 in session。这是单独同步互斥、读写锁等经典问题的推广化。</p>
+<ol>
+<li>同步互斥：同一时间最多 1 个 forum 在 in session</li>
+<li>无死锁：任何时间最少一个进程可以有效行动</li>
+<li>有界等待：有成员的 forum 在有界时间内能 in session</li>
+<li>同步进入：只要 forum 在 in session，其他有意愿的进程都能加入</li>
+</ol>
+<h4 id="中心化方案">中心化方案</h4>
+<ul>
+<li>每个进程拥有一个 $flag\in{F_i,\perp}$，中心协调器按顺序读取 flag 信息，安排进入 forum 和 in session</li>
+<li>为了防止一个 forum 一直有进入，指定一个 leader（一般是第一个进入的进程），当 leader 退出时 forum 结束 in session</li>
+</ul>
+<h4 id="去中心化方案">去中心化方案</h4>
+<p>每个进程拥有一个 $flag=(state,op),state\in {request, in_cs, in_forum, passive},op\in{F,F&rsquo;,\perp}$。类似于 <a href="#peterson-%E6%96%B9%E6%A1%88">peterson 的 2 进程方案</a>。为了保证想要进入 forum 的都可以，而不是偶尔检查条件被 skip，可以选择第一个进入的为 leader，leader 保证申请的随后进入 forum</p>
+<pre tabindex="0"><code>First attempt with two forums F and F′
+define  flag: array[1..n − 1] of (state, op), turn ∈ {F, F′}
+        state ∈ {request, in_cs, in_forum, passive}
+        op ∈ {F, F′, ⊥}
+{Program for process i trying to attend forum F}
+do ∃j ≠ i: flag[j] = (in_cs, F′) →
+
+    flag[i] := (request, F); //发送请求
+
+    do turn ≠ F ∧ ¬(∀j ≠ i: flag[j].op ≠ F′) → skip od; // (1 F&#39;之前执行完)∧(2 没有要求进入F&#39;的)
+
+    flag[i] := (in_cs, F);//准备进入 forum 的临界区
+od;
+
+attend forum F;
+
+turn := F′;
+flag[i] := (passive, ⊥)
+</code></pre>]]></content:encoded></item><item><title>遥远的时间有关的童话/寓言（？</title><link>https://livypad.github.io/post/2022-06-21-fairytalerabbit/</link><pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate><guid>https://livypad.github.io/post/2022-06-21-fairytalerabbit/</guid><description>遥远的时间有关的童话/寓言（？ 小时候看儿童向杂志看到一个略显黑暗（？）的童话/寓言（？。有个小兔子不喜欢上学，喜欢星期天放假。一个老兔子给了</description><content:encoded><![CDATA[<h1 id="遥远的时间有关的童话寓言">遥远的时间有关的童话/寓言（？</h1>
 <p>小时候看儿童向杂志看到一个略显黑暗（？）的童话/寓言（？。有个小兔子不喜欢上学，喜欢星期天放假。一个老兔子给了 ta 一筐胡萝卜，吃一根就能到星期天了。小兔子就天天吃那筐胡萝卜，天天过星期天。有一天胡萝卜吃完了，小兔子也老了。因为胡罗卜的机制是跳过星期一到六。</p>
 <p>记忆会自动分类记录不同的状态，日子过得就像那个小兔子。学习时会自动续接之前看到到的页码，做的题，而不会考虑之前的视频到哪一 p，知乎看到哪个问题。用记忆回顾关键点，真的会忽视中间其他领域用时。大学这种，以假期定界的生活。每年大休息状态：寒假和暑假；大工作状态：两个学期。4 年就只是 8 个学期。8 个萝卜就过去 4 年了。</p>
 ]]></content:encoded></item><item><title>FFmpeg转换音乐文件格式</title><link>https://livypad.github.io/post/2022-03-23-ffmpeg/</link><pubDate>Wed, 23 Mar 2022 00:00:00 +0000</pubDate><guid>https://livypad.github.io/post/2022-03-23-ffmpeg/</guid><description>FFmpeg是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用find命</description><content:encoded><![CDATA[<p><a href="https://ffmpeg.org/">FFmpeg</a>是一个开源强大的音视频库。这里用 FFmpeg“大炮打蚊子”，用来当格式工厂用，转音乐文件格式。下面是*Unix 环境下用<code>find</code>命令搭配 FFmpeg，将当前工作路径下的所用*.flac 转化为*.mp3 格式。</p>
