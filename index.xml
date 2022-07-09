@@ -609,7 +609,7 @@
 <p>用于证明活跃性。一个映射（测量函数/变化函数 measured/variant function）从系统全局状态到一个 well-founed set $f:S\to WF$</p>
 <blockquote>
 <p>well-founded set</p>
-<p>对于 $WF={w_1,w_2,&hellip;}$ ，上面有个全序关系$\gg$</p>
+<p>对于 $WF=\{w_1,w_2,&hellip;\}$ ，上面有个全序关系$\gg$</p>
 <ol>
 <li>不存在无穷比较链 $w_1\gg w_2 \gg &hellip;$</li>
 <li>系统状态从 $s_1$ 到 $s_2$ ，有 $w_1=f(s_1),w_2=f(s_2) \implies w_1 \gg w_2$</li>
@@ -851,8 +851,8 @@
 <li>fetch-and-add(FA)：原子加</li>
 <li>semaphore 信号量：非负整数支持原子操作，可以对应资源个数
 <ul>
-<li>$P(s)\triangleq{waituntil; s&gt;0\implies s-=1}$：申请资源，取得后可用资源-1</li>
-<li>$V(s)\triangleq{s+=1}$：释放资源，可用资源+1</li>
+<li>$P(s)\triangleq\{waituntil; s&gt;0\implies s-=1\}$：申请资源，取得后可用资源-1</li>
+<li>$V(s)\triangleq\{s+=1\}$：释放资源，可用资源+1</li>
 </ul>
 </li>
 </ul>
@@ -950,11 +950,11 @@ od
 </ol>
 <h4 id="中心化方案">中心化方案</h4>
 <ul>
-<li>每个进程拥有一个 $flag\in{F_i,\perp}$，中心协调器按顺序读取 flag 信息，安排进入 forum 和 in session</li>
+<li>每个进程拥有一个 $flag\in\{F_i,\perp\}$，中心协调器按顺序读取 flag 信息，安排进入 forum 和 in session</li>
 <li>为了防止一个 forum 一直有进入，指定一个 leader（一般是第一个进入的进程），当 leader 退出时 forum 结束 in session</li>
 </ul>
 <h4 id="去中心化方案">去中心化方案</h4>
-<p>每个进程拥有一个 $flag=(state,op),state\in {request, in_cs, in_forum, passive},op\in{F,F&rsquo;,\perp}$。类似于 <a href="#peterson-%E6%96%B9%E6%A1%88">peterson 的 2 进程方案</a>。为了保证想要进入 forum 的都可以，而不是偶尔检查条件被 skip，可以选择第一个进入的为 leader，leader 保证申请的随后进入 forum</p>
+<p>每个进程拥有一个 $flag=(state,op),state\in \{request, in\_cs, in\_forum, passive\},op\in\{F,F&rsquo;,\perp\}$。类似于 <a href="#peterson-%E6%96%B9%E6%A1%88">peterson 的 2 进程方案</a>。为了保证想要进入 forum 的都可以，而不是偶尔检查条件被 skip，可以选择第一个进入的为 leader，leader 保证申请的随后进入 forum</p>
 <pre tabindex="0"><code>First attempt with two forums F and F′
 define  flag: array[1..n − 1] of (state, op), turn ∈ {F, F′}
         state ∈ {request, in_cs, in_forum, passive}
