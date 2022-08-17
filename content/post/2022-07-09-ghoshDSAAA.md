@@ -57,6 +57,14 @@ isCJKLanguage: true
         - [组同步互斥](#组同步互斥)
             - [中心化方案](#中心化方案)
             - [去中心化方案](#去中心化方案)
+    - [ch 8 Distributed Snapshot](#ch-8-distributed-snapshot)
+        - [Chandy-Lamport 算法](#chandy-lamport-算法)
+        - [Lai-Yang 算法](#lai-yang-算法)
+        - [分布式 debug](#分布式-debug)
+    - [ch 9 Global State Collection](#ch-9-global-state-collection)
+    - [ch 11 Coordination Algorithms](#ch-11-coordination-algorithms)
+    - [ch 12 Fault-Tolerant Systems](#ch-12-fault-tolerant-systems)
+    - [ch 13 Distributed Consensus](#ch-13-distributed-consensus)
 
 # Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach
 
@@ -787,3 +795,65 @@ attend forum F;
 turn := F′;
 flag[i] := (passive, ⊥)
 ```
+
+## ch 8 Distributed Snapshot
+
+记录分布式系统的单个分布组分的状态信息，收集分散的状态信息在下一章 [global state collection](#ch-9-global-state-collection) 介绍。非常有用：死锁检测、程序终止检测、系统回滚等。
+
+> cut 切分
+>
+> 一组事件，而且每个进程至少有一个事件
+
+> consistent cut
+>
+> cut，而且对于里面的事件，其因的事件也在 cut 当中： $(a\in C)\wedge(b\prec a)\implies b\in C$
+
+> consistent
+>
+> 对于一次运行（computation，run，behavior），$\forall a,b, a\prec b$，a 发生在 b 前，就称为 consistent 的，保证 consistent 下可以有多种可能的实际事件顺序，如，交换并行的两个事件执行顺序不会影响运行的 consistent 特性
+
+### Chandy-Lamport 算法
+
+强连通图，信道 FIFO，有一个启动进程 initiator，发生一个 \* 标志消息启动记录，每个进程有两种状态，`white`和`red`，初始为`white`
+
+1. 启动进程原子执行
+   1. 变`red`
+   2. 记录本地状态
+   3. 向所有对外信道广播\*标志
+2. 所有进程在**第一次**接受到\*标志后，先做以下原子操作再执行其他任务
+   1. 变`red`
+   2. 记录本地状态：发送事件和接收事件分别由发送进程和接收进程记录
+   3. 向所有对外信道广播\*标志
+
+算法记录最后一次白色+第一次红色事件。由于**白色事件不可能引发红色消息**，实际记录下来的事件顺序必然保持因果关系。
+
+- 算法记录下来的 snapshot state 都是由初始状态可达的，但不保证每次运行都能跑出这个状态
+- 每个对于初始状态可达的最终状态，对算法记录下的 snapshot state 也是可达的：这保证了回滚的正确性
+
+### Lai-Yang 算法
+
+对 Chandy-Lamport 的改进，信道不需要 FIFO，消息也附加两种状态，`white`和`red`。是一种懒记录方法，主要期待借用已有的各种消息传递。对于程序终止检测（终止后不会再收发任务消息）等需要额外发控制消息。
+
+1. 启动进程记录本地状态，任何外发消息为$(msg,red)$
+2. 任何进程第一次接受到$(msg,red)$时，先记录本地状态，再处理接收信息
+
+### 分布式 debug
+
+> 本地状态 $s(i),s(j)$ 对应 consistent 的全局状态
+>
+> 如果本地状态 $s(i),s(j)$ 是由事件 $e_i,e_j$ 引发，那么逻辑时钟关系 $\forall k,VC_k(e_i)\sim VC_k(e_j)$
+
+对由初始状态可达的 consistent 的全局状态应用判断 $\phi$。这样的判断时间复杂度巨大，需要注意可拓展性：n个进程每个m个可能行动 $O(m^n)$
+
+
+- Possibly $\phi$：至少一个为真
+- Definetly $\phi$：永真 $definetly\;\phi \implies possibly\; \phi$
+- Never $\phi$：永假
+
+## ch 9 Global State Collection
+
+## ch 11 Coordination Algorithms
+
+## ch 12 Fault-Tolerant Systems
+
+## ch 13 Distributed Consensus
