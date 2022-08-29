@@ -60,8 +60,8 @@
 {{- end }}
 
 {{- /* Favicons */}}
-<link rel="icon" href="{{ site.Params.favicon | default "favicon.ico" | absURL }}">
-<link rel="apple-touch-icon" href="{{ site.Params.appleTouchIcon | default "apple-touch-icon.png" | absURL }}">
+<link rel="icon" href="{{ site.Params.favicon | default "/assets/icon/favicon.ico" | absURL }}">
+<link rel="apple-touch-icon" href="{{ site.Params.appleTouchIcon | default "/assets//icon/apple-touch-icon.png" | absURL }}">
 
 {{- /* RSS */}}
 {{ range .AlternativeOutputFormats -}}
