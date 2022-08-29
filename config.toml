@@ -72,7 +72,7 @@ Title = "Welcome to zhh's blog"
     url = "https://github.com/livypad"
     [[params.socialIcons]]
     name = "email"
-    url="ishonghua.zhu@outlook.com"
+    url="mailto:ishonghua.zhu@outlook.com"
 [params.assets]
     disableHLJS = true
 [markup]
