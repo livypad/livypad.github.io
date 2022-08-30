@@ -1500,7 +1500,7 @@
 <h4 id="csmaca-collision-avoidance">CSMA/CA collision avoidance</h4>
 <blockquote>
 <p>binary exponential backoff</p>
-<p>二进制指数后退。在$i$次碰撞后，在[[ch4 介质访问控制子层#p-persistent|p-persistent CSMA]]基础上改为等待$0\sim2^i-1$个时间槽</p>
+<p>二进制指数后退。在$i$次碰撞后，在<a href="#p-persistent">p-persistent CSMA</a>基础上改为等待$0\sim2^i-1$个时间槽</p>
 </blockquote>
 <p>实际中，有时间槽次数上限和碰撞次数上限</p>
 <p>竞争时间间隔为$j$的概率</p>
@@ -1514,7 +1514,7 @@
 <h4 id="binary-countdown-二进制计数-无冲突">binary countdown 二进制计数 无冲突</h4>
 <p>信道中有公共信息广播时间，所有站监听。如果需要发数据，从高位开始，在对应时间槽中发送自己优先级（唯一，二进制表示）消息，消息之间是<strong>或</strong>关系。只有知道自己是优先级最高的才能接下来发送。竞争用时$\log_2N$</p>
 <h4 id="the-adaptive-tree-walk-protocol-自适应树遍历协议">The Adaptive Tree Walk Protocol 自适应树遍历协议</h4>
-<p>注意到，如果竞争站的数目$k$比较小时候，[[ch4 介质访问控制子层#p-persistent|获得信道概率]]会上升。因此可以通过分组减少竞争，极大提升信道使用效果</p>
+<p>注意到，如果竞争站的数目$k$比较小时候，<a href="#p-persistent">p-persistent CSMA 的获得信道概率</a>会上升。因此可以通过分组减少竞争，极大提升信道使用效果</p>
 <p>自适应树中，将站看作是二叉树的叶节点，从根节点开始搜索。如果某个节点冲突，向下探寻左、右子节点；如果左节点不冲突了，给左节点下需求站发送数据；下一时间槽给右节点的站。在公共广播期间，站按照自身的父节点被搜索到的顺序竞争时间槽。</p>
 <p>如果$q$个站随机均匀分布，在让每个槽中参与竞争的平均站数为 1 时，得到最优树高$1+\log_2q$</p>
 <h3 id="以太网">以太网</h3>
@@ -1615,7 +1615,7 @@
 </blockquote>
 <blockquote>
 <p>spanning tree</p>
-<p>包含所有路由器的树，不一定是最优路径（和[[ch5 网络层#^7ddb3a|汇集树]]相区别）</p>
+<p>包含所有路由器的树，不一定是最优路径（和汇集树相区别）</p>
 </blockquote>
 <h4 id="dijstra-最短路径">Dijstra 最短路径</h4>
 <p>每次找到距离源距离最近（距离=到已发现集合的某点距离+该点距离源距离）的新节点，加入发现集合</p>
@@ -1837,9 +1837,9 @@
 <h4 id="choke-packets">choke packets</h4>
 <p>直接向发送方回传拥塞发生的通知数据包。</p>
 <h4 id="explicit-congestion-notification-显式拥塞通知">Explicit Congestion Notification 显式拥塞通知</h4>
-<p>ECN。不单独[[ch5 网络层#choke packets|发包]]，在包中间标志位标记拥塞信息。</p>
+<p>ECN。不单独<a href="#choke-packets">发拥塞通知包</a>，在包中间标志位标记拥塞信息。</p>
 <h4 id="hop-by-hop-backpressure">Hop-by-Hop Backpressure</h4>
-<p>防止路程过长，拥塞通知延迟太久。同时用[[ch5 网络层#choke packets|choke packets]]通知中间路由控制流量。</p>
+<p>防止路程过长，拥塞通知延迟太久。同时用<a href="#choke-packets">choke packets（拥塞通知包）</a>通知中间路由控制流量。</p>
 <h2 id="ch6-传输层">ch6 传输层</h2>
 <p>传输层主要跑在用户机上，而<a href="#ch5-%E7%BD%91%E7%BB%9C%E5%B1%82">网络层</a>跑在路由器上</p>
 <h3 id="socket">Socket</h3>
