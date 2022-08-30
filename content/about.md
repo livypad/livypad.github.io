@@ -6,6 +6,6 @@ draft: false
 
 # Owner |hhZhu
 
-Currently a undergraduate student(graduated) in the Department of Precise Instrument.
+Currently a graduate student major in computer science at University of Chinese Academy of Sciences.
 
 E-mail：ishonghua.zhu@outlook.com
