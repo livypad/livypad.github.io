@@ -1,4 +1,117 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>读书笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link><description>Recent content in 读书笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Sat, 09 Jul 2022 01:31:57 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Distributed Systems An Algorithmic Approach 2nd（更新到第7章）</title><link>https://livypad.github.io/post/2022-07-09-ghoshdsaaa/</link><pubDate>Sat, 09 Jul 2022 01:31:57 +0800</pubDate><guid>https://livypad.github.io/post/2022-07-09-ghoshdsaaa/</guid><description>Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach Ch 1 introduction Ch 2 interprocess communication naming rpc remote procedure call cloud computing MapReduce ch 3 Models for Communication shared variable 共享变量 linda mobile agent 模型强弱 resequencing protocol, 非 FIFO 模拟 FIFO 共享变量模拟信息传递 信息传递模拟共享变量 信</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>读书笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link><description>Recent content in 读书笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Wed, 31 Aug 2022 00:10:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Designing data-intensive applications(开始记录）</title><link>https://livypad.github.io/post/2022-08-31-ddia/</link><pubDate>Wed, 31 Aug 2022 00:10:00 +0800</pubDate><guid>https://livypad.github.io/post/2022-08-31-ddia/</guid><description>Designing data-intensive applications: the big ideas behind reliable, scalable, and maintainable systems Foundations of Data Systems Data Models SQL：关系型，key-value 对，关联程度一般 文档型：自包含文档，少关联 图数据库：数据大量关联 Storage and Retrival</description><content:encoded><![CDATA[<h1 id="designing-data-intensive-applications-the-big-ideas-behind-reliable-scalable-and-maintainable-systems">Designing data-intensive applications: the big ideas behind reliable, scalable, and maintainable systems</h1>
+<h2 id="foundations-of-data-systems">Foundations of Data Systems</h2>
+<h3 id="data-models">Data Models</h3>
+<ul>
+<li>SQL：关系型，key-value 对，关联程度一般</li>
+<li>文档型：自包含文档，少关联</li>
+<li>图数据库：数据大量关联</li>
+</ul>
+<h3 id="storage-and-retrival">Storage and Retrival</h3>
+<ul>
+<li>OLTP 数据存储系统
+<ul>
+<li>日志结构：追加
+<ul>
+<li>hash-map：key 对应数据文件当中的位置偏移，只要 key 表能装入内存
+<ul>
+<li>高性能读写</li>
+<li>对大量 key 不友好</li>
+<li>区间查询不友好</li>
+</ul>
+</li>
+<li>SSTables：排序字符串表：按顺序合并存储 k-v
+<ul>
+<li>可以稀疏存储 key</li>
+<li>内存维护表，大于表的写进磁盘文件，一个 log 用来数据恢复</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>原地更新
+<ul>
+<li>B-Tree：固定大小的段/页组合
+<ul>
+<li>页大小和底层磁盘契合</li>
+<li>覆盖而不是追加</li>
+<li>大于页大小时候分裂页</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>OLAP 数据分析系统
+<ul>
+<li>数据仓库：专门用于数据分析的数据库，是工作用数据库的副本，面向查询
+<ul>
+<li>事实表：记录事件事实的主表，大，列多</li>
+<li>列存储：列太多，一行拆开，每列单独存</li>
+<li>列压缩：<code>None</code>值可以被压缩</li>
+<li>聚合：面对常见操作预处理</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="encoding">Encoding</h3>
+<blockquote>
+<p>向前兼容</p>
+<p>旧版本可读新版本的数据，一般通过忽略实现</p>
+</blockquote>
+<blockquote>
+<p>向后兼容</p>
+<p>新版本可读旧版本数据</p>
+</blockquote>
+<ul>
+<li>语言自带：性能、通用性差、安全问题（代码生成）</li>
+<li>文本文件（XML，JSON，CSV）：大，各种数据格式支持弱</li>
+<li>二进制编码：小，带有更好的兼容检查支持，自带类型，自带注释</li>
+</ul>
+<h3 id="dataflow">Dataflow</h3>
+<ul>
+<li>基于数据库：数据比代码长久，旧版本更新需要忽略新的项</li>
+<li>基于服务（web 服务 和 RPC）
+<ul>
+<li>web 服务：通过 HTTP 向服务器公开的 API 调用服务</li>
+<li>RPC：远程调用有网络自身带来新问题，大跨度有兼容性问题</li>
+</ul>
+</li>
+<li>基于消息传递：加入一个消息代理/Actor</li>
+</ul>
+<h2 id="distributed-data">Distributed Data</h2>
+<h3 id="replication">Replication</h3>
+<ul>
+<li>主从复制
+<ul>
+<li>分主节点（可读可写）和从节点（只读）</li>
+<li>新节点建立：快照+基础上的变更 log</li>
+<li>恢复：选举+重新配置</li>
+<li>方法
+<ul>
+<li>基于语句：非确定性语句改为传结果（VM-FT）</li>
+<li>基于预写日志 Write-ahead log (WAL)：磁盘字节改变的日志</li>
+<li>基于行的逻辑日志：按照修改的逻辑</li>
+<li>基于触发器：应用层控制</li>
+</ul>
+</li>
+<li>复制滞后和一致性
+<ul>
+<li>写后读：个人能读到自己之前的写</li>
+<li>单调读：多次读取的版本号不减</li>
+<li>前缀一致读：读的顺序取绝于当时写的顺序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多主节点复制
+<ul>
+<li>场景：多中心、离线工作、协作编辑</li>
+<li>需要解决/规避同时写冲突</li>
+</ul>
+</li>
+<li>无主节点复制</li>
+</ul>
+]]></content:encoded></item><item><title>笔记：Distributed Systems An Algorithmic Approach 2nd（更新到第9章）</title><link>https://livypad.github.io/post/2022-07-09-ghoshdsaaa/</link><pubDate>Sat, 09 Jul 2022 01:31:57 +0800</pubDate><guid>https://livypad.github.io/post/2022-07-09-ghoshdsaaa/</guid><description>Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach Ch 1 introduction Ch 2 interprocess communication naming rpc remote procedure call cloud computing MapReduce ch 3 Models for Communication shared variable 共享变量 linda mobile agent 模型强弱 resequencing protocol, 非 FIFO 模拟 FIFO 共享变量模拟信息传递 信息传递模拟共享变量 信</description><content:encoded><![CDATA[<ul>
 <li><a href="#ghosh-sukumar-2014---distributed-systems-an-algorithmic-approach">Ghosh, Sukumar (2014) - Distributed Systems An Algorithmic Approach</a>
 <ul>
 <li><a href="#ch-1-introduction">Ch 1 introduction</a></li>
@@ -103,7 +216,19 @@
 <li><a href="#%E5%88%86%E5%B8%83%E5%BC%8F-debug">分布式 debug</a></li>
 </ul>
 </li>
-<li><a href="#ch-9-global-state-collection">ch 9 Global State Collection</a></li>
+<li><a href="#ch-9-global-state-collection">ch 9 Global State Collection</a>
+<ul>
+<li><a href="#%E5%85%A8%E5%B1%80%E5%B9%BF%E6%92%AD">全局广播</a></li>
+<li><a href="#%E7%A8%8B%E5%BA%8F%E7%BB%88%E6%AD%A2%E6%A3%80%E6%B5%8B">程序终止检测</a>
+<ul>
+<li><a href="#dijstra-scholten-%E7%AE%97%E6%B3%95">Dijstra-Scholten 算法</a></li>
+<li><a href="#%E5%8D%95%E5%90%91%E7%8E%AF%E7%9A%84-token-passing">单向环的 token passing</a></li>
+<li><a href="#%E4%BF%A1%E7%94%A8%E7%82%B9%E5%88%86%E9%85%8D%E7%AE%97%E6%B3%95-credit-recovery-algorithm">信用点分配算法 credit-recovery algorithm</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B5%AA%E6%BD%AE-wave-%E7%AE%97%E6%B3%95">浪潮 wave 算法</a></li>
+</ul>
+</li>
 <li><a href="#ch-11-coordination-algorithms">ch 11 Coordination Algorithms</a></li>
 <li><a href="#ch-12-fault-tolerant-systems">ch 12 Fault-Tolerant Systems</a></li>
 <li><a href="#ch-13-distributed-consensus">ch 13 Distributed Consensus</a></li>
@@ -1032,14 +1157,140 @@ flag[i] := (passive, ⊥)
 <p>本地状态 $s(i),s(j)$ 对应 consistent 的全局状态</p>
 <p>如果本地状态 $s(i),s(j)$ 是由事件 $e_i,e_j$ 引发，那么逻辑时钟关系 $\forall k,VC_k(e_i)\sim VC_k(e_j)$</p>
 </blockquote>
-<p>对由初始状态可达的 consistent 的全局状态应用判断 $\phi$。这样的判断时间复杂度巨大，需要注意可拓展性：n个进程每个m个可能行动 $O(m^n)$</p>
+<p>对由初始状态可达的 consistent 的全局状态应用判断 $\phi$。这样的判断时间复杂度巨大，需要注意可拓展性：n 个进程每个 m 个可能行动 $O(m^n)$</p>
 <ul>
 <li>Possibly $\phi$：至少一个为真</li>
 <li>Definetly $\phi$：永真 $definetly;\phi \implies possibly; \phi$</li>
 <li>Never $\phi$：永假</li>
 </ul>
 <h2 id="ch-9-global-state-collection">ch 9 Global State Collection</h2>
-<h2 id="ch-11-coordination-algorithms">ch 11 Coordination Algorithms</h2>
+<p>本章假定底层任务能表现出预期的性质（如检测终止算法中，底层任务确实能终止）</p>
+<h3 id="全局广播">全局广播</h3>
+<p>假设本地需要被收集的为 $s(i)$,最后每个进程都能收集到 $\forall i:V(i)={s(k):0\le k\le n-1}$。那 naive 的方法就是每次向邻居通知自己新知道的其他进程的信息，直到大家知道全了。消息复杂度：向每个邻居发，每次多一个：$O(n^2)$，全局 $O(n^3)$</p>
+<pre tabindex="0"><code>program broadcast (for process i}
+define Vi, Wi: set of values;
+initially Vi = {s(i)}, Wi = Ø {and every channel is empty}
+do Vi ≠ Wi      →   send Vi\Wi to every outgoing channel;
+                    Wi:= Vi
+[] ¬empty (k,i) →   receive X from channel (k,i);
+                    Vi:= Vi ∪ X
+od
+</code></pre><ul>
+<li>$empty(i,j)\implies W_i\subseteq V_j$：归纳法易证，注意到 $W_i^{r+1}=V_i^{r+1},V^{r+1}/W^r_i\subseteq V_j$</li>
+<li>停止时候能保证 $\forall i:V(i)={s(k):0\le k\le n-1}$: 由上一条+停止条件 有 $\forall i,j:V_i\subseteq V_j$，显然</li>
+<li>有界步终止：必然递增</li>
+</ul>
+<h3 id="程序终止检测">程序终止检测</h3>
+<p>（不一定需要是全局终止，相同步时候也要检测某相结束以开启下一相）</p>
+<h4 id="dijstra-scholten-算法">Dijstra-Scholten 算法</h4>
+<blockquote>
+<p>diffusing computation</p>
+<p>由一个 initiator 开启，通知邻居逐步开始的计算</p>
+</blockquote>
+<ul>
+<li>沿方向的消息为 <code>signal</code> ，反向消息为<code>ack</code></li>
+<li>环境 environment 节点：只有向外边</li>
+<li>内部 internal 节点：从环境节点可达</li>
+<li>环境节点起始发<code>signal</code> 开始算法</li>
+<li>任何节点第一次收到<code>signal</code> 的发送方为父节点，然后自己开始向邻居广播<code>signal</code></li>
+<li>之后收到<code>signal</code> 立刻回复<code>ack</code>，自己邻居都回复了<code>ack</code>后向父节点回复<code>ack</code>，起始节点收完<code>ack</code>即算法结束</li>
+<li>对于某条有向边，沿向<code>signal</code>和反向<code>ack</code>数值差为 deficit</li>
+<li>对于某个节点：
+<ul>
+<li>$C$：入边的 deficit 和</li>
+<li>$D$：出边的 deficit 和</li>
+</ul>
+</li>
+</ul>
+<p>在这样设定下，有如下 2 不变式：</p>
+<ol>
+<li>$(C\ge 0)\wedge(D\ge 0)$:deficit 定义可知</li>
+<li>$(C&gt;0)\vee(D=0)$:（1 等待邻居子图完成）或者是（2 邻居都完成了，可以回复父节点了）</li>
+</ol>
+<p>注意上述不变式有 $(C&gt;1)\vee(C=1\wedge D=0)$，整个进程之间关系是一棵树。要求信道 FIFO（保证工作信息和检测信息之间正确顺序，防止虚假终止）。在大家确实停止后，消息复杂度 $O(|E|)$（每个信道来去各一次）</p>
+<pre tabindex="0"><code>program detect {for an internal node i}
+define  C, D : integer
+        m: (signal, ack) {represents the type of message received}
+        state: (active, passive)
+initially C = 0, D = 0, parent(i) = i
+do (m = signal) ∧ (C = 0)   → C := 1; state := active;
+                                parent := sender
+                                //开始准备向邻居广播
+    [] m = ack                  → D := D − 1
+    [] (C = 1 ∧ D = 0) ∧ (state = passive) → send ack to parent;
+                                            C:= 0; parent(i) = i
+                                 //节点可以返回初始状态了
+    [](m = signal) ∧ (C = 1)    → send ack to the sender
+                                // 对多余的signal直接回复ack
+od
+</code></pre><h4 id="单向环的-token-passing">单向环的 token passing</h4>
+<ol>
+<li>每个节点 <code>black,white</code>两个状态，初始<code>white</code></li>
+<li>向 token 传递反向高的节点发消息后，变<code>black</code></li>
+<li><code>white</code>节点传递 token 时颜色不变，<code>black</code>节点传递时染黑 token</li>
+<li>节点传递完 token 后变回<code>white</code></li>
+<li>initiator 能收发白色 token 即终止</li>
+</ol>
+<p>算法要求消息通信瞬时（新的消息要追上 token 速度）</p>
+<pre tabindex="0"><code>program term {for process i &gt; 0，假定进程0为启动进程}
+define  color, token: (black, white) {colors of process and token}
+        state : (active, passive)
+do  (token = white) ∧ (state ≠ passive)   → skip
+    [](token = white) ∧ (state = passive) →
+            if color(i) = black → color(i) := white; send a black token
+            [] color(i) = white → send a white token
+            fi
+    [](token = black)   → send a black token
+    []i sends a message to a higher numbered process → color(i) :=black
+od
+{for process 0}
+send a white token;
+do
+(token ≠ white) → send a white token
+od
+//收回白token 结束
+</code></pre><h4 id="信用点分配算法-credit-recovery-algorithm">信用点分配算法 credit-recovery algorithm</h4>
+<ul>
+<li>$\sum credit(i)=1$</li>
+<li>对于活跃进程：$credit(i)&gt;0$</li>
+<li>对于休眠进程：$credit(i)=0$</li>
+</ul>
+<ol>
+<li>活跃进程发消息时，将自身$credit/2$ 随消息发出</li>
+<li>休眠进程接到消息，转活跃，并对于自身$+=msg_{credit}$</li>
+<li>活跃进程收到消息，可以：发回给启动进程，或者为了减少消息数目 保留加到自己的 $credit$</li>
+</ol>
+<h3 id="浪潮-wave-算法">浪潮 wave 算法</h3>
+<blockquote>
+<p>wave</p>
+<p>一个启动进程某活动，引发邻居活动，进而邻居的邻居活动，此谓浪潮</p>
+<ol>
+<li>每个计算有界</li>
+<li>每个计算至少包括一个确定性事件 decision event</li>
+<li>一个确定性事件 decision event 在每个进程中一些事件的因果前</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>PIF</p>
+<p>Propagation of Information with Feedback，类似于 <a href="#dijstra-scholten-%E7%AE%97%E6%B3%95">Dijstra Scholten 算法</a>里的广播，但是此时返回是副本不是<code>ack</code></p>
+</blockquote>
+<pre tabindex="0"><code>program PIF {for the initiator node i}
+define  count : integer
+        N(i): set of neighbors of process i
+
+send M to each neighbor; count := |N(i)|
+do
+    count ≠ 0 ∧ M received → count: = count − 1
+od
+{program for a non-initiator node j≠i}
+if
+    message M received → parent := sender
+                        send M to each neighbor except parent;
+                        count := |N(j)|;
+    []count &gt; 0 ∧ M received → count: = count − 1
+    []count = 0              → send M to parent
+fi
+</code></pre><h2 id="ch-11-coordination-algorithms">ch 11 Coordination Algorithms</h2>
 <h2 id="ch-12-fault-tolerant-systems">ch 12 Fault-Tolerant Systems</h2>
 <h2 id="ch-13-distributed-consensus">ch 13 Distributed Consensus</h2>
 ]]></content:encoded></item></channel></rss>
