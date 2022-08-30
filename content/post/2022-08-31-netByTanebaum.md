@@ -1,7 +1,7 @@
 ---
 title: "笔记：Computer Network by Tanenbaum(大概第6章)"
 date: 2022-08-31T00:18:17+08:00
-draft: true
+draft: false
 tags: ["教程", "读书笔记"]
 isCJKLanguage: true
 ---
@@ -19,30 +19,56 @@ isCJKLanguage: true
         - [检错纠错](#检错纠错)
             - [hamming](#hamming)
         - [protocol](#protocol)
-        - [乌托邦式的单工协议](#乌托邦式的单工协议)
-        - [简单的 停-等 协议，无错信道](#简单的-停-等-协议无错信道)
-        - [简单的 停-等 协议，信道可能出错](#简单的-停-等-协议信道可能出错)
-        - [滑动窗口协议](#滑动窗口协议)
-            - [1 位 滑动窗口](#1-位-滑动窗口)
-            - [多位窗口](#多位窗口)
+            - [乌托邦式的单工协议](#乌托邦式的单工协议)
+            - [简单的 停-等 协议，无错信道](#简单的-停-等-协议无错信道)
+            - [简单的 停-等 协议，信道可能出错](#简单的-停-等-协议信道可能出错)
+            - [滑动窗口协议](#滑动窗口协议)
+                - [1 位 滑动窗口](#1-位-滑动窗口)
+                - [多位窗口](#多位窗口)
                 - [Go-Back-N 回退 N 协议](#go-back-n-回退-n-协议)
                 - [selective repeat 选择重传](#selective-repeat-选择重传)
-- [ch4 介质访问控制子层](#ch4-介质访问控制子层)
-    - [多路访问协议](#多路访问协议)
-        - [ALOHA](#aloha)
-        - [分槽 ALOHA](#分槽-aloha)
-        - [CSMA](#csma)
-            - [Persistent：等到占用结束直接开始发](#persistent等到占用结束直接开始发)
-            - [Nonpersistent](#nonpersistent)
-            - [p-persistent](#p-persistent)
-        - [CSMA/CD collision detection](#csmacd-collision-detection)
-        - [CSMA/CA collision avoidance](#csmaca-collision-avoidance)
-        - [Bit-Map 位图协议 无冲突](#bit-map-位图协议-无冲突)
-        - [token ring 令牌环 无冲突](#token-ring-令牌环-无冲突)
-        - [binary countdown 二进制计数 无冲突](#binary-countdown-二进制计数-无冲突)
-        - [The Adaptive Tree Walk Protocol 自适应树遍历协议](#the-adaptive-tree-walk-protocol-自适应树遍历协议)
-    - [以太网](#以太网)
-        - [设施](#设施)
+    - [ch4 介质访问控制子层](#ch4-介质访问控制子层)
+        - [多路访问协议](#多路访问协议)
+            - [ALOHA](#aloha)
+            - [分槽 ALOHA](#分槽-aloha)
+            - [CSMA](#csma)
+                - [Persistent：等到占用结束直接开始发](#persistent等到占用结束直接开始发)
+                - [Nonpersistent](#nonpersistent)
+                - [p-persistent](#p-persistent)
+            - [CSMA/CD collision detection](#csmacd-collision-detection)
+            - [CSMA/CA collision avoidance](#csmaca-collision-avoidance)
+            - [Bit-Map 位图协议 无冲突](#bit-map-位图协议-无冲突)
+            - [token ring 令牌环 无冲突](#token-ring-令牌环-无冲突)
+            - [binary countdown 二进制计数 无冲突](#binary-countdown-二进制计数-无冲突)
+            - [The Adaptive Tree Walk Protocol 自适应树遍历协议](#the-adaptive-tree-walk-protocol-自适应树遍历协议)
+        - [以太网](#以太网)
+            - [设施](#设施)
+    - [ch5 网络层](#ch5-网络层)
+        - [路由算法](#路由算法)
+            - [Dijstra 最短路径](#dijstra-最短路径)
+            - [flooding 泛洪](#flooding-泛洪)
+            - [distance vector routing 距离向量路由](#distance-vector-routing-距离向量路由)
+            - [link state routing 链路状态路由](#link-state-routing-链路状态路由)
+            - [层次路由](#层次路由)
+            - [广播路由](#广播路由)
+        - [组播路由](#组播路由)
+            - [anycast routing 选播路由](#anycast-routing-选播路由)
+        - [拥塞控制算法](#拥塞控制算法)
+            - [Traffic-Aware Routing](#traffic-aware-routing)
+            - [admission control](#admission-control)
+            - [load shedding](#load-shedding)
+            - [traffic shaping](#traffic-shaping)
+            - [active queue management 主动队列管理](#active-queue-management-主动队列管理)
+            - [Random Early Detection 随机早期检测](#random-early-detection-随机早期检测)
+            - [choke packets](#choke-packets)
+            - [Explicit Congestion Notification 显式拥塞通知](#explicit-congestion-notification-显式拥塞通知)
+            - [Hop-by-Hop Backpressure](#hop-by-hop-backpressure)
+    - [ch6 传输层](#ch6-传输层)
+        - [Socket](#socket)
+            - [原语](#原语)
+            - [文件传输程序](#文件传输程序)
+                - [客户端](#客户端)
+                - [服务器端](#服务器端)
 
 # Computer Network by Tanenbaum
 
@@ -217,7 +243,7 @@ void disable_network_layer(void);
 3. ack：回应
 4. info：数据
 
-### 乌托邦式的单工协议
+#### 乌托邦式的单工协议
 
 单边发送，单边接收。发送方和接收方的网络层总是处于准备就绪状态。数据处理的时间忽略不计。可用的缓存空间无穷大。最强的一个条件是数据链路层之间的通信信道永远不会损坏帧或者丢失帧。
 
@@ -269,7 +295,7 @@ void receiver1(void)
 }
 ```
 
-### 简单的 停-等 协议，无错信道
+#### 简单的 停-等 协议，无错信道
 
 > stop-and-wait
 >
@@ -323,7 +349,7 @@ void receiver2(void)
 }
 ```
 
-### 简单的 停-等 协议，信道可能出错
+#### 简单的 停-等 协议，信道可能出错
 
 - 需要加入计时器，防止 frame 丢失
 - 需要标记帧号码，防止重复接收
@@ -411,7 +437,7 @@ void receiver3(void)
 }
 ```
 
-### 滑动窗口协议
+#### 滑动窗口协议
 
 双工，而不是使用两个单工协议。
 
@@ -430,7 +456,7 @@ void receiver3(void)
 
 ![sliding windows](/assets/img/note/net/slidingwin.png)
 
-#### 1 位 滑动窗口
+##### 1 位 滑动窗口
 
 ![1bit](/assets/img/note/net/1bit.png)
 
@@ -505,7 +531,7 @@ void protocol4 (void)
 }
 ```
 
-#### 多位窗口
+##### 多位窗口
 
 由于信道传输时间不可忽略，1 位滑动窗口的异常启动问题不可忽略，需要提高带宽利用率。
 
@@ -817,7 +843,7 @@ void protocol6(void)
 }
 ```
 
-# ch4 介质访问控制子层
+## ch4 介质访问控制子层
 
 > MAC
 >
@@ -837,7 +863,7 @@ $$T_N=\frac{1}{\mu (C/N) -(\lambda/N)}=\frac{N}{\mu C -\lambda}=NT$$
 4. 时间连续/分槽 slotted
 5. 载波侦听 carrirer sense 或不听
 
-## 多路访问协议
+### 多路访问协议
 
 > contention system
 >
@@ -845,7 +871,7 @@ $$T_N=\frac{1}{\mu (C/N) -(\lambda/N)}=\frac{N}{\mu C -\lambda}=NT$$
 
 ![thorouput](/assets/img/note/net/thorouput.png)
 
-### ALOHA
+#### ALOHA
 
 有数据直接发，如果碰撞，在等待随机时间之后重发。
 
@@ -859,7 +885,7 @@ $$S=Ge^{-2G}$$
 
 ![aloha](/assets/img/note/net/aloha.png)
 
-### 分槽 ALOHA
+#### 分槽 ALOHA
 
 要求每帧必须在时间槽开始时才能尝试发送，不能在任意时刻发送，只需要考虑单槽$t$内的碰撞。吞吐量
 
@@ -873,7 +899,7 @@ $$P_k=e^{-G}(1-e^{-G})^{k-1}$$
 
 $$E=\sum kP_k=\sum ke^{-G}(1-e^{-G})^{k-1}=e^G$$
 
-### CSMA
+#### CSMA
 
 > CSMA
 >
@@ -881,15 +907,15 @@ $$E=\sum kP_k=\sum ke^{-G}(1-e^{-G})^{k-1}=e^G$$
 
 在发送自己帧之前，监听是否信道被占用，不占用再发送；如果占用
 
-#### Persistent：等到占用结束直接开始发
+##### Persistent：等到占用结束直接开始发
 
 会在同时多站等发时候冲突
 
-#### Nonpersistent
+##### Nonpersistent
 
 等待一段时间后再检测
 
-#### p-persistent
+##### p-persistent
 
 针对分槽时间，每个槽如果空闲，以$p$的概率发，$1-p$的概率等下个时间槽。
 
@@ -903,13 +929,13 @@ $$P_\max=(\frac{k-1}{k})^{k-1}$$
 
 而且$k\to\infty$时候有$P\to\frac{1}{e}$。
 
-### CSMA/CD collision detection
+#### CSMA/CD collision detection
 
 在发送前，信道空闲时候，发送竞争信号，竞争胜利者发送数据帧
 
 ![CSMA/CD](/assets/img/note/net/csmacd.png)
 
-### CSMA/CA collision avoidance
+#### CSMA/CA collision avoidance
 
 > binary exponential backoff
 >
@@ -925,19 +951,19 @@ $$P_{t=jT_0}=P(1-P)^{j-1}$$
 
 $$E=\sum_{j=0} jP(1-P)^{j-1}=\frac{1}{P}$$
 
-### Bit-Map 位图协议 无冲突
+#### Bit-Map 位图协议 无冲突
 
 信道中有公共信息广播时间。在该时间里，每个站有一个槽，发送信息表示接下来需要发送数据帧；沉默表示接下来不发。然后站按照申请的结果发。平均等待$N$个槽时间
 
-### token ring 令牌环 无冲突
+#### token ring 令牌环 无冲突
 
 所有站连接成一个单环结构，传递令牌。得到令牌的发数据，发完继续传；如果不用发数据直接向下传
 
-### binary countdown 二进制计数 无冲突
+#### binary countdown 二进制计数 无冲突
 
 信道中有公共信息广播时间，所有站监听。如果需要发数据，从高位开始，在对应时间槽中发送自己优先级（唯一，二进制表示）消息，消息之间是**或**关系。只有知道自己是优先级最高的才能接下来发送。竞争用时$\log_2N$
 
-### The Adaptive Tree Walk Protocol 自适应树遍历协议
+#### The Adaptive Tree Walk Protocol 自适应树遍历协议
 
 注意到，如果竞争站的数目$k$比较小时候，[[ch4 介质访问控制子层#p-persistent|获得信道概率]]会上升。因此可以通过分组减少竞争，极大提升信道使用效果
 
@@ -945,11 +971,446 @@ $$E=\sum_{j=0} jP(1-P)^{j-1}=\frac{1}{P}$$
 
 如果$q$个站随机均匀分布，在让每个槽中参与竞争的平均站数为 1 时，得到最优树高$1+\log_2q$
 
-## 以太网
+### 以太网
 
-### 设施
+#### 设施
 
 |     | hub 集线器                 | switch 交换机                |
 | --- | -------------------------- | ---------------------------- |
 | pro | 易排错                     | 扩容；无冲突；安全           |
 | con | 不能扩容，逻辑上等同单线缆 | 自带 buffer 防止同时发送端口 |
+
+## ch5 网络层
+
+1. 向上提供的服务应该独立于路由器技术
+2. 应该向传输层屏蔽路由器的数量、类型和拓扑关系
+3. 传输层可用的网络地址应该有一个统一编址方案，甚至可以跨越 LAN 和 WAN
+
+> datagram
+>
+> 数据报网络，所有的数据包都被独立地注入到网络中，并且每个数据包独立路由，不需要提前建立任何设置
+
+> virtual circuit
+>
+> 虚电路网络，在发送数据包之前，必须首先建立起一条从源路由器到目标路由器之间的路径
+
+|              | datagram               | virtual-circuit                      |
+| ------------ | ---------------------- | :----------------------------------- |
+| 线路初始化   | 不需要                 | 需要                                 |
+| 寻址         | 包带有源和目标地址     | 包带有短 VC 号                       |
+| 状态信息     | 路由不包含连接信息     | 每条虚电路（VC）需要路由记录每个连接 |
+| 路由         | 每个包单独路由         | VC 设置时候路由，包遵守              |
+| 路由失效影响 | 无，除了因为崩溃丢的包 | 故障路由相关 VC 均中断               |
+| 服务质量     | 困难                   | 简单，如果建立 VC 时候资源足够       |
+| 拥塞控制     | 困难                   | 简单，如果建立 VC 时候资源足够       |
+
+### 路由算法
+
+> routing algorithm
+>
+> 路由算法。网络层软件决定入境数据包在哪条线外发
+
+> optimality principle
+>
+> 路由最优化原理。如果路由 J 在 I 到 K 最优路径，那么 J 到 K 最优路径也是同样的路由
+
+> sink tree
+>
+> 汇集树。从所有的源到一个指定目标的最优路径的集合构成了一棵以目标节点为根的树/DAG（有向无环图）
+
+> spanning tree
+>
+> 包含所有路由器的树，不一定是最优路径（和[[ch5 网络层#^7ddb3a|汇集树]]相区别）
+
+#### Dijstra 最短路径
+
+每次找到距离源距离最近（距离=到已发现集合的某点距离+该点距离源距离）的新节点，加入发现集合
+
+```cpp
+#define MAX_NODES 1024
+/* maximum number of nodes */
+#define INFINITY 1000000000
+/* a number larger than every maximum path */
+int n, dist[MAX_NODES][MAX_NODES];
+/* dist[i][j] is the distance from i to j */
+void shortest path(int s, int t, int path[])
+{
+    struct state {
+        /* the path being worked on */
+        int predecessor;
+        /* previous node */
+        int length;
+        /* length from source to this node */
+        enum {permanent, tentative} label;
+        /* label state */
+    } state[MAX_NODES];
+
+    int i, k, min;
+    struct state *p;
+    for (p = &state[0]; p < &state[n]; p++) {
+        /* initialize state */
+        p->predecessor = −1;
+        p->length = INFINITY;
+        p->label = tentative;
+    }
+    state[t].length = 0; state[t].label = permanent;
+    k = t;
+    /* k is the initial working node */
+    do {
+        /* Is there a better path from k? */
+        for (i = 0; i < n; i++){ //n node
+            if (dist[k][i] != 0 && state[i].label == tentative) {
+                if (state[k].length + dist[k][i] < state[i].length) {
+                    state[i].predecessor = k;
+                    state[i].length = state[k].length + dist[k][i];
+                }
+            }
+        }
+        /* Find the tentatively labeled node with the smallest label. */
+        k = 0; min = INFINITY;
+        for (i = 0; i < n; i++){
+            if (state[i].label == tentative && state[i].length < min) {
+                min = state[i].length;
+                k = i;
+            }
+        }
+        state[k].label = permanent;
+    } while (k != s);
+    /* Copy the path into the output array. */
+    i = 0; k = s;
+    do {path[i++] = k; k = state[k].predecessor; } while (k >= 0);
+}
+```
+
+#### flooding 泛洪
+
+每一个入境数据包发送到除了该数据包到达的那条线路以外的每条出境线路
+
+1. 泛洪包带有寿命，计数减到 0 之后不再发
+2. 追踪泛洪包防止二次发送。泛洪包带序号，一个序号对应一次泛洪，一次泛洪只发送一次
+
+- 保证广播
+- robust
+
+#### distance vector routing 距离向量路由
+
+每个路由器维护一张表（即一个矢量)，表中列出了当前已知的到每个目标的最佳距离，以及所使用的链路。这些表通过邻居之间相互交换信息而不断被更新，最终每个路由器都了解到达每个目的地的最佳链路。
+
+又名 Bellman-Fold 算法
+
+> Count-to-Infinity
+>
+> 无穷计数问题。坏消息传递慢，距离每次增 1 而已（没有一个路由器具有一个比它所有邻居的最小值还大于 1 的值，从邻居获得道路信息不包含自身是否在道路上）
+
+#### link state routing 链路状态路由
+
+1. 发现它的邻居节点，并了解其网络地址
+2. 设置到每个邻居节点的距离或者成本度量值
+3. 构造一个包含所有刚刚获知的链路信息包
+4. 将这个包发送给所有其他的路由器，并接收来自所有其他路由器的信息包
+5. 计算出到每个其他路由器的最短路径
+
+每个路由都知道网络拓扑结构，每个路由自行完成[Dijstra 最短路径算法](#dijstra-最短路径)
+
+#### 层次路由
+
+分层。可以证明对于 $N$ 路由数目网络最优层数 $\ln N$，每个路由器查找表条目 $e\ln N$。
+
+#### 广播路由
+
+> multidestination routing
+>
+> 多目标路由。每个数据包包含一组目标地址，路由对于某条线上转发时候只保留线连接区域地址，直到只发给 1 个目标地址
+
+> reverse path forwarding
+>
+> 逆向路径转发。检测数据包是否来自汇集树（或者放宽为优化的生成树），否则丢弃，结合[泛洪](#flooding-泛洪)
+
+1. 每个路由单独发包
+2. [泛洪](#flooding-泛洪)
+3. 多目标路由
+
+### 组播路由
+
+> core-based tree
+>
+> 基于核心树。只对核心（core/root）建生成树
+
+1. 干脆 [广播路由](#广播路由)
+2. 修建生成树，按需要传播
+3. 其他路由先发到核心，核心走核心树
+
+#### anycast routing 选播路由
+
+> anycast
+>
+> 数据包发送到特定一个组中最近的一个路由
+
+### 拥塞控制算法
+
+> bufferfloat
+>
+> 路由内存充足反而容易导致拥塞。数据包（本来会因为内存不足丢弃）排到队列前面时，它们早己经超时（重复地）并且它们的副本也己经发送
+
+![congestion control](/assets/img/note/net/congestc.png)
+
+#### Traffic-Aware Routing
+
+流量感知路由。将负载考虑到路由选择上，但不能直接使用流量调整，防止路由选择波动。
+
+#### admission control
+
+准入控制。只能针对虚电路网络，在可承担负载情况下才建立新连接。
+
+#### load shedding
+
+负载脱落。直接抛弃负载保证不拥塞。抛弃优先级可以结合流量费用设定。
+
+> wine
+>
+> 旧数据包保留：如文件传输
+
+> milk
+>
+> 新数据包保留：如流媒体
+
+#### traffic shaping
+
+流量整形。
+
+桶容量 $B$ ，数据速率 $R$
+
+> leaky bucket
+>
+> 漏桶。向缓冲区发包，包以 $R$ 离开缓冲区
+
+> token bucket
+>
+> 令牌桶。令牌以 $R$ 速度累计， 得到令牌才能发包
+
+流量突发时长 $S$ ，突发产生速率 $M$ ，则桶算法有
+
+$$B+RS=MS$$
+
+还可以级联桶，调控平均速率和突发最大速率。
+
+![bucket algorithm](/assets/img/note/net/bucket.png)
+
+#### active queue management 主动队列管理
+
+主动管理负载避免拥塞，路由监控自己使用的资源。期待延迟为 $d$ ，队列长度 $s$ ，有关系式
+
+$$d_{new}=\alpha d_{old}+(1-\alpha)s$$
+
+> Exponentially Weighted Moving Average
+>
+> EWMA，指数加权移动平均。 $\alpha$ 是路由遗忘历史信息的常数。等同于低通滤波器。 期待延迟 $d$ 超过阈值预示拥塞发生
+
+#### Random Early Detection 随机早期检测
+
+RED。因为路由难以得到显式信息通知拥塞，只有包丢失是容易感知的，但是包丢失对于避免拥塞太晚了。当某条链路上的平均队列长度超过某个阈值时，该链路就被认为即将拥塞，因此路由器随机丢弃一小部分数据包。隐含传递拥塞信号
+
+#### choke packets
+
+直接向发送方回传拥塞发生的通知数据包。
+
+#### Explicit Congestion Notification 显式拥塞通知
+
+ECN。不单独[[ch5 网络层#choke packets|发包]]，在包中间标志位标记拥塞信息。
+
+#### Hop-by-Hop Backpressure
+
+防止路程过长，拥塞通知延迟太久。同时用[[ch5 网络层#choke packets|choke packets]]通知中间路由控制流量。
+
+## ch6 传输层
+
+传输层主要跑在用户机上，而[网络层](#ch5-网络层)跑在路由器上
+
+### Socket
+
+#### 原语
+
+| 原语    | 含义                           |
+| ------- | ------------------------------ |
+| socket  | 建立一个新通讯端点             |
+| bind    | 将 socket 与一个本地地址关联   |
+| listen  | 声明愿意接受连接；给出队列长度 |
+| accept  | 被动创建一个入境连接           |
+| connect | 主动尝试创建连接               |
+| send    | 通过连接传输数据               |
+| receive | 通过连接接受数据               |
+| close   | 断开连接                       |
+
+#### 文件传输程序
+
+##### 客户端
+
+```cpp
+/* This page contains a client program that can request a file from the server program
+ * on the next page. The server responds by sending the whole file.
+ */
+#include <netdb.h>
+#include <netinet/in.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/socket.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+#define SERVER_PORT 8080
+/* arbitrar y, but client & server must agree */
+#define BUF_SIZE 4096
+/* block transfer size */
+int main(int argc, char** argv)
+{
+    int c, s, bytes;
+    char buf[BUF_SIZE];
+    /* buffer for incoming file */
+    struct hostent* h;
+    /* info about server */
+    struct sockaddr in_channel;
+    /* holds IP address */
+    if (argc != 3)
+    {
+        printf("Usage: client server-name file-name");
+        exit(-1);
+    }
+    h = gethostbyname(argv[1]);
+    /* look up host’s IP address */
+    if (!h)
+    {
+        printf("gethostbyname failed to locate %s", argv[1]);
+        exit(-1);
+    }
+    s = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+
+    if (s < 0)
+    {
+        printf("socket call failed");
+        exit(-1);
+    }
+
+    memset(&channel, 0, sizeof(channel));
+    channel.sin_family = AF_INET;
+    memcpy(&channel.sin_addr.s_addr, h->h_addr, h->h_length);
+    channel.sin_port = htons(SERVER_PORT);
+    c = connect(s, (struct sockaddr*)&channel, sizeof(channel));
+
+    if (c < 0)
+    {
+        printf("connect failed");
+        exit(-1);
+    }
+
+    /* Connection is now established. Send file name including 0 byte at end. */
+    write(s, argv[2], strlen(argv[2]) + 1);
+    /* Go get the file and write it to standard output. */
+    while (1)
+    {
+        bytes = read(s, buf, BUF_SIZE);
+        /* read from socket */
+
+        if (bytes <= 0)
+            exit(0);
+
+        /* check for end of file */
+        write(1, buf, bytes);
+        /* wr ite to standard output */
+    }
+}
+```
+
+##### 服务器端
+
+```cpp
+#include <sys/types.h>
+/* This is the server code */
+#include <netdb.h>
+#include <netinet/in.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/fcntl.h>
+#include <sys/socket.h>
+
+#define SERVER_PORT 8080
+/* arbitrar y, but client & server must agree */
+#define BUF_SIZE 4096
+/* block transfer size */
+#define QUEUE_SIZE 10
+int main(int argc, char* argv[])
+{
+    int s, b, l, fd, sa, bytes, on = 1;
+    char buf[BUF_SIZE];
+    /* buffer for outgoing file */
+    struct sockaddr_in channel;
+    /* holds IP address */
+    /* Build address structure to bind to socket. */
+    memset(&channel, 0, sizeof(channel));
+    /* zero channel */
+    channel.sin_family = AF_INET;
+    channel.sin_addr.s_addr = htonl(INADDR_ANY);
+    channel.sin + port = htons(SERVER_PORT);
+
+    /* Passive open. Wait for connection. */
+    s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    /* create socket */
+    if (s < 0)
+    {
+        printf("socket call failed");
+        exit(-1);
+    }
+
+    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (char*)&on, sizeof(on));
+    b = bind(s, (struct sockaddr*)&channel, sizeof(channel));
+
+    if (b < 0)
+    {
+        printf("bind failed");
+        exit(-1);
+    }
+
+    l = listen(s, QUEUE_SIZE);
+    /* specify queue size */
+    if (l < 0)
+    {
+        printf("listen failed");
+        exit(-1);
+    }
+
+    /* Socket is now set up and bound. Wait for connection and process it. */
+    while (1)
+    {
+        sa = accept(s, 0, 0);
+        /* block for connection request */
+        if (sa < 0)
+        {
+            printf("accept failed");
+            exit(-1);
+        }
+        read(sa, buf, BUF_SIZE);
+        /* read file name from socket */
+        /* Get and return the file. */
+        fd = open(buf, O_RDONLY);
+        /* open the file to be sent back */
+        if (fd < 0)
+        {
+            printf("open failed");
+        }
+        while (1)
+        {
+            bytes = read(fd, buf, BUF_SIZE); /* read from file */
+            if (bytes <= 0)
+                break;
+            /* check for end of file */
+            write(sa, buf, bytes);
+            /* wr ite bytes to socket */
+        }
+        close(fd);
+        /* close file */
+        close(sa);
+        /* close connection */
+    }
+}
+```
