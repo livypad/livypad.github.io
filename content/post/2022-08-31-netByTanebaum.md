@@ -939,7 +939,7 @@ $$P_\max=(\frac{k-1}{k})^{k-1}$$
 
 > binary exponential backoff
 >
-> 二进制指数后退。在$i$次碰撞后，在[[ch4 介质访问控制子层#p-persistent|p-persistent CSMA]]基础上改为等待$0\sim2^i-1$个时间槽
+> 二进制指数后退。在$i$次碰撞后，在[p-persistent CSMA](#p-persistent)基础上改为等待$0\sim2^i-1$个时间槽
 
 实际中，有时间槽次数上限和碰撞次数上限
 
@@ -965,7 +965,7 @@ $$E=\sum_{j=0} jP(1-P)^{j-1}=\frac{1}{P}$$
 
 #### The Adaptive Tree Walk Protocol 自适应树遍历协议
 
-注意到，如果竞争站的数目$k$比较小时候，[[ch4 介质访问控制子层#p-persistent|获得信道概率]]会上升。因此可以通过分组减少竞争，极大提升信道使用效果
+注意到，如果竞争站的数目$k$比较小时候，[p-persistent CSMA 的获得信道概率](#p-persistent)会上升。因此可以通过分组减少竞争，极大提升信道使用效果
 
 自适应树中，将站看作是二叉树的叶节点，从根节点开始搜索。如果某个节点冲突，向下探寻左、右子节点；如果左节点不冲突了，给左节点下需求站发送数据；下一时间槽给右节点的站。在公共广播期间，站按照自身的父节点被搜索到的顺序竞争时间槽。
 
@@ -1020,7 +1020,7 @@ $$E=\sum_{j=0} jP(1-P)^{j-1}=\frac{1}{P}$$
 
 > spanning tree
 >
-> 包含所有路由器的树，不一定是最优路径（和[[ch5 网络层#^7ddb3a|汇集树]]相区别）
+> 包含所有路由器的树，不一定是最优路径（和汇集树相区别）
 
 #### Dijstra 最短路径
 
@@ -1216,11 +1216,11 @@ RED。因为路由难以得到显式信息通知拥塞，只有包丢失是容�
 
 #### Explicit Congestion Notification 显式拥塞通知
 
-ECN。不单独[[ch5 网络层#choke packets|发包]]，在包中间标志位标记拥塞信息。
+ECN。不单独[发拥塞通知包](#choke-packets)，在包中间标志位标记拥塞信息。
 
 #### Hop-by-Hop Backpressure
 
-防止路程过长，拥塞通知延迟太久。同时用[[ch5 网络层#choke packets|choke packets]]通知中间路由控制流量。
+防止路程过长，拥塞通知延迟太久。同时用[choke packets（拥塞通知包）](#choke-packets)通知中间路由控制流量。
 
 ## ch6 传输层
 
