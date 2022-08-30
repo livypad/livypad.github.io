@@ -1,5 +1,5 @@
 ---
-title: "笔记：Distributed Systems An Algorithmic Approach 2nd（更新到第7章）"
+title: "笔记：Distributed Systems An Algorithmic Approach 2nd（更新到第9章）"
 date: 2022-07-09T01:31:57+08:00
 draft: false
 tags: ["教程", "读书笔记"]
@@ -62,6 +62,12 @@ isCJKLanguage: true
         - [Lai-Yang 算法](#lai-yang-算法)
         - [分布式 debug](#分布式-debug)
     - [ch 9 Global State Collection](#ch-9-global-state-collection)
+        - [全局广播](#全局广播)
+        - [程序终止检测](#程序终止检测)
+            - [Dijstra-Scholten 算法](#dijstra-scholten-算法)
+            - [单向环的 token passing](#单向环的-token-passing)
+            - [信用点分配算法 credit-recovery algorithm](#信用点分配算法-credit-recovery-algorithm)
+        - [浪潮 wave 算法](#浪潮-wave-算法)
     - [ch 11 Coordination Algorithms](#ch-11-coordination-algorithms)
     - [ch 12 Fault-Tolerant Systems](#ch-12-fault-tolerant-systems)
     - [ch 13 Distributed Consensus](#ch-13-distributed-consensus)
@@ -843,14 +849,153 @@ flag[i] := (passive, ⊥)
 >
 > 如果本地状态 $s(i),s(j)$ 是由事件 $e_i,e_j$ 引发，那么逻辑时钟关系 $\forall k,VC_k(e_i)\sim VC_k(e_j)$
 
-对由初始状态可达的 consistent 的全局状态应用判断 $\phi$。这样的判断时间复杂度巨大，需要注意可拓展性：n个进程每个m个可能行动 $O(m^n)$
-
+对由初始状态可达的 consistent 的全局状态应用判断 $\phi$。这样的判断时间复杂度巨大，需要注意可拓展性：n 个进程每个 m 个可能行动 $O(m^n)$
 
 - Possibly $\phi$：至少一个为真
 - Definetly $\phi$：永真 $definetly\;\phi \implies possibly\; \phi$
 - Never $\phi$：永假
 
 ## ch 9 Global State Collection
+
+本章假定底层任务能表现出预期的性质（如检测终止算法中，底层任务确实能终止）
+
+### 全局广播
+
+假设本地需要被收集的为 $s(i)$,最后每个进程都能收集到 $\forall i:V(i)=\{s(k):0\le k\le n-1\}$。那 naive 的方法就是每次向邻居通知自己新知道的其他进程的信息，直到大家知道全了。消息复杂度：向每个邻居发，每次多一个：$O(n^2)$，全局 $O(n^3)$
+
+```
+program broadcast (for process i}
+define Vi, Wi: set of values;
+initially Vi = {s(i)}, Wi = Ø {and every channel is empty}
+do Vi ≠ Wi      →   send Vi\Wi to every outgoing channel;
+                    Wi:= Vi
+[] ¬empty (k,i) →   receive X from channel (k,i);
+                    Vi:= Vi ∪ X
+od
+```
+
+- $empty(i,j)\implies W_i\subseteq V_j$：归纳法易证，注意到 $W_i^{r+1}=V_i^{r+1},V^{r+1}/W^r_i\subseteq V_j$
+- 停止时候能保证 $\forall i:V(i)=\{s(k):0\le k\le n-1\}$: 由上一条+停止条件 有 $\forall i,j:V_i\subseteq V_j$，显然
+- 有界步终止：必然递增
+
+### 程序终止检测
+
+（不一定需要是全局终止，相同步时候也要检测某相结束以开启下一相）
+
+#### Dijstra-Scholten 算法
+
+> diffusing computation
+>
+> 由一个 initiator 开启，通知邻居逐步开始的计算
+
+- 沿方向的消息为 `signal` ，反向消息为`ack`
+- 环境 environment 节点：只有向外边
+- 内部 internal 节点：从环境节点可达
+- 环境节点起始发`signal` 开始算法
+- 任何节点第一次收到`signal` 的发送方为父节点，然后自己开始向邻居广播`signal`
+- 之后收到`signal` 立刻回复`ack`，自己邻居都回复了`ack`后向父节点回复`ack`，起始节点收完`ack`即算法结束
+- 对于某条有向边，沿向`signal`和反向`ack`数值差为 deficit
+- 对于某个节点：
+  - $C$：入边的 deficit 和
+  - $D$：出边的 deficit 和
+
+在这样设定下，有如下 2 不变式：
+
+1. $(C\ge 0)\wedge(D\ge 0)$:deficit 定义可知
+2. $(C>0)\vee(D=0)$:（1 等待邻居子图完成）或者是（2 邻居都完成了，可以回复父节点了）
+
+注意上述不变式有 $(C>1)\vee(C=1\wedge D=0)$，整个进程之间关系是一棵树。要求信道 FIFO（保证工作信息和检测信息之间正确顺序，防止虚假终止）。在大家确实停止后，消息复杂度 $O(|E|)$（每个信道来去各一次）
+
+```
+program detect {for an internal node i}
+define  C, D : integer
+        m: (signal, ack) {represents the type of message received}
+        state: (active, passive)
+initially C = 0, D = 0, parent(i) = i
+do (m = signal) ∧ (C = 0)   → C := 1; state := active;
+                                parent := sender
+                                //开始准备向邻居广播
+    [] m = ack                  → D := D − 1
+    [] (C = 1 ∧ D = 0) ∧ (state = passive) → send ack to parent;
+                                            C:= 0; parent(i) = i
+                                 //节点可以返回初始状态了
+    [](m = signal) ∧ (C = 1)    → send ack to the sender
+                                // 对多余的signal直接回复ack
+od
+```
+
+#### 单向环的 token passing
+
+1. 每个节点 `black,white`两个状态，初始`white`
+2. 向 token 传递反向高的节点发消息后，变`black`
+3. `white`节点传递 token 时颜色不变，`black`节点传递时染黑 token
+4. 节点传递完 token 后变回`white`
+5. initiator 能收发白色 token 即终止
+
+算法要求消息通信瞬时（新的消息要追上 token 速度）
+
+```
+program term {for process i > 0，假定进程0为启动进程}
+define  color, token: (black, white) {colors of process and token}
+        state : (active, passive)
+do  (token = white) ∧ (state ≠ passive)   → skip
+    [](token = white) ∧ (state = passive) →
+            if color(i) = black → color(i) := white; send a black token
+            [] color(i) = white → send a white token
+            fi
+    [](token = black)   → send a black token
+    []i sends a message to a higher numbered process → color(i) :=black
+od
+{for process 0}
+send a white token;
+do
+(token ≠ white) → send a white token
+od
+//收回白token 结束
+```
+
+#### 信用点分配算法 credit-recovery algorithm
+
+- $\sum credit(i)=1$
+- 对于活跃进程：$credit(i)>0$
+- 对于休眠进程：$credit(i)=0$
+
+1. 活跃进程发消息时，将自身$credit/2$ 随消息发出
+2. 休眠进程接到消息，转活跃，并对于自身$+=msg_{credit}$
+3. 活跃进程收到消息，可以：发回给启动进程，或者为了减少消息数目 保留加到自己的 $credit$
+
+### 浪潮 wave 算法
+
+> wave
+>
+> 一个启动进程某活动，引发邻居活动，进而邻居的邻居活动，此谓浪潮
+>
+> 1. 每个计算有界
+> 2. 每个计算至少包括一个确定性事件 decision event
+> 3. 一个确定性事件 decision event 在每个进程中一些事件的因果前
+
+> PIF
+>
+> Propagation of Information with Feedback，类似于 [Dijstra Scholten 算法](#dijstra-scholten-算法)里的广播，但是此时返回是副本不是`ack`
+
+```
+program PIF {for the initiator node i}
+define  count : integer
+        N(i): set of neighbors of process i
+
+send M to each neighbor; count := |N(i)|
+do
+    count ≠ 0 ∧ M received → count: = count − 1
+od
+{program for a non-initiator node j≠i}
+if
+    message M received → parent := sender
+                        send M to each neighbor except parent;
+                        count := |N(j)|;
+    []count > 0 ∧ M received → count: = count − 1
+    []count = 0              → send M to parent
+fi
+```
 
 ## ch 11 Coordination Algorithms
 
