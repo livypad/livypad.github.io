@@ -2462,6 +2462,12 @@
 </ul>
 </li>
 <li><a href="#%E6%B5%AA%E6%BD%AE-wave-%E7%AE%97%E6%B3%95">浪潮 wave 算法</a></li>
+<li><a href="#%E6%AD%BB%E9%94%81%E6%A3%80%E6%B5%8B">死锁检测</a>
+<ul>
+<li><a href="#resource-deadlock">resource deadlock</a></li>
+<li><a href="#communication-deadlock">communication deadlock</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#ch-11-coordination-algorithms">ch 11 Coordination Algorithms</a></li>
@@ -3525,6 +3531,78 @@ if
     []count &gt; 0 ∧ M received → count: = count − 1
     []count = 0              → send M to parent
 fi
+</code></pre><h3 id="死锁检测">死锁检测</h3>
+<h4 id="resource-deadlock">resource deadlock</h4>
+<p>循环等待资源引发的死锁，特征是<code>AND</code></p>
+<ol>
+<li>资源访问同步互斥</li>
+<li>持有资源并等待更多资源</li>
+<li>资源调度非抢占</li>
+<li>循环等待</li>
+</ol>
+<blockquote>
+<p>$succ(i)$</p>
+<p>进程 i 等待进程的集合</p>
+</blockquote>
+<blockquote>
+<p>$probe(i,s,r)$</p>
+<p>消息，i 启动，s 实际发送，r 接受</p>
+</blockquote>
+<blockquote>
+<p>$depend[j,i]$</p>
+<p>直到 j 释放资源，i 才能进展。那么容易知道，有：</p>
+<ol>
+<li>$depend[j,i]\implies j\in succ^m(i)$</li>
+<li>$depend[k,j]\wedge depend[j,i]\implies depend[k,i]$</li>
+</ol>
+</blockquote>
+<pre tabindex="0"><code>program resource deadlock {program for process k}
+    define P() :  probe {has three fields initiator, sender, receiver}
+    depend[k]: array [0..n−1] of boolean
+initially ∀j: 0 ≤ j ≤ n−1, depend[k,j] = false
+do
+    P(i,s,k) received ∧ k is waiting ∧ (k ≠ i) ∧ ¬depend(k, i)→  ∀j ∈ succ(k): send P(i,k,j) to j;   depend(k,i) := true
+    [] P(i,s,k) received ∧ k is waiting ∧ (k = i) →  process k is deadlocked
+od
+</code></pre><p>当且仅当启动算法的进程在 wait for graph 时候，死锁可以成功检测。</p>
+<h4 id="communication-deadlock">communication deadlock</h4>
+<p>消息传递模型中，彼此等待唤醒信息，特征是<code>OR</code>。</p>
+<blockquote>
+<p>dependent set, $depend(i)$</p>
+<p>对于进程 i，接收到 $depend(i)$ 任意一个进程消息后将活跃</p>
+</blockquote>
+<p>在子集 S 中</p>
+<ol>
+<li>S 中所有进程都消极</li>
+<li>$\forall i \in S, depend(i) \subseteq S$</li>
+<li>S 中信道皆空</li>
+</ol>
+<ul>
+<li>第一次接收到 probe 时候向外发送 probe</li>
+<li>之后接收到 probe 后返回 ack</li>
+<li>对外每个 probe 都收到 ack 后，对第一次的 parent 发送 ack</li>
+<li>注意 $num_{deficit}=num_{probe}-num_{ack}$</li>
+</ul>
+<p>算法和 <a href="#dijstra-scholten-%E7%AE%97%E6%B3%95">Dijstra-Scholten 算法</a> 类似，证明也是类似。</p>
+<pre tabindex="0"><code>program communication deadlock
+    define  P () : probe {has three fields  initiator, sender, receiver}
+            parent : process  ack : message
+            D : integer
+    {program for the initiator node i}
+initially node i send P(i,i,j) to each j ∈ succ(i), parent = null, D = |succ(i)|
+do
+    P(i,s,i) → send ack to s;
+    [] ack → D := D−1
+    [] D = 0 → deadlock detected
+od {program for a non-initiator node k}
+
+initially D = 0, parent = k
+do
+    P(i,s,k) ∧ k is waiting ∧ (parent = k) → parent := s;    ∀j  ∈ succ(k): send (i,k,j) to j;   D := D + |succ(k)|
+    []P(i,s,k) ∧ k is waiting ∧ (parent ≠ k) → send ack to s;
+    []ack → D := D − 1
+    []D = 0 ∧ k is waiting ∧ (parent ≠ k) →  se nd ack to parent; parent := k
+od
 </code></pre><h2 id="ch-11-coordination-algorithms">ch 11 Coordination Algorithms</h2>
 <h2 id="ch-12-fault-tolerant-systems">ch 12 Fault-Tolerant Systems</h2>
 <h2 id="ch-13-distributed-consensus">ch 13 Distributed Consensus</h2>
