@@ -68,6 +68,9 @@ isCJKLanguage: true
             - [单向环的 token passing](#单向环的-token-passing)
             - [信用点分配算法 credit-recovery algorithm](#信用点分配算法-credit-recovery-algorithm)
         - [浪潮 wave 算法](#浪潮-wave-算法)
+        - [死锁检测](#死锁检测)
+            - [resource deadlock](#resource-deadlock)
+            - [communication deadlock](#communication-deadlock)
     - [ch 11 Coordination Algorithms](#ch-11-coordination-algorithms)
     - [ch 12 Fault-Tolerant Systems](#ch-12-fault-tolerant-systems)
     - [ch 13 Distributed Consensus](#ch-13-distributed-consensus)
@@ -995,6 +998,88 @@ if
     []count > 0 ∧ M received → count: = count − 1
     []count = 0              → send M to parent
 fi
+```
+
+### 死锁检测
+
+#### resource deadlock
+
+循环等待资源引发的死锁，特征是`AND`
+
+1. 资源访问同步互斥
+2. 持有资源并等待更多资源
+3. 资源调度非抢占
+4. 循环等待
+
+> $succ(i)$
+>
+> 进程 i 等待进程的集合
+
+> $probe(i,s,r)$
+>
+> 消息，i 启动，s 实际发送，r 接受
+
+> $depend[j,i]$
+>
+> 直到 j 释放资源，i 才能进展。那么容易知道，有：
+>
+> 1. $depend[j,i]\implies j\in succ^m(i)$
+> 2. $depend[k,j]\wedge depend[j,i]\implies depend[k,i]$
+
+```
+program resource deadlock {program for process k}
+    define P() :  probe {has three fields initiator, sender, receiver}
+    depend[k]: array [0..n−1] of boolean
+initially ∀j: 0 ≤ j ≤ n−1, depend[k,j] = false
+do
+    P(i,s,k) received ∧ k is waiting ∧ (k ≠ i) ∧ ¬depend(k, i)→  ∀j ∈ succ(k): send P(i,k,j) to j;   depend(k,i) := true
+    [] P(i,s,k) received ∧ k is waiting ∧ (k = i) →  process k is deadlocked
+od
+```
+
+当且仅当启动算法的进程在 wait for graph 时候，死锁可以成功检测。
+
+#### communication deadlock
+
+消息传递模型中，彼此等待唤醒信息，特征是`OR`。
+
+> dependent set, $depend(i)$
+>
+> 对于进程 i，接收到 $depend(i)$ 任意一个进程消息后将活跃
+
+在子集 S 中
+
+1. S 中所有进程都消极
+2. $\forall i \in S, depend(i) \subseteq S$
+3. S 中信道皆空
+
+- 第一次接收到 probe 时候向外发送 probe
+- 之后接收到 probe 后返回 ack
+- 对外每个 probe 都收到 ack 后，对第一次的 parent 发送 ack
+- 注意 $num_{deficit}=num_{probe}-num_{ack}$
+
+算法和 [Dijstra-Scholten 算法](#dijstra-scholten-算法) 类似，证明也是类似。
+
+```
+program communication deadlock
+    define  P () : probe {has three fields  initiator, sender, receiver}
+            parent : process  ack : message
+            D : integer
+    {program for the initiator node i}
+initially node i send P(i,i,j) to each j ∈ succ(i), parent = null, D = |succ(i)|
+do
+    P(i,s,i) → send ack to s;
+    [] ack → D := D−1
+    [] D = 0 → deadlock detected
+od {program for a non-initiator node k}
+
+initially D = 0, parent = k
+do
+    P(i,s,k) ∧ k is waiting ∧ (parent = k) → parent := s;    ∀j  ∈ succ(k): send (i,k,j) to j;   D := D + |succ(k)|
+    []P(i,s,k) ∧ k is waiting ∧ (parent ≠ k) → send ack to s;
+    []ack → D := D − 1
+    []D = 0 ∧ k is waiting ∧ (parent ≠ k) →  se nd ack to parent; parent := k
+od
 ```
 
 ## ch 11 Coordination Algorithms
