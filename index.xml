@@ -1,4 +1,142 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>zhh's blog</title><link>https://livypad.github.io/</link><description>Recent content on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Wed, 31 Aug 2022 00:18:17 +0800</lastBuildDate><atom:link href="https://livypad.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Computer Network by Tanenbaum(大概第6章)</title><link>https://livypad.github.io/post/2022-08-31-netbytanebaum/</link><pubDate>Wed, 31 Aug 2022 00:18:17 +0800</pubDate><guid>https://livypad.github.io/post/2022-08-31-netbytanebaum/</guid><description>Computer Network by Tanenbaum ch1 term 分层 ch2 物理层 信道容量 介质 调制 ch3 数据链路层 frame 检错纠错 hamming protocol 乌托邦式的单工协议 简单的 停-等 协议，无错信道 简单的 停-等 协议，信道可能出错</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>zhh's blog</title><link>https://livypad.github.io/</link><description>Recent content on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Tue, 13 Sep 2022 00:10:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Designing data-intensive applications(开始记录）</title><link>https://livypad.github.io/post/2022-08-31-ddia/</link><pubDate>Tue, 13 Sep 2022 00:10:00 +0800</pubDate><guid>https://livypad.github.io/post/2022-08-31-ddia/</guid><description>Designing data-intensive applications: the big ideas behind reliable, scalable, and maintainable systems Foundations of Data Systems Data Models SQL：关系型，key-value 对，关联程度一般 文档型：自包含文档，少关联 图数据库：数据大量关联 Storage and Retrival</description><content:encoded><![CDATA[<h1 id="designing-data-intensive-applications-the-big-ideas-behind-reliable-scalable-and-maintainable-systems">Designing data-intensive applications: the big ideas behind reliable, scalable, and maintainable systems</h1>
+<h2 id="foundations-of-data-systems">Foundations of Data Systems</h2>
+<h3 id="data-models">Data Models</h3>
+<ul>
+<li>SQL：关系型，key-value 对，关联程度一般</li>
+<li>文档型：自包含文档，少关联</li>
+<li>图数据库：数据大量关联</li>
+</ul>
+<h3 id="storage-and-retrival">Storage and Retrival</h3>
+<ul>
+<li>OLTP 数据存储系统
+<ul>
+<li>日志结构：追加
+<ul>
+<li>hash-map：key 对应数据文件当中的位置偏移，只要 key 表能装入内存
+<ul>
+<li>高性能读写</li>
+<li>对大量 key 不友好</li>
+<li>区间查询不友好</li>
+</ul>
+</li>
+<li>SSTables：排序字符串表：按顺序合并存储 k-v
+<ul>
+<li>可以稀疏存储 key</li>
+<li>内存维护表，大于表的写进磁盘文件，一个 log 用来数据恢复</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>原地更新
+<ul>
+<li>B-Tree：固定大小的段/页组合
+<ul>
+<li>页大小和底层磁盘契合</li>
+<li>覆盖而不是追加</li>
+<li>大于页大小时候分裂页</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>OLAP 数据分析系统
+<ul>
+<li>数据仓库：专门用于数据分析的数据库，是工作用数据库的副本，面向查询
+<ul>
+<li>事实表：记录事件事实的主表，大，列多</li>
+<li>列存储：列太多，一行拆开，每列单独存</li>
+<li>列压缩：<code>None</code>值可以被压缩</li>
+<li>聚合：面对常见操作预处理</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="encoding">Encoding</h3>
+<blockquote>
+<p>向前兼容</p>
+<p>旧版本可读新版本的数据，一般通过忽略实现</p>
+</blockquote>
+<blockquote>
+<p>向后兼容</p>
+<p>新版本可读旧版本数据</p>
+</blockquote>
+<ul>
+<li>语言自带：性能、通用性差、安全问题（代码生成）</li>
+<li>文本文件（XML，JSON，CSV）：大，各种数据格式支持弱</li>
+<li>二进制编码：小，带有更好的兼容检查支持，自带类型，自带注释</li>
+</ul>
+<h3 id="dataflow">Dataflow</h3>
+<ul>
+<li>基于数据库：数据比代码长久，旧版本更新需要忽略新的项</li>
+<li>基于服务（web 服务 和 RPC）
+<ul>
+<li>web 服务：通过 HTTP 向服务器公开的 API 调用服务</li>
+<li>RPC：远程调用有网络自身带来新问题，大跨度有兼容性问题</li>
+</ul>
+</li>
+<li>基于消息传递：加入一个消息代理/Actor</li>
+</ul>
+<h2 id="distributed-data">Distributed Data</h2>
+<h3 id="replication">Replication</h3>
+<ul>
+<li>主从复制
+<ul>
+<li>分主节点（可读可写）和从节点（只读）</li>
+<li>新节点建立：快照+基础上的变更 log</li>
+<li>恢复：选举+重新配置</li>
+<li>方法
+<ul>
+<li>基于语句：非确定性语句改为传结果（VM-FT）</li>
+<li>基于预写日志 Write-ahead log (WAL)：磁盘字节改变的日志</li>
+<li>基于行的逻辑日志：按照修改的逻辑</li>
+<li>基于触发器：应用层控制</li>
+</ul>
+</li>
+<li>复制滞后和一致性
+<ul>
+<li>写后读：个人能读到自己之前的写</li>
+<li>单调读：多次读取的版本号不减</li>
+<li>前缀一致读：读的顺序取绝于当时写的顺序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多主节点复制
+<ul>
+<li>场景：多中心、离线工作、协作编辑</li>
+<li>需要解决/规避同时写冲突</li>
+</ul>
+</li>
+<li>无主节点复制
+<ul>
+<li>失效节点修复：
+<ul>
+<li>读修复：检测到过期的值，适合频繁读取情形</li>
+<li>反熵过程：不断检测差异并复制缺失数据，不保证顺序，可能严重滞后</li>
+</ul>
+</li>
+<li>quorum 一致：
+<ul>
+<li>一次写入、读取需要确认的节点数目有要求，可以保证读到最新值 $w+r&gt;n$</li>
+<li>由于：同时读写，回滚错误、宽松 quorum 等原因，该 quorum 一致性不是确定性保证</li>
+<li>宽松 quorum：不满足条件时，先缓存等网络重连后继续写入</li>
+</ul>
+</li>
+<li>检测并发写
+<ul>
+<li>每个 key 对应一个 version 号，每次写递增 version 号</li>
+<li>读 key 时候返回所有未覆盖的值和 version 号，写之前必须读</li>
+<li>写时必须包含之前读的 version 号，并手动 merge 读到的结果</li>
+<li>可以覆盖低 version 号的结果，高版本不动</li>
+<li>注意，删除需要特殊的 remove 标记（简单移除会被误认为未更新）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded></item><item><title>笔记：Computer Network by Tanenbaum(大概第6章)</title><link>https://livypad.github.io/post/2022-08-31-netbytanebaum/</link><pubDate>Wed, 31 Aug 2022 00:18:17 +0800</pubDate><guid>https://livypad.github.io/post/2022-08-31-netbytanebaum/</guid><description>Computer Network by Tanenbaum ch1 term 分层 ch2 物理层 信道容量 介质 调制 ch3 数据链路层 frame 检错纠错 hamming protocol 乌托邦式的单工协议 简单的 停-等 协议，无错信道 简单的 停-等 协议，信道可能出错</description><content:encoded><![CDATA[<ul>
 <li><a href="#computer-network-by-tanenbaum">Computer Network by Tanenbaum</a>
 <ul>
 <li><a href="#ch1">ch1</a>
@@ -2225,120 +2363,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>]]></content:encoded></item><item><title>笔记：Designing data-intensive applications(开始记录）</title><link>https://livypad.github.io/post/2022-08-31-ddia/</link><pubDate>Wed, 31 Aug 2022 00:10:00 +0800</pubDate><guid>https://livypad.github.io/post/2022-08-31-ddia/</guid><description>Designing data-intensive applications: the big ideas behind reliable, scalable, and maintainable systems Foundations of Data Systems Data Models SQL：关系型，key-value 对，关联程度一般 文档型：自包含文档，少关联 图数据库：数据大量关联 Storage and Retrival</description><content:encoded><![CDATA[<h1 id="designing-data-intensive-applications-the-big-ideas-behind-reliable-scalable-and-maintainable-systems">Designing data-intensive applications: the big ideas behind reliable, scalable, and maintainable systems</h1>
-<h2 id="foundations-of-data-systems">Foundations of Data Systems</h2>
-<h3 id="data-models">Data Models</h3>
-<ul>
-<li>SQL：关系型，key-value 对，关联程度一般</li>
-<li>文档型：自包含文档，少关联</li>
-<li>图数据库：数据大量关联</li>
-</ul>
-<h3 id="storage-and-retrival">Storage and Retrival</h3>
-<ul>
-<li>OLTP 数据存储系统
-<ul>
-<li>日志结构：追加
-<ul>
-<li>hash-map：key 对应数据文件当中的位置偏移，只要 key 表能装入内存
-<ul>
-<li>高性能读写</li>
-<li>对大量 key 不友好</li>
-<li>区间查询不友好</li>
-</ul>
-</li>
-<li>SSTables：排序字符串表：按顺序合并存储 k-v
-<ul>
-<li>可以稀疏存储 key</li>
-<li>内存维护表，大于表的写进磁盘文件，一个 log 用来数据恢复</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>原地更新
-<ul>
-<li>B-Tree：固定大小的段/页组合
-<ul>
-<li>页大小和底层磁盘契合</li>
-<li>覆盖而不是追加</li>
-<li>大于页大小时候分裂页</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>OLAP 数据分析系统
-<ul>
-<li>数据仓库：专门用于数据分析的数据库，是工作用数据库的副本，面向查询
-<ul>
-<li>事实表：记录事件事实的主表，大，列多</li>
-<li>列存储：列太多，一行拆开，每列单独存</li>
-<li>列压缩：<code>None</code>值可以被压缩</li>
-<li>聚合：面对常见操作预处理</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="encoding">Encoding</h3>
-<blockquote>
-<p>向前兼容</p>
-<p>旧版本可读新版本的数据，一般通过忽略实现</p>
-</blockquote>
-<blockquote>
-<p>向后兼容</p>
-<p>新版本可读旧版本数据</p>
-</blockquote>
-<ul>
-<li>语言自带：性能、通用性差、安全问题（代码生成）</li>
-<li>文本文件（XML，JSON，CSV）：大，各种数据格式支持弱</li>
-<li>二进制编码：小，带有更好的兼容检查支持，自带类型，自带注释</li>
-</ul>
-<h3 id="dataflow">Dataflow</h3>
-<ul>
-<li>基于数据库：数据比代码长久，旧版本更新需要忽略新的项</li>
-<li>基于服务（web 服务 和 RPC）
-<ul>
-<li>web 服务：通过 HTTP 向服务器公开的 API 调用服务</li>
-<li>RPC：远程调用有网络自身带来新问题，大跨度有兼容性问题</li>
-</ul>
-</li>
-<li>基于消息传递：加入一个消息代理/Actor</li>
-</ul>
-<h2 id="distributed-data">Distributed Data</h2>
-<h3 id="replication">Replication</h3>
-<ul>
-<li>主从复制
-<ul>
-<li>分主节点（可读可写）和从节点（只读）</li>
-<li>新节点建立：快照+基础上的变更 log</li>
-<li>恢复：选举+重新配置</li>
-<li>方法
-<ul>
-<li>基于语句：非确定性语句改为传结果（VM-FT）</li>
-<li>基于预写日志 Write-ahead log (WAL)：磁盘字节改变的日志</li>
-<li>基于行的逻辑日志：按照修改的逻辑</li>
-<li>基于触发器：应用层控制</li>
-</ul>
-</li>
-<li>复制滞后和一致性
-<ul>
-<li>写后读：个人能读到自己之前的写</li>
-<li>单调读：多次读取的版本号不减</li>
-<li>前缀一致读：读的顺序取绝于当时写的顺序</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>多主节点复制
-<ul>
-<li>场景：多中心、离线工作、协作编辑</li>
-<li>需要解决/规避同时写冲突</li>
-</ul>
-</li>
-<li>无主节点复制</li>
-</ul>
-]]></content:encoded></item><item><title>启动共情的责任人</title><link>https://livypad.github.io/post/2022-08-15-empathy/</link><pubDate>Mon, 15 Aug 2022 01:04:00 +0800</pubDate><guid>https://livypad.github.io/post/2022-08-15-empathy/</guid><description>对于文艺作品，启动共情的责任人 Chinese Version 观众可以理解文艺作品的情绪，但是观众自身没有投入情绪，应该归咎于谁？我个人认为，应该归咎于文艺作品创作者，</description><content:encoded><![CDATA[<h1 id="对于文艺作品启动共情的责任人">对于文艺作品，启动共情的责任人</h1>
+</div>]]></content:encoded></item><item><title>启动共情的责任人</title><link>https://livypad.github.io/post/2022-08-15-empathy/</link><pubDate>Mon, 15 Aug 2022 01:04:00 +0800</pubDate><guid>https://livypad.github.io/post/2022-08-15-empathy/</guid><description>对于文艺作品，启动共情的责任人 Chinese Version 观众可以理解文艺作品的情绪，但是观众自身没有投入情绪，应该归咎于谁？我个人认为，应该归咎于文艺作品创作者，</description><content:encoded><![CDATA[<h1 id="对于文艺作品启动共情的责任人">对于文艺作品，启动共情的责任人</h1>
 <h2 id="chinese-version">Chinese Version</h2>
 <p>观众可以理解文艺作品的情绪，但是观众自身没有投入情绪，应该归咎于谁？我个人认为，应该归咎于文艺作品创作者，而不是指责观众。考虑一个极端的例子，假定能搞到政府的某种负面有关事情的涉及名单（eg，新冠死亡名单）和对应人的背景，那你也不可能同等强度的对每个条目对应的人投入足量且相对平衡的情绪。不然的话，一个名单对应的数目，总比一个故事多数十，乃至成百上千吧。那投入情绪真能实现对应倍数吗？某种意义上，文艺作品就是利用了智人的脑结构的特殊性质，而智人投入情绪也不是按照什么非常合理的原则的。那这样的话，如何调动情绪显然就应该是创作者考虑的问题。</p>
 <h2 id="english-version">English Version</h2>
