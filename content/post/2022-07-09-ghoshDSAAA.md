@@ -1,6 +1,6 @@
 ---
-title: "笔记：Distributed Systems An Algorithmic Approach 2nd（更新到第9章）"
-date: 2022-07-09T01:31:57+08:00
+title: "笔记：Distributed Systems An Algorithmic Approach 2nd（更新到第10章）"
+date: 2022-10-04T01:31:57+08:00
 draft: false
 tags: ["教程", "读书笔记"]
 isCJKLanguage: true
@@ -71,6 +71,21 @@ isCJKLanguage: true
         - [死锁检测](#死锁检测)
             - [resource deadlock](#resource-deadlock)
             - [communication deadlock](#communication-deadlock)
+    - [ch 10 Graph Algorithms](#ch-10-graph-algorithms)
+        - [路由算法](#路由算法)
+            - [Ford 算法](#ford-算法)
+            - [Chandy and Misra 改进](#chandy-and-misra-改进)
+            - [距离向量](#距离向量)
+            - [链路状态算法](#链路状态算法)
+            - [间隔路由算法](#间隔路由算法)
+            - [前缀路由](#前缀路由)
+        - [图遍历](#图遍历)
+            - [Chang 生成树构建](#chang-生成树构建)
+            - [Tarry 图遍历](#tarry-图遍历)
+            - [最小生成树](#最小生成树)
+        - [图染色](#图染色)
+            - [(D + 1)染色](#d--1染色)
+            - [6 色平面图](#6-色平面图)
     - [ch 11 Coordination Algorithms](#ch-11-coordination-algorithms)
     - [ch 12 Fault-Tolerant Systems](#ch-12-fault-tolerant-systems)
     - [ch 13 Distributed Consensus](#ch-13-distributed-consensus)
@@ -1079,6 +1094,241 @@ do
     []P(i,s,k) ∧ k is waiting ∧ (parent ≠ k) → send ack to s;
     []ack → D := D − 1
     []D = 0 ∧ k is waiting ∧ (parent ≠ k) →  se nd ack to parent; parent := k
+od
+```
+
+## ch 10 Graph Algorithms
+
+### 路由算法
+
+#### Ford 算法
+
+注意，i-j-k 的最短路径中，i-j 本身也是最短路径
+
+```
+program Bellman-Ford shortest path
+{program for process 0}
+send (D(0)+ w(0,j),0) to each node in j ∈ N(0)
+{program for process j > 0, after receiving a message from process i}
+do D(i) + w(i,j) < D(j)→
+    D(j):= D(i) + w(i,j);
+    parent(j):= i;
+    send the new D(j) to each node in N(j)\{i}
+od
+```
+
+#### Chandy and Misra 改进
+
+应对负边权，加入一个 [类似终止检测的方法](#dijstra-scholten-算法)
+
+```
+program Chandy-Misra shortest path
+{program for process 0}
+send (D(0)+ w(0,k),0) to each node in k ∈ N(0);
+deficit:= |N(0)|;
+do
+    D(i)+ w(i,0)≥ D(0)→ send ack to sender i
+    []deficit > 0 ∧ ack → deficit:= deficit – 1
+od;
+{deficit = 0 signals termination}
+{program for process j > 0 after receiving a message from process i}
+{initially ∀j:D(j) = ∞, deficit = 0}
+do
+    D(i)+ w(i,j)< D(j)→
+        if (deficit > 0)∧(parent ≠ j)→ send ack to parent
+        fi;
+        D(j) := D(i)+ w(i, j);
+        parent := i; {the sender becomes the new parent}
+        send the new D(j) to each node in N(j){i};
+        deficit := deficit +|N(j)|−1
+    []D(i)+ w(i, j)≥ D(j)→ send ack to sender j
+    []deficit > 0 ∧ ack → deficit := deficit − 1
+    [](deficit = 0) ∧ (parent ≠ j)→ send ack to parent; parent = j
+od
+```
+
+#### 距离向量
+
+每个节点的路由表为`(destination, next hop, distance)`,distance/距离向量初始为
+
+$$
+\begin{aligned}
+D(i,j)&=0, i==j\\
+&=1, j\in N(i)\\
+&=\infty, j\notin N(i)\cup\{i\}
+\end{aligned}
+$$
+
+之后反复更新。但这样更新，正确容易收敛到；如果断联，会每次距离递增 1 直至无穷
+
+$$
+\forall k\neq i:D(i,k)=min_j(w(i,j)+D(j,k))
+$$
+
+#### 链路状态算法
+
+两阶段
+
+1. reliable flooding：周期广播本节点到邻接节点距离
+2. 独立计算网络拓扑
+
+3. 保证节点收到全部他者的 reliable flooding 带来的 link-state packets
+   - 每个包带递增`seq`，丢弃重复包
+   - `seq`号需要位数足够，防止溢出
+4. 故障处理
+   - `time-to-live`字段，定期过期信息保证最新
+   - TTL 还可以应对偶发的`seq`顺序问题（旧包过期，新的小`seq`包不会被丢）
+
+```
+program link state {for node i}
+define
+    L() : link state packet LSP
+    seq : integerz
+    local : array [0..n – 1] of LSP {local[k] is the LSP from node k}
+    {initially, seq = 0, local[k] := (k, undefined for ∀k ≠i, 0)}
+do
+    neighborhood change detected →
+        compute link state S;
+        send L(i, S, seq) to k ∈ N(i);
+        local[0] := (i, S, seq)
+        seq := seq + 1
+    [] L(j, S, seq) received →
+        if(j = i) → discard L(j, S, seq)
+            [](j≠i)∧(L.seq > local[j].seq)→
+            enter L(j, S, seq) into the local database;
+            forward L(j, S, seq) to k∈N(i)\{sender}
+            [](j≠i)∧(L.seq ≤ local[j].seq)→
+            discard L(j, S, seq)
+        fi
+do
+```
+
+#### 间隔路由算法
+
+$$
+\begin{aligned}
+interval[p, q)\equiv &if\ p<q:p,p+1 ...q-2,q-1\\
+&if\ p\ge q:p,p+1 ...n-2,n-1,0,1,...q-2,q-1
+\end{aligned}
+$$
+
+按照$interval[p, q)$对应的端口发消息
+
+1. 生成树根节点标号 0，先序遍历，每次递增 1
+2. 按照$L(i)+T(i)+1 \mod n$标记端口
+   1. $L(i)$为自身标号
+   2. $T(i)$为下面子树节点个数（除了自己）
+
+可以推广用多个标签
+
+#### 前缀路由
+
+为了网络结构的频繁变动设计（非常像 URL）。考虑一个字母表$\sigma=\{a,b,c,d...\}$和空字符$\lambda: \forall x\in \sigma:\lambda\cdot x=x$
+
+1. 根节点标签$\lambda$
+2. 子树根节点为$L$，子树的子节点的标签即为$L\cdot x,x\in \sigma$
+3. 到子节点的端口标子域名标签，到父节点标$\lambda$
+4. 如果节点$(u,v)$非树边，标节点全标签。如果 v 就是根节点，把 u 的父节点端口改成父节点标签（防止和 2 冲突，两个$\lambda$端口）
+
+```
+program prefix routing
+{Y = label of the current node, X = label of the destination}
+if
+    X = Y → deliver message locally
+    [] X ≠ Y → forward message to the port labeled with the longest prefix of X
+fi
+```
+
+### 图遍历
+
+#### Chang 生成树构建
+
+对外传染发`probe`信息，结束后向父节点发`echo`
+
+```
+program Changs’s spanning tree
+define probe, echo: messages, parent: process
+initially ∀i>0, parent(i)=i, parent(0)=undefined
+{program of the initiator node 0}
+send probe to each neighbor j ∈ N(0)
+do
+    number of echoes ≠ number of probes →
+        echo received → echo:= echo + 1
+        probe received → send echo to the sender
+od
+{program for node j>0 , after receiving a probe}
+first probe → parent:= sender; forward probe to non-parent
+neighbors;
+do
+    number of echoes ≠ number of probes →
+        echo received → echo:=echo+1
+        probe received → send echo to the sender
+od
+send echo to parent; parent(i):= i
+```
+
+#### Tarry 图遍历
+
+1. 向其他邻居发 token
+2. 如果不行了，向父节点（第一次传来 token 的节点）传回 token
+
+一条边两次：$2\cdot|E|$
+
+#### 最小生成树
+
+Prim 和 Kruskal
+
+### 图染色
+
+#### (D + 1)染色
+
+定义$nc(i)=\{c(j):j\in N(i)\}$，可选颜色范围 C，可能数目远大于最优
+
+```
+program (D + 1) coloring
+define c(i): color {of process i}, b: color
+{program for process i}
+do
+    ∃j ∈ N(i):c(i)= c(j) → c(i):= b:b ∈ {C\nc(i)}
+od
+```
+
+如果图有向无环，借助前缀和后继，可以减少可选颜色数目
+
+```
+program dag coloring;
+{program for node i}
+initially ∀i : c(i)=0;
+do
+    ∃j ∈ succ(i):c(i)= c(j)→ c(i):= b:b ∈ {C\sc(i)}
+od
+```
+
+#### 6 色平面图
+
+- 要求 coarse-grain atomicity，一个节点原子的检查和执行
+- 将平面图转成度数小于 6 的有向无环图，然后用 [有向无环图方法](#d--1染色)
+- 平面图至少一个节点度数$\le5$（欧拉定理）
+- 每次剔除$\le5$的节点，剩余图还是平面图，因此可一直进行
+
+```
+program undirected to dag;
+initially all edges are undirected;
+{program for each node i}
+do
+    number of undirected edges incident on node i ≤ 5 →
+    make all undirected edges outgoing
+od
+```
+
+```
+program planar graph coloring;
+{program for node i}
+do {Layer A: dag generation actions}
+    number of undirected edges incident on it ≤ 5 →
+        make all undirected edges outgoing
+        {Layer B: coloring actions}
+    [](outdgree(i)≤ 5)∧(∃j ∈ succ(i):c(i)=c(j))→ c(i):= b:b ∈ {C\sc(i)}
 od
 ```
 
