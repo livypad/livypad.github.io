@@ -33,9 +33,9 @@ isCJKLanguage: true
         - [时间逻辑 temporal logic](#时间逻辑-temporal-logic)
     - [ch 6 Time in a Distributed System](#ch-6-time-in-a-distributed-system)
         - [逻辑时钟](#逻辑时钟)
-            - [弱时钟条件 偏序关系 $\prec$](#弱时钟条件-偏序关系-prec)
+            - [弱时钟条件 偏序关系 $\\prec$](#弱时钟条件-偏序关系-prec)
             - [弱时钟实现的逻辑时钟 logic clock](#弱时钟实现的逻辑时钟-logic-clock)
-            - [强时钟关系 全序关系 $\ll$](#强时钟关系-全序关系-ll)
+            - [强时钟关系 全序关系 $\\ll$](#强时钟关系-全序关系-ll)
         - [向量时钟 vector clock](#向量时钟-vector-clock)
         - [物理时钟同步](#物理时钟同步)
             - [Berkeley 算法 内部同步](#berkeley-算法-内部同步)
@@ -1152,11 +1152,13 @@ od
 每个节点的路由表为`(destination, next hop, distance)`,distance/距离向量初始为
 
 $$
+D(i,j)=\left\\{
 \begin{aligned}
-D(i,j)&=0, i==j\\
-&=1, j\in N(i)\\
-&=\infty, j\notin N(i)\cup\{i\}
+&0, i==j \\\
+&1, j\in N(i)\\\
+&\infty, j\notin N(i)\cup\\{i\\}
 \end{aligned}
+\right.
 $$
 
 之后反复更新。但这样更新，正确容易收敛到；如果断联，会每次距离递增 1 直至无穷
@@ -1206,10 +1208,12 @@ do
 #### 间隔路由算法
 
 $$
+interval[p, q)\equiv\left\\{
 \begin{aligned}
-interval[p, q)\equiv &if\ p<q:p,p+1 ...q-2,q-1\\
+ &if\ p<q:p,p+1 ...q-2,q-1\\\
 &if\ p\ge q:p,p+1 ...n-2,n-1,0,1,...q-2,q-1
 \end{aligned}
+\right.
 $$
 
 按照$interval[p, q)$对应的端口发消息
