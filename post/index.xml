@@ -1,4 +1,374 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on zhh's blog</title><link>https://livypad.github.io/post/</link><description>Recent content in Posts on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Wed, 02 Nov 2022 00:22:50 +0800</lastBuildDate><atom:link href="https://livypad.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Michael&amp;Scott 无锁队列</title><link>https://livypad.github.io/post/2022-11-02-mbqueue/</link><pubDate>Wed, 02 Nov 2022 00:22:50 +0800</pubDate><guid>https://livypad.github.io/post/2022-11-02-mbqueue/</guid><description>MB 无锁队列复现和原论文的纠错 纠错 Michael&amp;amp;Scott 1 给出了了一个无锁队列的实现。在我实际用 Java 语音复现时，发现其给出的伪代码有一处问题。 原始版本的enque有</description><content:encoded><![CDATA[<h1 id="mb-无锁队列复现和原论文的纠错">MB 无锁队列复现和原论文的纠错</h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on zhh's blog</title><link>https://livypad.github.io/post/</link><description>Recent content in Posts on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Mon, 27 Feb 2023 17:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Mon, 27 Feb 2023 17:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP 算法 矩阵检验 附录-基础知识 Markov-Inequality</description><content:encoded><![CDATA[<ul>
+<li><a href="#%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1">高级算法设计</a>
+<ul>
+<li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>
+<ul>
+<li><a href="#python">python</a>
+<ul>
+<li><a href="#%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81">算法代码</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81">测试代码</a></li>
+</ul>
+</li>
+<li><a href="#rust">rust</a>
+<ul>
+<li><a href="#%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81-1">算法代码</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-1">测试代码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB">随机算法分类</a>
+<ul>
+<li><a href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89">形式化定义</a></li>
+<li><a href="#%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%8E%87%E6%8F%90%E5%8D%87">算法的正确率提升</a></li>
+<li><a href="#les-vegas-%E5%92%8C-monte-carlo-%E8%BD%AC%E5%8C%96">Les-Vegas 和 Monte-Carlo 转化</a></li>
+<li><a href="#pnp">P，NP</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AE%97%E6%B3%95">算法</a>
+<ul>
+<li><a href="#%E7%9F%A9%E9%98%B5%E6%A3%80%E9%AA%8C">矩阵检验</a></li>
+</ul>
+</li>
+<li><a href="#%E9%99%84%E5%BD%95-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">附录-基础知识</a>
+<ul>
+<li><a href="#markov-inequality">Markov-Inequality</a></li>
+<li><a href="#chebyshev-inequality">Chebyshev-Inequality</a></li>
+<li><a href="#%E6%8A%BD%E6%A0%B7%E8%B0%83%E6%9F%A5%E5%87%86%E7%A1%AE%E7%8E%87">抽样调查准确率</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="高级算法设计">高级算法设计</h1>
+<h2 id="快速排序">快速排序</h2>
+<h3 id="python">python</h3>
+<h4 id="算法代码">算法代码</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">swap</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">quicksort</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">quicksort</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">quicksort</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">q</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">A</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">r</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pivot</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">A</span><span class="p">[</span><span class="n">pivot</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">pivot</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hi</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">hi</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">            <span class="n">A</span><span class="p">[</span><span class="n">hi</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">hi</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="n">A</span><span class="p">[</span><span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">swap</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">A</span><span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">hi</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="测试代码">测试代码</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">a</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">quicksort</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="rust">rust</h3>
+<p>注意一下，</p>
+<ul>
+<li><code>rand</code>库需要声明依赖</li>
+<li>&lt;=这样的比较需要 <code>PartialOrd</code> 的 trait</li>
+<li><code>sort()</code>需要实现 <code>Ord</code> 的 trait，只有整型有；浮点类型只能使用<code>sort_by()</code>去自定义比较函数</li>
+<li><code>sort()</code>是原位排序，更加推荐更快的 <code>sort_unstable()</code></li>
+</ul>
+<h4 id="算法代码-1">算法代码</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">rand</span>::<span class="n">Rng</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">quicksort</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nb">PartialOrd</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arr</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">],</span><span class="w"> </span><span class="n">p</span>: <span class="kt">usize</span><span class="p">,</span><span class="w"> </span><span class="n">r</span>: <span class="kt">usize</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">partition</span>::<span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">quicksort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">quicksort</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">partition</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nb">PartialOrd</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arr</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">],</span><span class="w"> </span><span class="n">p</span>: <span class="kt">usize</span><span class="p">,</span><span class="w"> </span><span class="n">r</span>: <span class="kt">usize</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">usize</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">arr</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">().</span><span class="n">gen_range</span><span class="p">(</span><span class="n">p</span><span class="o">..</span><span class="n">r</span><span class="p">),</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">hi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">p</span><span class="o">..</span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">arr</span><span class="p">[</span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">arr</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">hi</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">arr</span><span class="p">.</span><span class="n">swap</span><span class="p">(</span><span class="n">hi</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">hi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="测试代码-1">测试代码</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">dependencies</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">rand</span><span class="p">=</span><span class="s2">&#34;0.8.0&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">rand</span>::<span class="n">seq</span>::<span class="n">SliceRandom</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">mod</span> <span class="nn">quicksort</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">const</span><span class="w"> </span><span class="n">UP</span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">200000</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">arr</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="n">UP</span><span class="p">).</span><span class="n">collect</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">arr</span><span class="p">.</span><span class="n">shuffle</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">new_arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">quicksort</span>::<span class="n">quicksort</span><span class="p">(</span><span class="n">new_arr</span><span class="p">.</span><span class="n">as_mut_slice</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">.</span><span class="n">len</span><span class="p">(</span><span class="w">                                                        </span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">arr</span><span class="p">.</span><span class="n">sort</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">new_arr</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">arr</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="n">UP</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">f32</span><span class="p">).</span><span class="n">collect</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">arr</span><span class="p">.</span><span class="n">shuffle</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">new_arr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">arr</span><span class="p">.</span><span class="n">clone</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">quicksort</span>::<span class="n">quicksort</span><span class="p">(</span><span class="n">new_arr</span><span class="p">.</span><span class="n">as_mut_slice</span><span class="p">(),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">.</span><span class="n">len</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">arr</span><span class="p">.</span><span class="n">sort_unstable_by</span><span class="p">(</span><span class="o">|</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">partial_cmp</span><span class="p">(</span><span class="n">b</span><span class="p">).</span><span class="n">unwrap</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">assert_eq!</span><span class="p">(</span><span class="n">new_arr</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="随机算法分类">随机算法分类</h2>
+<blockquote>
+<p>Las Vegas 算法</p>
+<p>随机数对结果正误没有影响，但是对于运行时间有影响（允许最坏情况下不终止）。eg，<a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快排</a></p>
+</blockquote>
+<blockquote>
+<p>Monte Carlo 算法</p>
+<p>随机数选择会影响是否出错。eg，<a href="#%E7%9F%A9%E9%98%B5%E6%A3%80%E9%AA%8C">检验矩阵乘法正确性</a></p>
+</blockquote>
+<p>上述的定义不关心是否是多项式时间复杂度。考虑现实一般都会加上。</p>
+<h3 id="形式化定义">形式化定义</h3>
+<ul>
+<li>Zero-error,Probabilistic,Poly(ZPP)，时间的期望为多项式
+<ul>
+<li>$$
+\begin{aligned}
+l\in \mathcal{ZPP} \iff&amp;\exists deterministic\ alg\ A\in \mathcal{P},random\ input\ r,\\
+&amp;\{x\in l \iff A(x,r)=1\}
+\end{aligned}
+$$</li>
+</ul>
+</li>
+<li>Randomized Poly 单边出错，假阳性，时间被多项式限制
+<ul>
+<li>$$
+\begin{aligned}
+l\in \mathcal{RP} \iff&amp;\exists deterministic\ alg\ A\in \mathcal{P},random\ input\ r,\\
+&amp;\{x\in l \rightarrow Pr(A(x,r)=1)\ge\frac{1}{2},\\
+&amp;x\notin l \rightarrow Pr(A(x,r)=0)=1 \}
+\end{aligned}
+$$</li>
+</ul>
+</li>
+<li>Co-RP 单边出错，假阴性
+<ul>
+<li>$$
+\begin{aligned}
+l\in \mathcal{Co-RP} \iff&amp;\exists deterministic\ alg\ A\in \mathcal{P},random\ input\ r,\\
+&amp;\{x\in l \rightarrow A(x,r)=1\ge\frac{1}{2},\\
+&amp;x\notin l \rightarrow Pr(A(x,r)=0)\ge\frac{1}{2} \}
+\end{aligned}
+$$</li>
+<li>$$
+\{\bar{l}|l\in\mathcal{RP}\}
+$$</li>
+</ul>
+</li>
+<li>Bounded Probabilistic Poly(BPP) 双边出错
+<ul>
+<li>$$
+\begin{aligned}
+l\in \mathcal{BBP} \iff&amp;\exists deterministic\ alg\ A\in \mathcal{P},random\ input\ r,\\
+&amp;\{x\in l \rightarrow Pr(A(x,r)=1)\ge\frac{2}{3},\\
+&amp;x\notin l \rightarrow Pr(A(x,r)=0)\ge\frac{2}{3} \}
+\end{aligned}
+$$</li>
+</ul>
+</li>
+</ul>
+<h3 id="算法的正确率提升">算法的正确率提升</h3>
+<p>事实上，上述定义中的概率常量不影响，集合之间等同。独立随机的输入运行多次，然后选择结果。</p>
+<p>eg，$\mathcal{RP}_\frac{1}{2}$ 提升到 $\mathcal{RP}_\frac{3}{4}$ ，运行 2 次，至少一次 1 即输出 1，全 0 输出 0。</p>
+<p>eg， $\mathcal{BBP}_\frac{1}{3}$ 提升（错误率不能超过 $\frac{1}{2}$）。取独立随机输入$r_1,&hellip;r_{2t+1}$ 对应随机变量$Y_1,&hellip;Y_{2t+1}$，如果和$Y=\sum Y_i\ge t+1$，输出 1，反之输出 0</p>
+<p>$$
+\begin{aligned}
+&amp;Pr(\sum Y_i\le t)\\
+&amp;=Pr(Y-E(Y)\le t-E(Y))\\
+&amp;\le Pr(Y-E(Y)\le t-(2t+1)\frac{2}{3})\\
+&amp;\le Pr(|Y-E(Y)| \ge t/3+2/3)\\
+&amp;\le \frac{Var(Y)}{(t/3+2/3)^2}\\
+&amp;\le \frac{(2t+1)Var(Y_i)}{(t/3+2/3)^2}\\
+&amp;\le \frac{(2t+1)/4}{(t/3+2/3)^2}\\
+\end{aligned}
+$$</p>
+<p>t 足够大时，正确的概率即可足够大</p>
+<h3 id="les-vegas-和-monte-carlo-转化">Les-Vegas 和 Monte-Carlo 转化</h3>
+<p>$$\mathcal{RP}\cap\mathcal{Co-RP}=\mathcal{ZPP} $$</p>
+<ol>
+<li>$\mathcal{ZPP}\subseteq\mathcal{RP}$：超时直接输出一个结果，按照$\mathcal{RP}$的要求，给 0（超时概率被 <a href="#markov-inequality">markov 不等式限制</a>，给出 1 一定正确，给 0 可能会出错 ）</li>
+<li>$\mathcal{ZPP}\subseteq\mathcal{Co-RP}$，类似的</li>
+<li>$\mathcal{RP}\cap\mathcal{RP}\subseteq\mathcal{ZPP}$：联立$A_1\in\mathcal{RP} ,A_2\mathcal{Co-RP}$,(1,1)输出 1，(0,0)输出 0，(0,1)再来一次。时间期望被正确率控制（(1,0)自相矛盾，不可能发生）</li>
+</ol>
+<p>这些算法集合关系如下。注意，$\mathcal{NP}$和$\mathcal{BPP}$之间实际上关系未知，有待进一步证明。目前大概认为不等</p>
+<p><img loading="lazy" src="/assets/img/p-npvenn.png" alt="p,np,zpp,rp,bpp"  />
+</p>
+<h3 id="pnp">P，NP</h3>
+<p>判定问题，可以对应一个集合/语言。</p>
+<p>$$f:x\to \{0,1\}$$</p>
+<p>$$L_f=\left\{x|f(x)=1 \right\}$$</p>
+<ul>
+<li>$\mathcal{P}$：多项式时间可解</li>
+<li>$\mathcal{NP}$：non-deterministic Turing machine 下 poly，多项式时间可验证一个解的正确性</li>
+</ul>
+<h2 id="算法">算法</h2>
+<h3 id="矩阵检验">矩阵检验</h3>
+<p>在$O(n^2)$，概率判断两矩阵乘是否相等另一矩阵。重复选择向量$x$。对于 0，1 的 2-bit 矩阵，错误率（在不等情况下）为$\frac{1}{2}$。</p>
+<p>$$A(Bx)==Cx$$</p>
+<h2 id="附录-基础知识">附录-基础知识</h2>
+<h3 id="markov-inequality">Markov-Inequality</h3>
+<p>$$
+\begin{aligned}
+&amp;X\ge0,\forall c\ge0\\
+&amp;\implies Pr(X\ge c)\le\frac{E(X)}{c}
+\end{aligned}
+$$</p>
+<p>证明是显然的</p>
+<h3 id="chebyshev-inequality">Chebyshev-Inequality</h3>
+<p>$$
+\begin{aligned}
+&amp;X,\forall c\ge 0\\
+&amp;\implies Pr(|X-E(x)|\ge c)\le\frac{Var(X)}{c^2}
+\end{aligned}
+$$</p>
+<p>注意到$Pr(|X-E(x)|\ge c)=Pr((X-E(x))^2\ge c^2)$，然后化归到 <a href="#markov-inequality">Markov 不等式</a></p>
+<h3 id="抽样调查准确率">抽样调查准确率</h3>
+<p>作为 <a href="#chebyshev-inequality">Chebyshev 不等式</a>的应用。 抽样 n 个，调查出来的概率$\hat{p}=\frac{X_1+&hellip;X_n}{n}=\frac{X}{n}$。对其和真实概率$p$的偏移有要求：</p>
+<p>$$Pr(|\hat{p}-p|\le \delta)\ge 1-\epsilon \implies Pr(|\hat{p}-p|\ge \delta)\le \epsilon $$</p>
+<p>$$
+\begin{aligned}
+&amp;Pr(|\hat{p}-p|\ge \delta)\\
+&amp;=Pr(|\frac{X}{n}-p|\ge \delta)\\
+&amp;=Pr(|X-np|\ge n\delta)\\
+&amp;\le\frac{Var(X)}{(n\delta)^2}\\
+&amp;\le\frac{1}{4(n\delta)^2}
+\end{aligned}
+$$</p>
+<p>要求的抽样$n$的取值只和要求的$\delta,\epsilon$有关，和真实概率$p$本身分布无关。但是，如果知道真实分布，可以改善$n$的取值。</p>
+]]></content:encoded></item><item><title>Michael&amp;Scott 无锁队列</title><link>https://livypad.github.io/post/2022-11-02-mbqueue/</link><pubDate>Wed, 02 Nov 2022 00:22:50 +0800</pubDate><guid>https://livypad.github.io/post/2022-11-02-mbqueue/</guid><description>MB 无锁队列复现和原论文的纠错 纠错 Michael&amp;amp;Scott 1 给出了了一个无锁队列的实现。在我实际用 Java 语音复现时，发现其给出的伪代码有一处问题。 原始版本的enque有</description><content:encoded><![CDATA[<h1 id="mb-无锁队列复现和原论文的纠错">MB 无锁队列复现和原论文的纠错</h1>
 <h2 id="纠错">纠错</h2>
 <p>Michael&amp;Scott <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 给出了了一个无锁队列的实现。在我实际用 Java 语音复现时，发现其给出的伪代码有一处问题。</p>
 <p>原始版本的<code>enque</code>有一处是错误的。红色标明的行中，第一个<code>if</code>判断了<code>next.ptr==null</code>之后，第二个 CAS 里面，直接比较<code>next.ptr</code>和其自己的值。但这两个语句之间，实际上另一个线程可能已经把<code>next.ptr</code>赋值了，这样 CAS 肯定成功，因为自己等于自己，但这样就会把已经连上的节点替换掉。</p>
@@ -1728,11 +2098,13 @@ od
 </code></pre><h4 id="距离向量">距离向量</h4>
 <p>每个节点的路由表为<code>(destination, next hop, distance)</code>,distance/距离向量初始为</p>
 <p>$$
+D(i,j)=\left\{
 \begin{aligned}
-D(i,j)&amp;=0, i==j\
-&amp;=1, j\in N(i)\
-&amp;=\infty, j\notin N(i)\cup{i}
+&amp;0, i==j \\
+&amp;1, j\in N(i)\\
+&amp;\infty, j\notin N(i)\cup\{i\}
 \end{aligned}
+\right.
 $$</p>
 <p>之后反复更新。但这样更新，正确容易收敛到；如果断联，会每次距离递增 1 直至无穷</p>
 <p>$$
@@ -1785,10 +2157,12 @@ do
 do
 </code></pre><h4 id="间隔路由算法">间隔路由算法</h4>
 <p>$$
+interval[p, q)\equiv\left\{
 \begin{aligned}
-interval[p, q)\equiv &amp;if\ p&lt;q:p,p+1 &hellip;q-2,q-1\
+&amp;if\ p&lt;q:p,p+1 &hellip;q-2,q-1\\
 &amp;if\ p\ge q:p,p+1 &hellip;n-2,n-1,0,1,&hellip;q-2,q-1
 \end{aligned}
+\right.
 $$</p>
 <p>按照$interval[p, q)$对应的端口发消息</p>
 <ol>

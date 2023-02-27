@@ -1323,11 +1323,13 @@ od
 </code></pre><h4 id="距离向量">距离向量</h4>
 <p>每个节点的路由表为<code>(destination, next hop, distance)</code>,distance/距离向量初始为</p>
 <p>$$
+D(i,j)=\left\{
 \begin{aligned}
-D(i,j)&amp;=0, i==j\
-&amp;=1, j\in N(i)\
-&amp;=\infty, j\notin N(i)\cup{i}
+&amp;0, i==j \\
+&amp;1, j\in N(i)\\
+&amp;\infty, j\notin N(i)\cup\{i\}
 \end{aligned}
+\right.
 $$</p>
 <p>之后反复更新。但这样更新，正确容易收敛到；如果断联，会每次距离递增 1 直至无穷</p>
 <p>$$
@@ -1380,10 +1382,12 @@ do
 do
 </code></pre><h4 id="间隔路由算法">间隔路由算法</h4>
 <p>$$
+interval[p, q)\equiv\left\{
 \begin{aligned}
-interval[p, q)\equiv &amp;if\ p&lt;q:p,p+1 &hellip;q-2,q-1\
+&amp;if\ p&lt;q:p,p+1 &hellip;q-2,q-1\\
 &amp;if\ p\ge q:p,p+1 &hellip;n-2,n-1,0,1,&hellip;q-2,q-1
 \end{aligned}
+\right.
 $$</p>
 <p>按照$interval[p, q)$对应的端口发消息</p>
 <ol>
