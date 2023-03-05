@@ -1,8 +1,8 @@
-<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>高级算法设计-课堂笔记 | zhh's blog</title><meta name=keywords content="教程,课堂笔记"><meta name=description content="高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP 算法 矩阵检验 附录-基础知识 Markov-Inequality"><meta name=author content="livypad"><link rel=canonical href=https://livypad.github.io/post/2023-02-27-adalg/><link crossorigin=anonymous href=/assets/css/stylesheet.min.7ca4c3dd9394a71fbe69a066b9fbc3dcfe7fb50ce978b051497ffe24c8e1c49a.css integrity="sha256-fKTD3ZOUpx++aaBmufvD3P5/tQzpeLBRSX/+JMjhxJo=" rel="preload stylesheet" as=style><link rel=icon href=https://livypad.github.io/assets/icon/favicon.ico><link rel=apple-touch-icon href=https://livypad.github.io/assets/icon/apple-touch-icon.png><link rel=manifest href=https://livypad.github.io/assets/icon/site.webmanifest><meta name=twitter:title content="高级算法设计-课堂笔记 | zhh's blog"><meta name=twitter:description content="高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP 算法 矩阵检验 附录-基础知识 Markov-Inequality"><meta name=twitter:site content="@novoreorx"><meta name=twitter:creator content="@novoreorx"><meta property="og:title" content><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary-bg:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript></head><body id=top><script data-no-instant>function switchTheme(e){switch(e){case"light":document.body.classList.remove("dark");break;case"dark":document.body.classList.add("dark");break;default:window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")}}function isDarkTheme(){return document.body.className.includes("dark")}function getPrefTheme(){return localStorage.getItem("pref-theme")}function setPrefTheme(e){switchTheme(e),localStorage.setItem("pref-theme",e)}const toggleThemeCallbacks={};toggleThemeCallbacks.main=e=>{setPrefTheme(e?"light":"dark")},window.addEventListener("toggle-theme",function(){const e=isDarkTheme();for(const t in toggleThemeCallbacks)toggleThemeCallbacks[t](e)});function toggleThemeListener(){window.dispatchEvent(new CustomEvent("toggle-theme"))}</script><script>(function(){const t="auto",e=getPrefTheme(),n=e||t;switchTheme(n)})()</script><header class=header><nav class=nav><div class=logo><a href=https://livypad.github.io accesskey=h title="zhh's blog (Alt + H)">zhh's blog</a>
-<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=https://livypad.github.io/about/ title=About>About</a></li><li><a href=https://livypad.github.io/tags/ title=Tags>Tags</a></li><li><a href=https://livypad.github.io/archives/ title=Archive>Archive</a></li><li><a href=https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/ title=Note>Note</a></li></ul></nav></header><main class="main post"><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://livypad.github.io>Home</a>&nbsp;»&nbsp;<a href=https://livypad.github.io/post/>Posts</a></div><h1 class=post-title>高级算法设计-课堂笔记</h1><div class=post-meta><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select:text"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select:text"/><line x1="16" y1="2" x2="16" y2="6" style="user-select:text"/><line x1="8" y1="2" x2="8" y2="6" style="user-select:text"/><line x1="3" y1="10" x2="21" y2="10" style="user-select:text"/></svg><span>2023-02-27</span></span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select:text"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" style="user-select:text"/><line x1="7" y1="7" x2="7" y2="7" style="user-select:text"/></svg>
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>高级算法设计-课堂笔记（更新到第3次课） | zhh's blog</title><meta name=keywords content="教程,课堂笔记"><meta name=description content="高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP 算法 矩阵检验 Birthday Paradox m~sqrt(n) m~n 上界 下界"><meta name=author content="livypad"><link rel=canonical href=https://livypad.github.io/post/2023-02-27-adalg/><link crossorigin=anonymous href=/assets/css/stylesheet.min.7ca4c3dd9394a71fbe69a066b9fbc3dcfe7fb50ce978b051497ffe24c8e1c49a.css integrity="sha256-fKTD3ZOUpx++aaBmufvD3P5/tQzpeLBRSX/+JMjhxJo=" rel="preload stylesheet" as=style><link rel=icon href=https://livypad.github.io/assets/icon/favicon.ico><link rel=apple-touch-icon href=https://livypad.github.io/assets/icon/apple-touch-icon.png><link rel=manifest href=https://livypad.github.io/assets/icon/site.webmanifest><meta name=twitter:title content="高级算法设计-课堂笔记（更新到第3次课） | zhh's blog"><meta name=twitter:description content="高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP 算法 矩阵检验 Birthday Paradox m~sqrt(n) m~n 上界 下界"><meta name=twitter:site content="@novoreorx"><meta name=twitter:creator content="@novoreorx"><meta property="og:title" content><meta property="og:description" content><meta property="og:type" content="website"><meta property="og:url" content><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary-bg:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript></head><body id=top><script data-no-instant>function switchTheme(e){switch(e){case"light":document.body.classList.remove("dark");break;case"dark":document.body.classList.add("dark");break;default:window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")}}function isDarkTheme(){return document.body.className.includes("dark")}function getPrefTheme(){return localStorage.getItem("pref-theme")}function setPrefTheme(e){switchTheme(e),localStorage.setItem("pref-theme",e)}const toggleThemeCallbacks={};toggleThemeCallbacks.main=e=>{setPrefTheme(e?"light":"dark")},window.addEventListener("toggle-theme",function(){const e=isDarkTheme();for(const t in toggleThemeCallbacks)toggleThemeCallbacks[t](e)});function toggleThemeListener(){window.dispatchEvent(new CustomEvent("toggle-theme"))}</script><script>(function(){const t="auto",e=getPrefTheme(),n=e||t;switchTheme(n)})()</script><header class=header><nav class=nav><div class=logo><a href=https://livypad.github.io accesskey=h title="zhh's blog (Alt + H)">zhh's blog</a>
+<span class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)"><svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></span></div><ul id=menu><li><a href=https://livypad.github.io/about/ title=About>About</a></li><li><a href=https://livypad.github.io/tags/ title=Tags>Tags</a></li><li><a href=https://livypad.github.io/archives/ title=Archive>Archive</a></li><li><a href=https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/ title=Note>Note</a></li></ul></nav></header><main class="main post"><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://livypad.github.io>Home</a>&nbsp;»&nbsp;<a href=https://livypad.github.io/post/>Posts</a></div><h1 class=post-title>高级算法设计-课堂笔记（更新到第3次课）</h1><div class=post-meta><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar" style="user-select:text"><rect x="3" y="4" width="18" height="18" rx="2" ry="2" style="user-select:text"/><line x1="16" y1="2" x2="16" y2="6" style="user-select:text"/><line x1="8" y1="2" x2="8" y2="6" style="user-select:text"/><line x1="3" y1="10" x2="21" y2="10" style="user-select:text"/></svg><span>2023-03-05</span></span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon" style="user-select:text"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" style="user-select:text"/><line x1="7" y1="7" x2="7" y2="7" style="user-select:text"/></svg>
 <a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>教程 </a><a href=https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/>课堂笔记</a>
-</span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select:text"><path d="M14 2H6A2 2 0 004 4v16a2 2 0 002 2h12a2 2 0 002-2V8z" style="user-select:text"/><polyline points="14 2 14 8 20 8" style="user-select:text"/><line x1="16" y1="13" x2="8" y2="13" style="user-select:text"/><line x1="16" y1="17" x2="8" y2="17" style="user-select:text"/><polyline points="10 9 9 9 8 9" style="user-select:text"/></svg><span>1885 words</span></span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
-<span>4 min</span></span></div></header><div class="toc side left"><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#%e9%ab%98%e7%ba%a7%e7%ae%97%e6%b3%95%e8%ae%be%e8%ae%a1 aria-label=高级算法设计>高级算法设计</a><ul><li><a href=#%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f aria-label=快速排序>快速排序</a><ul><li><a href=#python aria-label=python>python</a><ul><li><a href=#%e7%ae%97%e6%b3%95%e4%bb%a3%e7%a0%81 aria-label=算法代码>算法代码</a></li><li><a href=#%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81 aria-label=测试代码>测试代码</a></li></ul></li><li><a href=#rust aria-label=rust>rust</a><ul><li><a href=#%e7%ae%97%e6%b3%95%e4%bb%a3%e7%a0%81-1 aria-label=算法代码>算法代码</a></li><li><a href=#%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81-1 aria-label=测试代码>测试代码</a></li></ul></li></ul></li><li><a href=#%e9%9a%8f%e6%9c%ba%e7%ae%97%e6%b3%95%e5%88%86%e7%b1%bb aria-label=随机算法分类>随机算法分类</a><ul><li><a href=#%e5%bd%a2%e5%bc%8f%e5%8c%96%e5%ae%9a%e4%b9%89 aria-label=形式化定义>形式化定义</a></li><li><a href=#%e7%ae%97%e6%b3%95%e7%9a%84%e6%ad%a3%e7%a1%ae%e7%8e%87%e6%8f%90%e5%8d%87 aria-label=算法的正确率提升>算法的正确率提升</a></li><li><a href=#les-vegas-%e5%92%8c-monte-carlo-%e8%bd%ac%e5%8c%96 aria-label="Les-Vegas 和 Monte-Carlo 转化">Les-Vegas 和 Monte-Carlo 转化</a></li><li><a href=#pnp aria-label=P，NP>P，NP</a></li></ul></li><li><a href=#%e7%ae%97%e6%b3%95 aria-label=算法>算法</a><ul><li><a href=#%e7%9f%a9%e9%98%b5%e6%a3%80%e9%aa%8c aria-label=矩阵检验>矩阵检验</a></li></ul></li><li><a href=#%e9%99%84%e5%bd%95-%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86 aria-label=附录-基础知识>附录-基础知识</a><ul><li><a href=#markov-inequality aria-label=Markov-Inequality>Markov-Inequality</a></li><li><a href=#chebyshev-inequality aria-label=Chebyshev-Inequality>Chebyshev-Inequality</a></li><li><a href=#%e6%8a%bd%e6%a0%b7%e8%b0%83%e6%9f%a5%e5%87%86%e7%a1%ae%e7%8e%87 aria-label=抽样调查准确率>抽样调查准确率</a></li></ul></li></ul></li></ul></div></details></div><div class=post-content><ul><li><a href=#%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1>高级算法设计</a><ul><li><a href=#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F>快速排序</a><ul><li><a href=#python>python</a><ul><li><a href=#%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81>算法代码</a></li><li><a href=#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81>测试代码</a></li></ul></li><li><a href=#rust>rust</a><ul><li><a href=#%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81-1>算法代码</a></li><li><a href=#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-1>测试代码</a></li></ul></li></ul></li><li><a href=#%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB>随机算法分类</a><ul><li><a href=#%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89>形式化定义</a></li><li><a href=#%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%8E%87%E6%8F%90%E5%8D%87>算法的正确率提升</a></li><li><a href=#les-vegas-%E5%92%8C-monte-carlo-%E8%BD%AC%E5%8C%96>Les-Vegas 和 Monte-Carlo 转化</a></li><li><a href=#pnp>P，NP</a></li></ul></li><li><a href=#%E7%AE%97%E6%B3%95>算法</a><ul><li><a href=#%E7%9F%A9%E9%98%B5%E6%A3%80%E9%AA%8C>矩阵检验</a></li></ul></li><li><a href=#%E9%99%84%E5%BD%95-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86>附录-基础知识</a><ul><li><a href=#markov-inequality>Markov-Inequality</a></li><li><a href=#chebyshev-inequality>Chebyshev-Inequality</a></li><li><a href=#%E6%8A%BD%E6%A0%B7%E8%B0%83%E6%9F%A5%E5%87%86%E7%A1%AE%E7%8E%87>抽样调查准确率</a></li></ul></li></ul></li></ul><h1 id=高级算法设计>高级算法设计<a hidden class=anchor aria-hidden=true href=#高级算法设计>¶</a></h1><h2 id=快速排序>快速排序<a hidden class=anchor aria-hidden=true href=#快速排序>¶</a></h2><h3 id=python>python<a hidden class=anchor aria-hidden=true href=#python>¶</a></h3><h4 id=算法代码>算法代码<a hidden class=anchor aria-hidden=true href=#算法代码>¶</a></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" style="user-select:text"><path d="M14 2H6A2 2 0 004 4v16a2 2 0 002 2h12a2 2 0 002-2V8z" style="user-select:text"/><polyline points="14 2 14 8 20 8" style="user-select:text"/><line x1="16" y1="13" x2="8" y2="13" style="user-select:text"/><line x1="16" y1="17" x2="8" y2="17" style="user-select:text"/><polyline points="10 9 9 9 8 9" style="user-select:text"/></svg><span>3653 words</span></span><span class=meta-item><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke="currentcolor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>8 min</span></span></div></header><div class="toc side left"><details open><summary accesskey=c title="(Alt + C)"><span class=details>Table of Contents</span></summary><div class=inner><ul><li><a href=#%e9%ab%98%e7%ba%a7%e7%ae%97%e6%b3%95%e8%ae%be%e8%ae%a1 aria-label=高级算法设计>高级算法设计</a><ul><li><a href=#%e5%bf%ab%e9%80%9f%e6%8e%92%e5%ba%8f aria-label=快速排序>快速排序</a><ul><li><a href=#python aria-label=python>python</a><ul><li><a href=#%e7%ae%97%e6%b3%95%e4%bb%a3%e7%a0%81 aria-label=算法代码>算法代码</a></li><li><a href=#%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81 aria-label=测试代码>测试代码</a></li></ul></li><li><a href=#rust aria-label=rust>rust</a><ul><li><a href=#%e7%ae%97%e6%b3%95%e4%bb%a3%e7%a0%81-1 aria-label=算法代码>算法代码</a></li><li><a href=#%e6%b5%8b%e8%af%95%e4%bb%a3%e7%a0%81-1 aria-label=测试代码>测试代码</a></li></ul></li></ul></li><li><a href=#%e9%9a%8f%e6%9c%ba%e7%ae%97%e6%b3%95%e5%88%86%e7%b1%bb aria-label=随机算法分类>随机算法分类</a><ul><li><a href=#%e5%bd%a2%e5%bc%8f%e5%8c%96%e5%ae%9a%e4%b9%89 aria-label=形式化定义>形式化定义</a></li><li><a href=#%e7%ae%97%e6%b3%95%e7%9a%84%e6%ad%a3%e7%a1%ae%e7%8e%87%e6%8f%90%e5%8d%87 aria-label=算法的正确率提升>算法的正确率提升</a></li><li><a href=#les-vegas-%e5%92%8c-monte-carlo-%e8%bd%ac%e5%8c%96 aria-label="Les-Vegas 和 Monte-Carlo 转化">Les-Vegas 和 Monte-Carlo 转化</a></li><li><a href=#pnp aria-label=P，NP>P，NP</a></li></ul></li><li><a href=#%e7%ae%97%e6%b3%95 aria-label=算法>算法</a><ul><li><a href=#%e7%9f%a9%e9%98%b5%e6%a3%80%e9%aa%8c aria-label=矩阵检验>矩阵检验</a></li></ul></li><li><a href=#birthday-paradox aria-label="Birthday Paradox">Birthday Paradox</a><ul><li><a href=#msqrtn aria-label=m~sqrt(n)>m~sqrt(n)</a></li><li><a href=#mn aria-label=m~n>m~n</a><ul><li><a href=#%e4%b8%8a%e7%95%8c aria-label=上界>上界</a></li><li><a href=#%e4%b8%8b%e7%95%8c aria-label=下界>下界</a></li></ul></li><li><a href=#mn-1 aria-label=m&amp;gt;n>m>n</a></li></ul></li><li><a href=#%e9%99%84%e5%bd%95-%e5%9f%ba%e7%a1%80%e7%9f%a5%e8%af%86 aria-label=附录-基础知识>附录-基础知识</a><ul><li><a href=#markov-inequality aria-label=Markov-Inequality>Markov-Inequality</a></li><li><a href=#chebyshev-inequality aria-label=Chebyshev-Inequality>Chebyshev-Inequality</a><ul><li><a href=#%e6%8a%bd%e6%a0%b7%e8%b0%83%e6%9f%a5%e5%87%86%e7%a1%ae%e7%8e%87 aria-label=抽样调查准确率>抽样调查准确率</a></li></ul></li><li><a href=#%e7%bb%84%e5%90%88%e6%95%b0%e4%b8%8d%e7%ad%89%e5%bc%8f aria-label=组合数不等式>组合数不等式</a></li><li><a href=#chernoff-bound aria-label=Chernoff-Bound>Chernoff-Bound</a><ul><li><a href=#%e6%ad%a3%e5%90%91%e7%9a%84%e8%af%81%e6%98%8e aria-label=正向的证明>正向的证明</a></li><li><a href=#%e8%b4%9f%e5%90%91%e7%9a%84%e8%af%81%e6%98%8e aria-label=负向的证明>负向的证明</a></li></ul></li></ul></li></ul></li></ul></div></details></div><div class=post-content><ul><li><a href=#%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1>高级算法设计</a><ul><li><a href=#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F>快速排序</a><ul><li><a href=#python>python</a><ul><li><a href=#%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81>算法代码</a></li><li><a href=#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81>测试代码</a></li></ul></li><li><a href=#rust>rust</a><ul><li><a href=#%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81-1>算法代码</a></li><li><a href=#%E6%B5%8B%E8%AF%95%E4%BB%A3%E7%A0%81-1>测试代码</a></li></ul></li></ul></li><li><a href=#%E9%9A%8F%E6%9C%BA%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB>随机算法分类</a><ul><li><a href=#%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89>形式化定义</a></li><li><a href=#%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%8E%87%E6%8F%90%E5%8D%87>算法的正确率提升</a></li><li><a href=#les-vegas-%E5%92%8C-monte-carlo-%E8%BD%AC%E5%8C%96>Les-Vegas 和 Monte-Carlo 转化</a></li><li><a href=#pnp>P，NP</a></li></ul></li><li><a href=#%E7%AE%97%E6%B3%95>算法</a><ul><li><a href=#%E7%9F%A9%E9%98%B5%E6%A3%80%E9%AA%8C>矩阵检验</a></li></ul></li><li><a href=#birthday-paradox>Birthday Paradox</a><ul><li><a href=#msqrtn>m~sqrt(n)</a></li><li><a href=#mn>m~n</a><ul><li><a href=#%E4%B8%8A%E7%95%8C>上界</a></li><li><a href=#%E4%B8%8B%E7%95%8C>下界</a></li></ul></li><li><a href=#mn-1>m>n</a></li></ul></li><li><a href=#%E9%99%84%E5%BD%95-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86>附录-基础知识</a><ul><li><a href=#markov-inequality>Markov-Inequality</a></li><li><a href=#chebyshev-inequality>Chebyshev-Inequality</a><ul><li><a href=#%E6%8A%BD%E6%A0%B7%E8%B0%83%E6%9F%A5%E5%87%86%E7%A1%AE%E7%8E%87>抽样调查准确率</a></li></ul></li><li><a href=#%E7%BB%84%E5%90%88%E6%95%B0%E4%B8%8D%E7%AD%89%E5%BC%8F>组合数不等式</a></li><li><a href=#chernoff-bound>Chernoff-Bound</a><ul><li><a href=#%E6%AD%A3%E5%90%91%E7%9A%84%E8%AF%81%E6%98%8E>正向的证明</a></li><li><a href=#%E8%B4%9F%E5%90%91%E7%9A%84%E8%AF%81%E6%98%8E>负向的证明</a></li></ul></li></ul></li></ul></li></ul><h1 id=高级算法设计>高级算法设计<a hidden class=anchor aria-hidden=true href=#高级算法设计>¶</a></h1><h2 id=快速排序>快速排序<a hidden class=anchor aria-hidden=true href=#快速排序>¶</a></h2><h3 id=python>python<a hidden class=anchor aria-hidden=true href=#python>¶</a></h3><h4 id=算法代码>算法代码<a hidden class=anchor aria-hidden=true href=#算法代码>¶</a></h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -183,7 +183,7 @@ l\in \mathcal{BBP} \iff&\exists deterministic\ alg\ A\in \mathcal{P},random\ inp
 &\{x\in l \rightarrow Pr(A(x,r)=1)\ge\frac{2}{3},\\
 &x\notin l \rightarrow Pr(A(x,r)=0)\ge\frac{2}{3} \}
 \end{aligned}
-$$</li></ul></li></ul><h3 id=算法的正确率提升>算法的正确率提升<a hidden class=anchor aria-hidden=true href=#算法的正确率提升>¶</a></h3><p>事实上，上述定义中的概率常量不影响，集合之间等同。独立随机的输入运行多次，然后选择结果。</p><p>eg，$\mathcal{RP}_\frac{1}{2}$ 提升到 $\mathcal{RP}_\frac{3}{4}$ ，运行 2 次，至少一次 1 即输出 1，全 0 输出 0。</p><p>eg， $\mathcal{BBP}_\frac{1}{3}$ 提升（错误率不能超过 $\frac{1}{2}$）。取独立随机输入$r_1,&mldr;r_{2t+1}$ 对应随机变量$Y_1,&mldr;Y_{2t+1}$，如果和$Y=\sum Y_i\ge t+1$，输出 1，反之输出 0</p><p>$$
+$$</li></ul></li></ul><h3 id=算法的正确率提升>算法的正确率提升<a hidden class=anchor aria-hidden=true href=#算法的正确率提升>¶</a></h3><p>事实上，上述定义中的概率常量不影响（对于$\mathcal{RP}\mathcal{Co-RP}$常数无关，对于$\mathcal{BPP}$错误率小于$\frac{1}{2}$，集合之间等同。独立随机的输入运行多次，然后选择结果。</p><p>eg，$\mathcal{RP}_\frac{1}{2}$ 提升到 $\mathcal{RP}_\frac{1}{4}$ ，运行 2 次，至少一次 1 即输出 1，全 0 输出 0。</p><p>eg， $\mathcal{BBP}_\frac{1}{3}$ 提升（错误率不能超过 $\frac{1}{2}$）。取独立随机输入$r_1,&mldr;r_{2t+1}$ 对应随机变量$Y_1,&mldr;Y_{2t+1}$，如果和$Y=\sum Y_i\ge t+1$，输出 1，反之输出 0</p><p>$$
 \begin{aligned}
 &Pr(\sum Y_i\le t)\\
 &=Pr(Y-E(Y)\le t-E(Y))\\
@@ -193,7 +193,88 @@ $$</li></ul></li></ul><h3 id=算法的正确率提升>算法的正确率提升<a
 &\le \frac{(2t+1)Var(Y_i)}{(t/3+2/3)^2}\\
 &\le \frac{(2t+1)/4}{(t/3+2/3)^2}\\
 \end{aligned}
-$$</p><p>t 足够大时，正确的概率即可足够大</p><h3 id=les-vegas-和-monte-carlo-转化>Les-Vegas 和 Monte-Carlo 转化<a hidden class=anchor aria-hidden=true href=#les-vegas-和-monte-carlo-转化>¶</a></h3><p>$$\mathcal{RP}\cap\mathcal{Co-RP}=\mathcal{ZPP} $$</p><ol><li>$\mathcal{ZPP}\subseteq\mathcal{RP}$：超时直接输出一个结果，按照$\mathcal{RP}$的要求，给 0（超时概率被 <a href=#markov-inequality>markov 不等式限制</a>，给出 1 一定正确，给 0 可能会出错 ）</li><li>$\mathcal{ZPP}\subseteq\mathcal{Co-RP}$，类似的</li><li>$\mathcal{RP}\cap\mathcal{RP}\subseteq\mathcal{ZPP}$：联立$A_1\in\mathcal{RP} ,A_2\mathcal{Co-RP}$,(1,1)输出 1，(0,0)输出 0，(0,1)再来一次。时间期望被正确率控制（(1,0)自相矛盾，不可能发生）</li></ol><p>这些算法集合关系如下。注意，$\mathcal{NP}$和$\mathcal{BPP}$之间实际上关系未知，有待进一步证明。目前大概认为不等</p><p><img loading=lazy src=/assets/img/p-npvenn.png alt=p,np,zpp,rp,bpp></p><h3 id=pnp>P，NP<a hidden class=anchor aria-hidden=true href=#pnp>¶</a></h3><p>判定问题，可以对应一个集合/语言。</p><p>$$f:x\to \{0,1\}$$</p><p>$$L_f=\left\{x|f(x)=1 \right\}$$</p><ul><li>$\mathcal{P}$：多项式时间可解</li><li>$\mathcal{NP}$：non-deterministic Turing machine 下 poly，多项式时间可验证一个解的正确性</li></ul><h2 id=算法>算法<a hidden class=anchor aria-hidden=true href=#算法>¶</a></h2><h3 id=矩阵检验>矩阵检验<a hidden class=anchor aria-hidden=true href=#矩阵检验>¶</a></h3><p>在$O(n^2)$，概率判断两矩阵乘是否相等另一矩阵。重复选择向量$x$。对于 0，1 的 2-bit 矩阵，错误率（在不等情况下）为$\frac{1}{2}$。</p><p>$$A(Bx)==Cx$$</p><h2 id=附录-基础知识>附录-基础知识<a hidden class=anchor aria-hidden=true href=#附录-基础知识>¶</a></h2><h3 id=markov-inequality>Markov-Inequality<a hidden class=anchor aria-hidden=true href=#markov-inequality>¶</a></h3><p>$$
+$$</p><p>t 足够大时，正确的概率即可足够大</p><h3 id=les-vegas-和-monte-carlo-转化>Les-Vegas 和 Monte-Carlo 转化<a hidden class=anchor aria-hidden=true href=#les-vegas-和-monte-carlo-转化>¶</a></h3><p>$$\mathcal{RP}\cap\mathcal{Co-RP}=\mathcal{ZPP} $$</p><ol><li>$\mathcal{ZPP}\subseteq\mathcal{RP}$：超时直接输出一个结果，按照$\mathcal{RP}$的要求，给 0（超时概率被 <a href=#markov-inequality>markov 不等式限制</a>，给出 1 一定正确，给 0 可能会出错 ）</li><li>$\mathcal{ZPP}\subseteq\mathcal{Co-RP}$，类似的</li><li>$\mathcal{RP}\cap\mathcal{RP}\subseteq\mathcal{ZPP}$：联立$A_1\in\mathcal{RP} ,A_2\in\mathcal{Co-RP}$,(1,1)输出 1，(0,0)输出 0，(0,1)再来一次。时间期望被正确率控制（(1,0)自相矛盾，不可能发生）</li></ol><p>这些算法集合关系如下。注意，$\mathcal{NP}$和$\mathcal{BPP}$之间实际上关系未知，有待进一步证明。目前大概认为不等</p><p><img loading=lazy src=/assets/img/p-npvenn.png alt=p,np,zpp,rp,bpp></p><h3 id=pnp>P，NP<a hidden class=anchor aria-hidden=true href=#pnp>¶</a></h3><p>判定问题，可以对应一个集合/语言。</p><p>$$f:x\to \{0,1\}$$</p><p>$$L_f=\left\{x|f(x)=1 \right\}$$</p><ul><li>$\mathcal{P}$：多项式时间可解</li><li>$\mathcal{NP}$：non-deterministic Turing machine 下 poly，多项式时间可验证一个解的正确性</li></ul><h2 id=算法>算法<a hidden class=anchor aria-hidden=true href=#算法>¶</a></h2><h3 id=矩阵检验>矩阵检验<a hidden class=anchor aria-hidden=true href=#矩阵检验>¶</a></h3><p>在$O(n^2)$，概率判断两矩阵乘是否相等另一矩阵。重复选择向量$x$。对于 0，1 的 2-bit 矩阵，错误率（在不等情况下）为$\frac{1}{2}$。</p><p>$$A(Bx)==Cx$$</p><h2 id=birthday-paradox>Birthday Paradox<a hidden class=anchor aria-hidden=true href=#birthday-paradox>¶</a></h2><p>$m$个球，独立随机投入到$n$个盒子。作为生日悖论的推广。还包括如md5 的 hash 碰撞，服务器负载均衡请求等。$X_i$表示 i 个盒子中球的数目，之间同分布但不独立（和为$m$）。注意有
+$x\in(0,1)\implies e^{-x}>1-x$</p><h3 id=msqrtn>m~sqrt(n)<a hidden class=anchor aria-hidden=true href=#msqrtn>¶</a></h3><p>$$
+\begin{aligned}
+Pr(\max X_i\ge 2)&=1-Pr(\forall i,X_i\le 1)\\
+&=1-(1-\frac{1}{n})(1-\frac{2}{n})&mldr;(1-\frac{m-1}{n})\\
+&\ge 1-e^{-\frac{1}{n}}&mldr;e^{-\frac{m-1}{n}}\\
+&=1-e^{-\frac{m(m-1)}{2n}}\\
+&\ge 1-e^{-(\frac{m}{\sqrt{2n}})^2}
+\end{aligned}
+$$</p><p>因此，$m=\Theta(\sqrt{n})\approx\sqrt{2n}$时候，大概率 2 球碰撞（$Pr=1-e^{-1}$）</p><h3 id=mn>m~n<a hidden class=anchor aria-hidden=true href=#mn>¶</a></h3><p>$$m=n\implies \max X_i \sim \frac{\ln n }{\ln \ln n}$$</p><p>有高概率实现（with high prop，whp，概率量级为$1-o(1)$）。证明有上界下界。如果尝试次数大于 1 次，可以改善到$\Theta(\ln \ln n)$（证明未被提及）</p><h4 id=上界>上界<a hidden class=anchor aria-hidden=true href=#上界>¶</a></h4><p>$$
+Pr(\max X_i\le 3\frac{\ln n }{\ln \ln n})\ge 1-o(1)
+$$</p><p>$$
+\begin{aligned}
+&Pr(X_1\ge 3s)\\
+&=Pr(\exists i_1,&mldr;i_{3s}\in [1,n],Ball_{i_j} \in X_1 )\\
+&=Pr(\bigcup Ball_{i_j} \in X_1 )\\
+&\le \sum Pr(Ball_{i_j} \in X_1)\\
+&=\binom{m}{3s}\left(\frac{1}{n}\right)^{3s}\\
+&\sim \binom{n}{3s}\left(\frac{1}{n}\right)^{3s}\\
+&\le \left(\frac{ne}{3s}\right)^{3s}\left(\frac{1}{n}\right)^{3s}\\
+&=(\frac{e}{3s})^{3s}\\
+&&lt;s^{-3s}\\
+&=(\frac{\ln \ln n }{\ln n})^{3s}\\
+&&lt; (\frac{\sqrt {\ln n}}{\ln n})^{3s}\\
+&=e^{-\ln \ln n \cdot (\frac{3}{2}\frac{\ln n }{\ln \ln n})}\\
+&=n^{-3/2}
+\end{aligned}
+$$</p><p>$$
+\begin{aligned}
+Pr(\max X_i\ge 3\frac{\ln n }{\ln \ln n})&=Pr(\exists i,X_i\ge 3\frac{\ln n }{\ln \ln n})\\
+&=Pr(\bigcup X_i\ge 3\frac{\ln n }{\ln \ln n})\\
+&\le nPr(X_1\ge 3s)\\
+&\le n^{\frac{1}{2}}
+\end{aligned}
+$$</p><h4 id=下界>下界<a hidden class=anchor aria-hidden=true href=#下界>¶</a></h4><p>$$
+Pr(\max X_i\ge \frac{1}{3}\frac{\ln n }{\ln \ln n})\ge 1-o(1)
+$$</p><p>定义同分布但不独立的随机变量$Y_1,&mldr;Y_n$ 有</p><p>$$
+Y_i=\left\{
+\begin{aligned}
+&1\qquad X_i\ge \frac{s}{3}\\
+&0\qquad otherwise
+\end{aligned}
+\right.
+$$</p><p>$$
+\begin{aligned}
+Pr(Y_i=1)&=Pr(X_i\ge \frac{s}{3})\\
+&\ge Pr(X_i=\frac{s}{3})\\
+&=\binom{m}{\frac{s}{3}}(\frac{1}{n})^{\frac{s}{3}}\cdot (1-\frac{1}{n})^{m-\frac{s}{3}}\\
+&\sim\binom{n}{\frac{s}{3}}(\frac{1}{n})^{\frac{s}{3}}\cdot (1-\frac{1}{n})^{n-\frac{s}{3}}\\
+&\ge (\frac{n}{\frac{s}{3}})^{\frac{s}{3}}(\frac{1}{n})^{\frac{s}{3}}e^{-1}\\
+&=(\frac{3}{s})^{\frac{s}{3}}e^{-1}\\
+&=(\frac{(3\ln \ln n)}{\ln n})^{\frac{s}{3}}e^{-1}\\
+&\ge (\ln n )^{-\frac{s}{3}}e^{-1}\qquad n>4\implies 3\ln \ln n>1\\
+&=e^{\ln \ln n\cdot \frac{\ln n}{3\ln \ln n}}e^{-1}\\
+&=n^{-1/3}e^{-1}
+\end{aligned}
+$$</p><p>因此有期望估计为 $E(Y_i)\ge n^{-1/3}e^{-1}$，期望和估计为$E(Y)\ge n^{2/3}e^{-1}$</p><p>$$
+\begin{aligned}
+&Pr(\max X_i\ge \frac{1}{3}\frac{\ln n }{\ln \ln n})\\
+&=Pr(\exists Y_i=1)\\
+&=Pr(\sum Y_i \ge 1)\\
+&=1-Pr(\sum Y_i \le 0)\\
+\end{aligned}
+$$</p><p>$$
+\begin{aligned}
+Pr(\sum Y_i \le 0)&=Pr(Y\le 0)\\
+&\le Pr(|Y-E(Y)|\ge E(Y))\qquad \text{注意到}E(Y)\ge 0\\
+&\le \frac{Var(Y)}{(n^{2/3}e^{-1})^2}\\
+&\le \frac{nVar(Y_i)}{(n^{2/3}e^{-1})^2}\\
+&\le \frac{e^2}{4}n^{-\frac{1}{3}}
+\end{aligned}
+$$</p><p>注意，这时候虽然$Y_i$之间不独立，但是其负相关（显然），协方差小于0。和的方差等于方差的和加上负的协方差。因此还是可以使用<a href=#chebyshev-inequality>chebyshev 不等式进行放缩</a>。</p><h3 id=mn-1>m>n<a hidden class=anchor aria-hidden=true href=#mn-1>¶</a></h3><p>期望里每个盒子的球数目为$\frac{m}{n}$。而在$m\sim n\ln n$量级上，可以保证高概率每个盒子均符合期望。</p><p>考虑独立随机变量$Y_1,&mldr;Y_m$，$Y_i$表示第 i 个球是否进入 1 号盒子。$E(Y_i)=\frac{1}{n},E(Y)=\frac{m}{n}$。取$m=24 n\ln n$。使用 <a href=#chernoff-bound>chernoff-bound 进行放缩</a></p><p>$$
+\begin{aligned}
+&Pr(\forall X_i\in [(1-\frac{1}{2})\frac{m}{n},(1+\frac{1}{2})\frac{m}{n}])\\
+&=1-Pr(\exists X_i\notin [(1-\frac{1}{2})\frac{m}{n},(1+\frac{1}{2})\frac{m}{n}] )\\
+&\ge 1-nPr(X_1 \notin [(1-\frac{1}{2})\frac{m}{n},(1+\frac{1}{2})\frac{m}{n}])\\
+&=1-(Pr(X_1 \le(1-\frac{1}{2})\frac{m}{n})+Pr(X_1\ge (1+\frac{1}{2})\frac{m}{n}))\\
+&\ge 1- 2ne^{-\frac{(\frac{1}{2})^2}{3}\cdot\frac{m}{n}}\\
+&=1-2ne^{-2\ln n}\\
+&=1-2/n=1-o(1)
+\end{aligned}
+$$</p><h2 id=附录-基础知识>附录-基础知识<a hidden class=anchor aria-hidden=true href=#附录-基础知识>¶</a></h2><h3 id=markov-inequality>Markov-Inequality<a hidden class=anchor aria-hidden=true href=#markov-inequality>¶</a></h3><p>$$
 \begin{aligned}
 &X\ge0,\forall c\ge0\\
 &\implies Pr(X\ge c)\le\frac{E(X)}{c}
@@ -203,15 +284,80 @@ $$</p><p>证明是显然的</p><h3 id=chebyshev-inequality>Chebyshev-Inequality<
 &X,\forall c\ge 0\\
 &\implies Pr(|X-E(x)|\ge c)\le\frac{Var(X)}{c^2}
 \end{aligned}
-$$</p><p>注意到$Pr(|X-E(x)|\ge c)=Pr((X-E(x))^2\ge c^2)$，然后化归到 <a href=#markov-inequality>Markov 不等式</a></p><h3 id=抽样调查准确率>抽样调查准确率<a hidden class=anchor aria-hidden=true href=#抽样调查准确率>¶</a></h3><p>作为 <a href=#chebyshev-inequality>Chebyshev 不等式</a>的应用。 抽样 n 个，调查出来的概率$\hat{p}=\frac{X_1+&mldr;X_n}{n}=\frac{X}{n}$。对其和真实概率$p$的偏移有要求：</p><p>$$Pr(|\hat{p}-p|\le \delta)\ge 1-\epsilon \implies Pr(|\hat{p}-p|\ge \delta)\le \epsilon $$</p><p>$$
+$$</p><p>注意到$Pr(|X-E(x)|\ge c)=Pr((X-E(x))^2\ge c^2)$，然后化归到 <a href=#markov-inequality>Markov 不等式</a>Chebyshev 不等式适用以下场景：</p><ol><li>变量之间独立，方差等于各自方差和</li><li>变量之间负相关，可以放缩方差和</li><li>变量之间两两独立，但不独立（eg，2 个独立 01 变量，再一个为前两个的异或），协方差均为 0，方差等于各自方差和</li></ol><h4 id=抽样调查准确率>抽样调查准确率<a hidden class=anchor aria-hidden=true href=#抽样调查准确率>¶</a></h4><p>作为 <a href=#chebyshev-inequality>Chebyshev 不等式</a>的应用。 抽样 n 个，调查出来的概率$\hat{p}=\frac{X_1+&mldr;X_n}{n}=\frac{X}{n}$。对其和真实概率$p$的偏移有要求：</p><p>$$Pr(|\hat{p}-p|\le \delta)\ge 1-\epsilon \implies Pr(|\hat{p}-p|\ge \delta)\le \epsilon $$</p><p>$$
 \begin{aligned}
 &Pr(|\hat{p}-p|\ge \delta)\\
 &=Pr(|\frac{X}{n}-p|\ge \delta)\\
 &=Pr(|X-np|\ge n\delta)\\
 &\le\frac{Var(X)}{(n\delta)^2}\\
-&\le\frac{1}{4(n\delta)^2}
+&\le\frac{1}{4n\delta^2}
 \end{aligned}
-$$</p><p>要求的抽样$n$的取值只和要求的$\delta,\epsilon$有关，和真实概率$p$本身分布无关。但是，如果知道真实分布，可以改善$n$的取值。</p></div><footer class=post-footer><ul class=post-tags><li><a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>教程</a></li><li><a href=https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/>课堂笔记</a></li></ul><nav class=paginav><a class=next href=https://livypad.github.io/post/2022-11-02-mbqueue/><span class=title>Next Page »</span><br><span>Michael&Scott 无锁队列</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2023 <a href=https://livypad.github.io>zhh's blog</a></span><span style=display:inline-block;margin-left:1em>
+$$</p><p>要求的抽样$n$的取值只和要求的$\delta,\epsilon$有关（$n\ge\frac{1}{4\epsilon\delta^2}$），和真实概率$p$本身分布无关。但是，如果知道真实分布，可以改善$n$的取值。</p><h3 id=组合数不等式>组合数不等式<a hidden class=anchor aria-hidden=true href=#组合数不等式>¶</a></h3><p>$$
+(\frac{n}{m})^m\le\binom{n}{m}\le(\frac{ne}{m})^m
+$$</p><p>第一个小于等于证明：</p><p>$$
+\begin{aligned}
+\binom{n}{m}&=\frac{n!}{m!(n-m)!}\\
+&=\frac{(n)..(n-m+1)}{(m)&mldr;(1)}\\
+&=\frac{n}{m}\frac{n-1}{m-1}&mldr;\frac{n-m+1}{1}\\
+&\ge (\frac{n}{m})^m
+\end{aligned}
+$$</p><p>注意到$\frac{(\frac{n+2}{n+1})^n}{n+1}(n+2)=(1+\frac{1}{n+1})^{n+1}\le e$。进行数学归纳法，有$\frac{(n+1)^n}{n!}\le e^n$。第二个小于等于证明：</p><p>$$
+\begin{aligned}
+\binom{n}{m}&=\frac{n!}{m!(n-m)!}\\
+&=\frac{(n)&mldr;(n-m+1)}{m!}\\
+&\le e^m\frac{(n)&mldr;(n-m+1)}{(m+1)^m}\\
+&\le (\frac{ne}{m})^m
+\end{aligned}
+$$</p><h3 id=chernoff-bound>Chernoff-Bound<a hidden class=anchor aria-hidden=true href=#chernoff-bound>¶</a></h3><p>$X_1,X_2,&mldr;X_n$为 n 个 01 的独立随机变量，$Pr(X_i=1)=p_i$，考虑随机变量和$X=\sum X_i$，均值$E(X)=\mu=\sum p_i$。对于一个偏离$\forall \delta\in (0,1)$（正向偏差时候大于 1 也可以，主要是负向概率不能为负。而最后的exp形式放缩需要$\delta\in(0,1)$）。</p><p>$$
+Pr(X\ge \mu(1+\delta))\le [\frac{e^\delta}{(1+\delta)^{1+\delta}}]^\mu\le e^{-\frac{\delta^2}{3}\mu}
+$$</p><p>$$
+Pr(X\le \mu(1-\delta))\le [\frac{e^{-\delta}}{(1-\delta)^{1-\delta}}]^\mu\le e^{-\frac{\delta^2}{2}\mu}
+$$</p><p>放缩成双向的</p><p>$$
+Pr(|X-\mu|\ge \delta\mu)\le 2e^{-\frac{\delta^2}{3}\mu}
+$$</p><p>eg：抛硬币 1000 次，800+次正面，$e^{-\frac{(3/5)^2}{3}\cdot \frac{n}{2}}$，指数小的概率，对比 <a href=#chebyshev-inequality>Chebyshev 里面只能 1/n 级别</a></p><h4 id=正向的证明>正向的证明<a hidden class=anchor aria-hidden=true href=#正向的证明>¶</a></h4><p>$$
+\begin{aligned}
+&Pr(X\ge(1+\delta)\mu)\\
+&=Pr(e^{\lambda X}\ge e^{\lambda(1+\delta)\mu})\qquad \lambda>0\\
+&\le \frac{E(e^{\lambda X})}{e^{\lambda(1+\delta)\mu}}\\
+&=\frac{\Pi E(e^{\lambda X_i})}{e^{\lambda(1+\delta)\mu}}\\
+&=\frac{\Pi ((1-p_i)+p_ie^{\lambda})}{e^{\lambda(1+\delta)\mu}}\\
+&=\frac{\Pi (1+p_i(e^{\lambda}-1))}{e^{\lambda(1+\delta)\mu}}\\
+&\le \frac{\Pi e^{p_i(e^{\lambda}-1)}}{e^{\lambda(1+\delta)\mu}}\\
+&=\frac{e^{(e^{\lambda}-1)\mu}}{e^{\lambda(1+\delta)\mu}}\\
+&=e^{(e^\lambda-1-\lambda(1+\delta))\mu}\qquad \lambda=\ln(1+\delta)>0\\
+&=e^{(1+\delta-1-(1+\delta)\ln (1+\delta))\mu}\\
+&=[\frac{e^\delta}{(1+\delta)^{1+\delta}}]^\mu
+\end{aligned}
+$$</p><p>在 $\delta\in(0,1)$时候，可以改写$e^{(1+\delta-1-(1+\delta)\ln (1+\delta))\mu}$，得出上界估计$e^{-\frac{\delta^2}{3}\mu}$</p><p>$$
+\begin{aligned}
+&\delta -(1+\delta)\ln (1+\delta)\\
+&=\delta-(1+\delta)(\delta-\frac{\delta^2}{2}+\frac{\delta^3}{3}&mldr;)\\
+&=(\frac{\delta^2}{2}-\frac{\delta^3}{3}&mldr;)-(\delta^2-\frac{\delta^3}{2}+\frac{\delta^3}{3}&mldr;)\\
+&=-\frac{\delta^2}{2}+\frac{\delta^3}{6}&mldr;\\
+&\le -\frac{\delta^2}{2}+\frac{\delta^2}{6}=-\frac{\delta^2}{3}
+\end{aligned}
+$$</p><h4 id=负向的证明>负向的证明<a hidden class=anchor aria-hidden=true href=#负向的证明>¶</a></h4><p>类似的，</p><p>$$
+\begin{aligned}
+&Pr(X\le(1-\delta)\mu)\\
+&=Pr(e^{\lambda X}\ge e^{\lambda(1-\delta)\mu})\qquad \lambda&lt;0\\
+&\le \frac{E(e^{\lambda X})}{e^{\lambda(1-\delta)\mu}}\\
+&=\frac{\Pi E(e^{\lambda X_i})}{e^{\lambda(1-\delta)\mu}}\\
+&=\frac{\Pi ((1-p_i)+p_ie^{\lambda})}{e^{\lambda(1-\delta)\mu}}\\
+&=\frac{\Pi (1+p_i(e^{\lambda}-1))}{e^{\lambda(1-\delta)\mu}}\\
+&\le \frac{\Pi e^{p_i(e^{\lambda}-1)}}{e^{\lambda(1-\delta)\mu}}\\
+&=\frac{e^{(e^{\lambda}-1)\mu}}{e^{\lambda(1-\delta)\mu}}\\
+&=e^{(e^\lambda-1-\lambda(1-\delta))\mu}\qquad \lambda=\ln(1-\delta)&lt;0\\
+&=e^{(1-\delta-1-(1-\delta)\ln (1-\delta))\mu}\\
+&=[\frac{e^{-\delta}}{(1-\delta)^{1-\delta}}]^\mu\\
+\end{aligned}
+$$</p><p>在 $\delta\in(0,1)$时候，可以改写$e^{(1-\delta-1-(1-\delta)\ln (1-\delta))\mu}$，得出上界估计$e^{-\frac{\delta^2}{2}\mu}$</p><p>$$
+\begin{aligned}
+&-\delta -(1-\delta)\ln (1-\delta)\\
+&=-\delta+(1-\delta)(\delta+\frac{\delta^2}{2}+\frac{\delta^3}{3}&mldr;)\\
+&=(\frac{\delta^2}{2}+\frac{\delta^3}{3}&mldr;)-(\delta^2+\frac{\delta^3}{2}+\frac{\delta^4}{3}&mldr;)\\
+&\le -\frac{\delta^2}{2}
+\end{aligned}
+$$</p></div><footer class=post-footer><ul class=post-tags><li><a href=https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/>教程</a></li><li><a href=https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/>课堂笔记</a></li></ul><nav class=paginav><a class=next href=https://livypad.github.io/post/2022-11-02-mbqueue/><span class=title>Next Page »</span><br><span>Michael&Scott 无锁队列</span></a></nav></footer></article></main><footer class=footer><span>&copy; 2023 <a href=https://livypad.github.io>zhh's blog</a></span><span style=display:inline-block;margin-left:1em>
 Powered by
 <a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
     <a href=https://github.com/reorx/hugo-PaperModX/ rel=noopener target=_blank>PaperModX</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg></a><script>MathJax={tex:{inlineMath:[["$","$"]],displayMath:[["$$","$$"]],processEscapes:!0,processEnvironments:!0,skipTags:["script","noscript","style","textarea","pre"],TeX:{equationNumbers:{autoNumber:"AMS"},extensions:["AMSmath.js","AMSsymbols.js"]}},svg:{fontCache:"global"}}</script><script type=text/javascript id=MathJax-script async src=https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js></script>

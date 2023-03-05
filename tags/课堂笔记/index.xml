@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>课堂笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link><description>Recent content in 课堂笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Mon, 27 Feb 2023 17:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Mon, 27 Feb 2023 17:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP 算法 矩阵检验 附录-基础知识 Markov-Inequality</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>课堂笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link><description>Recent content in 课堂笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Sun, 05 Mar 2023 17:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第3次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Sun, 05 Mar 2023 17:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP 算法 矩阵检验 Birthday Paradox m~sqrt(n) m~n 上界 下界</description><content:encoded><![CDATA[<ul>
 <li><a href="#%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1">高级算法设计</a>
 <ul>
 <li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>
@@ -30,11 +30,33 @@
 <li><a href="#%E7%9F%A9%E9%98%B5%E6%A3%80%E9%AA%8C">矩阵检验</a></li>
 </ul>
 </li>
+<li><a href="#birthday-paradox">Birthday Paradox</a>
+<ul>
+<li><a href="#msqrtn">m~sqrt(n)</a></li>
+<li><a href="#mn">m~n</a>
+<ul>
+<li><a href="#%E4%B8%8A%E7%95%8C">上界</a></li>
+<li><a href="#%E4%B8%8B%E7%95%8C">下界</a></li>
+</ul>
+</li>
+<li><a href="#mn-1">m&gt;n</a></li>
+</ul>
+</li>
 <li><a href="#%E9%99%84%E5%BD%95-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">附录-基础知识</a>
 <ul>
 <li><a href="#markov-inequality">Markov-Inequality</a></li>
-<li><a href="#chebyshev-inequality">Chebyshev-Inequality</a></li>
+<li><a href="#chebyshev-inequality">Chebyshev-Inequality</a>
+<ul>
 <li><a href="#%E6%8A%BD%E6%A0%B7%E8%B0%83%E6%9F%A5%E5%87%86%E7%A1%AE%E7%8E%87">抽样调查准确率</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%84%E5%90%88%E6%95%B0%E4%B8%8D%E7%AD%89%E5%BC%8F">组合数不等式</a></li>
+<li><a href="#chernoff-bound">Chernoff-Bound</a>
+<ul>
+<li><a href="#%E6%AD%A3%E5%90%91%E7%9A%84%E8%AF%81%E6%98%8E">正向的证明</a></li>
+<li><a href="#%E8%B4%9F%E5%90%91%E7%9A%84%E8%AF%81%E6%98%8E">负向的证明</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -301,8 +323,8 @@ $$</li>
 </li>
 </ul>
 <h3 id="算法的正确率提升">算法的正确率提升</h3>
-<p>事实上，上述定义中的概率常量不影响，集合之间等同。独立随机的输入运行多次，然后选择结果。</p>
-<p>eg，$\mathcal{RP}_\frac{1}{2}$ 提升到 $\mathcal{RP}_\frac{3}{4}$ ，运行 2 次，至少一次 1 即输出 1，全 0 输出 0。</p>
+<p>事实上，上述定义中的概率常量不影响（对于$\mathcal{RP}\mathcal{Co-RP}$常数无关，对于$\mathcal{BPP}$错误率小于$\frac{1}{2}$，集合之间等同。独立随机的输入运行多次，然后选择结果。</p>
+<p>eg，$\mathcal{RP}_\frac{1}{2}$ 提升到 $\mathcal{RP}_\frac{1}{4}$ ，运行 2 次，至少一次 1 即输出 1，全 0 输出 0。</p>
 <p>eg， $\mathcal{BBP}_\frac{1}{3}$ 提升（错误率不能超过 $\frac{1}{2}$）。取独立随机输入$r_1,&hellip;r_{2t+1}$ 对应随机变量$Y_1,&hellip;Y_{2t+1}$，如果和$Y=\sum Y_i\ge t+1$，输出 1，反之输出 0</p>
 <p>$$
 \begin{aligned}
@@ -321,7 +343,7 @@ $$</p>
 <ol>
 <li>$\mathcal{ZPP}\subseteq\mathcal{RP}$：超时直接输出一个结果，按照$\mathcal{RP}$的要求，给 0（超时概率被 <a href="#markov-inequality">markov 不等式限制</a>，给出 1 一定正确，给 0 可能会出错 ）</li>
 <li>$\mathcal{ZPP}\subseteq\mathcal{Co-RP}$，类似的</li>
-<li>$\mathcal{RP}\cap\mathcal{RP}\subseteq\mathcal{ZPP}$：联立$A_1\in\mathcal{RP} ,A_2\mathcal{Co-RP}$,(1,1)输出 1，(0,0)输出 0，(0,1)再来一次。时间期望被正确率控制（(1,0)自相矛盾，不可能发生）</li>
+<li>$\mathcal{RP}\cap\mathcal{RP}\subseteq\mathcal{ZPP}$：联立$A_1\in\mathcal{RP} ,A_2\in\mathcal{Co-RP}$,(1,1)输出 1，(0,0)输出 0，(0,1)再来一次。时间期望被正确率控制（(1,0)自相矛盾，不可能发生）</li>
 </ol>
 <p>这些算法集合关系如下。注意，$\mathcal{NP}$和$\mathcal{BPP}$之间实际上关系未知，有待进一步证明。目前大概认为不等</p>
 <p><img loading="lazy" src="/assets/img/p-npvenn.png" alt="p,np,zpp,rp,bpp"  />
@@ -338,6 +360,112 @@ $$</p>
 <h3 id="矩阵检验">矩阵检验</h3>
 <p>在$O(n^2)$，概率判断两矩阵乘是否相等另一矩阵。重复选择向量$x$。对于 0，1 的 2-bit 矩阵，错误率（在不等情况下）为$\frac{1}{2}$。</p>
 <p>$$A(Bx)==Cx$$</p>
+<h2 id="birthday-paradox">Birthday Paradox</h2>
+<p>$m$个球，独立随机投入到$n$个盒子。作为生日悖论的推广。还包括如md5 的 hash 碰撞，服务器负载均衡请求等。$X_i$表示 i 个盒子中球的数目，之间同分布但不独立（和为$m$）。注意有
+$x\in(0,1)\implies e^{-x}&gt;1-x$</p>
+<h3 id="msqrtn">m~sqrt(n)</h3>
+<p>$$
+\begin{aligned}
+Pr(\max X_i\ge 2)&amp;=1-Pr(\forall i,X_i\le 1)\\
+&amp;=1-(1-\frac{1}{n})(1-\frac{2}{n})&hellip;(1-\frac{m-1}{n})\\
+&amp;\ge 1-e^{-\frac{1}{n}}&hellip;e^{-\frac{m-1}{n}}\\
+&amp;=1-e^{-\frac{m(m-1)}{2n}}\\
+&amp;\ge 1-e^{-(\frac{m}{\sqrt{2n}})^2}
+\end{aligned}
+$$</p>
+<p>因此，$m=\Theta(\sqrt{n})\approx\sqrt{2n}$时候，大概率 2 球碰撞（$Pr=1-e^{-1}$）</p>
+<h3 id="mn">m~n</h3>
+<p>$$m=n\implies \max X_i \sim \frac{\ln n }{\ln \ln n}$$</p>
+<p>有高概率实现（with high prop，whp，概率量级为$1-o(1)$）。证明有上界下界。如果尝试次数大于 1 次，可以改善到$\Theta(\ln \ln n)$（证明未被提及）</p>
+<h4 id="上界">上界</h4>
+<p>$$
+Pr(\max X_i\le 3\frac{\ln n }{\ln \ln n})\ge 1-o(1)
+$$</p>
+<p>$$
+\begin{aligned}
+&amp;Pr(X_1\ge 3s)\\
+&amp;=Pr(\exists i_1,&hellip;i_{3s}\in [1,n],Ball_{i_j} \in X_1 )\\
+&amp;=Pr(\bigcup Ball_{i_j} \in X_1 )\\
+&amp;\le \sum Pr(Ball_{i_j} \in X_1)\\
+&amp;=\binom{m}{3s}\left(\frac{1}{n}\right)^{3s}\\
+&amp;\sim \binom{n}{3s}\left(\frac{1}{n}\right)^{3s}\\
+&amp;\le \left(\frac{ne}{3s}\right)^{3s}\left(\frac{1}{n}\right)^{3s}\\
+&amp;=(\frac{e}{3s})^{3s}\\
+&amp;&lt;s^{-3s}\\
+&amp;=(\frac{\ln  \ln n }{\ln n})^{3s}\\
+&amp;&lt; (\frac{\sqrt {\ln n}}{\ln n})^{3s}\\
+&amp;=e^{-\ln \ln n \cdot (\frac{3}{2}\frac{\ln n }{\ln \ln n})}\\
+&amp;=n^{-3/2}
+\end{aligned}
+$$</p>
+<p>$$
+\begin{aligned}
+Pr(\max X_i\ge 3\frac{\ln n }{\ln \ln n})&amp;=Pr(\exists i,X_i\ge 3\frac{\ln n }{\ln \ln n})\\
+&amp;=Pr(\bigcup X_i\ge 3\frac{\ln n }{\ln \ln n})\\
+&amp;\le nPr(X_1\ge 3s)\\
+&amp;\le n^{\frac{1}{2}}
+\end{aligned}
+$$</p>
+<h4 id="下界">下界</h4>
+<p>$$
+Pr(\max X_i\ge \frac{1}{3}\frac{\ln n }{\ln \ln n})\ge 1-o(1)
+$$</p>
+<p>定义同分布但不独立的随机变量$Y_1,&hellip;Y_n$ 有</p>
+<p>$$
+Y_i=\left\{
+\begin{aligned}
+&amp;1\qquad X_i\ge \frac{s}{3}\\
+&amp;0\qquad otherwise
+\end{aligned}
+\right.
+$$</p>
+<p>$$
+\begin{aligned}
+Pr(Y_i=1)&amp;=Pr(X_i\ge \frac{s}{3})\\
+&amp;\ge Pr(X_i=\frac{s}{3})\\
+&amp;=\binom{m}{\frac{s}{3}}(\frac{1}{n})^{\frac{s}{3}}\cdot (1-\frac{1}{n})^{m-\frac{s}{3}}\\
+&amp;\sim\binom{n}{\frac{s}{3}}(\frac{1}{n})^{\frac{s}{3}}\cdot (1-\frac{1}{n})^{n-\frac{s}{3}}\\
+&amp;\ge (\frac{n}{\frac{s}{3}})^{\frac{s}{3}}(\frac{1}{n})^{\frac{s}{3}}e^{-1}\\
+&amp;=(\frac{3}{s})^{\frac{s}{3}}e^{-1}\\
+&amp;=(\frac{(3\ln \ln n)}{\ln n})^{\frac{s}{3}}e^{-1}\\
+&amp;\ge (\ln n )^{-\frac{s}{3}}e^{-1}\qquad n&gt;4\implies 3\ln \ln n&gt;1\\
+&amp;=e^{\ln \ln n\cdot \frac{\ln n}{3\ln \ln n}}e^{-1}\\
+&amp;=n^{-1/3}e^{-1}
+\end{aligned}
+$$</p>
+<p>因此有期望估计为 $E(Y_i)\ge n^{-1/3}e^{-1}$，期望和估计为$E(Y)\ge n^{2/3}e^{-1}$</p>
+<p>$$
+\begin{aligned}
+&amp;Pr(\max X_i\ge \frac{1}{3}\frac{\ln n }{\ln \ln n})\\
+&amp;=Pr(\exists Y_i=1)\\
+&amp;=Pr(\sum Y_i \ge 1)\\
+&amp;=1-Pr(\sum Y_i \le 0)\\
+\end{aligned}
+$$</p>
+<p>$$
+\begin{aligned}
+Pr(\sum Y_i \le 0)&amp;=Pr(Y\le 0)\\
+&amp;\le Pr(|Y-E(Y)|\ge E(Y))\qquad \text{注意到}E(Y)\ge 0\\
+&amp;\le \frac{Var(Y)}{(n^{2/3}e^{-1})^2}\\
+&amp;\le \frac{nVar(Y_i)}{(n^{2/3}e^{-1})^2}\\
+&amp;\le \frac{e^2}{4}n^{-\frac{1}{3}}
+\end{aligned}
+$$</p>
+<p>注意，这时候虽然$Y_i$之间不独立，但是其负相关（显然），协方差小于0。和的方差等于方差的和加上负的协方差。因此还是可以使用<a href="#chebyshev-inequality">chebyshev 不等式进行放缩</a>。</p>
+<h3 id="mn-1">m&gt;n</h3>
+<p>期望里每个盒子的球数目为$\frac{m}{n}$。而在$m\sim n\ln n$量级上，可以保证高概率每个盒子均符合期望。</p>
+<p>考虑独立随机变量$Y_1,&hellip;Y_m$，$Y_i$表示第 i 个球是否进入 1 号盒子。$E(Y_i)=\frac{1}{n},E(Y)=\frac{m}{n}$。取$m=24 n\ln n$。使用 <a href="#chernoff-bound">chernoff-bound 进行放缩</a></p>
+<p>$$
+\begin{aligned}
+&amp;Pr(\forall X_i\in [(1-\frac{1}{2})\frac{m}{n},(1+\frac{1}{2})\frac{m}{n}])\\
+&amp;=1-Pr(\exists X_i\notin [(1-\frac{1}{2})\frac{m}{n},(1+\frac{1}{2})\frac{m}{n}] )\\
+&amp;\ge 1-nPr(X_1 \notin [(1-\frac{1}{2})\frac{m}{n},(1+\frac{1}{2})\frac{m}{n}])\\
+&amp;=1-(Pr(X_1 \le(1-\frac{1}{2})\frac{m}{n})+Pr(X_1\ge (1+\frac{1}{2})\frac{m}{n}))\\
+&amp;\ge 1- 2ne^{-\frac{(\frac{1}{2})^2}{3}\cdot\frac{m}{n}}\\
+&amp;=1-2ne^{-2\ln n}\\
+&amp;=1-2/n=1-o(1)
+\end{aligned}
+$$</p>
 <h2 id="附录-基础知识">附录-基础知识</h2>
 <h3 id="markov-inequality">Markov-Inequality</h3>
 <p>$$
@@ -354,8 +482,13 @@ $$</p>
 &amp;\implies Pr(|X-E(x)|\ge c)\le\frac{Var(X)}{c^2}
 \end{aligned}
 $$</p>
-<p>注意到$Pr(|X-E(x)|\ge c)=Pr((X-E(x))^2\ge c^2)$，然后化归到 <a href="#markov-inequality">Markov 不等式</a></p>
-<h3 id="抽样调查准确率">抽样调查准确率</h3>
+<p>注意到$Pr(|X-E(x)|\ge c)=Pr((X-E(x))^2\ge c^2)$，然后化归到 <a href="#markov-inequality">Markov 不等式</a>Chebyshev 不等式适用以下场景：</p>
+<ol>
+<li>变量之间独立，方差等于各自方差和</li>
+<li>变量之间负相关，可以放缩方差和</li>
+<li>变量之间两两独立，但不独立（eg，2 个独立 01 变量，再一个为前两个的异或），协方差均为 0，方差等于各自方差和</li>
+</ol>
+<h4 id="抽样调查准确率">抽样调查准确率</h4>
 <p>作为 <a href="#chebyshev-inequality">Chebyshev 不等式</a>的应用。 抽样 n 个，调查出来的概率$\hat{p}=\frac{X_1+&hellip;X_n}{n}=\frac{X}{n}$。对其和真实概率$p$的偏移有要求：</p>
 <p>$$Pr(|\hat{p}-p|\le \delta)\ge 1-\epsilon \implies Pr(|\hat{p}-p|\ge \delta)\le \epsilon $$</p>
 <p>$$
@@ -364,8 +497,95 @@ $$</p>
 &amp;=Pr(|\frac{X}{n}-p|\ge \delta)\\
 &amp;=Pr(|X-np|\ge n\delta)\\
 &amp;\le\frac{Var(X)}{(n\delta)^2}\\
-&amp;\le\frac{1}{4(n\delta)^2}
+&amp;\le\frac{1}{4n\delta^2}
 \end{aligned}
 $$</p>
-<p>要求的抽样$n$的取值只和要求的$\delta,\epsilon$有关，和真实概率$p$本身分布无关。但是，如果知道真实分布，可以改善$n$的取值。</p>
+<p>要求的抽样$n$的取值只和要求的$\delta,\epsilon$有关（$n\ge\frac{1}{4\epsilon\delta^2}$），和真实概率$p$本身分布无关。但是，如果知道真实分布，可以改善$n$的取值。</p>
+<h3 id="组合数不等式">组合数不等式</h3>
+<p>$$
+(\frac{n}{m})^m\le\binom{n}{m}\le(\frac{ne}{m})^m
+$$</p>
+<p>第一个小于等于证明：</p>
+<p>$$
+\begin{aligned}
+\binom{n}{m}&amp;=\frac{n!}{m!(n-m)!}\\
+&amp;=\frac{(n)..(n-m+1)}{(m)&hellip;(1)}\\
+&amp;=\frac{n}{m}\frac{n-1}{m-1}&hellip;\frac{n-m+1}{1}\\
+&amp;\ge (\frac{n}{m})^m
+\end{aligned}
+$$</p>
+<p>注意到$\frac{(\frac{n+2}{n+1})^n}{n+1}(n+2)=(1+\frac{1}{n+1})^{n+1}\le e$。进行数学归纳法，有$\frac{(n+1)^n}{n!}\le e^n$。第二个小于等于证明：</p>
+<p>$$
+\begin{aligned}
+\binom{n}{m}&amp;=\frac{n!}{m!(n-m)!}\\
+&amp;=\frac{(n)&hellip;(n-m+1)}{m!}\\
+&amp;\le e^m\frac{(n)&hellip;(n-m+1)}{(m+1)^m}\\
+&amp;\le (\frac{ne}{m})^m
+\end{aligned}
+$$</p>
+<h3 id="chernoff-bound">Chernoff-Bound</h3>
+<p>$X_1,X_2,&hellip;X_n$为 n 个 01 的独立随机变量，$Pr(X_i=1)=p_i$，考虑随机变量和$X=\sum X_i$，均值$E(X)=\mu=\sum p_i$。对于一个偏离$\forall \delta\in (0,1)$（正向偏差时候大于 1 也可以，主要是负向概率不能为负。而最后的exp形式放缩需要$\delta\in(0,1)$）。</p>
+<p>$$
+Pr(X\ge \mu(1+\delta))\le [\frac{e^\delta}{(1+\delta)^{1+\delta}}]^\mu\le e^{-\frac{\delta^2}{3}\mu}
+$$</p>
+<p>$$
+Pr(X\le \mu(1-\delta))\le [\frac{e^{-\delta}}{(1-\delta)^{1-\delta}}]^\mu\le e^{-\frac{\delta^2}{2}\mu}
+$$</p>
+<p>放缩成双向的</p>
+<p>$$
+Pr(|X-\mu|\ge \delta\mu)\le 2e^{-\frac{\delta^2}{3}\mu}
+$$</p>
+<p>eg：抛硬币 1000 次，800+次正面，$e^{-\frac{(3/5)^2}{3}\cdot \frac{n}{2}}$，指数小的概率，对比 <a href="#chebyshev-inequality">Chebyshev 里面只能 1/n 级别</a></p>
+<h4 id="正向的证明">正向的证明</h4>
+<p>$$
+\begin{aligned}
+&amp;Pr(X\ge(1+\delta)\mu)\\
+&amp;=Pr(e^{\lambda X}\ge e^{\lambda(1+\delta)\mu})\qquad \lambda&gt;0\\
+&amp;\le \frac{E(e^{\lambda X})}{e^{\lambda(1+\delta)\mu}}\\
+&amp;=\frac{\Pi E(e^{\lambda X_i})}{e^{\lambda(1+\delta)\mu}}\\
+&amp;=\frac{\Pi ((1-p_i)+p_ie^{\lambda})}{e^{\lambda(1+\delta)\mu}}\\
+&amp;=\frac{\Pi (1+p_i(e^{\lambda}-1))}{e^{\lambda(1+\delta)\mu}}\\
+&amp;\le \frac{\Pi e^{p_i(e^{\lambda}-1)}}{e^{\lambda(1+\delta)\mu}}\\
+&amp;=\frac{e^{(e^{\lambda}-1)\mu}}{e^{\lambda(1+\delta)\mu}}\\
+&amp;=e^{(e^\lambda-1-\lambda(1+\delta))\mu}\qquad \lambda=\ln(1+\delta)&gt;0\\
+&amp;=e^{(1+\delta-1-(1+\delta)\ln (1+\delta))\mu}\\
+&amp;=[\frac{e^\delta}{(1+\delta)^{1+\delta}}]^\mu
+\end{aligned}
+$$</p>
+<p>在 $\delta\in(0,1)$时候，可以改写$e^{(1+\delta-1-(1+\delta)\ln (1+\delta))\mu}$，得出上界估计$e^{-\frac{\delta^2}{3}\mu}$</p>
+<p>$$
+\begin{aligned}
+&amp;\delta -(1+\delta)\ln (1+\delta)\\
+&amp;=\delta-(1+\delta)(\delta-\frac{\delta^2}{2}+\frac{\delta^3}{3}&hellip;)\\
+&amp;=(\frac{\delta^2}{2}-\frac{\delta^3}{3}&hellip;)-(\delta^2-\frac{\delta^3}{2}+\frac{\delta^3}{3}&hellip;)\\
+&amp;=-\frac{\delta^2}{2}+\frac{\delta^3}{6}&hellip;\\
+&amp;\le -\frac{\delta^2}{2}+\frac{\delta^2}{6}=-\frac{\delta^2}{3}
+\end{aligned}
+$$</p>
+<h4 id="负向的证明">负向的证明</h4>
+<p>类似的，</p>
+<p>$$
+\begin{aligned}
+&amp;Pr(X\le(1-\delta)\mu)\\
+&amp;=Pr(e^{\lambda X}\ge e^{\lambda(1-\delta)\mu})\qquad \lambda&lt;0\\
+&amp;\le \frac{E(e^{\lambda X})}{e^{\lambda(1-\delta)\mu}}\\
+&amp;=\frac{\Pi E(e^{\lambda X_i})}{e^{\lambda(1-\delta)\mu}}\\
+&amp;=\frac{\Pi ((1-p_i)+p_ie^{\lambda})}{e^{\lambda(1-\delta)\mu}}\\
+&amp;=\frac{\Pi (1+p_i(e^{\lambda}-1))}{e^{\lambda(1-\delta)\mu}}\\
+&amp;\le \frac{\Pi e^{p_i(e^{\lambda}-1)}}{e^{\lambda(1-\delta)\mu}}\\
+&amp;=\frac{e^{(e^{\lambda}-1)\mu}}{e^{\lambda(1-\delta)\mu}}\\
+&amp;=e^{(e^\lambda-1-\lambda(1-\delta))\mu}\qquad \lambda=\ln(1-\delta)&lt;0\\
+&amp;=e^{(1-\delta-1-(1-\delta)\ln (1-\delta))\mu}\\
+&amp;=[\frac{e^{-\delta}}{(1-\delta)^{1-\delta}}]^\mu\\
+\end{aligned}
+$$</p>
+<p>在 $\delta\in(0,1)$时候，可以改写$e^{(1-\delta-1-(1-\delta)\ln (1-\delta))\mu}$，得出上界估计$e^{-\frac{\delta^2}{2}\mu}$</p>
+<p>$$
+\begin{aligned}
+&amp;-\delta -(1-\delta)\ln (1-\delta)\\
+&amp;=-\delta+(1-\delta)(\delta+\frac{\delta^2}{2}+\frac{\delta^3}{3}&hellip;)\\
+&amp;=(\frac{\delta^2}{2}+\frac{\delta^3}{3}&hellip;)-(\delta^2+\frac{\delta^3}{2}+\frac{\delta^4}{3}&hellip;)\\
+&amp;\le -\frac{\delta^2}{2}
+\end{aligned}
+$$</p>
 ]]></content:encoded></item></channel></rss>
