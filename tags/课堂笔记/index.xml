@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>课堂笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link><description>Recent content in 课堂笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Sun, 05 Mar 2023 17:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第3次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Sun, 05 Mar 2023 17:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP 算法 矩阵检验 Birthday Paradox m~sqrt(n) m~n 上界 下界</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>课堂笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link><description>Recent content in 课堂笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Mon, 06 Mar 2023 17:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第4次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Mon, 06 Mar 2023 17:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP 算法 矩阵检验 GCD 素数判定 双边出</description><content:encoded><![CDATA[<ul>
 <li><a href="#%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1">高级算法设计</a>
 <ul>
 <li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>
@@ -28,6 +28,14 @@
 <li><a href="#%E7%AE%97%E6%B3%95">算法</a>
 <ul>
 <li><a href="#%E7%9F%A9%E9%98%B5%E6%A3%80%E9%AA%8C">矩阵检验</a></li>
+<li><a href="#gcd">GCD</a></li>
+<li><a href="#%E7%B4%A0%E6%95%B0%E5%88%A4%E5%AE%9A">素数判定</a>
+<ul>
+<li><a href="#%E5%8F%8C%E8%BE%B9%E5%87%BA%E9%94%99%E7%AE%97%E6%B3%95">双边出错算法</a></li>
+<li><a href="#%E5%8D%95%E8%BE%B9%E5%87%BA%E9%94%99%E7%AE%97%E6%B3%95">单边出错算法</a></li>
+<li><a href="#%E5%8E%9F%E6%A0%B9">原根</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#birthday-paradox">Birthday Paradox</a>
@@ -55,6 +63,12 @@
 <ul>
 <li><a href="#%E6%AD%A3%E5%90%91%E7%9A%84%E8%AF%81%E6%98%8E">正向的证明</a></li>
 <li><a href="#%E8%B4%9F%E5%90%91%E7%9A%84%E8%AF%81%E6%98%8E">负向的证明</a></li>
+</ul>
+</li>
+<li><a href="#fermat-little-theorem">Fermat-Little-Theorem</a>
+<ul>
+<li><a href="#carmichael-number">Carmichael-Number</a></li>
+<li><a href="#%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86">中国剩余定理</a></li>
 </ul>
 </li>
 </ul>
@@ -360,8 +374,185 @@ $$</p>
 <h3 id="矩阵检验">矩阵检验</h3>
 <p>在$O(n^2)$，概率判断两矩阵乘是否相等另一矩阵。重复选择向量$x$。对于 0，1 的 2-bit 矩阵，错误率（在不等情况下）为$\frac{1}{2}$。</p>
 <p>$$A(Bx)==Cx$$</p>
+<h3 id="gcd">GCD</h3>
+<p>不分解质因数，使用辗转相除法计算最大公因数 GCD。至多 2 次减半，时间复杂度度$O(\ln n*\ln^2 n)$。</p>
+<p>辗转相除法的过程中，还可以同时构造得到 Bezout 系数$x,y\in \mathbb{Z}$使得 $GCD(a,b)=x\times a+y\times b$。一个可能的实现如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rust" data-lang="rust"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">num</span>::<span class="n">Integer</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">cmp</span>::<span class="p">{</span><span class="n">max</span><span class="p">,</span><span class="w"> </span><span class="n">min</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">ops</span>::<span class="p">{</span><span class="n">Div</span><span class="p">,</span><span class="w"> </span><span class="n">Neg</span><span class="p">,</span><span class="w"> </span><span class="n">Rem</span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">gcd</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Integer</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Neg</span><span class="o">&lt;</span><span class="n">Output</span><span class="o">=</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Copy</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span>: <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">b</span>: <span class="nc">T</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">r_rep</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[(</span><span class="n">T</span>::<span class="n">zero</span><span class="p">(),</span><span class="w"> </span><span class="n">T</span>::<span class="n">one</span><span class="p">())];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">v2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max_min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">div_rem</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">is_zero</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r_rep</span><span class="p">.</span><span class="n">pop</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">v2</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="p">.</span><span class="mi">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(((</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">)))</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_last2_items</span><span class="p">(</span><span class="o">&amp;</span><span class="n">r_rep</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">r_rep</span><span class="p">.</span><span class="n">push</span><span class="p">((</span><span class="n">a</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">d</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">r_rep</span><span class="p">.</span><span class="n">push</span><span class="p">((</span><span class="n">T</span>::<span class="n">one</span><span class="p">(),</span><span class="w"> </span><span class="o">-</span><span class="n">q</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">v1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v2</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">r</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">get_last2_items</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nb">Copy</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v</span>: <span class="kp">&amp;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">len</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">len</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Some</span><span class="p">((</span><span class="n">v</span><span class="p">[</span><span class="n">l</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">v</span><span class="p">[</span><span class="n">l</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">None</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">div_rem</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Div</span><span class="o">&lt;</span><span class="n">Output</span><span class="o">=</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Rem</span><span class="o">&lt;</span><span class="n">Output</span><span class="o">=</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Copy</span><span class="o">&gt;</span><span class="p">(</span><span class="n">dividend</span>: <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">divisor</span>: <span class="nc">T</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">(</span><span class="n">dividend</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">divisor</span><span class="p">,</span><span class="w"> </span><span class="n">dividend</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">divisor</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">max_min</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nb">Ord</span> <span class="o">+</span><span class="w"> </span><span class="nb">PartialOrd</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Copy</span><span class="o">&gt;</span><span class="p">(</span><span class="n">v1</span>: <span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span>: <span class="nc">T</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">(</span><span class="n">max</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="p">),</span><span class="w"> </span><span class="n">min</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span><span class="w"> </span><span class="n">v2</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="素数判定">素数判定</h3>
+<p>对于一个大小为 n 的数，注意到表示这个数需要的复杂度是$O(\ln n)$。所以合理的多项式时间算法，应该是针对$\sim \ln n$的多项式。</p>
+<h4 id="双边出错算法">双边出错算法</h4>
+<p>给定一个$\mathcal{BPP}$算法</p>
+<ol>
+<li>n 不是不为 2 的偶数</li>
+<li>$n=r^s\qquad r,s&gt;1$
+<ol>
+<li>$r$遍历过$2&hellip;\log_2{n}$</li>
+<li>二分查找$r^s&lt;n$，判断是否成立，时间复杂度$O(\ln^3 n)$，遍历+二分查找+翻倍乘法（FFT）作为基</li>
+</ol>
+</li>
+<li>独立随机的取$a_1,a_2,..a_{10}\in[2,n-1]$
+<ol>
+<li>$GCD(\Pi a_i,n)\neq 1$，结束，<a href="#gcd">时间复杂度</a> $O(\ln^3 n)$</li>
+<li><a href="#fermat-little-theorem">费马小定理检测</a>$a_i^{n-1}\neq 1\pmod n$，结束</li>
+<li>$a_i^{\frac{n-1}{2}}\neq \pm1\pmod n$，结束</li>
+<li>$\exists i,a_i^{\frac{n-1}{2}}\equiv -1\pmod n$，是素数，结束</li>
+<li>全是+1，合数</li>
+</ol>
+</li>
+</ol>
+<p>对于素数$p$，有$(a^{\frac{p-1}{2}}-1)(a^{\frac{p-1}{2}}+1)=a^{p-1}-1\equiv0\pmod p$。p 至少整除$a^{\frac{p-1}{2}}-1,a^{\frac{p-1}{2}}+1$其中一个。因此必有$a^{\frac{p-1}{2}}\equiv \pm1\pmod p$。对于素数，只有最后两个步骤可能出问题。mod 为+1 的概率为$\frac{1}{2}$，<a href="#%E5%8E%9F%E6%A0%B9">因为原根</a>。</p>
+<p>对于合数。</p>
+<p>$$
+\begin{aligned}
+\epsilon=Pr(\exists i,&amp;a_i^{\frac{n-1}{2}}\equiv -1\pmod n\\
+\forall i,&amp;a_i^{\frac{n-1}{2}}\equiv \pm1\pmod n,\
+&amp;a_i^{n-1}\equiv 1\pmod n )
+\end{aligned}
+$$</p>
+<p>找一个坏的$y$使得$y^{\frac{n-1}{2}}\neq \pm1\pmod n$。然后 y 和其他的 mod 余数为$\pm1$的乘，即可生成等大小的集合，<a href="#%E5%8E%9F%E6%A0%B9">类似原根里的构造集合</a> 。使得能正确筛出概率$\ge \frac{1}{2}$。坏的$y$在 mod -1 元素存在时（$a^{\frac{n-1}{2}}\equiv -1\pmod n=-1\pmod{PQ}$）必然存在。</p>
+<p>分解有$n=p^\alpha Q=P\times Q\implies GCD(P,Q)=1$（分解的存在性由通过第 2 大步保证，Q 是剩下素因子乘积）。使用 <a href="#%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86">中国剩余定理</a>保证下列要求有解。</p>
+<p>$$
+\left\{
+\begin{aligned}
+&amp;y\equiv 1\pmod{P}\\
+&amp;y\equiv a\pmod{Q},\qquad a\neq \pm 1
+\end{aligned}
+\right.
+$$</p>
+<p>而且容易知道，解$y\star$不能是 naive 的 1，-1，否则下列等式总有一行不成立。且等式和在一起必与$y^{\frac{n-1}{2}}\equiv \pm1\pmod n$矛盾（对 n mod $\pm1$，对于 PQ 必然都 mod $\pm 1$两个结果一样，因为$(y\mp 1)\mod n=(y\mp 1)\mod P=(y\mp 1)\mod Q=0$）</p>
+<p>$$
+\left\{
+\begin{aligned}
+&amp;y\star^{\frac{n-1}{2}}=1^\frac{n-1}{2}=1\equiv 1\pmod{P}\\
+&amp;y\star^{\frac{n-1}{2}}=a^{\frac{n-1}{2}}\equiv -1\pmod{Q}
+\end{aligned}
+\right.
+$$</p>
+<h4 id="单边出错算法">单边出错算法</h4>
+<p>关于素数$\mathcal{Co-RP}$，关于合数的$\mathcal{RP}$算法。前大部分得出合数都是可靠的。</p>
+<ol>
+<li>n 不是不为 2 的偶数</li>
+<li>$n=r^s\qquad r,s&gt;1$
+<ol>
+<li>$r$遍历过$2&hellip;\log_2{n}$</li>
+<li>二分查找$r^s&lt;n$，判断是否成立，时间复杂度$O(\ln^3 n)$，遍历+二分查找+翻倍乘法（FFT）作为基</li>
+</ol>
+</li>
+<li>随机选取$a\in[2,n-1]$
+<ol>
+<li>$GCD(a,n)\neq 1$，合数</li>
+<li>$a^{n-1}\neq 1\pmod{n}$，合数</li>
+<li>$a^{\frac{n-1}{2}}\neq \pm1\pmod{n}$，合数</li>
+<li>$n-1=2^rs$遍历，$a^{2^{r-1}s},&hellip;a^s$，mod n，检测结果序列
+<ol>
+<li>出现$\neq \pm1$，合数</li>
+<li>出现$1,-1$形式，素数，可能错误选出合数</li>
+<li>全是 1，素数，可能错误选出合数</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>注意，$s$ 是奇数，必然的$-1^s\equiv -1\pmod{n}$。和<a href="#%E5%8F%8C%E8%BE%B9%E5%87%BA%E9%94%99%E7%AE%97%E6%B3%95">之前合数部分类似的</a>，可以拓展出坏根。出现$\neq \pm1$的概率$\ge \frac{1}{2}$</p>
+<h4 id="原根">原根</h4>
+<p>原根有$a\star ^{\frac{p+1}{2}}\equiv-1\pmod p$。素数必有原根。且原根能满足下列集合在 mod p 意义上的相等</p>
+<p>$$p,a\star\implies \{a\star ^1,a\star^2 &hellip; a\star ^{p-1}\}\pmod p=\{1,2,3&hellip;p-1\}\pmod p$$</p>
+<p>假定一个数已知有原根。那 mod 之后，等于 1，-1 的集合等大小（原根乘 mod 余 1 的集合每个元素，构造出来两个集合等大小）。</p>
 <h2 id="birthday-paradox">Birthday Paradox</h2>
-<p>$m$个球，独立随机投入到$n$个盒子。作为生日悖论的推广。还包括如md5 的 hash 碰撞，服务器负载均衡请求等。$X_i$表示 i 个盒子中球的数目，之间同分布但不独立（和为$m$）。注意有
+<p>$m$个球，独立随机投入到$n$个盒子。作为生日悖论的推广。还包括如 md5 的 hash 碰撞，服务器负载均衡请求等。$X_i$表示 i 个盒子中球的数目，之间同分布但不独立（和为$m$）。注意有
 $x\in(0,1)\implies e^{-x}&gt;1-x$</p>
 <h3 id="msqrtn">m~sqrt(n)</h3>
 <p>$$
@@ -451,7 +642,7 @@ Pr(\sum Y_i \le 0)&amp;=Pr(Y\le 0)\\
 &amp;\le \frac{e^2}{4}n^{-\frac{1}{3}}
 \end{aligned}
 $$</p>
-<p>注意，这时候虽然$Y_i$之间不独立，但是其负相关（显然），协方差小于0。和的方差等于方差的和加上负的协方差。因此还是可以使用<a href="#chebyshev-inequality">chebyshev 不等式进行放缩</a>。</p>
+<p>注意，这时候虽然$Y_i$之间不独立，但是其负相关（显然），协方差小于 0。和的方差等于方差的和加上负的协方差。因此还是可以使用<a href="#chebyshev-inequality">chebyshev 不等式进行放缩</a>。</p>
 <h3 id="mn-1">m&gt;n</h3>
 <p>期望里每个盒子的球数目为$\frac{m}{n}$。而在$m\sim n\ln n$量级上，可以保证高概率每个盒子均符合期望。</p>
 <p>考虑独立随机变量$Y_1,&hellip;Y_m$，$Y_i$表示第 i 个球是否进入 1 号盒子。$E(Y_i)=\frac{1}{n},E(Y)=\frac{m}{n}$。取$m=24 n\ln n$。使用 <a href="#chernoff-bound">chernoff-bound 进行放缩</a></p>
@@ -489,18 +680,29 @@ $$</p>
 <li>变量之间两两独立，但不独立（eg，2 个独立 01 变量，再一个为前两个的异或），协方差均为 0，方差等于各自方差和</li>
 </ol>
 <h4 id="抽样调查准确率">抽样调查准确率</h4>
-<p>作为 <a href="#chebyshev-inequality">Chebyshev 不等式</a>的应用。 抽样 n 个，调查出来的概率$\hat{p}=\frac{X_1+&hellip;X_n}{n}=\frac{X}{n}$。对其和真实概率$p$的偏移有要求：</p>
-<p>$$Pr(|\hat{p}-p|\le \delta)\ge 1-\epsilon \implies Pr(|\hat{p}-p|\ge \delta)\le \epsilon $$</p>
+<p>作为 <a href="#chebyshev-inequality">Chebyshev 不等式</a>的应用。 抽样 n 个，调查出来的概率$\hat{p}=\frac{X_1+&hellip;X_n}{n}=\frac{X}{n}$。对其和真实概率$p=\frac{|T|}{|U|}$的偏移有要求：</p>
+<p>$$Pr(|\hat{p}-p|\le \Delta)\ge 1-\epsilon \implies Pr(|\hat{p}-p|\ge \Delta)\le \epsilon $$</p>
 <p>$$
 \begin{aligned}
-&amp;Pr(|\hat{p}-p|\ge \delta)\\
-&amp;=Pr(|\frac{X}{n}-p|\ge \delta)\\
-&amp;=Pr(|X-np|\ge n\delta)\\
-&amp;\le\frac{Var(X)}{(n\delta)^2}\\
-&amp;\le\frac{1}{4n\delta^2}
+&amp;Pr(|\hat{p}-p|\ge \Delta)\\
+&amp;=Pr(|\frac{X}{n}-p|\ge \Delta)\\
+&amp;=Pr(|X-np|\ge n\Delta)\\
+&amp;\le\frac{Var(X)}{(n\Delta)^2}\\
+&amp;\le\frac{1}{4n\Delta^2}
 \end{aligned}
 $$</p>
-<p>要求的抽样$n$的取值只和要求的$\delta,\epsilon$有关（$n\ge\frac{1}{4\epsilon\delta^2}$），和真实概率$p$本身分布无关。但是，如果知道真实分布，可以改善$n$的取值。</p>
+<p>要求的抽样$n$的取值只和要求的$\Delta,\epsilon$有关（$n\ge\frac{1}{4\epsilon\Delta^2}$），和真实概率$p$本身分布无关。但是，如果知道真实分布，可以改善$n$的取值。</p>
+<p>如果使用 <a href="#chernoff-bound">chernoff bound 去估计</a>，可以指定相对误差$\delta\in(0,1)$。如果有如下的要求</p>
+<p>$$Pr(\hat{p}\in[(1-\delta)p,(1+\delta)p])\ge 1-\epsilon$$</p>
+<p>则有</p>
+<p>$$
+\begin{aligned}
+&amp;Pr(|\hat{p}-p|\ge\delta )\\
+&amp;=Pr(|\frac{X_1+&hellip;X_n}{n}-p|\ge\delta)\\
+&amp;\le 2e^{-\frac{\delta^2}{3}n\mu}
+\end{aligned}
+$$</p>
+<p>推出要求数目为$n\ge \frac{3(\ln 2-\ln\epsilon)}{\delta^2 p}$。改进为对错误率的对数形式。但是此时对$n$的要求和原始分布$p$有关。</p>
 <h3 id="组合数不等式">组合数不等式</h3>
 <p>$$
 (\frac{n}{m})^m\le\binom{n}{m}\le(\frac{ne}{m})^m
@@ -524,7 +726,7 @@ $$</p>
 \end{aligned}
 $$</p>
 <h3 id="chernoff-bound">Chernoff-Bound</h3>
-<p>$X_1,X_2,&hellip;X_n$为 n 个 01 的独立随机变量，$Pr(X_i=1)=p_i$，考虑随机变量和$X=\sum X_i$，均值$E(X)=\mu=\sum p_i$。对于一个偏离$\forall \delta\in (0,1)$（正向偏差时候大于 1 也可以，主要是负向概率不能为负。而最后的exp形式放缩需要$\delta\in(0,1)$）。</p>
+<p>$X_1,X_2,&hellip;X_n$为 n 个 <strong>01</strong>（如果不是，需要正规化 normalize ） 的<strong>独立</strong>随机变量，$Pr(X_i=1)=p_i$，考虑随机变量和$X=\sum X_i$，均值$E(X)=\mu=\sum p_i$。对于一个偏离$\forall \delta\in (0,1)$（正向偏差时候大于 1 也可以，主要是负向概率不能为负。而最后的 exp 形式放缩需要$\delta\in(0,1)$）。</p>
 <p>$$
 Pr(X\ge \mu(1+\delta))\le [\frac{e^\delta}{(1+\delta)^{1+\delta}}]^\mu\le e^{-\frac{\delta^2}{3}\mu}
 $$</p>
@@ -588,4 +790,65 @@ $$</p>
 &amp;\le -\frac{\delta^2}{2}
 \end{aligned}
 $$</p>
+<h3 id="fermat-little-theorem">Fermat-Little-Theorem</h3>
+<p>$$p\in prime\implies \forall a,a^p\equiv a\pmod p$$</p>
+<p>$$(a,p)=1\implies a^{p-1}\equiv 1\pmod{p}$$</p>
+<p>注意集合${1,2,&hellip;(p-1)}$和集合 ${1\times a,2\times a ,&hellip;(p-1)\times a}$在$\mod p$意义上相等。因此有</p>
+<p>$(p-1)!\equiv a^{p-1}(p-1)!\pmod p\implies a^{p-1}\equiv 1\pmod{p}$</p>
+<h4 id="carmichael-number">Carmichael-Number</h4>
+<p>是合数，但是能够保证通过 <a href="#fermat-little-theorem">费马小定理的检测</a>。</p>
+<p>$N=561=3\times 11 \times 17,\forall a,(a,N)=1\implies a^{560}\equiv 1\pmod{561}$</p>
+<p>可以使用 <a href="#%E4%B8%AD%E5%9B%BD%E5%89%A9%E4%BD%99%E5%AE%9A%E7%90%86">中国剩余定理</a>证明 561 满足性质要求。</p>
+<p>$$
+\left\{
+\begin{aligned}
+&amp;a^{560}=(a^{2})^{280}=1^{280}\equiv 1\pmod{3}\\
+&amp;a^{560}=(a^{10})^{56}=1^{56}\equiv 1\pmod{11}\\
+&amp;a^{560}=(a^{16})^{35}=1^{35}\equiv 1\pmod{17}
+\end{aligned}
+\right.
+$$</p>
+<p>有无数个 Carmichael Number，而且对于足够大的一个 m，$(m,2m)$之间一定有一个 Carmichael Number（论文证明）。</p>
+<h4 id="中国剩余定理">中国剩余定理</h4>
+<blockquote>
+<p>今有物不知其数，三三数之剩二，五五数之剩三，七七数之剩二，问物几何？</p>
+</blockquote>
+<p>$$
+\left\{
+\begin{aligned}
+&amp;x=2\pmod 3\\
+&amp;x=3\pmod 5\\
+&amp;x=2\pmod 7
+\end{aligned}
+\right.
+$$</p>
+<p>$$
+\begin{aligned}
+x=2\times &amp;70+3\times &amp;21+2\times &amp;15\\
+(1,&amp;0,0) &amp;(0,1,0) (0,&amp;0,1)
+\end{aligned}
+$$</p>
+<p>可以认为是用不同的余数的基底组合而成。可以推广为以下同余方程组，保证有解</p>
+<p>$$
+\left\{
+\begin{aligned}
+&amp;x=n_1\pmod {m_1}\\
+&amp;x=n_2\pmod {m_2}\\
+&amp;&hellip;\\
+&amp;x=n_k\pmod {m_k}
+\end{aligned}
+\right.
+$$</p>
+<p>解为</p>
+<p>$$x\equiv \sum n_i\times M_i\pmod{\Pi m_i}$$</p>
+<p>当中</p>
+<p>$$
+\left\{
+\begin{aligned}
+&amp;M_i\equiv 0\pmod{\frac{\Pi m_k}{m_i}}\\
+&amp;M_i\equiv 1\pmod{m_i}
+\end{aligned}
+\right.
+$$</p>
+<p>有 Bezout 定理，$GCD(x,y)=1\iff \exists r,s,rx+sy=1$。因此可以表达为$M_i=r(\frac{\Pi m_k}{m_i})=1-sm_i$。$r,s$通过<a href="#gcd">辗转相除法的中间系数计算</a></p>
 ]]></content:encoded></item></channel></rss>
