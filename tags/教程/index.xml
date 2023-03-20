@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>教程 on zhh's blog</title><link>https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Mon, 13 Mar 2023 21:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第5次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Mon, 13 Mar 2023 21:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP 算法 矩阵检验 GCD 素数判定 双边出</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>教程 on zhh's blog</title><link>https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Mon, 20 Mar 2023 20:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第6次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Mon, 20 Mar 2023 20:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP #P Holant-#CSP 算法 矩阵检验 GCD 素数判定 双</description><content:encoded><![CDATA[<ul>
 <li><a href="#%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1">高级算法设计</a>
 <ul>
 <li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>
@@ -23,6 +23,8 @@
 <li><a href="#%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%8E%87%E6%8F%90%E5%8D%87">算法的正确率提升</a></li>
 <li><a href="#les-vegas-%E5%92%8C-monte-carlo-%E8%BD%AC%E5%8C%96">Les-Vegas 和 Monte-Carlo 转化</a></li>
 <li><a href="#pnp">P，NP</a></li>
+<li><a href="#p">#P</a></li>
+<li><a href="#holant-csp">Holant-#CSP</a></li>
 </ul>
 </li>
 <li><a href="#%E7%AE%97%E6%B3%95">算法</a>
@@ -56,6 +58,15 @@
 </ul>
 </li>
 <li><a href="#mn-1">m&gt;n</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BC%A0%E9%87%8F%E7%BD%91%E7%BB%9C">张量网络</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89">定义</a></li>
+<li><a href="#%E5%BC%95%E5%85%A5%E5%A4%96%E8%BE%B9%E6%88%90%E4%B8%BA%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0">引入外边成为多元函数</a></li>
+<li><a href="#%E5%85%A8%E6%81%AF%E8%A7%84%E7%BA%A6">全息规约</a></li>
+<li><a href="#%E5%AF%B9%E7%A7%B0%E5%87%BD%E6%95%B0">对称函数</a></li>
+<li><a href="#csp-%E4%BA%8C%E5%88%86%E5%AE%9A%E7%90%86">#CSP-二分定理</a></li>
 </ul>
 </li>
 <li><a href="#%E9%99%84%E5%BD%95-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">附录-基础知识</a>
@@ -379,6 +390,19 @@ $$</p>
 <li>$\mathcal{P}$：多项式时间可解</li>
 <li>$\mathcal{NP}$：non-deterministic Turing machine 下 poly，多项式时间可验证一个解的正确性</li>
 </ul>
+<h3 id="p">#P</h3>
+<p>函数$F$属于$\#P$问题：存在多项式时间算法$R$，使得$F(x)= |\{y|R(x,y)=1\}|$（多项式时间验证可解的解的计数）</p>
+<p>如果任何$\#P$的问题可以规约到问题 B，B 是$\#P-complete$</p>
+<h3 id="holant-csp">Holant-#CSP</h3>
+<blockquote>
+<p>$Holant(\mathcal{F})$问题</p>
+<p>对于张量网络$G$,点上的函数属于$\mathcal{F}$，输出 G 的值</p>
+</blockquote>
+<blockquote>
+<p>$\#CSP(\mathcal{H})$ 问题（Constraint Satisfaction Problem 计数）</p>
+<p>张量网络形如 $=_n,F_i\in\mathcal{H}$ 的二部图</p>
+<p>$\#CSP(\mathcal{H})=Holant(\{=_i&hellip;\}\cup \mathcal{H})$</p>
+</blockquote>
 <h2 id="算法">算法</h2>
 <h3 id="矩阵检验">矩阵检验</h3>
 <p>在$O(n^2)$，概率判断两矩阵乘是否相等另一矩阵。重复选择向量$x$。对于 0，1 的 2-bit 矩阵，错误率（在不等情况下）为$\frac{1}{2}$。</p>
@@ -851,6 +875,147 @@ $$</p>
 &amp;=1-2/n=1-o(1)
 \end{aligned}
 $$</p>
+<h2 id="张量网络">张量网络</h2>
+<h3 id="定义">定义</h3>
+<p>使用$[d]$表示大小为$d$的有限集合。$\mathbb{R}^d$的向量可以视为对每一维上的离散函数$F(i):[d]\to\mathbb{R}$。$k$维张量即可以视为$F(i_1,&hellip;i_k)$</p>
+<blockquote>
+<p>张量网络</p>
+<p>张量/离散函数作为点、自变量作为边的图。如果函数不对称，需要指定边的次序</p>
+<p>图$G(V,E)$中每个点$v$赋予一个$d_v$元函数$F_v$</p>
+<p>张量网络的值：$\sum_{e\in [d]} \prod_v F_v(e_{v,1},&hellip;e_{v,d_v})$，对所有边取一种赋值之后的结果求和</p>
+</blockquote>
+<p>eg，对于 SAT 问题，$\exists {x_1,&hellip;x_n}\to {0,1},\bigwedge c()=1 \iff \sum\prod c()\ge 1$（可以引入一些辅助节点，保证出现次数大于 2 次的边，转化成很多条连到辅助节点的边，辅助节点的函数要求所有边取值相同）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">F1-e-F2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>$e\in\{0,1\},F_1(0)=1,F_1(0)=3,F_2(0)=2,F_2(1)=5$，网络值是 $1\times 2+3\times 5=17$</p>
+<p>eg，3-regular 图（顶点度数均为 3）的 3 染色问题，可以用张量网络和转变为计数问题</p>
+<h3 id="引入外边成为多元函数">引入外边成为多元函数</h3>
+<p>定义输入$X=\{x_1,&hellip;x_n\}\in D^n$，有</p>
+<p>$$F_G(x_1,&hellip;x_n)=\sum_e\prod_v F_v(e_{v,1},&hellip;e_{v,d_v},x_i)$$</p>
+<p>eg，$AB_{x_1x_2}=\sum A_{x_1e}B_{ex_2}$</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">x1-A-e-B-x2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>矩阵的迹(对角线元素求和)
+<ul>
+<li>$trace(A)=\sum A_{ee}$(自环),$trace(ABC)=\sum A_{e_1e_2}B_{e_2e_3}C_{e_3e_1}$</li>
+</ul>
+</li>
+<li>张量积，(克罗内克积)对于矩阵$M_{dd},N_{dd}$，结果为$d^2\times d^2$的矩阵，$M\otimes N=(m_{ij}N)$
+<ul>
+<li>$(M\otimes N)_{x_1x_2,x_3x_4}=M_{x_1x_3}N_{x_2x_4}$ 。结果中行标$x_1x_2$可以视为把$M$的行标$x_1$和$N$的行标$x_2$字符串组合在一起</li>
+<li>可以表示为<code>x1-M-x3, x2-N-x4</code>的张量网络（没有内部边，无需求和，顶点函数就是矩阵的 index）</li>
+</ul>
+</li>
+<li>张量网络值满足<strong>结合律</strong></li>
+<li>有限域上的线性方程组解集大小，等于对应张量网络值
+<ul>
+<li>$\#P$问题，存在多项式时间算法</li>
+<li>相同的变量用一个多元相等关系约束</li>
+<li>每个方程对应一个 $\mod{}$ 顶点</li>
+</ul>
+</li>
+<li>图的顶点覆盖数目（选定一组顶点，使得顶点的邻边包括所有的边）
+<ul>
+<li>$\#P-complete$问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="全息规约">全息规约</h3>
+<p>？尚不理解</p>
+<h3 id="对称函数">对称函数</h3>
+<p>对于置换$\pi$,对于自变量$\forall x_i$，有</p>
+<p>$$
+F(x_1,&hellip;x_n)=F(x_{\pi(1)},&hellip;x_{\pi(n)})
+$$</p>
+<p>如果是 bool 为自变量的对称函数，可以用$f_i$表示$i$个 1 时候$F$的值。那么$F$可以完全被$f_0,f_1,&hellip;f_{n}$来确定。对于 n 元相等关系(全相等时候取 1，否则取 0)，记$F=[1,0,&hellip;0,1]$为$=_n$</p>
+<h3 id="csp-二分定理">#CSP-二分定理</h3>
+<p>对于 bool 定义域，值域$\mathbb{C}$的函数$F$。有一个第一易解类$\mathcal{A}$，对于<a href="#holant-csp">$\#CSP(\mathcal{A})$</a>存在多项式时间算法。定义仿射关系，$\mathcal{X}_{(AX=C)}$，为$D$上$n$维的指示函数。</p>
+<p>可以定义一类特殊条件的多项式$P()$：</p>
+<ul>
+<li>整系数多项式$P(x_1,&hellip;x_n)$，整数加法乘法运算</li>
+<li>$P()$最高次数为 2，交错二次项的系数为偶数</li>
+</ul>
+<p>那么，$F\in \mathcal{A}$当且仅当$F$具有形式$\mathcal{X}_{(AX=C)}\cdot i^{P(x_1,&hellip;x_n)}$</p>
+<p>考虑$AX=C$的自由变量有$x_1,&hellip;x_r$，其他的变量可以表示为$X^\prime=(x_1,&hellip;x_r,1)$的线性组合，$x_j=L_j(X^\prime)\mod 2$。注意到</p>
+<ol>
+<li>$\forall a\in\mathcal{Z},a=0,1\mod2\iff a^2=0,1\mod 4$
+<ol>
+<li>显然有$a\pmod2=0\iff a^2\pmod4=0$</li>
+<li>$a^2 \pmod4 =1$可知$a^2,a$为奇数</li>
+<li>$a=2k+1\implies a^2=(2k+1)^2=4(k^2+k)+1$,$\mod 1$的情况得证</li>
+</ol>
+</li>
+<li>注意到对$i=\sqrt{-1}$的指数，可以在$\mod 4$的意义下计算</li>
+</ol>
+<p>因此我们可以把$P()$中的不自由的$x_j$（$j\in[r+1,n]$）进行<strong>合法的替换</strong></p>
+<ol>
+<li>一次项$x_j$替换为$L_j(X^\prime)^2$，因为在$\mod 4$下不改变</li>
+<li>平方项和交错二次项正常换成$L_j(X^\prime)^2$和$2L_j(X^\prime)L_{k}(X^\prime)$</li>
+</ol>
+<p>此时$P(x_1,..x_r,x_{r+1},&hellip;x_n)=P(x_1,&hellip;x_r,L_{r+1}(X^\prime),&hellip;L_{n}(X^\prime))=Q(x_1,&hellip;x_r)$，容易验证新的多项式$Q()$仍然满足上述$P()$的条件。因此有</p>
+<p>$$
+\sum \mathcal{X}_{(AX=C)}\cdot i^{P(x_1,&hellip;x_n)}=\sum i^{Q(x_1,&hellip;x_r)}
+$$</p>
+<p>接下来进行逐步消除自变量。考虑$x_1$。如果$x_1$的一次项系数是偶数，分解$Q(x_1,&hellip;x_r)=2x_1R(x_2,&hellip;x_r)+S(x_2,&hellip;x_r)+\alpha_1x^2_1$。容易知道，当中$S()$仍然满足之前$P()$的要求，而$R(x_2,&hellip;x_r)$是一个次数为 1 的多项式</p>
+<p>$$
+\begin{aligned}
+\sum i^{Q(x_1,&hellip;x_r)}&amp;=\sum i^{2x_1R+S+\alpha_1x^2_1}\\
+&amp;=\sum_{x_2,&hellip;x_r}i^S\sum_{x_1\in{0,1}}i^{2x_1R+\alpha_1x_1^2} \\
+&amp;=(1+(-1)^{R}\cdot i^{\alpha_1})\sum_{x_2,&hellip;x_r}i^S\\
+\end{aligned}
+$$</p>
+<p>类似的，如果$x_1$的一次项系数是奇数，分解$Q(x_1,&hellip;x_r)=2x_1R(x_2,&hellip;x_r)+S(x_2,&hellip;x_r)+\alpha_1x^2_1+x_1$（注意所有的交错二次项的系数均是偶数，因此只有可能留下$x_1$单独的一次项）。此时有</p>
+<p>$$
+\sum i^{Q(x_1,&hellip;x_r)}=(1+(-1)^R\cdot i^{\alpha_1+1})\sum_{x_2,&hellip;x_r}i^S
+$$</p>
+<p>考虑表达式之前的常数项，有</p>
+<ul>
+<li>$1+(-1)^R\cdot 1$
+<ul>
+<li>$R=0\implies 2,R=1\implies 0$</li>
+<li>可以用示性函数来表示，$2\mathcal{X}_{R=0}$</li>
+</ul>
+</li>
+<li>$1+(-1)^R\cdot (-1)$
+<ul>
+<li>$R=0\implies 0,R=1\implies 2$</li>
+<li>可以用示性函数来表示，$2\mathcal{X}_{R=1}$</li>
+</ul>
+</li>
+<li>$1+(-1)^R\cdot i$
+<ul>
+<li>$R=0\implies (1+i),R=1\implies (1-i)$</li>
+<li>注意到可以表示为$(1+i)\cdot (-i)^R$</li>
+</ul>
+</li>
+<li>$1+(-1)^R\cdot (-i)$
+<ul>
+<li>$R=0\implies (1-i),R=1\implies (1+i)$</li>
+<li>注意到可以表示为$(1-i)\cdot (i)^R$</li>
+</ul>
+</li>
+</ul>
+<p>由于之前的分解$R(x_2,&hellip;x_r)$是一个次数为 1 的多项式</p>
+<ol>
+<li>对于示性函数$\mathcal{X}_{R=0},\mathcal{X}_{R=1}$ ，可以在选出一个不自由的自变量 $x_i$ 由其他 $x_j$ 来表示，这样再次可以类似开始的消除不自由变量的递降</li>
+<li>由于$S()$满足$P()$的条件，$R()$次数为 1，和二次项无关，因此$T(x_2,&hellip;x_r)=S()\pm R()$仍然满足$P()$的条件。此时$F$具有类似$\sum i^{T(x_2,&hellip;x_r)}$的形式，可以类似之前提出$x_1$的方法继续提出其他自变量</li>
+</ol>
+<blockquote>
+<p>这一小结参考论文<a href="https://www.sciencedirect.com/science/article/pii/S0022000013001414">The complexity of complex weighted Boolean #CSP</a></p>
+</blockquote>
 <h2 id="附录-基础知识">附录-基础知识</h2>
 <h3 id="markov-inequality">Markov-Inequality</h3>
 <p>$$
