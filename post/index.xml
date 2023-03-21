@@ -969,19 +969,20 @@ $$</p>
 <p>$$
 \sum \mathcal{X}_{(AX=C)}\cdot i^{P(x_1,&hellip;x_n)}=\sum i^{Q(x_1,&hellip;x_r)}
 $$</p>
-<p>接下来进行逐步消除自变量。考虑$x_1$。如果$x_1$的一次项系数是偶数，分解$Q(x_1,&hellip;x_r)=2x_1R(x_2,&hellip;x_r)+S(x_2,&hellip;x_r)+\alpha_1x^2_1$。容易知道，当中$S()$仍然满足之前$P()$的要求，而$R(x_2,&hellip;x_r)$是一个次数为 1 的多项式</p>
+<p>接下来进行逐步消除自变量。考虑$x_1$。注意到，$x_i$都是 bool 变量，因此必然有$x_i^2\equiv x_i$，我们可以把关于$x_1$的二次项$\alpha_1x_1^2$（如果存在的话）改写成$\alpha_1x_1$融合进关于$x_1$的一次项当中。</p>
+<p>对$x_1$的一次项系数进行分类讨论。假设其是偶数，那么可以把$Q()$分解为$Q(x_1,&hellip;x_r)=2x_1R(x_2,&hellip;x_r)+S(x_2,&hellip;x_r)$。容易知道，当中$S()$仍然满足之前$P()$的要求，而$R(x_2,&hellip;x_r)$是一个次数为 1 的多项式</p>
 <p>$$
 \begin{aligned}
-\sum i^{Q(x_1,&hellip;x_r)}&amp;=\sum i^{2x_1R+S+\alpha_1x^2_1}\\
-&amp;=\sum_{x_2,&hellip;x_r}i^S\sum_{x_1\in{0,1}}i^{2x_1R+\alpha_1x_1^2} \\
-&amp;=(1+(-1)^{R}\cdot i^{\alpha_1})\sum_{x_2,&hellip;x_r}i^S\\
+\sum i^{Q(x_1,&hellip;x_r)}&amp;=\sum i^{2x_1R+S}\\
+&amp;=\sum_{x_2,&hellip;x_r}i^S\sum_{x_1\in{0,1}}i^{2x_1R}\\
+&amp;=(1+(-1)^{R})\sum_{x_2,&hellip;x_r}i^S
 \end{aligned}
 $$</p>
-<p>类似的，如果$x_1$的一次项系数是奇数，分解$Q(x_1,&hellip;x_r)=2x_1R(x_2,&hellip;x_r)+S(x_2,&hellip;x_r)+\alpha_1x^2_1+x_1$（注意所有的交错二次项的系数均是偶数，因此只有可能留下$x_1$单独的一次项）。此时有</p>
+<p>类似的，如果$x_1$的一次项系数是奇数，分解$Q(x_1,&hellip;x_r)=2x_1R(x_2,&hellip;x_r)+S(x_2,&hellip;x_r)+x_1$（注意所有的交错二次项的系数均是偶数，因此只有可能留下$x_1$单独的一次项）。此时有</p>
 <p>$$
-\sum i^{Q(x_1,&hellip;x_r)}=(1+(-1)^R\cdot i^{\alpha_1+1})\sum_{x_2,&hellip;x_r}i^S
+\sum i^{Q(x_1,&hellip;x_r)}=(1+(-1)^R\cdot i)\sum_{x_2,&hellip;x_r}i^S
 $$</p>
-<p>考虑表达式之前的常数项，有</p>
+<p>考虑表达式之前的常数项，（不失一般性的）有</p>
 <ul>
 <li>$1+(-1)^R\cdot 1$
 <ul>
@@ -1013,6 +1014,7 @@ $$</p>
 <li>对于示性函数$\mathcal{X}_{R=0},\mathcal{X}_{R=1}$ ，可以在选出一个不自由的自变量 $x_i$ 由其他 $x_j$ 来表示，这样再次可以类似开始的消除不自由变量的递降</li>
 <li>由于$S()$满足$P()$的条件，$R()$次数为 1，和二次项无关，因此$T(x_2,&hellip;x_r)=S()\pm R()$仍然满足$P()$的条件。此时$F$具有类似$\sum i^{T(x_2,&hellip;x_r)}$的形式，可以类似之前提出$x_1$的方法继续提出其他自变量</li>
 </ol>
+<p>显然的这个过程（高斯消元解矩阵，多项式提取公共项等）可以在多项式时间内实现，$\mathcal{A}$确为一个易解类。</p>
 <blockquote>
 <p>这一小结参考论文<a href="https://www.sciencedirect.com/science/article/pii/S0022000013001414">The complexity of complex weighted Boolean #CSP</a></p>
 </blockquote>
@@ -3258,6 +3260,23 @@ od
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+<h3 id="partition">partition</h3>
+<ul>
+<li>$hash\mod N$，但是丧失顺序
+<ul>
+<li>不能避免攻击/单 key 高流量</li>
+<li>单 key 加盐</li>
+<li>对比 node 数目，多建分区防止 mod 抖动</li>
+</ul>
+</li>
+<li>service discovery：找到划分所在 node
+<ol>
+<li>随机找一个节点，节点之间协调</li>
+<li>路由表连接到节点</li>
+<li>客户端知道划分，自己找到对应节点</li>
+</ol>
 </li>
 </ul>
 ]]></content:encoded></item><item><title>笔记：Computer Network by Tanenbaum(大概第6章)</title><link>https://livypad.github.io/post/2022-08-31-netbytanebaum/</link><pubDate>Wed, 31 Aug 2022 00:18:17 +0800</pubDate><guid>https://livypad.github.io/post/2022-08-31-netbytanebaum/</guid><description>Computer Network by Tanenbaum ch1 term 分层 ch2 物理层 信道容量 介质 调制 ch3 数据链路层 frame 检错纠错 hamming protocol 乌托邦式的单工协议 简单的 停-等 协议，无错信道 简单的 停-等 协议，信道可能出错</description><content:encoded><![CDATA[<ul>

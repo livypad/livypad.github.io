@@ -1623,6 +1623,23 @@ od
 </ul>
 </li>
 </ul>
+<h3 id="partition">partition</h3>
+<ul>
+<li>$hash\mod N$，但是丧失顺序
+<ul>
+<li>不能避免攻击/单 key 高流量</li>
+<li>单 key 加盐</li>
+<li>对比 node 数目，多建分区防止 mod 抖动</li>
+</ul>
+</li>
+<li>service discovery：找到划分所在 node
+<ol>
+<li>随机找一个节点，节点之间协调</li>
+<li>路由表连接到节点</li>
+<li>客户端知道划分，自己找到对应节点</li>
+</ol>
+</li>
+</ul>
 ]]></content:encoded></item><item><title>笔记：Computer Network by Tanenbaum(大概第6章)</title><link>https://livypad.github.io/post/2022-08-31-netbytanebaum/</link><pubDate>Wed, 31 Aug 2022 00:18:17 +0800</pubDate><guid>https://livypad.github.io/post/2022-08-31-netbytanebaum/</guid><description>Computer Network by Tanenbaum ch1 term 分层 ch2 物理层 信道容量 介质 调制 ch3 数据链路层 frame 检错纠错 hamming protocol 乌托邦式的单工协议 简单的 停-等 协议，无错信道 简单的 停-等 协议，信道可能出错</description><content:encoded><![CDATA[<ul>
 <li><a href="#computer-network-by-tanenbaum">Computer Network by Tanenbaum</a>
 <ul>
