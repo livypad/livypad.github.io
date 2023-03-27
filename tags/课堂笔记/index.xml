@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>课堂笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link><description>Recent content in 课堂笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Mon, 20 Mar 2023 20:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第6次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Mon, 20 Mar 2023 20:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 P，NP #P Holant-#CSP 算法 矩阵检验 GCD 素数判定 双</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>课堂笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link><description>Recent content in 课堂笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Mon, 27 Mar 2023 22:30:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第7次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Mon, 27 Mar 2023 22:30:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 自动机 图灵机 图灵机线性加速定理 3-CNF 非确</description><content:encoded><![CDATA[<ul>
 <li><a href="#%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1">高级算法设计</a>
 <ul>
 <li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>
@@ -22,8 +22,30 @@
 <li><a href="#%E5%BD%A2%E5%BC%8F%E5%8C%96%E5%AE%9A%E4%B9%89">形式化定义</a></li>
 <li><a href="#%E7%AE%97%E6%B3%95%E7%9A%84%E6%AD%A3%E7%A1%AE%E7%8E%87%E6%8F%90%E5%8D%87">算法的正确率提升</a></li>
 <li><a href="#les-vegas-%E5%92%8C-monte-carlo-%E8%BD%AC%E5%8C%96">Les-Vegas 和 Monte-Carlo 转化</a></li>
-<li><a href="#pnp">P，NP</a></li>
-<li><a href="#p">#P</a></li>
+<li><a href="#%E8%87%AA%E5%8A%A8%E6%9C%BA">自动机</a></li>
+<li><a href="#%E5%9B%BE%E7%81%B5%E6%9C%BA">图灵机</a>
+<ul>
+<li><a href="#%E5%9B%BE%E7%81%B5%E6%9C%BA%E7%BA%BF%E6%80%A7%E5%8A%A0%E9%80%9F%E5%AE%9A%E7%90%86">图灵机线性加速定理</a></li>
+<li><a href="#3-cnf">3-CNF</a></li>
+<li><a href="#%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%9B%BE%E7%81%B5%E6%9C%BA">非确定性图灵机</a></li>
+</ul>
+</li>
+<li><a href="#%E8%A7%84%E7%BA%A6">规约</a>
+<ul>
+<li><a href="#%E5%9B%BE%E7%81%B5%E5%8F%AF%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98%E8%A7%84%E7%BA%A6%E5%88%B0-bool-%E7%BA%BF%E8%B7%AF">图灵可计算问题规约到 bool 线路</a></li>
+</ul>
+</li>
+<li><a href="#pnp">P，NP</a>
+<ul>
+<li><a href="#ladner-%E5%AE%9A%E7%90%86">Ladner-定理</a></li>
+</ul>
+</li>
+<li><a href="#p">#P</a>
+<ul>
+<li><a href="#permanent">Permanent</a></li>
+</ul>
+</li>
+<li><a href="#csp">CSP</a></li>
 <li><a href="#holant-csp">Holant-#CSP</a></li>
 </ul>
 </li>
@@ -64,9 +86,19 @@
 <ul>
 <li><a href="#%E5%AE%9A%E4%B9%89">定义</a></li>
 <li><a href="#%E5%BC%95%E5%85%A5%E5%A4%96%E8%BE%B9%E6%88%90%E4%B8%BA%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0">引入外边成为多元函数</a></li>
+<li><a href="#st">s+t</a></li>
 <li><a href="#%E5%85%A8%E6%81%AF%E8%A7%84%E7%BA%A6">全息规约</a></li>
 <li><a href="#%E5%AF%B9%E7%A7%B0%E5%87%BD%E6%95%B0">对称函数</a></li>
-<li><a href="#csp-%E4%BA%8C%E5%88%86%E5%AE%9A%E7%90%86">#CSP-二分定理</a></li>
+<li><a href="#csp-%E4%BA%8C%E5%88%86%E5%AE%9A%E7%90%86">#CSP-二分定理</a>
+<ul>
+<li><a href="#csp-%E7%AC%AC%E4%B8%80%E6%98%93%E8%A7%A3%E7%B1%BB">#CSP-第一易解类</a>
+<ul>
+<li><a href="#%E5%81%B6%E6%95%B0%E6%9D%A1%E8%BE%B9%E7%9A%84%E5%AD%90%E5%9B%BE%E6%95%B0%E7%9B%AE%E7%AE%97%E6%B3%95">偶数条边的子图数目算法</a></li>
+</ul>
+</li>
+<li><a href="#csp-%E7%AC%AC%E4%BA%8C%E6%98%93%E8%A7%A3%E7%B1%BB">#CSP-第二易解类</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%E9%99%84%E5%BD%95-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">附录-基础知识</a>
@@ -382,17 +414,113 @@ $$</p>
 <p>这些算法集合关系如下。注意，$\mathcal{NP}$和$\mathcal{BPP}$之间实际上关系未知，有待进一步证明。目前大概认为不等</p>
 <p><img loading="lazy" src="/assets/img/p-npvenn.png" alt="p,np,zpp,rp,bpp"  />
 </p>
+<h3 id="自动机">自动机</h3>
+<blockquote>
+<p>自动机</p>
+<p>每次读取下一个字符（有限集$\Sigma$），根据状态转移函数改变状态（有限集$Q$）</p>
+<p>$\delta:Q\times \Sigma\to Q$</p>
+</blockquote>
+<blockquote>
+<p>语言</p>
+<p>字符串的集合 $L\subseteq\Sigma^*$</p>
+<p>等价定义指示函数 $L:\Sigma^*\to {0,1}$</p>
+</blockquote>
+<blockquote>
+<p>正则语言</p>
+<p>能被自动机接收的语言</p>
+</blockquote>
+<blockquote>
+<p>有限差异</p>
+<p>集合${\sigma|L_1(\sigma)\neq L_2(\sigma)}$有限大小</p>
+</blockquote>
+<p>有限语言都是正则语言。正则语言对于交、并、补运算封闭。</p>
+<p>对于两个有限差异的问题$L_1,L_2$，对于$L_1$有复杂度$T(n)$为算法。那么对于$L_2$，总可以把差异部分打表，相同部分调用$L_1$的算法，形成一个$T(n)+n+c$的算法。</p>
+<ul>
+<li>判定问题 $F:\Sigma^*\to {0,1}$</li>
+<li>优化问题 $F:\Sigma^*\to \Sigma^*$</li>
+<li>计数问题 $F:\Sigma^*\to \mathbb{N}$</li>
+</ul>
+<h3 id="图灵机">图灵机</h3>
+<blockquote>
+<p>图灵机</p>
+<p>根据状态和读入的字符，可以写字符，变状态，左右移动</p>
+<p>$F:Q\times \Gamma\to Q\times \Gamma\times\{\leftarrow,\rightarrow\}$</p>
+</blockquote>
+<blockquote>
+<p>（图灵）可计算问题</p>
+<p>起始状态时，带子作为输入字符串。停机之后，带子上字符串作为输出</p>
+<p>$F:\Sigma^*\to \Sigma^*$</p>
+</blockquote>
+<p>图灵机是所有编程语言的计算能力。</p>
+<h4 id="图灵机线性加速定理">图灵机线性加速定理</h4>
+<p>对于一个可计算问题，存在一个图灵机有复杂度$T(n)$算法。那么存在一个图灵机可以实现$\frac{1}{d}T(n)+n+c$的算法。</p>
+<p>主要靠扩充状态和字符集，将原先的状态和字符压缩表示。</p>
+<h4 id="3-cnf">3-CNF</h4>
+<p>$$\psi=C_1\wedge C_2&hellip;$$</p>
+<p>当中子句是 3 元或函数，当中文字为变量的形式$x_i,\neg x_i$：$C_i=l_{i,1}\vee l_{i,2}\vee l_{i,3}$</p>
+<ul>
+<li>非门: $x=\neg y \iff (x\vee y)\wedge(\neg x\vee \neg y)$</li>
+<li>或门: $x=(y\vee z)\iff (\neg x\vee y\vee z)\wedge(x\vee \neg y)\wedge(x\vee \neg z)$</li>
+</ul>
+<p><a href="#sat">作为 3SAT 的基础</a>。而且，对于 4SAT 问题，定义一个新变量$z_i$来表示一个子句$l_{i,1}\vee l_{i,2}\vee l_{i,3}\vee l_{i,4}$，写成$l_{i,1}\vee l_{i,2}\vee z_i,\neg z_i\vee l_{i,3}\vee l_{i,4}$。</p>
+<h4 id="非确定性图灵机">非确定性图灵机</h4>
+<p>non-deterministic Turing machine</p>
+<blockquote>
+<p>非确定性图灵机</p>
+<p>根据状态和读入的字符，接下来随机选择状态转移（可以认为是无限度的并行执行，选择最正确的分支作为结果），可以写字符，变状态，左右移动</p>
+<p>$F:Q\times {0,1}\to Q\times \Sigma\times\{\leftarrow,\rightarrow\}$</p>
+</blockquote>
+<h3 id="规约">规约</h3>
+<p>对于规约$\Psi$，有$F(X)=H(\Psi(X))$</p>
+<p>如果规约$\Psi$是多项式时间的、$\log$空间、etc；称为多项式时间规约、$\log$空间规约、etc。记为$\le^\text{cost}_{way}$。</p>
+<ul>
+<li>多项式时间规约：$F\le^\text{poly}_m H\implies p(n)+q(p(n))$，规约时间+H 算法（规约输入）</li>
+<li>图灵规约：递归调用$H$，adaptive。需要带 oracle 的图灵机（预言机，指的是规约到更强大的预言机来解决）$F\le^\text{poly}_T H\implies p(n)+p(n)q(p(n))$，规约时间+规约出来的状态数目*H 算法（规约输入）</li>
+<li>Truth Table 规约：一次给定多个$H$,non-adaptive</li>
+</ul>
+<p>如果$\forall F\in\mathcal{NP}$，$F$可以被规约到问题$H$，称$H$为$\mathcal{NP}-C$问题（NP 完全问题）</p>
+<h4 id="图灵可计算问题规约到-bool-线路">图灵可计算问题规约到 bool 线路</h4>
+<p>对于输入字符串为$n$。图灵机停机用时$T(n)$。那么必然读写头移动范围不超过$T(n)$。可以把图灵机的运行过程用一个$T(n)\times T(n)$的表格表示。每格记为$\Sigma\times (Q\cup{\mathcal{o}})$，表示每格的字符，图灵机状态、读写头是否在本格。即为<strong>计算表格</strong>。</p>
+<p>因此，上述每格的有限数目的状态用$c$个 bit 编码。注意到，任意一个时刻某个位置字符是否改变，必然只取决于上一个时刻其左右 3 个字符的情况（$3c$个 bit）。因此最后可以表达为有限个逻辑门组合。</p>
+<p>注意，对于$\mathcal{NP}$问题，对于多项式时间判定函数$R()$的计算表格，也可以类似规约。如此规约出来的问题具有 <a href="#3-cnf">3CNF 问题</a>的形式。由此也可以证明<a href="#sat">3SAT 问题</a>是$\mathcal{NP}$完全的。</p>
 <h3 id="pnp">P，NP</h3>
 <p>判定问题，可以对应一个集合/语言。</p>
 <p>$$f:x\to \{0,1\}$$</p>
 <p>$$L_f=\left\{x|f(x)=1 \right\}$$</p>
 <ul>
-<li>$\mathcal{P}$：多项式时间可解</li>
-<li>$\mathcal{NP}$：non-deterministic Turing machine 下 poly，多项式时间可验证一个解的正确性</li>
+<li>$\mathcal{P}$：对于<a href="#%E5%9B%BE%E7%81%B5%E6%9C%BA">图灵机</a>多项式时间可解</li>
+<li>$\mathcal{NP}$：对于<a href="#%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%9B%BE%E7%81%B5%E6%9C%BA">非确定性图灵机</a>多项式时间可解；多项式时间可验证一个解的正确性</li>
 </ul>
+<p>存在多项式时间算法$R$有输入$|y|=|x|^k$，有$F\in\mathcal{NP},F(x)=1\iff \exists y,R(x,y)=1$</p>
+<h4 id="ladner-定理">Ladner-定理</h4>
+<p>如果$\mathcal{P}\neq\mathcal{NP}$，存在问题不是 P，也不是 NP 难。</p>
+<p>构造一个算法，使得增长速度能够介于$\mathcal{P}$与$\mathcal{NP}$之间。大致思路是，在 SAT 之间插入$n^{H(n)}$的 1，当中$H(n)$是关于$n$的多项式时间函数，且$n$趋于无穷时候趋于无穷。记$SAT_H={\psi01^{n^{H(n)}}:\psi\in SAT \wedge n=|\psi|}$。</p>
 <h3 id="p">#P</h3>
-<p>函数$F$属于$\#P$问题：存在多项式时间算法$R$，使得$F(x)= |\{y|R(x,y)=1\}|$（多项式时间验证可解的解的计数）</p>
-<p>如果任何$\#P$的问题可以规约到问题 B，B 是$\#P-complete$</p>
+<p>函数$F$属于$\#P$问题：存在多项式时间算法$R$，使得$F(x)=|{y|R(x,y)=1}|$（多项式时间验证可解的解的计数）</p>
+<p>如果任何$\#P$的问题可以规约到问题 B，B 是$\#P$完全（$\#P-complete$）。$\#P-complete$也是$\mathcal{NP}$完全的。#SAT 是$\#P$完全的。 <a href="#Permanent">01Permanent 问题</a>也是$\#P$完全的</p>
+<h4 id="permanent">Permanent</h4>
+<p>对于 A ：</p>
+<ul>
+<li>n 个点带权有向图，所有圈的权重和；</li>
+<li>二分图的所有完美匹配权重和</li>
+<li>这个定义对比行列式的定义，去除了符号项</li>
+</ul>
+<p>$$Permanent(A)=\sum_{\pi \in S_n}\prod A_{j,\pi(j)}$$</p>
+<h3 id="csp">CSP</h3>
+<blockquote>
+<p>$CSP(\mathcal{F})$ 问题（Constraint Satisfaction Problem）</p>
+<p>变量的约束满足形式$\mathcal{F}$，约束是否可以满足的问题</p>
+</blockquote>
+<p>$\mathcal{F}$如果有形式，$CSP(\mathcal{F})$为 P 问题，否则为 NP 难</p>
+<ul>
+<li>0-valid</li>
+<li>1-valid</li>
+<li>Horn SAT</li>
+<li>dual Horn SAT</li>
+<li>affine（线性函数）</li>
+<li>bijunctive（2SAT）</li>
+</ul>
+<p>3-SAT 作为 CSP 的特例。每个子句相当于 8 种约束中的一种。要求满足所有约束</p>
 <h3 id="holant-csp">Holant-#CSP</h3>
 <blockquote>
 <p>$Holant(\mathcal{F})$问题</p>
@@ -403,6 +531,9 @@ $$</p>
 <p>张量网络形如 $=_n,F_i\in\mathcal{H}$ 的二部图</p>
 <p>$\#CSP(\mathcal{H})=Holant(\{=_i&hellip;\}\cup \mathcal{H})$</p>
 </blockquote>
+<p>对于变量集合$X=\{x_1,x_2,&hellip;x_n\}$，有函数 $R_1(x_{1,1},&hellip;x_{1,r_1}),&hellip;R_m(x_{m,1},&hellip;x_{m,r_m})$，函数有$R_i\in\mathcal{F}$。$\#CSP(\mathcal{F})$就是求解</p>
+<p>$$\sum_{\sigma:X\to D}\prod R_j(\sigma(x_{j,1}）,&hellip;,\sigma(x_{j,r_j}))$$</p>
+<p>对于#CSP 问题，其中一部分是$\mathcal{P}$问题，见<a href="#csp-%E4%BA%8C%E5%88%86%E5%AE%9A%E7%90%86">#CSP 二分定理</a></p>
 <h2 id="算法">算法</h2>
 <h3 id="矩阵检验">矩阵检验</h3>
 <p>在$O(n^2)$，概率判断两矩阵乘是否相等另一矩阵。重复选择向量$x$。对于 0，1 的 2-bit 矩阵，错误率（在不等情况下）为$\frac{1}{2}$。</p>
@@ -607,7 +738,7 @@ $$</p>
 $$</p>
 <h3 id="max-sat">MAX-SAT</h3>
 <h4 id="sat">SAT</h4>
-<p>对于 bool 变量$x_1,&hellip;x_n$，有逻辑表达式$\varphi=(x_i\vee&hellip;)\wedge&hellip;$，是否存在一组取值使得$\varphi$可被满足为真。3-SAT 为$\mathcal{NP}$问题。</p>
+<p>对于 bool 变量$x_1,&hellip;x_n$，有逻辑表达式$\varphi=(x_i\vee&hellip;)\wedge&hellip;$，是否存在一组取值使得$\varphi$可被满足为真。<a href="#%E5%9B%BE%E7%81%B5%E5%8F%AF%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98%E8%A7%84%E7%BA%A6%E5%88%B0-bool-%E7%BA%BF%E8%B7%AF">3-SAT 为$\mathcal{NP}$问题</a>。</p>
 <h4 id="正分-sat">正分-SAT</h4>
 <p>逻辑表达式$\varphi=(x_i\vee&hellip;)\wedge&hellip;$，每个子句满足有正分，反之 0 分。MAX-2SAT 是$\mathcal{NP}$问题。</p>
 <p>$$\varphi=(x_1\vee \bar{x}_2)\wedge(\bar{x}_1\vee x_3\vee\bar{x}_4)&hellip;$$</p>
@@ -933,6 +1064,8 @@ $$</p>
 </ul>
 </li>
 </ul>
+<h3 id="st">s+t</h3>
+<p>$s+t$的 bool 函数$F$，输入为$x_1,&hellip;x_s,y_1,&hellip;y_t$。向左边视为行标，向右边视为列标。对于$2^s\times2^t$矩阵$M_{x_1,&hellip;x_s,y_1,&hellip;y_t}=F(x_1,&hellip;x_s,y_1,&hellip;y_t)$。注意如果$s=0$（$t=0$），降级为行（列）向量。此时的张量网络函数可以视为矩阵乘法。</p>
 <h3 id="全息规约">全息规约</h3>
 <p>？尚不理解</p>
 <h3 id="对称函数">对称函数</h3>
@@ -942,6 +1075,27 @@ F(x_1,&hellip;x_n)=F(x_{\pi(1)},&hellip;x_{\pi(n)})
 $$</p>
 <p>如果是 bool 为自变量的对称函数，可以用$f_i$表示$i$个 1 时候$F$的值。那么$F$可以完全被$f_0,f_1,&hellip;f_{n}$来确定。对于 n 元相等关系(全相等时候取 1，否则取 0)，记$F=[1,0,&hellip;0,1]$为$=_n$</p>
 <h3 id="csp-二分定理">#CSP-二分定理</h3>
+<p>bool 定义域的#CSP 问题，其他形式是#P 难的问题</p>
+<ul>
+<li>01 值域：
+<ul>
+<li>仿射关系</li>
+</ul>
+</li>
+<li>非负实数值域
+<ul>
+<li>pure affine</li>
+<li>product type</li>
+</ul>
+</li>
+<li>复数值域
+<ul>
+<li>第一易解类$\mathcal{A}$</li>
+<li>第二易解类$\mathcal{P}$，作为product 形式的推广</li>
+</ul>
+</li>
+</ul>
+<h4 id="csp-第一易解类">#CSP-第一易解类</h4>
 <p>对于 bool 定义域，值域$\mathbb{C}$的函数$F$。有一个第一易解类$\mathcal{A}$，对于<a href="#holant-csp">$\#CSP(\mathcal{A})$</a>存在多项式时间算法。定义仿射关系，$\mathcal{X}_{(AX=C)}$，为$D$上$n$维的指示函数。</p>
 <p>可以定义一类特殊条件的多项式$P()$：</p>
 <ul>
@@ -1018,6 +1172,18 @@ $$</p>
 <blockquote>
 <p>这一小结参考论文<a href="https://www.sciencedirect.com/science/article/pii/S0022000013001414">The complexity of complex weighted Boolean #CSP</a></p>
 </blockquote>
+<h5 id="偶数条边的子图数目算法">偶数条边的子图数目算法</h5>
+<p>有函数形式</p>
+<p>$$
+F=\left(\begin{matrix}1&amp;1 \\ 1&amp;-1\end{matrix}\right)
+$$</p>
+<p>也可以认为是对于$x,y$，为$F(x,y)=i^{2xy}$。</p>
+<p>对于图，点为$x_1,&hellip;x_n$，对每个边应用$F$。考虑取 1 的点构成的子图。子图有偶数条边，$-1$的偶数次幂为$+1$；奇数条边子图结果即为$-1$</p>
+<p>因此问题结果为：偶数边子图数目-奇数边子图数目。已知 所有子图数目$2^{|V|}$=偶数边子图数目+奇数边子图数目。因此偶数边子图、奇数边子图数目计算为 $\mathcal{P}$ 问题</p>
+<h4 id="csp-第二易解类">#CSP-第二易解类</h4>
+<p>集合$\mathcal{E}$有，$F\in\mathcal{E} \iff \exists \alpha\in \{0,1\}^n,\forall X\notin \{ \alpha,\bar{\alpha} \},F(X)=0$。这个集合可以认为是 n 元相等关系的推广。</p>
+<p>注意到 $\{\alpha,\bar{\alpha}\}$是一个一维仿射子空间。一个自由变量相当于约束了其他非自由变量（对于求张量网络和来说）。</p>
+<p>第二易解类$\mathcal{P}$，当函数为$\mathcal{E}$的乘积。注意到，连通的$\mathcal{E}$类型的函数，还是$\mathcal{E}$类型的函数。连通分支内部取值固定，之间取乘积即可。</p>
 <h2 id="附录-基础知识">附录-基础知识</h2>
 <h3 id="markov-inequality">Markov-Inequality</h3>
 <p>$$
