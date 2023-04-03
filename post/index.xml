@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on zhh's blog</title><link>https://livypad.github.io/post/</link><description>Recent content in Posts on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Mon, 27 Mar 2023 22:30:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第7次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Mon, 27 Mar 2023 22:30:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 自动机 图灵机 图灵机线性加速定理 3-CNF 非确</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Posts on zhh's blog</title><link>https://livypad.github.io/post/</link><description>Recent content in Posts on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Tue, 04 Apr 2023 00:01:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第8次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Tue, 04 Apr 2023 00:01:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 自动机 图灵机 图灵机线性加速定理 3-CNF 非确</description><content:encoded><![CDATA[<ul>
 <li><a href="#%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1">高级算法设计</a>
 <ul>
 <li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>
@@ -33,6 +33,7 @@
 <li><a href="#%E8%A7%84%E7%BA%A6">规约</a>
 <ul>
 <li><a href="#%E5%9B%BE%E7%81%B5%E5%8F%AF%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98%E8%A7%84%E7%BA%A6%E5%88%B0-bool-%E7%BA%BF%E8%B7%AF">图灵可计算问题规约到 bool 线路</a></li>
+<li><a href="#%E6%9E%84%E4%BB%B6%E6%9B%BF%E6%8D%A2%E8%A7%84%E7%BA%A6">构件替换规约</a></li>
 </ul>
 </li>
 <li><a href="#pnp">P，NP</a>
@@ -47,6 +48,7 @@
 </li>
 <li><a href="#csp">CSP</a></li>
 <li><a href="#holant-csp">Holant-#CSP</a></li>
+<li><a href="#%E4%BA%8C%E9%83%A8-holant-%E9%97%AE%E9%A2%98">二部 Holant 问题</a></li>
 </ul>
 </li>
 <li><a href="#%E7%AE%97%E6%B3%95">算法</a>
@@ -99,6 +101,16 @@
 <li><a href="#csp-%E7%AC%AC%E4%BA%8C%E6%98%93%E8%A7%A3%E7%B1%BB">#CSP-第二易解类</a></li>
 </ul>
 </li>
+<li><a href="#%E5%9B%BE%E5%90%8C%E6%80%81%E6%98%A0%E5%B0%84%E6%95%B0%E7%9B%AE">图同态映射数目</a></li>
+<li><a href="#%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E9%97%A8">斐波那契门</a>
+<ul>
+<li><a href="#%E7%AE%97%E6%B3%95%E4%B8%80">算法一</a></li>
+<li><a href="#%E7%AE%97%E6%B3%95%E4%BA%8C">算法二</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A5%87%E5%81%B6%E5%92%8C%E7%9B%B8%E7%AD%89%E5%85%B3%E7%B3%BB%E8%BD%AC%E6%8D%A2">奇偶和相等关系转换</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%BA%BF%E6%80%A7%E6%80%A7%E8%B4%A8%E7%BA%BF%E6%80%A7%E6%A3%80%E6%B5%8B">函数线性性质线性检测</a></li>
+<li><a href="#%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86">容斥原理</a></li>
 </ul>
 </li>
 <li><a href="#%E9%99%84%E5%BD%95-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">附录-基础知识</a>
@@ -483,6 +495,8 @@ $$</p>
 <p>对于输入字符串为$n$。图灵机停机用时$T(n)$。那么必然读写头移动范围不超过$T(n)$。可以把图灵机的运行过程用一个$T(n)\times T(n)$的表格表示。每格记为$\Sigma\times (Q\cup{\mathcal{o}})$，表示每格的字符，图灵机状态、读写头是否在本格。即为<strong>计算表格</strong>。</p>
 <p>因此，上述每格的有限数目的状态用$c$个 bit 编码。注意到，任意一个时刻某个位置字符是否改变，必然只取决于上一个时刻其左右 3 个字符的情况（$3c$个 bit）。因此最后可以表达为有限个逻辑门组合。</p>
 <p>注意，对于$\mathcal{NP}$问题，对于多项式时间判定函数$R()$的计算表格，也可以类似规约。如此规约出来的问题具有 <a href="#3-cnf">3CNF 问题</a>的形式。由此也可以证明<a href="#sat">3SAT 问题</a>是$\mathcal{NP}$完全的。</p>
+<h4 id="构件替换规约">构件替换规约</h4>
+<p>对于$A\le B$的规约，由于张量网络结合律，使用 B 的构件，发挥 A 中函数作用。如<a href="#3-cnf">4SAT 到 3SAT 的规约</a>。</p>
 <h3 id="pnp">P，NP</h3>
 <p>判定问题，可以对应一个集合/语言。</p>
 <p>$$f:x\to \{0,1\}$$</p>
@@ -534,6 +548,24 @@ $$</p>
 <p>对于变量集合$X=\{x_1,x_2,&hellip;x_n\}$，有函数 $R_1(x_{1,1},&hellip;x_{1,r_1}),&hellip;R_m(x_{m,1},&hellip;x_{m,r_m})$，函数有$R_i\in\mathcal{F}$。$\#CSP(\mathcal{F})$就是求解</p>
 <p>$$\sum_{\sigma:X\to D}\prod R_j(\sigma(x_{j,1}）,&hellip;,\sigma(x_{j,r_j}))$$</p>
 <p>对于#CSP 问题，其中一部分是$\mathcal{P}$问题，见<a href="#csp-%E4%BA%8C%E5%88%86%E5%AE%9A%E7%90%86">#CSP 二分定理</a></p>
+<h3 id="二部-holant-问题">二部 Holant 问题</h3>
+<p>对于两个函数集合$\mathcal{H},\mathcal{F}$，对于二部图$G(U,V,E)$：$U$上函数来自$\mathcal{H}$；$V$上函数来自$\mathcal{F}$ 定义问题$\#\mathcal{H}|\mathcal{F}$，求解张量网络值。也被称为二部 Holant 问题</p>
+<p>注意，任何一条边，可以转化成两条连着二元相等关系顶点$=_2$的边。因此，有如下等价关系</p>
+<ol>
+<li>$\#\mathcal{F}\equiv\#\{=_2\}|\mathcal{F}$</li>
+<li>$\#CSP(\mathcal{F})\equiv\#\{=_i,&hellip;\}|\mathcal{F}$</li>
+<li>$\#CSP(\mathcal{F})\equiv\#\{=_i,&hellip;\}\cup\mathcal{F}$
+<ol>
+<li>在$\mathcal{F}$直接有两边相连，插入$=_2$</li>
+<li>$=_i$关系相连，转换为一个更大的相等关系</li>
+</ol>
+</li>
+</ol>
+<p>问题的集合和实例的集合不是一回事：</p>
+<ul>
+<li>从问题角度，#CSP 问题类是 Holant 问题类的子集,$\#CSP(\mathcal{F})=\#\mathcal{F}\cup\{=_i,&hellip;\}\subseteq\#\mathcal{F}$</li>
+<li>对于一个确定的函数集合$\mathcal{F}$，$\#\mathcal{F}$的实例对应的实例$\#CSP(\mathcal{F})\supseteq\#\mathcal{F}\cup\{=_2\}$，前者可规约到后者</li>
+</ul>
 <h2 id="算法">算法</h2>
 <h3 id="矩阵检验">矩阵检验</h3>
 <p>在$O(n^2)$，概率判断两矩阵乘是否相等另一矩阵。重复选择向量$x$。对于 0，1 的 2-bit 矩阵，错误率（在不等情况下）为$\frac{1}{2}$。</p>
@@ -1067,7 +1099,11 @@ $$</p>
 <h3 id="st">s+t</h3>
 <p>$s+t$的 bool 函数$F$，输入为$x_1,&hellip;x_s,y_1,&hellip;y_t$。向左边视为行标，向右边视为列标。对于$2^s\times2^t$矩阵$M_{x_1,&hellip;x_s,y_1,&hellip;y_t}=F(x_1,&hellip;x_s,y_1,&hellip;y_t)$。注意如果$s=0$（$t=0$），降级为行（列）向量。此时的张量网络函数可以视为矩阵乘法。</p>
 <h3 id="全息规约">全息规约</h3>
-<p>？尚不理解</p>
+<p>$$
+AB=AEB=AMM^{-1}B=(AM)\cdot(M^{-1}B)
+$$</p>
+<p>一个$f,h$二分的张量网络，可以先把$f,h$之间插入一个$=_2=[1,0,1]$，然后把$=_2=MM^{-1}$，把$f,h$换一个基：$fM^{\otimes i},(M^{-1})^{\otimes j}h$</p>
+<p>对于一个$F，H$二分，而且$F、H$之间每条边上都有顶点$M$的张量网络。有问题间的等价关系$\#\{FM^{\otimes i}\}|\{H\}\equiv\#\{F\}|\{M^{\otimes j}H\}$</p>
 <h3 id="对称函数">对称函数</h3>
 <p>对于置换$\pi$,对于自变量$\forall x_i$，有</p>
 <p>$$
@@ -1091,7 +1127,7 @@ $$</p>
 <li>复数值域
 <ul>
 <li>第一易解类$\mathcal{A}$</li>
-<li>第二易解类$\mathcal{P}$，作为product 形式的推广</li>
+<li>第二易解类$\mathcal{P}$，作为 product 形式的推广</li>
 </ul>
 </li>
 </ul>
@@ -1183,7 +1219,184 @@ $$</p>
 <h4 id="csp-第二易解类">#CSP-第二易解类</h4>
 <p>集合$\mathcal{E}$有，$F\in\mathcal{E} \iff \exists \alpha\in \{0,1\}^n,\forall X\notin \{ \alpha,\bar{\alpha} \},F(X)=0$。这个集合可以认为是 n 元相等关系的推广。</p>
 <p>注意到 $\{\alpha,\bar{\alpha}\}$是一个一维仿射子空间。一个自由变量相当于约束了其他非自由变量（对于求张量网络和来说）。</p>
-<p>第二易解类$\mathcal{P}$，当函数为$\mathcal{E}$的乘积。注意到，连通的$\mathcal{E}$类型的函数，还是$\mathcal{E}$类型的函数。连通分支内部取值固定，之间取乘积即可。</p>
+<p>第二易解类$\mathcal{P}$，当函数为$\mathcal{E}$的乘积。注意到，连通的$\mathcal{E}$类型的函数，还是$\mathcal{E}$类型的函数。连通分支内部取值固定，连通分支之间取乘积即可（有结合律，易知）。</p>
+<p>定义二元不等关系$\neq_2$为$[0,1,0]$。可以认为集合$\mathcal{E}$是由一个推广 n 元相等$[a,0..,0,b]$，取一些边接上二元不等关系$\neq_2$生成。这也是一种 <a href="#%E6%9E%84%E4%BB%B6%E6%9B%BF%E6%8D%A2%E8%A7%84%E7%BA%A6">构件替换规约</a>。</p>
+<h3 id="图同态映射数目">图同态映射数目</h3>
+<p>图的同态映射，$\psi:V_G\to V_H$，有$\forall e=(a,b)\in E_G,(\psi(a),\psi(b))\in E_H$。给定一个图，求同态映射数目，相当于求一个二元函数$H$定义的$\#CSP$问题。</p>
+<p>3 染色问题，可以认为是$H=\left(\begin{aligned}0,1,1\\1,0,1\\1,1,0\end{aligned}\right)$的$\#CSP(H)$问题</p>
+<p>如果二元函数$H$对应的矩阵的秩小于等于 1，那么该问题为 $\mathcal{P}$问题。把分解二元函数$H=ab^{\prime}$。原来的图的每个顶点都相当于一个 n 元相等关系，只有两个赋值能满足，这样显然是易解的。</p>
+<p>另一个易解类出现在如果图是二部图，有邻接矩阵$\begin{pmatrix}
+0,A\\B,0
+\end{pmatrix}$ ，当中的矩阵 A、B 秩都是 1。那么，如果另一图不是二部图，显然不存在同态映射；如果是二部图，考虑一部的顶点集合到另一个部的顶点集合，这时候化归到二元函数$H$对应的矩阵的秩小于等于 1 的情况。</p>
+<h3 id="斐波那契门">斐波那契门</h3>
+<p>对于张量网络中的对称函数，如果$f_{i+2}=f_{i+1}+f_i$,那么$[f_0,f_1,f_2,&hellip;,f_k]$被称为斐波那契门。</p>
+<p>斐波那契门的张量网络求值问题$\#\{Fib\}|\{=_2\}$，有多项式时间解法</p>
+<h4 id="算法一">算法一</h4>
+<p>对于$\#\{Fib\}|\{=_2\}$这样的张量网络，以下两种运算封闭</p>
+<ol>
+<li>把两个斐波那契门函数用一条公共边/$=_2$关系连在一起，形成一个新的斐波拉契门</li>
+<li>把一个斐波那契门函数的两条自由边成环在一起，新的函数还是新的斐波拉契门
+<ul>
+<li>容易证明$[f_0+f_2,f_1+f_3,&hellip;f_{k-2}+f_k]$这样的形式也是斐波那契门</li>
+</ul>
+</li>
+</ol>
+<p>因此上述网络重复上述两种操作，最后可以得到一个超大的斐波那契门。表示，计算斐波那契门的输入输出都是多项式时间的。因此是$\mathcal{P}$问题。</p>
+<h4 id="算法二">算法二</h4>
+<p>考虑$x^2=x+1$，根为$a,b$，有韦达定理$ab=-1$。注意到$a^{i+2}=a^{i+1}+a^i$。那么$[1,a,a^2,&hellip;a^n]$满足$f_{i+2}=f_{i+1}+f_i$这样的递推关系。举个简单例子</p>
+<p>$$
+\begin{aligned}
+&amp;(1,a)^{\otimes 3}\\
+&amp;=(1,a)\otimes (1,a,a,a^2)\\
+&amp;=(1,a,a,a^2,a,a^2,a^2,a^3)\\
+&amp;(000,001,010,011,100,101,110,111)
+\end{aligned}
+$$</p>
+<p>因此，$(1,a)^{\otimes n},(1,b)^{\otimes n},s(1,a)^{\otimes n}+t(1,b)^{\otimes n}$都是斐波那契门。</p>
+<p>反之，所有斐波那契门都能表示成$s(1,a)^{\otimes n}+t(1,b)^{\otimes n}$的形式。注意到</p>
+<p>$$
+\begin{pmatrix}
+f_{i+1}\\f_{i+2}
+\end{pmatrix}=\left(\Sigma\begin{pmatrix}
+a,0\\0,b
+\end{pmatrix}\Sigma^{-1}\right)^i\begin{pmatrix}
+f_{i}\\f_{i+1}
+\end{pmatrix}=\Sigma\begin{pmatrix}
+a,0\\0,b
+\end{pmatrix}^i\Sigma^{-1}\begin{pmatrix}
+f_{i}\\f_{i+1}
+\end{pmatrix}=T \begin{pmatrix}
+a^i\\b^i
+\end{pmatrix}
+$$</p>
+<p>而且，定义$M=\begin{pmatrix}
+1,a\\1,b
+\end{pmatrix}$，注意到</p>
+<p>$$
+\begin{aligned}
+&amp;s(1,a)^{\otimes n}+t(1,b)^{\otimes n}\\
+&amp;=(s,0,&hellip;0,t)\begin{pmatrix}
+1,a\\1,b
+\end{pmatrix}^{\otimes n}\\
+&amp;=[s,0,&hellip;0,t]\begin{pmatrix}
+1,a\\1,b
+\end{pmatrix}^{\otimes n}=[s,0,&hellip;0,t]M^{\otimes n}
+\end{aligned}
+$$</p>
+<p><a href="#%E5%85%A8%E6%81%AF%E8%A7%84%E7%BA%A6">使用全息规约</a>，把斐波那契门的$M^{\otimes n}$项转移到二元相等关系上去。有</p>
+<p>$$
+\begin{aligned}
+&amp;M^{\otimes 2}\begin{pmatrix}
+1\\0\\0\\1
+\end{pmatrix}\\
+&amp;=\begin{pmatrix}
+1,a,a,a^2\\1,b,a,ab\\1,a,b,ab\\1,b,b,b^2
+\end{pmatrix}\begin{pmatrix}
+1\\0\\0\\1
+\end{pmatrix}\\
+&amp;=\begin{pmatrix}
+1+a^2\\0\\0\\1+b^2
+\end{pmatrix}
+\end{aligned}
+$$</p>
+<p>注意到，$[s,0,&hellip;0,t]$和$(1+a^2,0,0,1+b^2)$都属于集合$\mathcal{E}$。这时候可以调用 <a href="#csp-%E7%AC%AC%E4%BA%8C%E6%98%93%E8%A7%A3%E7%B1%BB">#CSP 第二易解类，product 形式</a>的算法。因此可以多项式时间完成。</p>
+<h3 id="奇偶和相等关系转换">奇偶和相等关系转换</h3>
+<p>对于$H=\begin{pmatrix}
+1,1\\1,-1
+\end{pmatrix}$，有如下</p>
+<p>$$
+\begin{aligned}
+&amp;[1,0,0,1]H^{\otimes 3}\\
+&amp;=((1,0)^{\otimes 3}+(0,1)^{\otimes 3})H^{\otimes 3}\\
+&amp;=(1,1)^{\otimes 3}+(1,-1)^{\otimes 3}\\
+&amp;=[1,1,1,1]+[1,-1,1,-1]\\
+&amp;=[2,0,2,0]=2[1,0,1,0]
+\end{aligned}
+$$</p>
+<p>又有</p>
+<p>$$
+\begin{aligned}
+&amp;[2,0,2,0]H^{\otimes 3}\\
+&amp;=((1,1)^{\otimes 3}+(1,-1)^{\otimes 3})H^{\otimes 3}\\
+&amp;=(2,0)^{\otimes 3}+(0,2)^{\otimes 3}\\
+&amp;=[2,0,0,0]+[0,0,0,2]\\
+&amp;=[2,0,0,2]=2[1,0,0,1]
+\end{aligned}
+$$</p>
+<h3 id="函数线性性质线性检测">函数线性性质线性检测</h3>
+<p>对于$X,Y\in{0,1}^n$，对于一个线性函数$G:{0,1}^n\to{0,1}$.有$G(X+Y)\equiv G(X)+G(Y) \mod 2$。当中有形式$G=\sum a_ix_i,a_i\in{0,1}$</p>
+<p>现在给出函数$G$，需要判断是否线性。则需要判断$G(X+Y)+G(X)+G(Y) \equiv0\mod 2$。如果不满足则不是线性函数。考虑变换$Z=X+Y$, 原有的判断条件可以改写为$(-1)^{G(X)}(-1)^{G(Y)}(-1)^{G(Z)}=1$。这时候，可以把 $(\text{通过概率}(1-p)-\text{拒绝概率}(p))$用张量网络求值表达出来。进行全息变换。$\oplus_3$替换为$=_3$ ,$(-1)^G$替换为$\hat{G}$</p>
+<p>$$
+\begin{aligned}
+1-2p&amp;=\sum\left((-1)^{G(X)}(-1)^{G(Y)}(-1)^{G(Z)}\prod \oplus_3(X_i,Y_i,Z_i)\right)\\
+&amp;=\sum \hat{G}(S)\hat{G}(U)\hat{G}(V)\prod =_3(S,U,V)\\
+&amp;=\sum \hat{G}^3(S) \\
+&amp;\le\sum (\max \hat{G}(S))\hat{G}^2(S)=\max \hat{G}(S)
+\end{aligned}
+$$</p>
+<p>$\hat{G}$可以认为是$G$函数和对应选择的线性函数$\chi_s$的值相同的概率$1-\rho$减去值不同的概率$\rho$</p>
+<p>注意到，bool 函数$G$和$\pm1$函数 $F:{1,-1}^n\to{1,-1}$之间是等价的，当中$F(X)=\prod_{j\in s}x_j$（注意这里把原先的$G$的 0 替换为$F$的 1，$G$的 1 替换为$F$的-1，$G$的奇数次的 1 有结果 1 对应$F$奇数次的-1 有结果-1）</p>
+<p>考虑 Hadmard 的满秩矩阵，$H=\begin{pmatrix}
+1,1\\  1,-1
+\end{pmatrix}$，$H^{\otimes n}$对应着关于不同的$x_j,j\in s$的$s$选取的真值表的基$\boldsymbol{\chi}_s,s\subseteq [n]$。以$n=2$为例</p>
+<p>$$
+\begin{aligned}
+H^{\otimes 2}=\begin{pmatrix}
+1,1,1,1\\1,-1,1,-1\\1,1,-1,-1\\1,-1,-1,1
+\end{pmatrix}\qquad\begin{matrix}
+00\\01\\10\\11
+\end{matrix}
+\end{aligned}
+$$</p>
+<p>右边表示是否选取$x_0,x_1$。例如，$10$代表选择$x_0$，此时的线性函数为$\chi_{10}=x_0$。真值对应如下面的树状关系</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">  x0=1        x0=-1
+</span></span><span class="line"><span class="cl">x1=1 x1=-1  x1=1 x1=-1
+</span></span><span class="line"><span class="cl"> 1     1     -1    -1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>考虑一个 bool 函数按照上述转化而来的 $\pm 1$函数$F$的结果向量和某个$\chi_s$的内积$&lt;F,\chi_s&gt;$。由内积的定义，如果某位其相同，乘积为 1，反之为-1。那么内积的结果就是$F$和$\chi_s$之间相同点-不同点的数目。</p>
+<p>这时候就可以定义相对距离$\rho$，不同的点数除以总点数。而值相同的概率减去值不同的概率一样表示为$1-2\rho$。因此，这是一个单边出错算法，拒绝概率$p\ge \rho$</p>
+<h3 id="容斥原理">容斥原理</h3>
+<p>$$
+|\bigcap \bar{A}_i|=|S-\bigcup A_i|=|S|-\sum|A_i|+\sum|A_i\cap A_j|&hellip;+(-1)^n|A_1\cap&hellip;A_n|
+$$</p>
+<p>定义$A_i(0)=\bar{A}_i,A_i(1)=A_i$，自变量$X\in{0,1}^n$，定义</p>
+<p>$$
+F(X)\triangleq |\bigcap A_i(x_i)|
+$$</p>
+<p>定义 $A_i^*(0)=S,A_i^*(1)=A_i$ ，自变量 $X\in{0,1}^n$，定义</p>
+<p>$$
+H(X)\triangleq |\bigcap A_i^*(x_i)|
+$$</p>
+<p>$$
+\begin{aligned}
+H(01&hellip;1)= &amp; |S\cap\bigcap_2 A_i^*(x_i)| \\
+&amp;=|A_1 \cap\bigcap_{2} A^{*}_{i}(x_i) |+|\bar{A}_1\cap\bigcap_2 A_i^{*}(x_i)| \\
+&amp;=F(01&hellip;1)+F(11&hellip;1) \\
+&amp;=(0,&hellip;0,1,0,&hellip;,0,1)\cdot\begin{pmatrix}
+F(0&hellip;0)\\
+&hellip;\\
+F(1&hellip;1)
+\end{pmatrix}\\
+&amp;=&lt;(1,1)\otimes (0,1)^{\otimes n-1},\mathbf{F}&gt;
+\end{aligned}
+$$</p>
+<p>所以可以有（slide 上实际没有证明）</p>
+<p>$$
+\mathbf{H}=\begin{pmatrix}
+1,1\\0,1
+\end{pmatrix}^{\otimes n} \mathbf{F},\begin{pmatrix}
+1,-1\\0,1
+\end{pmatrix}^{\otimes n}\mathbf{H}=\mathbf{F}
+$$</p>
+<p>那么就有，$F(0&hellip;0)=(1,-1)^{\otimes n}\mathbf{H}$。展开就能得到容斥原理的表达式。</p>
 <h2 id="附录-基础知识">附录-基础知识</h2>
 <h3 id="markov-inequality">Markov-Inequality</h3>
 <p>$$
