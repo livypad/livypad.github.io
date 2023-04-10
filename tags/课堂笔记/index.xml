@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>课堂笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link><description>Recent content in 课堂笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Tue, 04 Apr 2023 00:01:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第8次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Tue, 04 Apr 2023 00:01:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 自动机 图灵机 图灵机线性加速定理 3-CNF 非确</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>课堂笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link><description>Recent content in 课堂笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Tue, 11 Apr 2023 00:01:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第10次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Tue, 11 Apr 2023 00:01:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 自动机 图灵机 图灵机线性加速定理 3-CNF 非确</description><content:encoded><![CDATA[<ul>
 <li><a href="#%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1">高级算法设计</a>
 <ul>
 <li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>
@@ -41,11 +41,7 @@
 <li><a href="#ladner-%E5%AE%9A%E7%90%86">Ladner-定理</a></li>
 </ul>
 </li>
-<li><a href="#p">#P</a>
-<ul>
-<li><a href="#permanent">Permanent</a></li>
-</ul>
-</li>
+<li><a href="#p">#P</a></li>
 <li><a href="#csp">CSP</a></li>
 <li><a href="#holant-csp">Holant-#CSP</a></li>
 <li><a href="#%E4%BA%8C%E9%83%A8-holant-%E9%97%AE%E9%A2%98">二部 Holant 问题</a></li>
@@ -111,6 +107,24 @@
 <li><a href="#%E5%A5%87%E5%81%B6%E5%92%8C%E7%9B%B8%E7%AD%89%E5%85%B3%E7%B3%BB%E8%BD%AC%E6%8D%A2">奇偶和相等关系转换</a></li>
 <li><a href="#%E5%87%BD%E6%95%B0%E7%BA%BF%E6%80%A7%E6%80%A7%E8%B4%A8%E7%BA%BF%E6%80%A7%E6%A3%80%E6%B5%8B">函数线性性质线性检测</a></li>
 <li><a href="#%E5%AE%B9%E6%96%A5%E5%8E%9F%E7%90%86">容斥原理</a></li>
+<li><a href="#permanent">Permanent</a>
+<ul>
+<li><a href="#ryser-%E5%85%AC%E5%BC%8F">Ryser 公式</a></li>
+<li><a href="#%E6%A8%A1%E6%95%B0%E6%84%8F%E4%B9%89%E4%B8%8B%E7%9A%84%E5%BF%AB%E9%80%9F%E7%AE%97%E6%B3%95">模数意义下的快速算法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98">匹配问题</a>
+<ul>
+<li><a href="#%E5%B8%A6%E6%9D%83%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98%E8%A7%84%E7%BA%A6">带权匹配问题规约</a></li>
+<li><a href="#%E4%B8%80%E8%88%AC%E7%9A%84%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98">一般的匹配问题</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8C%B9%E9%85%8D%E9%97%A8">匹配门</a>
+<ul>
+<li><a href="#juxtaposition">Juxtaposition</a></li>
+<li><a href="#jumper">Jumper</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%E9%99%84%E5%BD%95-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">附录-基础知识</a>
@@ -511,15 +525,7 @@ $$</p>
 <p>构造一个算法，使得增长速度能够介于$\mathcal{P}$与$\mathcal{NP}$之间。大致思路是，在 SAT 之间插入$n^{H(n)}$的 1，当中$H(n)$是关于$n$的多项式时间函数，且$n$趋于无穷时候趋于无穷。记$SAT_H={\psi01^{n^{H(n)}}:\psi\in SAT \wedge n=|\psi|}$。</p>
 <h3 id="p">#P</h3>
 <p>函数$F$属于$\#P$问题：存在多项式时间算法$R$，使得$F(x)=|{y|R(x,y)=1}|$（多项式时间验证可解的解的计数）</p>
-<p>如果任何$\#P$的问题可以规约到问题 B，B 是$\#P$完全（$\#P-complete$）。$\#P-complete$也是$\mathcal{NP}$完全的。#SAT 是$\#P$完全的。 <a href="#Permanent">01Permanent 问题</a>也是$\#P$完全的</p>
-<h4 id="permanent">Permanent</h4>
-<p>对于 A ：</p>
-<ul>
-<li>n 个点带权有向图，所有圈的权重和；</li>
-<li>二分图的所有完美匹配权重和</li>
-<li>这个定义对比行列式的定义，去除了符号项</li>
-</ul>
-<p>$$Permanent(A)=\sum_{\pi \in S_n}\prod A_{j,\pi(j)}$$</p>
+<p>如果任何$\#P$的问题可以规约到问题 B，B 是$\#P$ 完全（$\#P-complete$）。$\#P-complete$也是$\mathcal{NP}$ 完全的。#SAT 是 $\#P$ 完全的。<a href="#permanent">01Permanent 问题</a>也是$\#P$完全的</p>
 <h3 id="csp">CSP</h3>
 <blockquote>
 <p>$CSP(\mathcal{F})$ 问题（Constraint Satisfaction Problem）</p>
@@ -1234,14 +1240,19 @@ $$</p>
 <h4 id="算法一">算法一</h4>
 <p>对于$\#\{Fib\}|\{=_2\}$这样的张量网络，以下两种运算封闭</p>
 <ol>
-<li>把两个斐波那契门函数用一条公共边/$=_2$关系连在一起，形成一个新的斐波拉契门</li>
+<li>把两个斐波那契门函数用一条公共边$=_2$关系连在一起，形成一个新的斐波拉契门
+<ul>
+<li>考虑一个输入，一部分输入的 1 在一边，一部分在另一边，容易证明不管如何分配值不变</li>
+<li>再证明这些输入的结果满足斐波那契关系</li>
+</ul>
+</li>
 <li>把一个斐波那契门函数的两条自由边成环在一起，新的函数还是新的斐波拉契门
 <ul>
 <li>容易证明$[f_0+f_2,f_1+f_3,&hellip;f_{k-2}+f_k]$这样的形式也是斐波那契门</li>
 </ul>
 </li>
 </ol>
-<p>因此上述网络重复上述两种操作，最后可以得到一个超大的斐波那契门。表示，计算斐波那契门的输入输出都是多项式时间的。因此是$\mathcal{P}$问题。</p>
+<p>因此对于上述网络重复上述两种操作，由于操作的封闭性和张量网络求值的结合律，最后可以得到一个超大的斐波那契门。表示，计算斐波那契门的输入输出都是多项式时间的。因此是$\mathcal{P}$问题。</p>
 <h4 id="算法二">算法二</h4>
 <p>考虑$x^2=x+1$，根为$a,b$，有韦达定理$ab=-1$。注意到$a^{i+2}=a^{i+1}+a^i$。那么$[1,a,a^2,&hellip;a^n]$满足$f_{i+2}=f_{i+1}+f_i$这样的递推关系。举个简单例子</p>
 <p>$$
@@ -1397,6 +1408,163 @@ $$</p>
 \end{pmatrix}^{\otimes n}\mathbf{H}=\mathbf{F}
 $$</p>
 <p>那么就有，$F(0&hellip;0)=(1,-1)^{\otimes n}\mathbf{H}$。展开就能得到容斥原理的表达式。</p>
+<h3 id="permanent">Permanent</h3>
+<p>矩阵$A$的积和式，定义为</p>
+<p>$$Permanent(M)=\sum_{\pi \in S_n}\prod M_{j,\pi(j)}$$</p>
+<p>对于 $M$ ：</p>
+<ul>
+<li>n 个点带权有向图，所有圈的权重乘积之和；</li>
+<li>二分图的所有完美匹配的权重乘积之和</li>
+<li>这个定义对比行列式的定义，去除了符号项</li>
+</ul>
+<h4 id="ryser-公式">Ryser 公式</h4>
+<p>可以定义矩阵的每行加起来，再乘积的结果$\phi(M)$</p>
+<p>$$
+\phi(M)=\prod(a_{11}+a_{12}+&hellip;)=\prod_i\sum_j a_{ij}
+$$</p>
+<p>把$\phi(M)$展开，每一项对应每行出一个元素的连乘结果。定义坏事件$A_i$表示每行贡献一项的元素连乘结果，第$i$列没有贡献项。$\phi(M)$作为全集，而积和式可以用容斥原理表达为</p>
+<p>$$
+\begin{aligned}
+Perm(M)&amp;=\sum\prod M_{i,\pi(i)}\\
+&amp;=\phi(M)-A_1-A_2&hellip;+A_1\cap A_2&hellip;\\
+\end{aligned}
+$$</p>
+<p>那么，有$k$个坏事件之交$\sum \bigcap^k A_i$结果为</p>
+<p>$$T_k=\sum_{B是M的n\times(n-k)子式}\phi(B)$$</p>
+<p>那么上述的容斥原理表达式，即可转成指数复杂度的 Ryser 公式，计算积和式</p>
+<p>$$
+\begin{aligned}
+Perm(M)&amp;=\sum (-1)^kT_k\\
+&amp;=(-1)^n\sum_{S\subseteq\{1,&hellip;,n\}}(-1)^{|S|}\prod_i\sum_{j\in S}m_{ij}
+\end{aligned}
+$$</p>
+<p>如果考虑积和式对应二分图的带权完美匹配的问题，那么有边的权重关系$(i,j^\prime)=(j^\prime,i)=A_{ij}$（当中$i,j^{\prime}$表示点出自不同部分）</p>
+<p>对于二部图，每个点取对称函数$[0,1,0&hellip;0]$（1 个 1，n-1 个 0 时候输出 1，否则输出 0）。如果张量网络求值结果不为 1，说明每个顶点有且只有一条边取 1，那么此时取得完美匹配。。如果把张量网络里一部的点的函数换成$[0,1,1&hellip;1]=(1,1)^{\otimes n}-(1,0)^{\otimes n}=F_1+F_2$，值不变（n 次匹配，必须完美分配才能保证一边不出 0 值）。如果从里面选一个${(1,1)^{\otimes n},-(1,0)^{\otimes n}}$拆开来算，那么分别计算$2^n$次，但每一次当中，一边的点对应边要么全 0 要么全 1，相对简单好算。</p>
+<h4 id="模数意义下的快速算法">模数意义下的快速算法</h4>
+<p>注意到积和式和行列式在模 2 意义下相等。而且积和式满足如下的关系</p>
+<p>$$
+Perm\begin{pmatrix}
+A_1+bB_1\\ A_2\\ &hellip;\\ A_n
+\end{pmatrix}=Perm\begin{pmatrix}
+A_1\\ A_2\\ &hellip;\\ A_n
+\end{pmatrix}+b\cdot Perm\begin{pmatrix}
+B_1\\ A_2\\ &hellip;\\ A_n
+\end{pmatrix}
+$$</p>
+<p>因此可以提出在积和式 $\mod 2^k,k\in \mathbb{Z}^*$意义下的多项式时间算法。首先对于积和式进行高斯分解。假定对第二行有$A_2+kA_1=(0,*)$，那么就有$A_2=(-k)A_1+(0,*)$。利用上述积和式关系，一次分解，会将$n\times n$的方阵，分解出$n-1$个两行相等的积和式，加上一个$(n-1)\times(n-1)$更小的积和式。</p>
+<p>令$T_k(n)$表示对$n\times n$的积和式计算$\mod 2^k$意义下的时间，$T_k^\prime(n)$表示对有两行相等的积和式计算$\mod 2^k$意义下的时间。有</p>
+<p>$$T_k(n)=(n-1)\cdot T^\prime_k(n)+T_{k-1}(n)+O(n)$$</p>
+<p>而对于两行相等的积和式，对两个相同行做展开，有，$T^\prime_k(n)\sim n^2T_{k-1}(n-2)$。因此有$T_k(n)&lt;\Theta(n^{4k+3})$。</p>
+<h3 id="匹配问题">匹配问题</h3>
+<h4 id="带权匹配问题规约">带权匹配问题规约</h4>
+<p>对于完美匹配问题，有如下规约关系。因此主要到#SAT 是#P 完全的，完美匹配计数问题也是<a href="#p">#P 完全的</a></p>
+<p>$$
+\#SAT\le\#PerM_{\text{有权重}}\le\#PerM_{\text{0,1}}
+$$</p>
+<p>第二个规约关系的证明。如果权重是正整数，$\star-k-\star$这样一条边可以替换为 $k-1$ 条$\star-0-1-0-\star$和一条$\star-1-\star$的边。因为如果该边在匹配中，顶点$\star$对外的其他边必取 0；而转换之后内部求和的完美匹配权重和的结果和只有一条权为$k$的边相同。</p>
+<p>如果权重是任意的$w\in \mathbb{R}$。定义$X_i$为原图完美匹配中去除$i$条权重为$w$的边之后的<strong>部分权重和</strong>。那么全图权重和即为$\#G=\sum w^iX_i$。定义图$G_k$，是将原图的$i$条权重为$w$的边替换为上述$k$条边之后的结果。那么有$\#G_k=\sum k^iX_i$。计算图$G_k$的完美匹配数是计算 01 权重完美匹配数的问题，已经假定存在解法。那么，可以列出关系式</p>
+<p>$$
+\begin{pmatrix}
+&hellip;\\ \#G_k\\ \#G_l\\ &hellip;
+\end{pmatrix}=\begin{pmatrix}
+&hellip;\\
+k^0,k^1,&hellip;k^n\\
+l^0,l^1,&hellip;l^n\\ &hellip;
+\end{pmatrix}\begin{pmatrix}
+X_0\\ X_1\\ &hellip; \\ X_n
+\end{pmatrix}
+$$</p>
+<p>注意到矩阵$\begin{pmatrix}
+&hellip;\\
+k^0,k^1,&hellip;k^n\\
+l^0,l^1,&hellip;l^n\\ &hellip;
+\end{pmatrix}$具有 Vandermonde 方阵的形式。Vandermonde 行列式是满秩的。因此可以直接求出$X_0,X_1,&hellip;X_n$，带回去就可以求解$\#G=\sum w^iX_i$。因此规约成立。</p>
+<h4 id="一般的匹配问题">一般的匹配问题</h4>
+<p>一般的匹配问题的顶点的对称函数变成$[1,1,0&hellip;0]$。完美匹配问题可以规约到求解一般的匹配问题，证明如下</p>
+<p>$$
+\#PerfectMatch\le\#Match
+$$</p>
+<p>考虑如下的一个张量网络，对其考虑匹配问题</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-plaintext" data-lang="plaintext"><span class="line"><span class="cl">Fk:
+</span></span><span class="line"><span class="cl">*--Mk-.....M2---M1
+</span></span><span class="line"><span class="cl">[1,1,0] [1,1,0][1,1]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>求值有，把其结果记为$F_k$。如果对应$*$的顶点取 0，结果即为$F_k(0)$，取 1 类似。</p>
+<p>$$
+\begin{aligned}
+&amp;\begin{pmatrix}
+1,1\\1,0
+\end{pmatrix}^{k-1}\begin{pmatrix}
+1\\1
+\end{pmatrix}=\begin{pmatrix}
+1,1\\1,0
+\end{pmatrix}^{k}\begin{pmatrix}
+1\\0
+\end{pmatrix}\\
+&amp;=\frac{1}{\sqrt{5}}\begin{pmatrix}
+\frac{1+\sqrt{5}}{2},\frac{1-\sqrt{5}}{2}\\1,1
+\end{pmatrix}\begin{pmatrix}
+(\frac{1+\sqrt{5}}{2})^k,0\\0,(\frac{1-\sqrt{5}}{2})^k
+\end{pmatrix}\begin{pmatrix}
+1,\frac{\sqrt{5}-1}{2}\\ -1,\frac{\sqrt{5}+1}{2}
+\end{pmatrix}\begin{pmatrix}
+1\\0
+\end{pmatrix}\\
+&amp;=\frac{1}{\sqrt{5}}\begin{pmatrix}
+\frac{1+\sqrt{5}}{2},\frac{-1+\sqrt{5}}{2}\\1,-1
+\end{pmatrix}\begin{pmatrix}
+\alpha^k\\ \beta^k
+\end{pmatrix}
+\end{aligned}
+$$</p>
+<p>对于$n$个点的图$G$。定义$Y_i$,表示取一次图的匹配，留下$i$不参加匹配的完美匹配数目。显然，完美匹配数有$\#PM(G)=Y_0$，匹配数有$\#M(G)=\sum Y_i$。考虑修改图$G_k$，把原来图$G$的$n$点全都连接上之前的张量网络链。那么图$G_k$的匹配有（注意到，只有原先没有参与匹配的点，对于新加入的链可以取 1，参加和新的链之间的匹配，即出现$F_k(0)+F_k(1)$的组合）</p>
+<p>$$
+\begin{aligned}
+\#M(G_k)&amp;=\sum Y_i(F_k(0)+F_k(1))^i(F_k(0))^{k-i}\\
+&amp;=F_k^n(0)\sum Y_i(\frac{F_k(0)+F_k(1)}{F_k(0)})^i\\
+\end{aligned}
+$$</p>
+<p>当中，有</p>
+<p>$$
+\begin{aligned}
+r_k=\frac{F_k(0)+F_k(1)}{F_k(0)}=\frac{\frac{3+\sqrt{5}}{2}\alpha^k+\frac{\sqrt{5}-3}{2}\beta^k}{\frac{1+\sqrt{5}}{2}\alpha^k+\frac{\sqrt{5}-1}{2}\beta^k}=\begin{pmatrix}
+a,b\\ c,d
+\end{pmatrix}\begin{pmatrix}
+\alpha^k \\ \beta^k
+\end{pmatrix}
+\end{aligned}
+$$</p>
+<p>如果要求$s\neq t\implies r_s\neq r_t$，那么充要条件为$ad-bc\neq0,\frac{\alpha}{\beta}\neq 1$。容易验证这些条件都是满足的。由于假定已知求解图$G_k$的匹配的算法，类似上面的，$(r_k)^i$还是可以构造出 Vandermonde 方阵的形式。从而求解出$Y_0,Y_1,&hellip;Y_n$，从而得出完美匹配数$\#PM(G)=Y_0$。因为我们已知<a href="#%E5%B8%A6%E6%9D%83%E5%8C%B9%E9%85%8D%E9%97%AE%E9%A2%98%E8%A7%84%E7%BA%A6">完美匹配是#P 完全问题</a>，所以匹配问题也是<a href="#p">#P 完全问题</a>。</p>
+<h3 id="匹配门">匹配门</h3>
+<p>用对称函数$[0,1,0&hellip;0]$和$[w_1,0,w_2]$构建的张量网络，称为匹配门$F:\{0,1\}^n\to \mathbb{C}$。假定两个输出$\alpha,\beta\in\{0,1\}^n$，把$\alpha,\beta$不相等的标号升序排列记为$\{p_1,p_2,&hellip;p_k\}$。那么，有匹配门等式</p>
+<p>$$I(F,\alpha,\beta)=\sum (-1)^jF(\alpha\oplus p_j)F(\beta\oplus p_j)=0$$</p>
+<p>由归纳法证明。起始函数是满足的。<strong>平面</strong>张量网络两个基本运算对匹配门等式封闭。（<a href="#%E7%AE%97%E6%B3%95%E4%B8%80">和斐波那契门算法 1 里的操作相似</a>）</p>
+<h4 id="juxtaposition">Juxtaposition</h4>
+<p>两个匹配门在平面上连在一起。（注意变量没有交错，平面条件在此）</p>
+<p>$$F(x_1,..x_s,y_1,&hellip;y_t)=P(x_1,..x_s)Q(y_1,&hellip;y_t)$$</p>
+<p>有</p>
+<p>$$I(F,\alpha\alpha^\prime,\beta\beta^\prime)=Q(\alpha^\prime)Q(\beta^\prime)I(P,\alpha,\beta)\pm P(\alpha)P(\beta)I(Q,\alpha^\prime,\beta^\prime)=0$$</p>
+<p>证毕</p>
+<h4 id="jumper">Jumper</h4>
+<p>匹配门两条边成自环，不妨设是$x_1,x_2$</p>
+<p>$$F(x_3,&hellip;x_3)=P(0,0,x_3,&hellip;x_s)+P(1,1,x_3,&hellip;x_s)$$</p>
+<p>有</p>
+<p>$$
+\begin{aligned}
+I(F,\alpha,\beta)&amp;=I(P,00\alpha,00\beta)+I(P,11\alpha,11\beta)\\
+&amp;+(I(P,00\alpha,11\beta)+P(10\alpha)P(01\beta)-P(01\alpha)P(10\beta))\\
+&amp;+(I(P,11\alpha,00\beta)+P(01\alpha)P(10\beta)-P(10\alpha)P(01\beta))=0
+\end{aligned}
+$$</p>
+<p>证毕</p>
 <h2 id="附录-基础知识">附录-基础知识</h2>
 <h3 id="markov-inequality">Markov-Inequality</h3>
 <p>$$
