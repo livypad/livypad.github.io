@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>课堂笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link><description>Recent content in 课堂笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Tue, 11 Apr 2023 00:01:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第10次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Tue, 11 Apr 2023 00:01:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 自动机 图灵机 图灵机线性加速定理 3-CNF 非确</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>课堂笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/</link><description>Recent content in 课堂笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Mon, 17 Apr 2023 21:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BE%E5%A0%82%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>高级算法设计-课堂笔记（更新到第11次课）</title><link>https://livypad.github.io/post/2023-02-27-adalg/</link><pubDate>Mon, 17 Apr 2023 21:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-02-27-adalg/</guid><description>高级算法设计 快速排序 python 算法代码 测试代码 rust 算法代码 测试代码 随机算法分类 形式化定义 算法的正确率提升 Les-Vegas 和 Monte-Carlo 转化 自动机 图灵机 图灵机线性加速定理 3-CNF 非确</description><content:encoded><![CDATA[<ul>
 <li><a href="#%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1">高级算法设计</a>
 <ul>
 <li><a href="#%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F">快速排序</a>
@@ -59,10 +59,23 @@
 </ul>
 </li>
 <li><a href="#%E5%9B%BE%E5%AE%8C%E7%BE%8E%E5%8C%B9%E9%85%8D">图完美匹配</a></li>
-<li><a href="#max-sat">MAX-SAT</a>
+<li><a href="#sat">SAT</a>
 <ul>
-<li><a href="#sat">SAT</a></li>
 <li><a href="#%E6%AD%A3%E5%88%86-sat">正分-SAT</a></li>
+</ul>
+</li>
+<li><a href="#sat-%E8%BD%AC%E6%8D%A2">SAT-转换</a>
+<ul>
+<li><a href="#%E5%9B%BE%E7%9D%80%E8%89%B2%E7%BC%96%E7%A0%81">图着色编码</a></li>
+<li><a href="#logic-puzzle">logic puzzle</a></li>
+<li><a href="#%E6%95%B0%E7%8B%AC">数独</a></li>
+<li><a href="#%E6%8E%A8%E7%AE%B1%E5%AD%90">推箱子</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92">线性规划</a>
+<ul>
+<li><a href="#%E5%8C%BA%E9%97%B4%E8%B0%83%E5%BA%A6">区间调度</a></li>
+<li><a href="#%E6%8E%92%E7%8F%AD">排班</a></li>
 </ul>
 </li>
 <li><a href="#max-cut">MAX-CUT</a></li>
@@ -774,8 +787,7 @@ $$</p>
 &amp;=\frac{n}{n^2}=\frac{1}{n}
 \end{aligned}
 $$</p>
-<h3 id="max-sat">MAX-SAT</h3>
-<h4 id="sat">SAT</h4>
+<h3 id="sat">SAT</h3>
 <p>对于 bool 变量$x_1,&hellip;x_n$，有逻辑表达式$\varphi=(x_i\vee&hellip;)\wedge&hellip;$，是否存在一组取值使得$\varphi$可被满足为真。<a href="#%E5%9B%BE%E7%81%B5%E5%8F%AF%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98%E8%A7%84%E7%BA%A6%E5%88%B0-bool-%E7%BA%BF%E8%B7%AF">3-SAT 为$\mathcal{NP}$问题</a>。</p>
 <h4 id="正分-sat">正分-SAT</h4>
 <p>逻辑表达式$\varphi=(x_i\vee&hellip;)\wedge&hellip;$，每个子句满足有正分，反之 0 分。MAX-2SAT 是$\mathcal{NP}$问题。</p>
@@ -817,6 +829,94 @@ $$</p>
 <p>$$
 \frac{\mathbb{E}(R)}{opt(P)}\ge 1-\frac{1}{e}
 $$</p>
+<h3 id="sat-转换">SAT-转换</h3>
+<p>可以把很多问题归结到 SAT 问题求解。而且 SAT 问题有现成的求解器程序（solver）</p>
+<h4 id="图着色编码">图着色编码</h4>
+<p>如 3-染色问题，每个点的每种染色结果编码为一个 bool 变量$x_{i1},x_{i2},x_{i3}$，然后枚举约束</p>
+<ol>
+<li>一条边上两个点颜色不同,$\neg x_{i1}\vee \neg x_{j1}$</li>
+<li>一个点必须有一种颜色 $x_{i1}\vee x_{i2}\vee x_{i3}$</li>
+<li>不需要指定一个点只取一种颜色（solver 求解之后，再舍去多多余即可，但这可能增加 solver 负担）</li>
+</ol>
+<h4 id="logic-puzzle">logic puzzle</h4>
+<p>至少一人说谎。$a,b,c$3 个 bool 变量对应 ABC 是否说真话。可以将蕴含转换为析取形式</p>
+<ul>
+<li>A: B is lying.</li>
+<li>B: C is lying.</li>
+<li>C: A and B is lying.</li>
+</ul>
+<p>对应表达式</p>
+<ol>
+<li>$a\vee b\vee c$</li>
+<li>$a\to \neg b,\neg a\to b \implies\neg a \vee \neg b,a\vee b$</li>
+<li>$b\to \neg c,\neg b\to c \implies\neg b \vee \neg c,b\vee c$</li>
+<li>$c\to(\neg a\wedge\neg b),\neg c\to \neg(\neg a\wedge\neg b)\implies \neg c\vee \neg a,\neg c \vee \neg b,a\vee b\vee c$</li>
+</ol>
+<p>最后可以求解为$\neg a,b,\neg c$</p>
+<h4 id="数独">数独</h4>
+<p>$p(i,j,n)$表示第 i 行 j 列是否取数字 n</p>
+<ol>
+<li>每行:$\bigwedge_i\bigwedge_n\bigvee_j p(i,j,n)$</li>
+<li>每列:$\bigwedge_j\bigwedge_n\bigvee_i p(i,j,n)$</li>
+<li>小方块:$\bigwedge_s\bigwedge_t\bigwedge_n\bigvee_i\bigvee_j p(3s+i,3t+j,n)$</li>
+<li>一个格子对应一个数:$n\neq n^\prime \implies \neg p(i,j,n) \vee \neg p(i,j,n^\prime)$</li>
+</ol>
+<h4 id="推箱子">推箱子</h4>
+<p>每个位置对应 3 种状态，<code>Empty,Worker,Box</code>。可以编码 k 步行动（行动可以被行动前后的状态对<code>&lt;pre,con&gt;</code>来编码）的推箱子解。</p>
+<ol>
+<li>每个状态有且只有值</li>
+<li>每轮行动要求前一轮之后前提能被满足</li>
+<li>每轮行动后，状态对应改变</li>
+<li>状态的改变必然是由于有行动</li>
+<li>每轮有且只有一个行动</li>
+</ol>
+<h3 id="线性规划">线性规划</h3>
+<p>线性规划（LP，Linear Programing）。有如下的标准形式。</p>
+<p>$$
+\min z=\mathbf{c}x\text{ s.t. }
+\left\{\begin{aligned}
+Ax=b\\
+x\ge 0
+\end{aligned}\right.
+$$</p>
+<p>如果要求变量只能取整数，即为 ILP；如果要求一部分为整数，为 MILP。</p>
+<h4 id="区间调度">区间调度</h4>
+<p>一些工作（持续时间是区间$[s_j,e_j)$），分配给一些工人（工人 t 有$B_t=\bigcap[s_{ti},e_{ti})$的时间段有别的事情）。要求同一个人干活、其他杂事之间都不能重叠。</p>
+<p>定义 bool 变量$x_t^j$表示工作 j 分配给工人 t。可以化归为整数线性规划</p>
+<ol>
+<li>$\sum_t x_t^j=1$：有时间的至少有一个人干某个工作 j</li>
+<li>$x_t^i\le(1-x_t^j)$：如果工作 i、j 时间冲突，一个人至多做其中一件事情</li>
+<li>$x_t^j\in{0,1}$</li>
+</ol>
+<h4 id="排班">排班</h4>
+<ul>
+<li>N 个人</li>
+<li>W 个周数</li>
+<li>D：一周天数</li>
+<li>S 种任务</li>
+</ul>
+<p>定义 bool 变量$x_{n,w,d,s}$表示第 w 周第 d 天，第 n 号人是否被分配工作 s</p>
+<ol>
+<li>优化目标 $\min z=z_1+z_2$
+<ol>
+<li>尽量整个周末要么加班要么不加班：$z_1=w_1\sum (y_{n,w,1}+y_{n,w,2})$</li>
+<li>每个人尽量上满天数：$z_2=w_2\sum_n q_n$</li>
+</ol>
+</li>
+<li>硬约束
+<ol>
+<li>每人每天只能干一个工作：$\sum_s x_{n,w,d,s}\le 1$</li>
+<li>每天每项工作要满足最少人数：$\sum_n x_{n,w,d,s}\ge C_{w,d,s}^{\min}$</li>
+<li>一些工作不能连续干：$\forall (s_1,s_2)\in\text{forbidden}:x_{n,w,d,s_1}+x_{n,w,d+1,s_2}$</li>
+</ol>
+</li>
+<li>软约束
+<ol>
+<li>$\sum_s x_{n,w,6,s}-\sum_s x_{n,w,7,s}+y_{n,w,1}\ge 0;\sum_s x_{n,w,7,s}-\sum_s x_{n,w,6,s}+y_{n,w,2}\ge 0$</li>
+<li>$\sum x_{n,w,d,s}+q_n\ge T_{\min}$</li>
+</ol>
+</li>
+</ol>
 <h3 id="max-cut">MAX-CUT</h3>
 <p>对于图$G=U\cup W,U\cap W=\emptyset$，m 条边，使得$|E(U,W)|$最大。这是$\mathcal{NP}$问题。</p>
 <p>对于每个顶点取$\frac{1}{2}$分给 U、W，对于每个边，有$\frac{1}{2}$概率(uu,uw,wu,ww)在 cut 中。因此，由于期望的线性性，有</p>
@@ -1053,7 +1153,7 @@ $$</p>
 <p>图$G(V,E)$中每个点$v$赋予一个$d_v$元函数$F_v$</p>
 <p>张量网络的值：$\sum_{e\in [d]} \prod_v F_v(e_{v,1},&hellip;e_{v,d_v})$，对所有边取一种赋值之后的结果求和</p>
 </blockquote>
-<p>eg，对于 SAT 问题，$\exists {x_1,&hellip;x_n}\to {0,1},\bigwedge c()=1 \iff \sum\prod c()\ge 1$（可以引入一些辅助节点，保证出现次数大于 2 次的边，转化成很多条连到辅助节点的边，辅助节点的函数要求所有边取值相同）</p>
+<p>eg，对于 <a href="#sat">SAT 问题</a> ，$\exists {x_1,&hellip;x_n}\to {0,1},\bigwedge c()=1 \iff \sum\prod c()\ge 1$（可以引入一些辅助节点，保证出现次数大于 2 次的边，转化成很多条连到辅助节点的边，辅助节点的函数要求所有边取值相同）</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
