@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>读书笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link><description>Recent content in 读书笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Tue, 11 Apr 2023 21:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Computer Architecture A Quantatative Approach（更新到第3/C章）</title><link>https://livypad.github.io/post/2023-03-23-caaqa/</link><pubDate>Tue, 11 Apr 2023 21:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-03-23-caaqa/</guid><description>Computer architecture: a quantitative approach ch 1 Fundamentals ch 2/B Memory Hierarchy Design 基础知识 cache 性能优化 虚拟存储 virtual machine Fallacy Pitfall ch 3/C Instruction-Level Parallelism and Its Exploitation 编译器优化 ILP 循环展开 5 级流水 前递 乱序 Scoreboard Tomasulo 硬件预测 多发射 VLIW 分支预测 静</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>读书笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link><description>Recent content in 读书笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Fri, 05 May 2023 21:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Computer Architecture A Quantatative Approach（更新到第4章）</title><link>https://livypad.github.io/post/2023-03-23-caaqa/</link><pubDate>Fri, 05 May 2023 21:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-03-23-caaqa/</guid><description>Computer architecture: a quantitative approach ch 1 Fundamentals ch 2/B Memory Hierarchy Design 基础知识 cache 性能优化 虚拟存储 virtual machine Fallacy Pitfall ch 3/C Instruction-Level Parallelism and Its Exploitation 编译器优化 ILP 循环展开 5 级流水 前递 乱序 Scoreboard Tomasulo 硬件预测 多发射 VLIW 分支预测 静</description><content:encoded><![CDATA[<ul>
 <li><a href="#computer-architecture-a-quantitative-approach">Computer architecture: a quantitative approach</a>
 <ul>
 <li><a href="#ch-1-fundamentals">ch 1 Fundamentals</a></li>
@@ -52,13 +52,35 @@
 <li><a href="#fallacy-1">Fallacy</a></li>
 </ul>
 </li>
+<li><a href="#ch-4-data-level-parallelism-in-vector-simd-and-gpu-architectures">ch 4 Data-Level Parallelism in Vector, SIMD, and GPU Architectures</a>
+<ul>
+<li><a href="#roofline-model">Roofline-Model</a></li>
+<li><a href="#%E5%90%91%E9%87%8F%E6%9E%B6%E6%9E%84">向量架构</a></li>
+<li><a href="#%E9%9D%A2%E5%90%91%E5%A4%9A%E5%AA%92%E4%BD%93%E7%9A%84-simd-%E6%89%A9%E5%B1%95">面向多媒体的 SIMD 扩展</a></li>
+<li><a href="#gpu">GPU</a>
+<ul>
+<li><a href="#cuda">CUDA</a></li>
+<li><a href="#%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">层次结构</a></li>
+<li><a href="#%E5%AF%B9%E7%85%A7">对照</a></li>
+</ul>
+</li>
+<li><a href="#loop-level-parallelism-%E6%94%B9%E8%BF%9B">Loop-level parallelism 改进</a>
+<ul>
+<li><a href="#%E4%BE%9D%E8%B5%96%E6%A3%80%E6%B5%8B">依赖检测</a></li>
+<li><a href="#%E5%8F%A6%E4%B8%80%E7%A7%8D%E4%BE%9D%E8%B5%96%E6%B6%88%E9%99%A4">另一种依赖消除</a></li>
+</ul>
+</li>
+<li><a href="#fallacy-2">Fallacy</a></li>
+<li><a href="#pitfall-2">Pitfall</a></li>
+</ul>
+</li>
 <li><a href="#ch-a-instruction-set-principles">ch A Instruction Set Principles</a>
 <ul>
 <li><a href="#isa-%E7%89%B9%E6%80%A7">ISA 特性</a></li>
 <li><a href="#%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96">编译器优化</a></li>
 <li><a href="#isa-%E7%BB%9F%E8%AE%A1%E5%92%8C%E5%AF%B9%E5%BA%94%E7%9A%84-risc-v-%E8%AE%BE%E8%AE%A1">ISA 统计和对应的 RISC-V 设计</a></li>
-<li><a href="#fallacy-2">Fallacy</a></li>
-<li><a href="#pitfall-2">Pitfall</a></li>
+<li><a href="#fallacy-3">Fallacy</a></li>
+<li><a href="#pitfall-3">Pitfall</a></li>
 </ul>
 </li>
 </ul>
@@ -1060,6 +1082,563 @@ $$</p>
 </ul>
 </li>
 </ol>
+<h2 id="ch-4-data-level-parallelism-in-vector-simd-and-gpu-architectures">ch 4 Data-Level Parallelism in Vector, SIMD, and GPU Architectures</h2>
+<blockquote>
+<p>SIMD</p>
+<p>single instruction multiple data</p>
+</blockquote>
+<blockquote>
+<p>DLP</p>
+<p>data level parallelism</p>
+</blockquote>
+<h3 id="roofline-model">Roofline-Model</h3>
+<p>可以定义计算强度，用来衡量程序内计算部分的占比。只有计算强度高的程序，才更容易被 SIMD/GPU 等加速</p>
+<blockquote>
+<p>arithmetric intensity</p>
+<p>每 byte 内存访问对应的浮点运算次数。可用于预测 vector 支持对程序性能的提升</p>
+</blockquote>
+<p>给定的系统，不同计算强度的程序被不同因素限制住。计算强度低的程序，访存多而计算少，内存带宽跟不上，被带宽限制；计算强度高的程序，计算多而访存少，被浮点部件性能限制。因此，表现到图上就是 roofline 形状：随着计算强度增加，程序的 $\text{GFLOP/s}$ 提升；提升到了浮点性能极限时候，再改变计算强度，能实现的 $\text{GFLOP/s}$ 也是一条平行线。</p>
+<p>$$
+\begin{aligned}
+\text{Attainable GFLOP/s}=\min( &amp;\text{Peak Memory BW}\times\text{Arithmetic Intensity}, \\
+&amp; \text{Peak Floating-Point Perf})
+\end{aligned}
+$$</p>
+<h3 id="向量架构">向量架构</h3>
+<ol>
+<li>向量寄存器：长的寄存器（eg，RV64V，64bit），一次存一个向量，支持不同数据类型（<code>i8,i16,i32,i64,f16,f32,f64</code>）</li>
+<li>向量功能部件</li>
+<li>向量访存部件</li>
+<li>辅助的标量寄存器</li>
+</ol>
+<blockquote>
+<p>dynamic register typing</p>
+<p>每个向量寄存器配置不同的数据类型和长度，而不是在指令中区分</p>
+<ol>
+<li>简化向量指令的实现</li>
+<li>允许关闭不用的寄存器，扩展使用的寄存器位数</li>
+<li>不同类型的操作数之间</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>convoy</p>
+<p>一组可以同时执行的向量指令（必须不存在 structural hazard）。其用时为 chime</p>
+</blockquote>
+<p>可以简化的认为，通过 convoy 数目表征向量程序用时。同一个 convoy 里面可以出现 RAW，因为向量的一部分元素在一个部件完成后可以直接前递到其他部件。一个 convoy 会处理多个元素，仍然有很高的并行度。</p>
+<ul>
+<li>RV64V 只允许位置相同的元素进行向量间运算，因此多条流水线可以并行处理各个元素</li>
+<li><code>vl</code>寄存器用于标记长度（必然 $\le \rm{mvl}$，maximum vector length）。可以在运行时动态指定（strip mining），只对<code>vl</code>长度进行处理</li>
+<li>
+<blockquote>
+<p>vector-mask control</p>
+<p>用一个 mask 条件执行来完成分支</p>
+</blockquote>
+</li>
+<li>向量功能部件要求更好的访存
+<ol>
+<li>每个周期允许多个访存</li>
+<li>支持不连续的访存</li>
+<li>允许多核间共享内存</li>
+</ol>
+</li>
+<li>
+<blockquote>
+<p>stride</p>
+<p>对于没有分块缓存的，先按 stride(nonunit strides)预读入向量，将空间不相邻元素转换为逻辑相邻。由于跨 stride 步长加载元素，有可能短时间 GCD 访问同一内存单元，造成阻塞，条件如下$\frac{\text{numbers of banks}}{\text{GCD(stride, number of banks)}}&lt;\text{bank busy time}$</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>gather-scatter</p>
+<p>对索引访存（eg 稀疏矩阵）进行优化，需要额外的索引寄存器，比起其他访存更慢</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="面向多媒体的-simd-扩展">面向多媒体的 SIMD 扩展</h3>
+<p>一般不支持 mask registers、gather-scatter 以及 stride 等向量化高级优化手段，一般要求固定的向量长度和类型（从而导致指令集膨胀，每种数据类型对应一条指令），因此向量化程序不容易编写，编译器不容易优化，一般只针对专门的多媒体库（音视频的数据表示一般不需要全长度）或者是手写内嵌汇编。实例有 intel 的 MMX，SSE，AVX（开始支持高级操作）等。SIMD 扩展可能带来历史兼容性的问题。</p>
+<ol>
+<li>再增加基本运算单元花销小（模式简单，MMX 用原先的 64bit 浮点寄存器支持$8\times 8$-bit 或$4\times 16$-bit 的操作），容易支持</li>
+<li>比起专门的 vector 架构，添加 SIMD 支持给处理器带来额外的状态，需要在上下文切换时候保存</li>
+<li>vector architecture 需要内存带宽支持发挥最大性能</li>
+<li>一般的 SIMD 扩展要求内存对齐访问，对于虚拟内存实现方便，不会跨页 page fault</li>
+<li>向量长度定长，便于加入新的向量操作来支持新的多媒体应用需求</li>
+</ol>
+<h3 id="gpu">GPU</h3>
+<h4 id="cuda">CUDA</h4>
+<p>Nvidia 为其 GPU 提供了兼容 C/C++的编程解决方案，CUDA。</p>
+<ul>
+<li>GPU 上运行的函数标识 <code>__device__</code> <code>__global__</code> ；CPU 上运行的函数标识<code> __host__</code></li>
+<li>CUDA 变量 <code>__device__</code> ，分配在 GPU Memory 上，所有的 multithreaded SIMD Processors 可访问</li>
+<li>函数调用形式为 <code>name&lt;&lt;&lt;dimGrid, dimBlock&gt;&gt;&gt; (… parameter list…)</code>
+<ul>
+<li><code>dimGrid</code>规定 thread block 数目，用<code>blockIdx</code>索引</li>
+<li><code>dimBlock</code>规定一个 block 内 thread 数目，用<code>threadIdx</code>索引</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// Invoke DAXPY
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">daxpy</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// DAXPY in C
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">daxpy</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">a</span><span class="p">,</span> <span class="kt">double</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="o">*</span><span class="n">y</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Invoke DAXPY with 256 threads per Thread Block
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">__host__</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">nblocks</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="o">+</span> <span class="mi">255</span><span class="p">)</span> <span class="o">/</span> <span class="mi">256</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">daxpy</span><span class="o">&lt;&lt;&lt;</span><span class="n">nblocks</span><span class="p">,</span> <span class="mi">256</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// DAXPY in CUDA
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">__global__</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">daxpy</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">double</span> <span class="n">a</span><span class="p">,</span> <span class="kt">double</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="o">*</span><span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">blockIdx</span><span class="p">.</span><span class="n">x</span><span class="o">*</span><span class="n">blockDim</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>CUDA 会编译成 PTX（Parallel Thread Execution）指令集，有如下格式</p>
+<pre tabindex="0"><code class="language-x86asm" data-lang="x86asm">opcode.type d, a, b, c;
+</code></pre><ul>
+<li>type 类型，bits/整形/浮点</li>
+<li>d 目标</li>
+<li>a，b，c 源</li>
+</ul>
+<p>原先的<code>DAXPY</code>对应的汇编如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">shl.u32</span> <span class="no">R8</span><span class="p">,</span> <span class="no">blockIdx</span><span class="p">,</span> <span class="mi">8</span> <span class="c">; Thread Block ID * Block size ;(256 or 28)
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">add.u32</span> <span class="no">R8</span><span class="p">,</span> <span class="no">R8</span><span class="p">,</span> <span class="no">threadIdx</span> <span class="c">; R8 = i = my CUDA Thread ID
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">shl.u32</span> <span class="no">R8</span><span class="p">,</span> <span class="no">R8</span><span class="p">,</span> <span class="mi">3</span> <span class="c">; byte offset
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">ld.global.f64</span> <span class="no">RD0</span><span class="p">,</span> <span class="p">[</span><span class="no">X</span><span class="err">+</span><span class="no">R8</span><span class="p">]</span><span class="c">; RD0 = X[i]
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">ld.global.f64</span> <span class="no">RD2</span><span class="p">,</span> <span class="p">[</span><span class="no">Y</span><span class="err">+</span><span class="no">R8</span><span class="p">]</span><span class="c">; RD2 = Y[i]
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">mul.f64</span> <span class="no">RD0</span><span class="p">,</span> <span class="no">RD0</span><span class="p">,</span> <span class="no">RD4</span> <span class="c">; Product in RD0 = RD0 * RD4 (scalar a)
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">add.f64</span> <span class="no">RD0</span><span class="p">,</span> <span class="no">RD0</span><span class="p">,</span> <span class="no">RD2</span> <span class="c">; Sum in RD0 = RD0 + RD2 (Y[i])
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">st.global.f64</span> <span class="p">[</span><span class="no">Y</span><span class="err">+</span><span class="no">R8</span><span class="p">],</span> <span class="no">RD0</span><span class="c">; Y[i] = sum (X[i]*a + Y[i])
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>PTX 的所有访存模式都是 gather-scatter。为了加速顺序访问，要求访存遵守 Address Coalescing 的规则，以便合并为块访存。</p>
+<p>GPU 使用 mask(编译器和硬件隐性设置，而不是显式有指令设置)和 branch synchronization stack（线程私有，每个条目一个标识符，一个目标地址，一个 mask）显式执行分支。预先算出 mask，压栈，使用 IF-THEN-ELSE 模式执行（要么执行 THEN 要么执行分支 ELSE）。除非全 0/1，会跳过其中一个分支，否则分支永远带来额外开销。因为 GPU Thread 之间强依赖，同一个 Thread Block 内的 lane 要么执行相同的指令，要么闲置，不能像操作系统线程那样分别执行。该机制同样适用于向量长度不是整数倍情况。</p>
+<p>对于以下代码，对应 PTX 汇编</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">   <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Z</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">ld.global.f64</span> <span class="no">RD0</span><span class="p">,</span> <span class="p">[</span><span class="no">X</span><span class="err">+</span><span class="no">R8</span><span class="p">]</span> <span class="c">; RD0 = X[i]
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">setp.neq.s32</span> <span class="no">P1</span><span class="p">,</span> <span class="no">RD0</span><span class="p">,</span> <span class="c">#0 ;P1 is predicate reg 1
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="err">@</span><span class="p">!</span><span class="no">P1</span><span class="p">,</span> <span class="no">bra</span> <span class="no">ELSE1</span><span class="p">,</span> <span class="p">*</span><span class="no">Push</span> <span class="c">; Push old mask, set new
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>						<span class="c">; mask bits if P1 false, go to ELSE1
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">ld.global.f64</span> <span class="no">RD2</span><span class="p">,</span> <span class="p">[</span><span class="no">Y</span><span class="err">+</span><span class="no">R8</span><span class="p">]</span><span class="c">; RD2 = Y[i]
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">sub.f64</span> <span class="no">RD0</span><span class="p">,</span> <span class="no">RD0</span><span class="p">,</span> <span class="no">RD2</span><span class="c">; Difference in RD0
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">st.global.f64</span> <span class="p">[</span><span class="no">X</span><span class="err">+</span><span class="no">R8</span><span class="p">],</span> <span class="no">RD0</span><span class="c">; X[i] = RD0
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="err">@</span><span class="no">P1</span><span class="p">,</span> <span class="no">bra</span> <span class="no">ENDIF1</span><span class="p">,</span> <span class="p">*</span><span class="no">Comp</span><span class="c">; complement mask bits
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>						<span class="c">; if P1 true, go to ENDIF1
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">ELSE1</span><span class="p">:</span> <span class="no">ld.global.f64</span> <span class="no">RD0</span><span class="p">,</span> <span class="p">[</span><span class="no">Z</span><span class="err">+</span><span class="no">R8</span><span class="p">]</span> <span class="c">; RD0 = Z[i]
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">st.global.f64</span> <span class="p">[</span><span class="no">X</span><span class="err">+</span><span class="no">R8</span><span class="p">],</span> <span class="no">RD0</span> <span class="c">; X[i] = RD0
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">ENDIF1</span><span class="p">:</span><span class="err">&lt;</span><span class="no">next</span> <span class="no">instruction</span><span class="err">&gt;</span><span class="p">,</span> <span class="p">*</span><span class="no">Pop</span>
+</span></span><span class="line"><span class="cl"><span class="c">; pop to restore old mask
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="层次结构">层次结构</h4>
+<p>代码组织成 3 层：</p>
+<ol>
+<li>Grid：一段并行的任务</li>
+<li>Thread Block：在一个处理器（Streaming Multiprocessor）上并行的代码段，共用 local memory 和一组寄存器（<strong>数目有限</strong>）</li>
+<li>Thread：串行执行的代码段，寄存器<strong>有上限</strong>的从共用寄存器按需分配</li>
+</ol>
+<p>两层调度</p>
+<ol>
+<li>Thread Block Scheduler：把 Gird 或多个 Thread Block 在处理器之间调度</li>
+<li>SIMD Thread Scheduler：单个 Thread Block 在处理器内调度，内部类似 SIMD 指令，彼此独立，可以使用 <a href="#scoreboard">scoreboard 乱序追踪指令</a>以掩盖访存延迟</li>
+</ol>
+<p>存储层次</p>
+<ol>
+<li>private memory：在片外 DRAM 上，thread 私有一小部分</li>
+<li>local memory：片内的高带宽低延迟存储，对 multiprocessor 内私有，但如果多个 Thread Block 同时执行，不能在之间共享状态</li>
+<li>GPU memory：片外 DRAM 上，host 能读写</li>
+</ol>
+<h4 id="对照">对照</h4>
+<table>
+<thead>
+<tr>
+<th>方面</th>
+<th>vector architecture</th>
+<th>GPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>隐藏访存延迟</td>
+<td>深流水线，不同流水级之间重叠执行</td>
+<td>多 thread</td>
+</tr>
+<tr>
+<td>分支</td>
+<td>显式设置 mask</td>
+<td>硬件和汇编器隐式设置 mask 和 stack</td>
+</tr>
+<tr>
+<td>控制</td>
+<td>专门的 control processor：调度、算标量、算地址</td>
+<td>只有 scheduler，自己计算地址（之后 Address Coalescing）、算标量</td>
+</tr>
+<tr>
+<td>标量计算</td>
+<td>专门的 scalar 部分，片上网络连接</td>
+<td>靠 CPU，PCIe 总线连接，开销更大</td>
+</tr>
+<tr>
+<td>并行部件</td>
+<td>lane 数目少，寄存器少</td>
+<td>lane 很多，multiprocessor 也多，寄存器空间大</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>More Descriptive Name used in this Book</th>
+<th>Closest old term outside of GPUs</th>
+<th>Official CUDA/ NVIDIA Term</th>
+<th>Book Definition and OpenCL Terms</th>
+<th>Official CUDA/NVIDIA Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vectorizable Loop</td>
+<td>Vectorizable Loop</td>
+<td>Grid</td>
+<td>A vectorizable loop, executed on the GPU, made up of 1 or more “Thread Blocks” (or bodies of vectorized loop) that can execute in parallel.OpenCL name is “index range.”</td>
+<td>A Grid is an array of Thread Blocks that can execute concurrently, equentially, or a mixture.</td>
+</tr>
+<tr>
+<td>Body of Vectorized Loop</td>
+<td>Body of a (Strip-Mined) Vectorized Loop</td>
+<td>Thread Block</td>
+<td>A vectorized loop executed on a “Streaming Multiprocessor” (multithreaded SIMD processor), made up of 1 or more “Warps” (or threads of SIMD instructions). These “Warps” (SIMD Threads) can communicate via “Shared Memory” (Local Memory). OpenCL calls a thread block a “work group.”</td>
+<td>A Thread Block is an array of CUDA threads that execute concurrently together and can cooperate and communicate via Shared Memory and barrier synchronization. A Thread Block has a Thread Block ID within its Grid.</td>
+</tr>
+<tr>
+<td>Sequence of SIMD Lane Operations</td>
+<td>One iteration of a Scalar Loop</td>
+<td>CUDA Thread</td>
+<td>A vertical cut of a “Warp” (or thread of SIMD instructions) corresponding to one element executed by one “Thread Processor” (or SIMD lane). Result is stored depending on mask. OpenCL calls a CUDA thread a “work item.”</td>
+<td>A CUDA Thread is a lightweight thread that executes a sequential program and can cooperate with other CUDA threads executing in the same Thread Block. A CUDA thread has a thread ID within its Thread Block.</td>
+</tr>
+<tr>
+<td>A Thread of SIMD Instructions</td>
+<td>Thread of Vector Instructions</td>
+<td>Warp</td>
+<td>A traditional thread, but it contains just SIMD instructions that are executed on a “Streaming Multiprocessor” (multithreaded SIMD processor). Results stored depending on a per element mask.</td>
+<td>A Warp is a set of parallel CUDA Threads (e.g., 32) that execute the same instruction together in a multithreaded SIMT/SIMD processor.</td>
+</tr>
+<tr>
+<td>SIMD Instruction</td>
+<td>Vector Instruction</td>
+<td>PTX Instruction</td>
+<td>A single SIMD instruction executed across the “Thread Processors” (SIMD lanes).</td>
+<td>A PTX instruction specifies an instruction executed by a CUDA Thread.</td>
+</tr>
+<tr>
+<td>Multithreaded SIMD Processor</td>
+<td>(Multithreaded) Vector Processor</td>
+<td>Streaming Multiprocessor</td>
+<td>Multithreaded SIMD processor that executes “Warps” (thread of SIMD instructions), independent of other SIMD processors. OpenCL calls it a “Compute Unit.” However, CUDA programmer writes program for one lane rather than for a “vector” of multiple SIMD lanes.</td>
+<td>A Streaming Multiprocessor (SM) is a multithreaded SIMT/SIMD processor that executes Warps of CUDA Threads. A SIMT program specifies the execution of one CUDA thread, rather than a vector of multiple SIMD lanes.</td>
+</tr>
+<tr>
+<td>Thread Block Scheduler</td>
+<td>Scalar Processor</td>
+<td>Giga Thread Engine</td>
+<td>Assigns multiple “Thread Blocks” (or body of vectorized loop) to “Streaming Multiprocessors” (multithreaded SIMD processors).</td>
+<td>Distributes and schedules Thread Blocks of a Grid to Streaming Multiprocessors as resources become available.</td>
+</tr>
+<tr>
+<td>SIMD Thread Scheduler</td>
+<td>Thread Scheduler in a Multithread CPU</td>
+<td>Warp Scheduler</td>
+<td>Hardware unit that schedules and issues “Warps” (threads of SIMD instructions) when they are ready to execute; includes a scoreboard to track “Warp” (SIMD thread) execution.</td>
+<td>A Warp Scheduler in a Streaming Multiprocessor schedules Warps for execution when their next instruction is ready to execute.</td>
+</tr>
+<tr>
+<td>SIMD Lane</td>
+<td>Vector Lane</td>
+<td>Thread Processor</td>
+<td>Hardware SIMD Lane that executes the operations in a “Warp” (thread of SIMD instructions) on a single element. Results stored depending on mask. OpenCL calls it a “Processing Element.”</td>
+<td>A Thread Processor is a datapath and register file portion of a Streaming Multiprocessor that executes operations for one or more lanes of a Warp.</td>
+</tr>
+<tr>
+<td>GPU Memory</td>
+<td>Main Memory</td>
+<td>Global memory</td>
+<td>DRAM memory accessible by all “Streaming Multiprocessors” (or multithreaded SIMD processors) in a GPU. OpenCL calls it “Global Memory.”</td>
+<td>Global Memory is accessible by all CUDA Threads in any Thread Block in any Grid. Implemented as a region of DRAM, and may be cached.</td>
+</tr>
+<tr>
+<td>Private Memory</td>
+<td>Stack / Thread Local Storage(OS)</td>
+<td>Local Memory</td>
+<td>Portion of DRAM memory private to each “Thread Processor” (SIMD lane). OpenCL calls it “Private Memory.”</td>
+<td>Private “thread-local” memory for a CUDA Thread. Implemented as a cached region of DRAM.</td>
+</tr>
+<tr>
+<td>Local Memory</td>
+<td>Local Memory</td>
+<td>Shared Memory</td>
+<td>Fast local SRAM for one “Streaming Multiprocessor” (multithreaded SIMD processor), unavailable to other Streaming Multiprocessors. OpenCL calls it “Local Memory.”</td>
+<td>Fast SRAM memory shared by the CUDA Threads composing a Thread Block, and private to that Thread Block. Used for communication among CUDA Threads in a Thread Block at barrier synchronization points.</td>
+</tr>
+<tr>
+<td>SIMD Lane Registers</td>
+<td>Vector Lane Registers</td>
+<td>Registers</td>
+<td>Registers in a single “Thread Processor” (SIMD lane) allocated across full “Thread Block” (or body of vectorized loop).</td>
+<td>Private registers for a CUDA Thread. Implemented as multithreaded register file for certain lanes of several warps for each thread processor.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="loop-level-parallelism-改进">Loop-level parallelism 改进</h3>
+<p>在源码（或者接近源码级别检测）</p>
+<blockquote>
+<p>loop-carried dependence</p>
+<p>循环依赖于之前的结果</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">//没有 loop-carried dependence
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">999</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">   <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//有 loop-carried dependence
+</span></span></span><span class="line"><span class="cl"><span class="c1">// S1 S2 都有对自身的循环依赖（有自环，无法消除）
+</span></span></span><span class="line"><span class="cl"><span class="c1">// S2 还有循环内对S1的依赖
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="cm">/* S1 */</span>
+</span></span><span class="line"><span class="cl">   <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span> <span class="cm">/* S2 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//有 loop-carried dependence也可以改进
+</span></span></span><span class="line"><span class="cl"><span class="c1">// S2 不是成环依赖 S1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="cm">/* S1 */</span>
+</span></span><span class="line"><span class="cl">   <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="cm">/* S2 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 可以改成能并行的版本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">99</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">   <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="n">B</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="n">C</span><span class="p">[</span><span class="mi">99</span><span class="p">]</span> <span class="o">+</span> <span class="n">D</span><span class="p">[</span><span class="mi">99</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 特殊的 recurrence 形式的循环依赖
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 一些架构/语言对 recurrence 有专门支持
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">;</span><span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">Y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="依赖检测">依赖检测</h4>
+<blockquote>
+<p>Affine</p>
+<p>当一维数组的索引可以写成 $a\times i +b$的形式，当中$a,b$为常数，$i$为循环变量，索引可认为 affine。当多维数组中每一维的索引满足 affine，索引可认为 affine</p>
+<p>一般的稀疏访问<code>x[y[i]]</code>，一般不是 affine 的</p>
+</blockquote>
+<p>对应 affine 的索引，同一个数组分别按照$a\times i +b$ 、 $c\times i+d$进行索引，$i\in [m,n]$时，有依赖关系</p>
+<ol>
+<li>两个索引$m\le j\le n,m\le k \le n$</li>
+<li>存在$a\times j+b=c\times k+d$的访问</li>
+</ol>
+<p>可以简化的使用 GCD（最大公因数）法检测。只保证充分性；因为未考虑边界条件，所以不满足必要性。事实上，检测依赖属于 $\mathcal{NP}-Complete$ 问题</p>
+<p>$$(d-b)\mod\rm{GCD}(c,a)=0$$</p>
+<h4 id="另一种依赖消除">另一种依赖消除</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// 有循环依赖
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 具有 reduction 形式，有些语言/硬件有特殊支持
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">9999</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">sum</span> <span class="o">=</span> <span class="n">sum</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//改进为
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">9999</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">9999</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">finalsum</span> <span class="o">=</span> <span class="n">finalsum</span> <span class="o">+</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 假设10核，可以分摊到多核上处理
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">9999</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">finalsum</span> <span class="o">=</span> <span class="n">finalsum</span> <span class="o">+</span> <span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="fallacy-2">Fallacy</h3>
+<ol>
+<li>GPU 和 CPU 分离不好
+<ul>
+<li>分离主内存和 GPU 内存有劣势（eg，需要专门的内存复制<code>cudaMemcpy()</code>）</li>
+<li>PTX 指令集和硬件可以根据环境需求动态增减特性，而且不影响 CPU 端的体系结构</li>
+<li>同时 GPU 端也和 CPU 端的体系结构变动解耦</li>
+</ul>
+</li>
+<li>不给 vector architecture 提供足够的访存带宽
+<ul>
+<li>记住<a href="#roofline-model">roofline 模型</a>，足够的内存带宽才能有足够数据喂饱计算能力</li>
+</ul>
+</li>
+<li>如果 GPU 访存性能不好，无脑增加 thread 数目
+<ul>
+<li>thread 之间需要能够访存融合，否则会导致单独的大量访存反而影响性能</li>
+<li>thread 本身也需要足够好的访存局部性</li>
+</ul>
+</li>
+</ol>
+<h3 id="pitfall-2">Pitfall</h3>
+<ol>
+<li>忽略启动开销来对比 vector architecture 之间的峰值性能
+<ul>
+<li>早期向量架构启动很慢，短向量（eg，$\le 100$）还不如直接用标量处理器</li>
+</ul>
+</li>
+<li>只关注 vector architecture 的向量性能，不关注标量性能
+<ul>
+<li>注意 Amdahl 定律，标量性能很有用（eg，strip mining，不满长的向量的下标索引）</li>
+<li>增加 SIMD lane 数目同时，需要响应提升标量部分性能</li>
+</ul>
+</li>
+</ol>
 <h2 id="ch-a-instruction-set-principles">ch A Instruction Set Principles</h2>
 <h3 id="isa-特性">ISA 特性</h3>
 <p>对于 ISA 设计，其有如下一些考虑：</p>
@@ -1165,7 +1744,7 @@ $$</p>
 </ol>
 <p>SIMD 指令基本上违背所有原则（vec 寄存器数目少，寻址模式过于简单，vec 类型不常见 etc.）。因此 SIMD 一般只有用在人工编写的底层库</p>
 <h3 id="isa-统计和对应的-risc-v-设计">ISA 统计和对应的 RISC-V 设计</h3>
-<h3 id="fallacy-2">Fallacy</h3>
+<h3 id="fallacy-3">Fallacy</h3>
 <ol>
 <li>存在一个典型程序：不同程序对 ISA 的使用差异巨大</li>
 <li>有缺陷的 ISA 不能成功（80x86）</li>
@@ -1176,7 +1755,7 @@ $$</p>
 </ul>
 </li>
 </ol>
-<h3 id="pitfall-2">Pitfall</h3>
+<h3 id="pitfall-3">Pitfall</h3>
 <ol>
 <li>设计一个高层次指令来支持高层语言的结构
 <ul>
