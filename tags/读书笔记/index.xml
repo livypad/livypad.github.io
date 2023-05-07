@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>读书笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link><description>Recent content in 读书笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Fri, 05 May 2023 21:00:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Computer Architecture A Quantatative Approach（更新到第4章）</title><link>https://livypad.github.io/post/2023-03-23-caaqa/</link><pubDate>Fri, 05 May 2023 21:00:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-03-23-caaqa/</guid><description>Computer architecture: a quantitative approach ch 1 Fundamentals ch 2/B Memory Hierarchy Design 基础知识 cache 性能优化 虚拟存储 virtual machine Fallacy Pitfall ch 3/C Instruction-Level Parallelism and Its Exploitation 编译器优化 ILP 循环展开 5 级流水 前递 乱序 Scoreboard Tomasulo 硬件预测 多发射 VLIW 分支预测 静</description><content:encoded><![CDATA[<ul>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>读书笔记 on zhh's blog</title><link>https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</link><description>Recent content in 读书笔记 on zhh's blog</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Mon, 08 May 2023 00:40:00 +0800</lastBuildDate><atom:link href="https://livypad.github.io/tags/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml"/><item><title>笔记：Computer Architecture A Quantatative Approach（更新到第5章）</title><link>https://livypad.github.io/post/2023-03-23-caaqa/</link><pubDate>Mon, 08 May 2023 00:40:00 +0800</pubDate><guid>https://livypad.github.io/post/2023-03-23-caaqa/</guid><description>Computer architecture: a quantitative approach ch 1 Fundamentals ch 2/B Memory Hierarchy Design 基础知识 cache 性能优化 虚拟存储 virtual machine Fallacy Pitfall ch 3/C Instruction-Level Parallelism and Its Exploitation 编译器优化 ILP 循环展开 5 级流水 前递 乱序 Scoreboard Tomasulo 硬件预测 多发射 VLIW 分支预测 静</description><content:encoded><![CDATA[<ul>
 <li><a href="#computer-architecture-a-quantitative-approach">Computer architecture: a quantitative approach</a>
 <ul>
 <li><a href="#ch-1-fundamentals">ch 1 Fundamentals</a></li>
@@ -74,13 +74,24 @@
 <li><a href="#pitfall-2">Pitfall</a></li>
 </ul>
 </li>
+<li><a href="#ch-5-thread-level-parallelism">ch 5 Thread-Level Parallelism</a>
+<ul>
+<li><a href="#memory-consistency-%E6%A8%A1%E5%9E%8B">Memory Consistency 模型</a></li>
+<li><a href="#centralized-shared-memory-architectures">Centralized Shared-Memory Architectures</a></li>
+<li><a href="#snooping">Snooping</a></li>
+<li><a href="#directory-based">Directory based</a></li>
+<li><a href="#%E5%90%8C%E6%AD%A5%E6%93%8D%E4%BD%9C">同步操作</a></li>
+<li><a href="#fallacy-3">Fallacy</a></li>
+<li><a href="#pitfall-3">Pitfall</a></li>
+</ul>
+</li>
 <li><a href="#ch-a-instruction-set-principles">ch A Instruction Set Principles</a>
 <ul>
 <li><a href="#isa-%E7%89%B9%E6%80%A7">ISA 特性</a></li>
 <li><a href="#%E7%BC%96%E8%AF%91%E5%99%A8%E4%BC%98%E5%8C%96">编译器优化</a></li>
 <li><a href="#isa-%E7%BB%9F%E8%AE%A1%E5%92%8C%E5%AF%B9%E5%BA%94%E7%9A%84-risc-v-%E8%AE%BE%E8%AE%A1">ISA 统计和对应的 RISC-V 设计</a></li>
-<li><a href="#fallacy-3">Fallacy</a></li>
-<li><a href="#pitfall-3">Pitfall</a></li>
+<li><a href="#fallacy-4">Fallacy</a></li>
+<li><a href="#pitfall-4">Pitfall</a></li>
 </ul>
 </li>
 </ul>
@@ -657,7 +668,7 @@ $$</p>
 </li>
 <li>write result：在 CDB 上广播结果，写寄存器，如果是<code>store</code>指令，把地址和值写到 store buffer 中，等访存部件可用</li>
 </ol>
-<p><img loading="lazy" src="/assets/img/tomasuloctrl.png" alt="tomasulo ctrl"  />
+<p><img loading="lazy" src="/assets/img/note/caaqa/tomasuloctrl.png" alt="tomasulo ctrl"  />
 </p>
 <p>Tomasulo 模式需要高速的集成的 cache 来保存大量消息，需要复杂的控制逻辑，需要高速高带宽的 CDB（多条 CDB 能提高带宽，但一致性需要解决）。Tomasulo 模式适合于多级 cache 的体系结构，因为可以掩盖不可控的 cache 延迟。对于程序员和编译器优化更友好。</p>
 <h4 id="硬件预测">硬件预测</h4>
@@ -684,7 +695,7 @@ $$</p>
 </ol>
 </li>
 </ol>
-<p><img loading="lazy" src="/assets/img/dynspeculation.png" alt="Dyn Speculation"  />
+<p><img loading="lazy" src="/assets/img/note/caaqa/dynspeculation.png" alt="Dyn Speculation"  />
 </p>
 <p>由于有序 commit，而改写寄存器和内存的值只在 commit 时候实现。因此可以保证只有在指令确定下来时候才实际更改机器状态。而且这也可以保证精确异常。而<code>load</code>的安全通过，1）在地址和某条 ROB 中地址重合时候不执行；2）按程序顺序计算访存地址来保证。</p>
 <p>预测可能会导致出现本来不出现的异常和 cache miss。一般的，为了性能，预测阶段只会处理高级别 cache miss，其他的异常都等到指令确定性时候才触发。特别是比如权限的异常（不必要的终止，meltdown 漏洞等）。对于结构性较差的程序（比如数据库查询），预测执行可能会遇到大量嵌套的跳转。出于能耗和复杂度，一般不会对多分支多做优化。对于访存还可以通过 Address aliasing prediction，进一步发掘指令级并行度。</p>
@@ -857,7 +868,7 @@ $$</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="tagged-hybridtage-预测器">Tagged Hybrid/TAGE 预测器</h4>
-<p><img loading="lazy" src="/assets/img/taggedhybrid.png" alt="TAGE 预测器"  />
+<p><img loading="lazy" src="/assets/img/note/caaqa/taggedhybrid.png" alt="TAGE 预测器"  />
 </p>
 <p>使用不同历史记录长度的预测器$P(0),P(1)$ 。$P(i)$ 使用<code>PC</code>的一部分和（用移位寄存器记录）的最近 i 条分支历史的 hash 结果索引，包括 2-bit 预测器（实际中 3-bit 更好一点）+ 4-8bit 的 tag。<code>PC</code>和 tag 比较（$P(0)$不比较，作为默认使用预测器），决定使用本级的预测器还是上一级结果。</p>
 <p>预测器可以包含一个 bit 用来表示该级是否最近使用过，并以此决定刷新频率。预测器内容的初始化有多种方式，而且对于短的程序，初始化的性能表现很重要。</p>
@@ -1639,6 +1650,474 @@ $$</p>
 </ul>
 </li>
 </ol>
+<h2 id="ch-5-thread-level-parallelism">ch 5 Thread-Level Parallelism</h2>
+<p>本章主要关注 TLP（Thread-Level Parallelism），通过 MIMD 形式的并行。注意，SMP 和 NUMA 的地址空间都是统一的，都可以通过 shared memory 共享和通信，而不是只能通过网络连接。但是，发掘 TLP 有很多困难：</p>
+<ol>
+<li>Amdahl 定律下，程序并行部分有限</li>
+<li>共享内存访问延迟很高</li>
+<li>Dennard scaling 失效，芯片有功耗限制，不能无限制堆核</li>
+</ol>
+<blockquote>
+<p>Dennard scaling</p>
+<p>在晶体管特征尺寸缩小同时，供应电压降低。使得单位面积的功耗近似不变</p>
+</blockquote>
+<blockquote>
+<p>SMP</p>
+<p>symmetric (shared-memory) multiprocessors，或者是 centralized shared-memory multiprocessors。所有核平等共享一个中心的内存</p>
+<p>UMA</p>
+<p>uniform memory access (UMA) multiprocessors</p>
+</blockquote>
+<blockquote>
+<p>NUMA</p>
+<p>Nonuniform Memory Access。对内存的访问时间不是相同的</p>
+<p>NUCA</p>
+<p>Nonuniform Cache Access。对 cache 的访问时间不是相同的</p>
+<p>DSM</p>
+<p>distributed shared memory，为了支持更多核/处理器，物理上划分内存为多个</p>
+</blockquote>
+<h3 id="memory-consistency-模型">Memory Consistency 模型</h3>
+<p>对于程序员，主要依赖可靠的并行库提供的同步操作来保证正确性，因为为了确保底层体系结构确实实现同步</p>
+<blockquote>
+<p>synchronized/data-race-free</p>
+<p>对于程序，所有共享部分访问都被同步操作排序</p>
+</blockquote>
+<p>最简单也直观的 Memory Consistency 模型是 Sequential Consistency。但是该模型性能不好。</p>
+<blockquote>
+<p>Sequential Consistency</p>
+<p>（执行结果就像，可以实际上不是）每个处理器的访存保持顺序，处理器之间访存可以任意交叉</p>
+</blockquote>
+<p>为了提高性能，可以放松访存一致性的要求。使用$\to$ 表示顺序，不同的一致性模型对不同操作之间的顺序有不同的要求。</p>
+<ul>
+<li>$R$为一般的读操作</li>
+<li>$W$为一般的写操作</li>
+<li>$S$为任意的同步操作</li>
+<li>$S_A$为取得的同步操作（类似<code>lock()</code>）</li>
+<li>$S_R$为释放的同步操作（类似<code>unlock()</code>）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Used in</th>
+<th>Ordinary orderings</th>
+<th>Synchronization orderings</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequential consistency</td>
+<td>Most machines as an optional mode</td>
+<td>$\mathrm{R\to R,R\to W}$,$\mathrm{W\to R,W\to W}$</td>
+<td>$\mathrm{S\to W, S\to R, R\to S, W\to S, S\to S}$</td>
+</tr>
+<tr>
+<td>Total store order or processor consistency</td>
+<td>IBMS/370, DEC VAX, SPARC</td>
+<td>$\mathrm{R\to R,R\to W}$,$\mathrm{W\to W}$</td>
+<td>$\mathrm{S\to W, S\to R, R\to S, W\to S, S\to S}$</td>
+</tr>
+<tr>
+<td>Partial store order</td>
+<td>SPARC</td>
+<td>$\mathrm{R\to R,R\to W}$</td>
+<td>$\mathrm{S\to W, S\to R, R\to S, W\to S, S\to S}$</td>
+</tr>
+<tr>
+<td>Weak ordering</td>
+<td>PowerPC</td>
+<td></td>
+<td>$\mathrm{S\to W, S\to R, R\to S, W\to S, S\to S}$</td>
+</tr>
+<tr>
+<td>Release consistency</td>
+<td>MIPS, RISC V, Armv8, C, and C++ specifications</td>
+<td></td>
+<td>$\mathrm{S_A\to W, S_A\to R, R\to S_R, W\to S_R}$,$\mathrm{ S_A\to S_A, S_A\to S_R, S_R\to S_A, S_R\to S_R}$</td>
+</tr>
+</tbody>
+</table>
+<p><img loading="lazy" src="/assets/img/note/caaqa/memory-consistency.png" alt=""  />
+</p>
+<h3 id="centralized-shared-memory-architectures">Centralized Shared-Memory Architectures</h3>
+<blockquote>
+<p>coherent 的内存</p>
+<ol>
+<li>P 写了位置 X，在没有其他处理器写位置 X 时，P 再读位置 X，读到自己写的值</li>
+<li>P 写完位置 X，Q 在足够间隔且没有其他写的情况下读位置 X，应该能看到 P 写的值</li>
+<li>
+<blockquote>
+<p>write serialization</p>
+<p>写同一位置的顺序是一致的：P 先写 Q 后写对于所有处理器都是一样的</p>
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<p>Coherence 和 Consistency（<a href="#memory-consistency-%E6%A8%A1%E5%9E%8B">参见上面部分</a> ） 侧重点不一样。Coherence 规定同一位置的读写行为；Consistency 规定涉及其他位置访存时候的读写行为。维护 cache coherence 有两种方向的协议：<a href="#directory-based">Directory based</a> 和<a href="#snooping">Snooping</a></p>
+<h3 id="snooping">Snooping</h3>
+<blockquote>
+<p>Snooping</p>
+<p>基于侦听。每个缓存共享内存的处理器自己追踪状态变化。可以通过比如侦听总线上广播的形式</p>
+</blockquote>
+<p>有两种主要的 snooping 的变种</p>
+<ol>
+<li>
+<blockquote>
+<p>write invalidate</p>
+<p>处理器在能写共享部分之前，先独占的拥有其。因此，每次写都会使得其他处理器上副本失效</p>
+</blockquote>
+</li>
+<li>
+<blockquote>
+<p>write update/write broadcast</p>
+<p>根据写的结果，广播更新其他副本</p>
+</blockquote>
+</li>
+</ol>
+<p>一般的 Snooping 协议实现都是每个处理器和 cache 维护一个有限状态机。对于一个简化版协议，可以认为一共有 3 种状态，Invalid,Shared 和 Modified，这也被称为 MSI 协议。对于使用 write invalidate，write back cache 的 Snooping 协议，cache 状态转移图表示如下。具体细节有表格。注意，这里假定各操作是原子的。如果是单一的中心化总线，可以把总线的获取和释放用于同步。多总线可以指定每条总线负责一个范围的共享内存。</p>
+<p><img loading="lazy" src="/assets/img/note/caaqa/snooping-fsm.png" alt=""  />
+</p>
+<table>
+<thead>
+<tr>
+<th>请求</th>
+<th>源</th>
+<th>对应 cache 块状态</th>
+<th>cache 行动</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read hit</td>
+<td>Processor</td>
+<td>Shared/modified</td>
+<td>正常命中</td>
+<td>把数据读进 local cache</td>
+</tr>
+<tr>
+<td>Read miss</td>
+<td>Processor</td>
+<td>Invalid</td>
+<td>正常缺失</td>
+<td>总线上广播 read miss</td>
+</tr>
+<tr>
+<td>Read miss</td>
+<td>Processor</td>
+<td>Shared</td>
+<td>替换</td>
+<td>共享地址的缺失: 总线上广播 read miss</td>
+</tr>
+<tr>
+<td>Read miss</td>
+<td>Processor</td>
+<td>Modified</td>
+<td>替换</td>
+<td>共享地址的缺失: 先写回，再在总线上广播 read miss</td>
+</tr>
+<tr>
+<td>Write hit</td>
+<td>Processor</td>
+<td>Modified</td>
+<td>正常命中</td>
+<td>向 local cache 写数据</td>
+</tr>
+<tr>
+<td>Write hit</td>
+<td>Processor</td>
+<td>Shared</td>
+<td>Coherence</td>
+<td>总线上广播 invalidate，因为不会去 fetch 数据，只是改变数据的状态，这一般被称为 upgrade 或者 ownership misses</td>
+</tr>
+<tr>
+<td>Write miss</td>
+<td>Processor</td>
+<td>Invalid</td>
+<td>正常缺失</td>
+<td>在总线上广播 write miss</td>
+</tr>
+<tr>
+<td>Write miss</td>
+<td>Processor</td>
+<td>Shared</td>
+<td>替换</td>
+<td>共享地址的缺失: 在总线上广播 write miss</td>
+</tr>
+<tr>
+<td>Write miss</td>
+<td>Processor</td>
+<td>Modified</td>
+<td>替换</td>
+<td>共享地址的缺失:先写回;然后在总线上广播 write miss</td>
+</tr>
+<tr>
+<td>Read miss</td>
+<td>Bus</td>
+<td>Shared</td>
+<td>无需行动</td>
+<td>用自己的 cache 或者内存的内容去解决其他处理器的 read miss.</td>
+</tr>
+<tr>
+<td>Read miss</td>
+<td>Bus</td>
+<td>Modified</td>
+<td>维护一致性</td>
+<td>其他处理器尝试读共享数据: 把自己的 cache 块广播到总线, 写回，然后把自己数据状态改成 shared</td>
+</tr>
+<tr>
+<td>Invalidate</td>
+<td>Bus</td>
+<td>Shared</td>
+<td>维护一致性</td>
+<td>其他处理器尝试写共享数据; 把自己数据变为 invalidate 态</td>
+</tr>
+<tr>
+<td>Write miss</td>
+<td>Bus</td>
+<td>Shared</td>
+<td>维护一致性</td>
+<td>其他处理器尝试读共享数据： 把自己数据变为 invalidate 态</td>
+</tr>
+<tr>
+<td>Write miss</td>
+<td>Bus</td>
+<td>Modified</td>
+<td>维护一致性</td>
+<td>其他处理器尝试写独占的数据：写回，然后把自己数据变为 invalidate 态</td>
+</tr>
+</tbody>
+</table>
+<p>除了最基本的 MSI 协议，还可以拓展更多状态。比如</p>
+<ul>
+<li>MESI：多了 Exclusive。E 状态表示只有一个处理器有副本，而且是 clean 的，写的时候不需要广播 invalidate 消息，因此不需要再次访问总线而有开销；当其他处理器对其 read miss，就会转为 Shared 态。可以通过 dirty 位来区别 Exclusive 和 Modified 态</li>
+<li>MESIF：多了 Exclusive 和 Forward，F 用来在分布式内存环境下，指定某个（共享中的）处理器处理请求</li>
+<li>MOESI：多了 Exclusive 和 Owned。如果其他处理器需要读 Modified 的数据，原先处理器状态转为 Owned 态，而先不写回内存。O 态表示内存数据不是最新的，该数据相关的 miss 由仅有一个的 O 态处理器负责提供（eg，AMD Opteron）</li>
+</ul>
+<p>snooping 协议可能有以下问题导致可拓展性不好</p>
+<ol>
+<li>总线负担大</li>
+<li>cache 负担大，需要检查每个 invalidate 信号</li>
+</ol>
+<blockquote>
+<p>coherence miss</p>
+<p>由于缓存一致性协议导致的 cache miss</p>
+<ul>
+<li>true sharing：真正的缺失，比如其他处理器要求独占之后的缺失</li>
+<li>false sharing：同一个 cache line 当中，实际没有共享数据被共享部分涉及而产生的缺失</li>
+</ul>
+</blockquote>
+<h3 id="directory-based">Directory based</h3>
+<blockquote>
+<p>Directory based</p>
+<p>基于目录。共享内存的状态被一块专门的目录（directory）管理，在 SMP 中维护一个中心化的目录，而在 NUMA 中目录也要分布开</p>
+</blockquote>
+<p>简单的目录协议中，除了单独的 cache 块有 MSI3 种状态，目录本身有 3 种状态。可以使用位图，每个位表示某个处理器是否持有副本（eg， intel i7）。NUMA 架构里，目录和对应管理的共享存储可以放在一起，保证分布式的目录可以被唯一的确定和找到。</p>
+<ol>
+<li>Shared：至少一个节点有副本，而且内存里是最新值</li>
+<li>Uncached：没有节点有副本</li>
+<li>Modified：有且只有一个节点有最新的副本，内存里是旧的值</li>
+</ol>
+<p>和 snooping 协议里广播和侦听总线不同，目录协议直接对特定节点发消息。这里假定消息收发是 FIFO 的，消息之间处理是原子的。为了方便，节点做如下区分</p>
+<ol>
+<li>local node：发送请求的节点</li>
+<li>home node：请求地址对应内存和目录的管理节点</li>
+<li>remote node：拥有数据副本的节点</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>消息类型</th>
+<th>源</th>
+<th>目的</th>
+<th>内容</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read miss</td>
+<td>Local cache</td>
+<td>Home directory</td>
+<td>P, A</td>
+<td>节点 P 读地址 A 出现 read miss，请求数据，并把节点 P 设置为读共享</td>
+</tr>
+<tr>
+<td>Write miss</td>
+<td>Local cache</td>
+<td>Home directory</td>
+<td>P, A</td>
+<td>节点 P 写地址 A 出现 write miss，请求数据，并把节点 P 设置为独占</td>
+</tr>
+<tr>
+<td>Invalidate</td>
+<td>Local cache</td>
+<td>Home directory</td>
+<td>A</td>
+<td>请求共享地址 A 的节点发送 invalidate（不是真的发了 invalidate，和下一项区分）</td>
+</tr>
+<tr>
+<td>Invalidate</td>
+<td>Home directory</td>
+<td>Remote cache</td>
+<td>A</td>
+<td>把地址 A 的数据副本置 invalid</td>
+</tr>
+<tr>
+<td>Fetch</td>
+<td>Home directory</td>
+<td>Remote cache</td>
+<td>A</td>
+<td>请求地址 A 的数据，更新 home 节点的数据和目录，并把持有地址 A 数据的节点置为共享态</td>
+</tr>
+<tr>
+<td>Fetch/ invalidate</td>
+<td>Home directory</td>
+<td>Remote cache</td>
+<td>A</td>
+<td>请求地址 A 的数据，更新 home 节点的数据和目录，并把持有地址 A 数据的节点置为 invalid</td>
+</tr>
+<tr>
+<td>Data value reply</td>
+<td>Home directory</td>
+<td>Local cache</td>
+<td>D</td>
+<td>从 home 内存取值发出去</td>
+</tr>
+<tr>
+<td>Data writeback</td>
+<td>Remote cache</td>
+<td>Home directory</td>
+<td>A, D</td>
+<td>把地址 A 的数据写回到 home 内存</td>
+</tr>
+</tbody>
+</table>
+<p>对于一个单独的 cache 块，其状态转移图非常类似 snooping 协议（把来自 local 的消息标黑，来自 home 的消息标灰）</p>
+<p><img loading="lazy" src="/assets/img/note/caaqa/dir-cache-fsm.png" alt=""  />
+</p>
+<p>而目录对于 cache 块和消息的也有状态转移图（注意，对于目录而言，所有改变都是因为有外部的请求，所以全部标灰）</p>
+<p><img loading="lazy" src="/assets/img/note/caaqa/dir-dir-fsm.png" alt=""  />
+</p>
+<h3 id="同步操作">同步操作</h3>
+<p>常见的硬件同步原语有</p>
+<ul>
+<li>atomic-echange：原子的交换</li>
+<li>fetch-and-add(FA)：原子加，共识数小，但是简单，不容易竞争</li>
+<li>compare-and-set (CAS)：比较预期值和内存变量，相等时候改为新传入的值，反之不修改，返回执行之后的内存变量值，会有 ABA 问题</li>
+<li>load-reserved 和 store-conditional：成对使用，在<code>lr</code>预定一个地址到<code>sc</code>写同一个地址之间，如果有其他的写，<code>sc</code>会返回非零错误值，天然免疫 ABA 问题，但是多核容易导致竞争抖动</li>
+</ul>
+<p>可以用<code>lr,sc</code>来实现其他同步原语效果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="c">; atomic exchange
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nl">try:</span>  <span class="nf">mov</span> <span class="no">x3</span><span class="p">,</span><span class="no">x4</span> <span class="c">;mov exchange value
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>      <span class="no">lr</span> <span class="no">x2</span><span class="p">,</span><span class="no">x1</span> <span class="c">;load reserved from
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>      <span class="no">sc</span> <span class="no">x3</span><span class="p">,</span><span class="mi">0</span><span class="p">(</span><span class="no">x1</span><span class="p">)</span> <span class="c">;store conditional
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>      <span class="no">bnez</span> <span class="no">x3</span><span class="p">,</span><span class="no">try</span> <span class="c">;branch store fails
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>      <span class="no">mov</span> <span class="no">x4</span><span class="p">,</span><span class="no">x2</span> <span class="c">;put load value in x4
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>
+</span></span><span class="line"><span class="cl"><span class="c">; fetch-and-add-1
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="nl">try:</span>  <span class="nf">lr</span> <span class="no">x2</span><span class="p">,</span><span class="no">x1</span> <span class="c">;load reserved 0(x1)
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>      <span class="no">addi</span> <span class="no">x3</span><span class="p">,</span><span class="no">x2</span><span class="p">,</span><span class="mi">1</span> <span class="c">;increment
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>      <span class="no">sc</span> <span class="no">x3</span><span class="p">,</span><span class="mi">0</span><span class="p">(</span><span class="no">x1</span><span class="p">)</span> <span class="c">;store conditional
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>      <span class="no">bnez</span> <span class="no">x3</span><span class="p">,</span><span class="no">try</span> <span class="c">;branch store fails
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>进一步的可以用同步原语构件自旋锁（spin-lock）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="c">; 不考虑cache一致性
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>         <span class="nf">addi</span> <span class="no">x2</span><span class="p">,</span><span class="no">R0</span><span class="p">,</span><span class="c">#1
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="no">lockit</span><span class="p">:</span>  <span class="no">EXCH</span> <span class="no">x2</span><span class="p">,</span><span class="mi">0</span><span class="p">(</span><span class="no">x1</span><span class="p">)</span> <span class="c">;atomic exchange
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>         <span class="no">bnez</span> <span class="no">x2</span><span class="p">,</span><span class="no">lockit</span> <span class="c">;already locked?
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>
+</span></span><span class="line"><span class="cl"><span class="c">; 利用cache一致性，缓存lock的变量
+</span></span></span><span class="line"><span class="cl"><span class="c">; 1. spining时候只需要读本地变量，不需要远程访存
+</span></span></span><span class="line"><span class="cl"><span class="c">; 2. 之后局部性可能更好，以后也用同一个lock
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>
+</span></span><span class="line"><span class="cl"><span class="nl">lockit:</span>  <span class="nf">ld</span> <span class="no">x2</span><span class="p">,</span><span class="mi">0</span><span class="p">(</span><span class="no">x1</span><span class="p">)</span> <span class="c">;load of lock
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>         <span class="no">bnez</span> <span class="no">x2</span><span class="p">,</span><span class="no">lockit</span> <span class="c">;not available-spin
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>         <span class="no">addi</span> <span class="no">x2</span><span class="p">,</span><span class="no">R0</span><span class="p">,</span><span class="c">#1 ;load locked value
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>         <span class="no">EXCH</span> <span class="no">x2</span><span class="p">,</span><span class="mi">0</span><span class="p">(</span><span class="no">x1</span><span class="p">)</span> <span class="c">;swap
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>         <span class="no">bnez</span> <span class="no">x2</span><span class="p">,</span><span class="no">lockit</span> <span class="c">;branch if lock wasn’t0
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>lr,sc</code>原语有效的分离了变量的读写，可以减少总线负担。直接使用<code>lr,sc</code>实现自旋锁如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nl">lockit:</span>  <span class="nf">lr</span> <span class="no">x2</span><span class="p">,</span><span class="mi">0</span><span class="p">(</span><span class="no">x1</span><span class="p">)</span> <span class="c">;load reserved
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>         <span class="no">bnez</span> <span class="no">x2</span><span class="p">,</span><span class="no">lockit</span> <span class="c">;not available-spin
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>         <span class="no">addi</span> <span class="no">x2</span><span class="p">,</span><span class="no">R0</span><span class="p">,</span><span class="c">#1 ;locked value
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>         <span class="no">sc</span> <span class="no">x2</span><span class="p">,</span><span class="mi">0</span><span class="p">(</span><span class="no">x1</span><span class="p">)</span> <span class="c">;store
+</span></span></span><span class="line"><span class="cl"><span class="c"></span>         <span class="no">bnez</span> <span class="no">x2</span><span class="p">,</span><span class="no">lockit</span> <span class="c">;branch if store fails
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="fallacy-3">Fallacy</h3>
+<ol>
+<li>Amdahl 定律对并行计算不适用
+<ul>
+<li>简单的放缩基准数据集（weak scaling），使得程序串行规模部分几乎不变，只有并行部分放大，会导致虚假的加速比</li>
+<li>需要合理衡量 true speedup 时候对串行和并行所用的数据集</li>
+</ul>
+</li>
+<li>多处理器只有实现完美的线性加速比才成本上合算
+<ul>
+<li>执行时间短（现实中一般只会关注任务用时，而不是每个处理器时间加和）是公认的并行的优势</li>
+<li>成本不是简单的正比于处理器数目,还有内存，硬盘，多核芯片等因素</li>
+</ul>
+</li>
+</ol>
+<h3 id="pitfall-3">Pitfall</h3>
+<ol>
+<li>衡量多核性能时候，只考虑执行时间的加速比
+<ul>
+<li>加速比对比对象：相对低端芯片加速比很大并不一定意味着性能好；对于浮点计算密集程序，如果没有专门硬件部件，或许实现可以接近线性加速比，但性能还是很差</li>
+<li>注意区分 relative speedup 和 true speedup，应该对比并行最优的算法和串行的最优算法</li>
+</ul>
+</li>
+<li>没有发展专门对多处理器架构优化的软件
+<ul>
+<li>eg：在使用锁管理页表的 os 上，即使是完美并行的程序，依然会被页分配制约</li>
+</ul>
+</li>
+</ol>
 <h2 id="ch-a-instruction-set-principles">ch A Instruction Set Principles</h2>
 <h3 id="isa-特性">ISA 特性</h3>
 <p>对于 ISA 设计，其有如下一些考虑：</p>
@@ -1744,7 +2223,7 @@ $$</p>
 </ol>
 <p>SIMD 指令基本上违背所有原则（vec 寄存器数目少，寻址模式过于简单，vec 类型不常见 etc.）。因此 SIMD 一般只有用在人工编写的底层库</p>
 <h3 id="isa-统计和对应的-risc-v-设计">ISA 统计和对应的 RISC-V 设计</h3>
-<h3 id="fallacy-3">Fallacy</h3>
+<h3 id="fallacy-4">Fallacy</h3>
 <ol>
 <li>存在一个典型程序：不同程序对 ISA 的使用差异巨大</li>
 <li>有缺陷的 ISA 不能成功（80x86）</li>
@@ -1755,7 +2234,7 @@ $$</p>
 </ul>
 </li>
 </ol>
-<h3 id="pitfall-3">Pitfall</h3>
+<h3 id="pitfall-4">Pitfall</h3>
 <ol>
 <li>设计一个高层次指令来支持高层语言的结构
 <ul>
