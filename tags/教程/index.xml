@@ -2639,7 +2639,7 @@ l\in \mathcal{ZPP} \iff&amp;\exists deterministic\ alg\ A\in \mathcal{P},random\
 $$</li>
 </ul>
 </li>
-<li>Randomized Poly 单边出错，假阳性，时间被多项式限制
+<li>Randomized Poly 单边出错，假阴性，时间被多项式限制
 <ul>
 <li>$$
 \begin{aligned}
@@ -2650,7 +2650,7 @@ l\in \mathcal{RP} \iff&amp;\exists deterministic\ alg\ A\in \mathcal{P},random\ 
 $$</li>
 </ul>
 </li>
-<li>Co-RP 单边出错，假阴性
+<li>Co-RP 单边出错，假阳性
 <ul>
 <li>$$
 \begin{aligned}
@@ -3016,9 +3016,9 @@ $$</p>
 <p>$$p,a\star\implies \{a\star ^1,a\star^2 &hellip; a\star ^{p-1}\}\pmod p=\{1,2,3&hellip;p-1\}\pmod p$$</p>
 <p>假定一个数已知有原根。那 mod 之后，等于 1，-1 的集合等大小（原根乘 mod 余 1 的集合每个元素，构造出来两个集合等大小）。</p>
 <h3 id="图完美匹配">图完美匹配</h3>
-<p>对于二部图$G(U,V,E)$，对于其邻接矩阵表示$M$，不存在完美匹配的充分条件为$\det(M)=0$</p>
+<p>对于二部图$G(U,V,E)$，对于其邻接矩阵表示$M$，不存在完美匹配的必要条件为$\det(M)=0$</p>
 <p>$$\det(M)=\sum_{\pi\in S_n}(-1)^{sign(\pi)}\prod^n_{j=1}m_{j,z(j)}$$</p>
-<p>不是必要条件，因为比如完全的二部图的邻接矩阵，每行每列全为 1，会导致抵消而等于 0。引入$O(n^2)$个变量，保证$\det(M)$行列之间不相消</p>
+<p>不是充分条件，因为比如完全的二部图的邻接矩阵，每行每列全为 1，会导致抵消而等于 0。引入$O(n^2)$个变量，保证$\det(M)$行列之间不相消</p>
 <p>$$
 m_{ij}=\left\{
 \begin{aligned}
@@ -3411,7 +3411,7 @@ $$</p>
 <pre tabindex="0" class="chroma"><code class="language-plain" data-lang="plain"><span class="line"><span class="cl">F1-e-F2
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>$e\in\{0,1\},F_1(0)=1,F_1(0)=3,F_2(0)=2,F_2(1)=5$，网络值是 $1\times 2+3\times 5=17$</p>
+</div><p>$e\in\{0,1\},F_1(0)=1,F_1(1)=3,F_2(0)=2,F_2(1)=5$，网络值是 $1\times 2+3\times 5=17$</p>
 <p>eg，3-regular 图（顶点度数均为 3）的 3 染色问题，可以用张量网络和转变为计数问题</p>
 <h3 id="引入外边成为多元函数">引入外边成为多元函数</h3>
 <p>定义输入$X=\{x_1,&hellip;x_n\}\in D^n$，有</p>
